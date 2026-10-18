@@ -1,31 +1,18 @@
-import { useState } from "react";
 import {
   ArrowUpRight,
-  CarFront,
-  Check,
-  ChevronLeft,
-  ChevronRight,
   Heart,
   Info,
   MapPin,
   ShoppingBasket,
-  Star,
   Users,
-  Utensils,
-  Wifi,
 } from "lucide-react";
 import type { Market, Search, Stay } from "../types";
-import {
-  bookingUrl,
-  distance,
-  formatDistance,
-  money,
-  nights,
-  totalPrice,
-} from "../lib/search";
+import { distance, formatDistance, stayBookingUrl } from "../lib/search";
 import { Dialog } from "./Dialog";
 import { Markets } from "./Markets";
 import { LazyMap as MapView } from "./LazyMap";
+import { PhotoCredit, StayPhoto } from "./StayPhoto";
+
 export function DetailDialog({
   stay,
   search,
@@ -47,49 +34,23 @@ export function DetailDialog({
   marketError: string;
   loadMarkets: () => void;
 }) {
-  const [photo, setPhoto] = useState(0);
+  const booking = stayBookingUrl(stay, search);
   return (
     <Dialog title={stay.name} onClose={onClose} wide>
       <div className="detail-content">
         <div className="detail-gallery">
-          <img
-            className="gallery-main"
-            src={stay.images[photo]}
-            alt={`Imagen ilustrativa ${photo + 1} de ${stay.name}`}
-          />
-          <span className="gallery-demo">Fotografías ilustrativas · demo</span>
-          <button
-            className="gallery-prev icon-button"
-            aria-label="Foto anterior"
-            onClick={() =>
-              setPhoto((photo + stay.images.length - 1) % stay.images.length)
-            }
-          >
-            <ChevronLeft size={20} />
-          </button>
-          <button
-            className="gallery-next icon-button"
-            aria-label="Siguiente foto"
-            onClick={() => setPhoto((photo + 1) % stay.images.length)}
-          >
-            <ChevronRight size={20} />
-          </button>
-          <span className="gallery-count">
-            {photo + 1} / {stay.images.length}
-          </span>
+          <StayPhoto stay={stay} className="gallery-main" />
         </div>
+        <PhotoCredit stay={stay} />
         <div className="detail-title">
           <div>
             <span className="small-caps">
-              {stay.type} EN {search.town.name}
+              {stay.type} · {search.town.name}
             </span>
-            <h2>Un lugar para sentirte en casa.</h2>
+            <h2>{stay.name}</h2>
             <p className="detail-rating">
-              <Star size={15} fill="currentColor" />
-              {stay.rating.toFixed(2)} · {stay.reviews} reseñas simuladas{" "}
-              <span>·</span>
-              <Users size={15} />
-              Hasta {stay.capacity} huéspedes
+              <MapPin size={15} />
+              {formatDistance(distance(stay, search.town))} del centro
             </p>
           </div>
           <button
@@ -104,52 +65,38 @@ export function DetailDialog({
         <div className="demo-disclaimer">
           <Info size={19} />
           <p>
-            <strong>Este alojamiento es ficticio.</strong> Fotografías,
-            ubicación, reseñas, servicios y precios son ejemplos de
-            demostración. Consulta los resultados y la disponibilidad real en
-            Booking o Airbnb.
+            <strong>Alojamiento real del catálogo abierto.</strong> No hay
+            tarifas, reseñas ni disponibilidad en tiempo real en CERCA.
+            Comprueba las condiciones y la capacidad para tu grupo en Booking.
           </p>
         </div>
         <div className="detail-columns">
           <div>
             <section className="detail-section">
-              <h3>Todo lo que necesitas</h3>
+              <h3>Información del alojamiento</h3>
               <p className="detail-description">
-                Un ejemplo de estancia para explorar CERCA: descubre la zona,
-                guarda tus lugares preferidos y comprueba qué tienes cerca antes
-                de organizar tu escapada.
+                Nombre, coordenadas e identificador de Booking procedentes de
+                Wikidata. Catálogo consultado el {stay.retrievedAt}. La
+                información puede cambiar.
               </p>
-              <div className="amenities-grid">
-                {stay.amenities.map((amenity) => (
-                  <span key={amenity}>
-                    {amenity === "Wifi" ? (
-                      <Wifi size={18} />
-                    ) : amenity === "Cocina" ? (
-                      <Utensils size={18} />
-                    ) : amenity === "Aparcamiento" ? (
-                      <CarFront size={18} />
-                    ) : (
-                      <Check size={18} />
-                    )}{" "}
-                    {amenity}
-                  </span>
-                ))}
-              </div>
-              {stay.freeCancellation && (
-                <p className="cancellation">
-                  <Check size={16} /> Cancelación gratuita · condición de
-                  ejemplo
-                </p>
-              )}
+              <a
+                className="text-button"
+                href={stay.sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver fuente del alojamiento <ArrowUpRight size={15} />
+              </a>
+              <p>
+                Servicios, condiciones de cancelación y valoraciones: consultar
+                en la plataforma.
+              </p>
             </section>
             <section className="detail-section">
               <h3>
-                <MapPin size={20} /> Tu ubicación
+                <MapPin size={20} /> Ubicación registrada
               </h3>
-              <p>
-                {formatDistance(distance(stay, search.town))} del centro ·{" "}
-                {stay.address}
-              </p>
+              <p>{stay.address}</p>
               <MapView
                 stays={[stay]}
                 search={search}
@@ -161,7 +108,7 @@ export function DetailDialog({
           </div>
           <aside className="price-breakdown">
             <div className="detail-nightly">
-              <strong>{money(stay.nightly)}</strong> / noche <span>DEMO</span>
+              <strong>Consulta tu estancia</strong>
             </div>
             <div className="booking-summary">
               <div>
@@ -185,43 +132,25 @@ export function DetailDialog({
                 {search.guests} huéspedes
               </p>
             </div>
-            <div className="price-line">
-              <span>
-                {money(stay.nightly)} × {nights(search)} noches
-              </span>
-              <span>{money(stay.nightly * nights(search))}</span>
-            </div>
-            <div className="price-line">
-              <span>Limpieza (simulada)</span>
-              <span>{money(stay.cleaningFee)}</span>
-            </div>
-            <div className="price-total">
-              <strong>Total demo</strong>
-              <strong>{money(totalPrice(stay, search))}</strong>
-            </div>
             <p className="price-note">
-              Importes ficticios. Los impuestos y cargos reales los determina la
-              plataforma al reservar.
+              Precio, impuestos y disponibilidad se comprueban en Booking para
+              tus fechas.
             </p>
-            <a
-              className="primary-button platform-link"
-              href={bookingUrl(search, "Booking")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Buscar en Booking <ArrowUpRight size={17} />
-            </a>
-            <a
-              className="secondary-button platform-link"
-              href={bookingUrl(search, "Airbnb")}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Buscar en Airbnb <ArrowUpRight size={17} />
-            </a>
+            {booking && (
+              <a
+                className="primary-button platform-link"
+                href={booking}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver este hotel en Booking <ArrowUpRight size={17} />
+              </a>
+            )}
             <small className="external-note">
-              Abrirás una búsqueda real con tus fechas y huéspedes, no una ficha
-              de este ejemplo.
+              {stay.bookingPath
+                ? "Enlace a la ficha de este hotel."
+                : "Se abre Booking con este hotel seleccionado mediante su identificador."}{" "}
+              Tus fechas y huéspedes se incluyen en el enlace.
             </small>
           </aside>
         </div>
@@ -231,7 +160,7 @@ export function DetailDialog({
               <h3>
                 <ShoppingBasket size={21} /> Supermercados cerca
               </h3>
-              <p>Los tres más próximos a la ubicación ilustrativa.</p>
+              <p>Consulta alrededor de las coordenadas de este alojamiento.</p>
             </div>
           </div>
           <Markets

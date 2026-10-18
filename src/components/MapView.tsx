@@ -9,7 +9,7 @@ import {
   X,
 } from "lucide-react";
 import type { Market, Search, Stay } from "../types";
-import { money } from "../lib/search";
+import { PhotoCredit, StayPhoto } from "./StayPhoto";
 export function MapView({
   stays,
   search,
@@ -84,7 +84,7 @@ export function MapView({
         keyboard: true,
         icon: L.divIcon({
           className: "stay-marker-wrapper",
-          html: `<span class="stay-map-marker">${money(stay.nightly)}</span>`,
+          html: `<span class="stay-map-marker">Hotel</span>`,
           iconSize: [68, 35],
           iconAnchor: [34, 17],
         }),
@@ -119,7 +119,7 @@ export function MapView({
       />
       <div className="map-legend">
         <span>
-          <i /> Alojamientos demo
+          <i /> Hoteles reales
         </span>
         <span>
           <ShoppingBasket size={14} /> Supermercados reales
@@ -153,14 +153,15 @@ export function MapView({
       )}
       {selected && (
         <div className="map-selected">
-          <img src={selected.images[0]} alt="Fotografía ilustrativa" />
+          <StayPhoto stay={selected} />
           <div>
             <strong>{selected.name}</strong>
+            <PhotoCredit stay={selected} />
             <p>
-              <MapPin size={12} /> {search.town.name} · ejemplo ficticio
+              <MapPin size={12} /> {search.town.name} · alojamiento real
             </p>
             <b>
-              {money(selected.nightly)} <small>/ noche demo</small>
+              <small>Precio en Booking</small>
             </b>
           </div>
           <button

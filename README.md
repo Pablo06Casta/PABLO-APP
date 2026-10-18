@@ -1,25 +1,28 @@
 # CERCA
 
-Aplicación web responsive para explorar alojamientos económicos y supermercados próximos en España. Diseño inspirado en iOS, Airbnb y Booking: blanco, azul suave, tarjetas con fotografías, navegación inferior en móvil y modo claro/oscuro.
+Web responsive para encontrar hoteles reales y supermercados próximos en España, con diseño inspirado en Airbnb, Booking e iOS.
 
-## Qué funciona
+**Web:** https://pablo06casta.github.io/PABLO-APP/
 
-- Autocompletado local de un catálogo de 8.132 municipios españoles; búsquedas sin tildes, fechas y entre 1 y 8 huéspedes.
-- Búsqueda explícita en Nominatim para precisar centros o buscar localidades adicionales. Nunca se utiliza Nominatim para autocompletar mientras se escribe.
-- Ocho alojamientos **ficticios** por destino en modo demostración. Filtros por precio, tipo, distancia, puntuación, cancelación, cocina y aparcamiento.
-- Orden por precio total de estancia (incluida limpieza simulada), distancia o valoración.
-- Galería, detalle, desglose, favoritos persistentes, destinos recientes y comparación de hasta tres alojamientos.
-- Enlaces a búsquedas de Booking y Airbnb con destino, fechas y huéspedes. No representan fichas de los alojamientos ficticios.
-- Mapa Leaflet/OpenStreetMap con marcadores de precio demo, centro y supermercados reales.
-- Consulta de supermercados de OpenStreetMap/Overpass: nombre, dirección registrada, horario disponible, proximidad, tiempo a pie estimado y ruta en Google Maps. No se generan establecimientos inventados cuando falla el proveedor.
-- PWA con manifiesto, iconos de instalación, service worker, interfaz y catálogo disponibles sin conexión tras la primera carga. Los servicios en tiempo real necesitan Internet.
-- Privacidad local, geolocalización solo a petición y con autorización del navegador, gestión de datos locales y soporte de movimiento reducido.
+## Datos reales y límites
 
-## Transparencia de los datos
+El catálogo incluido contiene **2.322 hoteles reales de España** con nombre, coordenadas e identificador de Booking obtenidos de Wikidata, bajo CC0, el 18 de octubre de 2026. No se generan hoteles a partir de plantillas ni se desplazan alojamientos ficticios a la localidad buscada. El catálogo tiene cobertura limitada, puede contener información antigua y no representa la oferta completa ni confirma que un establecimiento siga operando.
 
-**Este MVP no tiene acceso a precios, disponibilidad ni valoraciones reales de Booking o Airbnb.** Todos los alojamientos, servicios, reseñas, importes y ubicaciones de alojamiento son demostraciones claramente identificadas; las fotografías son ilustrativas. No se confirma disponibilidad ni se permite reservar esos ejemplos.
+Cada tarjeta abre Booking con ese hotel y las fechas y huéspedes seleccionados. Cuando Wikidata publica la ruta del hotel (P3607), se utiliza esa ficha. Cuando publica su ID numérico (P10532), se abre una búsqueda de Booking con `dest_type=hotel`, `dest_id` y `highlighted_hotels` para seleccionar ese establecimiento. La plataforma puede mostrar alternativas si no tiene disponibilidad. No se inventan rutas a partir del nombre.
 
-Los supermercados sí se obtienen de OpenStreetMap. Sus distancias son geográficas en línea recta y los minutos a pie son estimaciones, no rutas peatonales calculadas. Los horarios pueden estar incompletos o desactualizados. El punto municipal del catálogo es un centroide: CERCA conserva centros urbanos conocidos e intenta precisar el resto con Nominatim al buscar. Si no se puede, muestra una advertencia sobre la referencia aproximada.
+**Los precios, disponibilidad, capacidad, reseñas, servicios y cancelación deben comprobarse en Booking.** No se muestran tarifas o valoraciones simuladas ni filtros que dependan de datos no disponibles. No hay integración de reserva ni API comercial de inventario en tiempo real. La interfaz permite consultar hoteles por proximidad y supermercados, guardar favoritos y comparar tres opciones.
+
+Las fotografías disponibles corresponden al establecimiento según Wikidata/Commons e incluyen autor, licencia y enlace de atribución. Si no existe una foto libre comprobada o falla la descarga, aparece un recuadro con «Fotografía no disponible», sin sustituirla por una habitación genérica. Nueve fotografías de hoteles de Granada se sirven con la app; sus fuentes y licencias están en `public/stays/NOTICE.json`. Las demás fotografías se cargan desde Wikimedia.
+
+## Supermercados
+
+La consulta utiliza OpenStreetMap/Overpass, con un límite corto de espera. Si Overpass está saturado, recurre a la API oficial de lectura de OSM en una ventana de unos 560 × 450 m (varía con la latitud) alrededor del punto elegido. Si se supera el límite de nodos, reduce el área una vez. Esta alternativa es local, no cubre toda la localidad; la interfaz lo identifica. Incluye supermercados y pequeñas tiendas de alimentación (`shop=supermarket|convenience`).
+
+Se validan coordenadas, se interpretan edificios mediante sus nodos y se eliminan duplicados cercanos. Los errores parciales no se tratan como búsquedas vacías. Hay caché en memoria durante una hora y opción de reconsulta; los resultados vacíos no se cachean. Las consultas de la ficha usan las coordenadas del **hotel**, no el centro municipal. Las consultas anteriores se cancelan al cambiar de destino.
+
+Si ambos servicios fallan en el centro de Granada, se puede usar una copia real de 23 comercios obtenida de OSM el 18 de octubre de 2026. La app la identifica como copia guardada que no se ha podido actualizar. Fuera de esa cobertura muestra el error y permite reintentar, sin inventar comercios. La copia procede de la API oficial, área `-3.602,37.172,-3.594,37.180`, licencia ODbL, atribución © OpenStreetMap contributors.
+
+Las distancias son geográficas en línea recta y los minutos a pie son estimaciones. «Cómo llegar» abre Google Maps con las coordenadas del comercio. Los horarios pueden estar incompletos o desactualizados.
 
 ## Desarrollo
 
@@ -31,57 +34,47 @@ npm ci --cache /tmp/pablo-app-npm-cache
 npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
 ```
 
-No hacen falta claves privadas para el modo demo y los proveedores públicos. Cada tarea en la nube está aislada; utiliza el checkout existente sin crear worktrees adicionales. Los procesos deben arrancarse de nuevo en cada máquina aunque se restauren las dependencias.
+No se necesitan claves privadas para el catálogo abierto y las consultas públicas. Utiliza el checkout existente: cada tarea en la nube ya está aislada y no necesita worktrees. Los procesos deben arrancarse de nuevo en cada máquina aunque se restauren las dependencias.
 
 ```sh
-npm run check       # Análisis, 20 pruebas, tipos, compilación y smoke HTTP/PWA.
-npm run test:watch  # Pruebas durante el desarrollo.
+npm run check       # Lint, 24 pruebas, tipos, build y smoke HTTP/PWA.
+npm run test:watch
 npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
 
-La prueba HTTP inicia y cierra su propio servidor en un puerto libre. Las pruebas de proveedores utilizan respuestas controladas y no acreditan acceso a los servicios externos. La validación visual y funcional se realiza por separado con Chromium.
+Las pruebas de proveedores usan respuestas controladas para comprobar errores, cobertura, cancelación y recuperación; no acreditan que los servidores públicos estén operativos. La validación con datos reales se realiza por separado.
 
-## Red y servicios
+El autocompletado local incluye 8.132 municipios españoles, con búsquedas sin tildes. Nominatim solo se consulta al buscar explícitamente o pedir geolocalización, mediante una cola compartida. Los centroides municipales no precisados se identifican como aproximados. Favoritos, búsquedas y tema se guardan en el navegador. La versión del almacenamiento de favoritos se ha cambiado para no volver a mostrar las antiguas tarjetas ficticias.
 
-La instalación descarga dependencias desde `registry.npmjs.org`. En ejecución:
+La PWA permite usar la interfaz, el catálogo y las fotos locales sin conexión tras la primera carga. No confirma datos de reserva sin Internet ni descarga teselas para uso offline.
 
-| Servicio | Dominio | Uso |
-| --- | --- | --- |
-| Nominatim | nominatim.openstreetmap.org | Búsqueda explícita y geolocalización inversa |
-| Overpass | overpass-api.de | Supermercados registrados en OpenStreetMap |
-| OpenStreetMap | tile.openstreetmap.org | Teselas del mapa |
-| Booking y Airbnb | booking.com, airbnb.es | Búsquedas externas, al pulsar sus enlaces |
-| Google Maps | google.com | Rutas, al pulsar «Cómo llegar» |
+## Fuentes y actualización
 
-Las fotos y la tipografía están alojadas con la app. Si una red restringe los proveedores, el catálogo local, los alojamientos demo y las funciones locales siguen funcionando; la app explica los fallos y ofrece reintentar. Las llamadas fallidas no se sustituyen por supermercados simulados.
+- Municipios y licencia: `src/data/NOTICE.md`.
+- Hoteles: `src/data/real/stays.json`; identificadores y coordenadas CC0 de Wikidata.
+- Fotografías: atribuciones en el catálogo y `public/stays/NOTICE.json`; cada archivo conserva su licencia de Commons.
+- Comercios: `src/data/real/granada-markets.json` y API OSM/Overpass, ODbL.
 
-Nominatim tiene cola de consultas y caché de sesión. Para tráfico de producción se debe usar un servicio autorizado con capacidad suficiente o un backend con caché y límites globales, de acuerdo con su política de uso. No se descargan teselas para uso offline.
+Para regenerar el catálogo desde las APIs abiertas, con Python 3 y curl:
 
-## Publicación web
+```sh
+python scripts/refresh-catalogue.py
+npm run check
+```
 
-El workflow `.github/workflows/ci.yml` comprueba el proyecto y genera un artefacto de GitHub Pages con la ruta `/PABLO-APP/`.
+El script consulta Wikidata y metadatos de licencia de Commons. Las fotos cuya licencia no pueda comprobarse se omiten. Las fotos locales y sus créditos forman una copia independiente; una actualización del catálogo no reasigna sus atribuciones. No se hace scraping de Booking o Airbnb ni se guardan credenciales privadas en el navegador.
 
-Para habilitar la publicación por primera vez, el administrador del repositorio debe seleccionar **Settings → Pages → Source: GitHub Actions** y guardar. Después debe ejecutar o repetir el workflow **Comprobar y publicar CERCA**. El workflow distingue una publicación completada de una activación pendiente; compilar el artefacto no publica por sí solo la web.
+Para precios e inventario en tiempo real sería necesaria una API autorizada y un backend que gestione sus credenciales; el catálogo abierto no sustituye ese servicio.
 
-El dominio previsto es `pablo06casta.github.io`, bajo la ruta del repositorio. No debe considerarse publicado hasta que el despliegue termine y se compruebe la URL.
+## Red y publicación
 
-Para probar la compilación con esa ruta en otro directorio:
+Instalación: `registry.npmjs.org`. En ejecución: `nominatim.openstreetmap.org`, `overpass-api.de`, `api.openstreetmap.org`, `tile.openstreetmap.org`, `thumb.wikimedia.org`, `upload.wikimedia.org` y `commons.wikimedia.org`. Los enlaces externos abren Booking y Google Maps. La actualización del catálogo usa además `query.wikidata.org`.
+
+Los servicios públicos tienen límites y no ofrecen un SLA para producción. Con tráfico significativo, utiliza un backend con caché, límites globales y un proveedor con capacidad contratada. La alternativa de lectura OSM está limitada a consultas locales explícitas, sin descargas masivas ni precarga de ciudades.
+
+El workflow `.github/workflows/ci.yml` ejecuta comprobaciones, compila para `/PABLO-APP/` y publica mediante GitHub Actions en Pages. Para probar esa ruta:
 
 ```sh
 CERCA_BASE_PATH=/PABLO-APP/ npm run build -- --outDir /tmp/cerca-pages-dist
 CERCA_BASE_PATH=/PABLO-APP/ npm run preview -- --outDir /tmp/cerca-pages-dist --host 127.0.0.1 --port 5181 --strictPort
 ```
-
-## Arquitectura y proveedores futuros
-
-- `src/components/`: buscador, tarjetas, filtros, mapa, supermercados, detalle y comparación.
-- `src/data/`: catálogo municipal y su aviso de licencia.
-- `src/lib/`: precios, filtros, distancias y persistencia.
-- `src/services/lodging.ts`: contrato `LodgingProvider` y proveedor demo.
-- `src/services/places.ts`: adaptadores Nominatim y Overpass.
-- `src/types.ts`: modelos de datos compartidos.
-- `scripts/smoke.mjs`: comprobación de recursos compilados e instalación PWA.
-
-Se conserva React + TypeScript + Vite del proyecto existente para este MVP estático y desplegable. Para conectar alojamientos reales hace falta un acuerdo/API oficial o proveedor autorizado y un backend que gestione credenciales, disponibilidad, precios totales y fichas reales. No se incluye scraping ni credenciales en el cliente. Cambiar un nombre de plataforma no convierte el proveedor demo en uno real.
-
-Fotografías ilustrativas: ver `public/images/NOTICE.txt`. Catálogo: ver `src/data/NOTICE.md`. Tipografía Inter y paquetes instalados conservan sus licencias.

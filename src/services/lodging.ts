@@ -1,142 +1,64 @@
 import type { Search, Stay } from "../types";
+import catalogue from "../data/real/stays.json";
+import localPhotos from "../data/real/local-photos.json";
+import { distance } from "../lib/search";
+const local = localPhotos as Record<
+  string,
+  {
+    url: string;
+    author: string;
+    licence: string;
+    licenceUrl: string;
+    source: string;
+  }
+>;
+
 export interface LodgingProvider {
   id: string;
-  mode: "demo" | "live";
+  mode: "catalogue" | "live";
   search(query: Search): Promise<Stay[]>;
 }
-// Un proveedor autorizado debe implementar este contrato desde un backend.
-// Nunca incluyas credenciales privadas en variables VITE_* o en el navegador.
-const templates = [
-  {
-    name: "Un refugio lleno de luz",
-    type: "Apartamento",
-    nightly: 46,
-    fee: 12,
-    rating: 4.91,
-    reviews: 84,
-    capacity: 2,
-    images: ["room-1", "room-2", "room-3"],
-    offset: [0.003, 0.002],
-    amenities: ["Wifi", "Cocina", "Aire acondicionado"],
-    cancellation: true,
-  },
-  {
-    name: "Pequeño, bonito y muy céntrico",
-    type: "Habitación",
-    nightly: 52,
-    fee: 0,
-    rating: 4.87,
-    reviews: 112,
-    capacity: 2,
-    images: ["room-2", "room-3", "room-1"],
-    offset: [-0.004, 0.003],
-    amenities: ["Wifi", "Aire acondicionado", "Ascensor"],
-    cancellation: true,
-  },
-  {
-    name: "Tu rincón con vistas",
-    type: "Apartamento",
-    nightly: 62,
-    fee: 16,
-    rating: 4.96,
-    reviews: 67,
-    capacity: 4,
-    images: ["room-3", "room-4", "room-1"],
-    offset: [0.007, -0.004],
-    amenities: ["Wifi", "Cocina", "Aparcamiento", "Terraza"],
-    cancellation: true,
-  },
-  {
-    name: "Descanso con mucho encanto",
-    type: "Hotel",
-    nightly: 68,
-    fee: 0,
-    rating: 4.82,
-    reviews: 203,
-    capacity: 3,
-    images: ["room-4", "room-2", "room-5"],
-    offset: [-0.002, -0.009],
-    amenities: ["Wifi", "Aire acondicionado", "Desayuno", "Ascensor"],
-    cancellation: false,
-  },
-  {
-    name: "La casa de los días tranquilos",
-    type: "Casa rural",
-    nightly: 76,
-    fee: 20,
-    rating: 4.94,
-    reviews: 56,
-    capacity: 6,
-    images: ["room-5", "room-6", "room-1"],
-    offset: [0.018, 0.016],
-    amenities: ["Wifi", "Cocina", "Aparcamiento", "Jardín"],
-    cancellation: true,
-  },
-  {
-    name: "Diseño y calma en el centro",
-    type: "Apartamento",
-    nightly: 83,
-    fee: 14,
-    rating: 4.98,
-    reviews: 98,
-    capacity: 4,
-    images: ["room-6", "room-1", "room-3"],
-    offset: [0.002, -0.003],
-    amenities: ["Wifi", "Cocina", "Aire acondicionado", "Terraza"],
-    cancellation: true,
-  },
-  {
-    name: "Una habitación para desconectar",
-    type: "Habitación",
-    nightly: 89,
-    fee: 8,
-    rating: 4.76,
-    reviews: 42,
-    capacity: 2,
-    images: ["room-7", "room-2", "room-4"],
-    offset: [-0.009, 0.006],
-    amenities: ["Wifi", "Aparcamiento", "Aire acondicionado"],
-    cancellation: false,
-  },
-  {
-    name: "Espacio para compartir",
-    type: "Casa rural",
-    nightly: 108,
-    fee: 24,
-    rating: 4.93,
-    reviews: 71,
-    capacity: 8,
-    images: ["room-8", "room-6", "room-5"],
-    offset: [0.022, -0.014],
-    amenities: ["Wifi", "Cocina", "Aparcamiento", "Jardín", "Terraza"],
-    cancellation: true,
-  },
-] as const;
-export function demoStays(query: Search): Stay[] {
-  return templates.map((stay, index) => ({
-    id: `${query.town.id}-${index}`,
-    name: stay.name,
-    type: stay.type,
-    nightly: stay.nightly,
-    cleaningFee: stay.fee,
-    rating: stay.rating,
-    reviews: stay.reviews,
-    capacity: stay.capacity,
-    lat: query.town.lat + stay.offset[0],
-    lng: query.town.lng + stay.offset[1],
-    address: `Ubicación ilustrativa · ${query.town.name}`,
-    images: stay.images.map(
-      (image) => `${import.meta.env.BASE_URL}images/${image}.jpg`,
-    ),
-    amenities: [...stay.amenities],
-    freeCancellation: stay.cancellation,
-    demo: true,
-  }));
+
+// Identidad y coordenadas CC0. La fuente no proporciona tarifas ni disponibilidad.
+// Los identificadores de Booking proceden de P10532/P3607, nunca del nombre.
+export function realStays(query: Search): Stay[] {
+  return catalogue.hotels
+    .filter((hotel) => distance(hotel, query.town) <= 10)
+    .map(
+      (hotel): Stay => ({
+        id: hotel.id,
+        name: hotel.name,
+        type: "Hotel",
+        nightly: null,
+        cleaningFee: null,
+        rating: null,
+        reviews: null,
+        capacity: null,
+        lat: hotel.lat,
+        lng: hotel.lng,
+        address: "Coordenadas del catálogo Wikidata",
+        images: local[hotel.id]
+          ? [`${import.meta.env.BASE_URL}stays/${hotel.id}.jpg`]
+          : "photo" in hotel && hotel.photo
+            ? [hotel.photo.url]
+            : [],
+        amenities: [],
+        freeCancellation: null,
+        bookingId: "bookingId" in hotel ? hotel.bookingId : undefined,
+        bookingPath: "bookingPath" in hotel ? hotel.bookingPath : undefined,
+        sourceUrl: `https://www.wikidata.org/wiki/${hotel.id}`,
+        retrievedAt: catalogue.retrievedAt,
+        photoCredit:
+          local[hotel.id] ??
+          ("photo" in hotel && hotel.photo ? hotel.photo : undefined),
+      }),
+    );
 }
+
 export const lodgingProvider: LodgingProvider = {
-  id: "cerca-demo",
-  mode: "demo",
+  id: "wikidata-spain-booking",
+  mode: "catalogue",
   async search(query) {
-    return demoStays(query);
+    return realStays(query);
   },
 };

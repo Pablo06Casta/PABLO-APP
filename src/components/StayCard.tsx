@@ -1,24 +1,20 @@
 import {
   ArrowUpRight,
   Check,
-  ChevronLeft,
-  ChevronRight,
   Heart,
   MapPin,
   ShoppingBasket,
   SlidersHorizontal,
-  Star,
 } from "lucide-react";
-import { useState } from "react";
 import type { Market, Search, Stay } from "../types";
 import {
   distance,
   formatDistance,
-  money,
   nearestMarkets,
-  nights,
-  totalPrice,
+  stayBookingUrl,
 } from "../lib/search";
+import { PhotoCredit, StayPhoto } from "./StayPhoto";
+
 export function StayCard({
   stay,
   search,
@@ -38,8 +34,8 @@ export function StayCard({
   onCompare: () => void;
   onOpen: () => void;
 }) {
-  const [photo, setPhoto] = useState(0);
   const closest = nearestMarkets(stay, markets)[0];
+  const booking = stayBookingUrl(stay, search);
   return (
     <article className="stay-card">
       <div className="card-photo">
@@ -48,13 +44,7 @@ export function StayCard({
           onClick={onOpen}
           aria-label={`Ver ${stay.name}`}
         >
-          <img
-            src={stay.images[photo]}
-            alt={`Imagen ilustrativa: ${stay.name}`}
-            loading="lazy"
-            width="640"
-            height="480"
-          />
+          <StayPhoto stay={stay} />
         </button>
         <span className="photo-badge">{stay.type}</span>
         <button
@@ -65,35 +55,11 @@ export function StayCard({
         >
           <Heart size={20} fill={saved ? "currentColor" : "none"} />
         </button>
-        <div className="photo-arrows">
-          <button
-            aria-label={`Foto anterior de ${stay.name}`}
-            onClick={() =>
-              setPhoto((photo + stay.images.length - 1) % stay.images.length)
-            }
-          >
-            <ChevronLeft size={17} />
-          </button>
-          <button
-            aria-label={`Siguiente foto de ${stay.name}`}
-            onClick={() => setPhoto((photo + 1) % stay.images.length)}
-          >
-            <ChevronRight size={17} />
-          </button>
-        </div>
-        <div className="photo-dots" aria-hidden="true">
-          {stay.images.map((_, index) => (
-            <span key={index} className={index === photo ? "active" : ""} />
-          ))}
-        </div>
-        <span className="demo-badge">DEMO</span>
+        <span className="real-badge">Alojamiento real</span>
       </div>
+      <PhotoCredit stay={stay} />
       <div className="card-heading">
         <button onClick={onOpen}>{stay.name}</button>
-        <span className="rating">
-          <Star size={13} fill="currentColor" />
-          {stay.rating.toFixed(2).replace(".", ",")}
-        </span>
       </div>
       <p className="card-location">
         <MapPin size={13} />
@@ -101,29 +67,20 @@ export function StayCard({
         centro
       </p>
       <p className="card-amenities">
-        {stay.capacity} huéspedes ·{" "}
-        {stay.amenities.includes("Cocina")
-          ? "Cocina"
-          : stay.type === "Hotel"
-            ? "Habitación privada"
-            : "Wifi incluido"}
+        Fechas y {search.guests} huéspedes: confirmar en Booking
       </p>
       <p className={`card-market ${closest ? "" : "market-pending"}`}>
         <ShoppingBasket size={14} />
         {closest
-          ? `Supermercado a ${formatDistance(closest.distance)}`
-          : "Explora supermercados cerca"}
+          ? `Tienda de alimentación a ${formatDistance(closest.distance)}`
+          : "Consulta supermercados cerca"}
       </p>
       <div className="card-bottom">
         <div>
           <p className="card-price">
-            <strong>{money(stay.nightly)}</strong>
-            <span> / noche</span>
+            <strong>Consultar precio</strong>
           </p>
-          <p className="card-total">
-            {money(totalPrice(stay, search))} por {nights(search)} noches ·
-            precio demo
-          </p>
+          <p className="card-total">Disponibilidad en la plataforma</p>
         </div>
         <button
           className="card-open"
@@ -133,6 +90,17 @@ export function StayCard({
           <ArrowUpRight size={18} />
         </button>
       </div>
+      {booking && (
+        <a
+          className="card-booking-link"
+          href={booking}
+          target="_blank"
+          rel="noreferrer"
+          aria-label={`Ver ${stay.name} en Booking`}
+        >
+          Ver en Booking <ArrowUpRight size={15} />
+        </a>
+      )}
       <button
         className={`compare-add ${compared ? "is-compared" : ""}`}
         onClick={onCompare}

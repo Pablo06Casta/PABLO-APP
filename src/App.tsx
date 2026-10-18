@@ -45,13 +45,13 @@ import type {
 import { towns } from "./data/towns";
 import {
   initialFilters,
+  bookingUrl,
   isoDate,
-  money,
   nights,
   filterStays,
 } from "./lib/search";
 import { readStorage, useStored } from "./lib/storage";
-import { demoStays, lodgingProvider } from "./services/lodging";
+import { realStays, lodgingProvider } from "./services/lodging";
 import { findMarkets, findTown } from "./services/places";
 import { SearchBar } from "./components/SearchBar";
 import { StayCard } from "./components/StayCard";
@@ -97,9 +97,9 @@ function initialSearch(): Search {
 }
 function App() {
   const [search, setSearch] = useState<Search>(initialSearch);
-  const [stays, setStays] = useState<Stay[]>(() => demoStays(search));
+  const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
-  const [sort, setSort] = useState("price");
+  const [sort, setSort] = useState("recommended");
   const [tab, setTab] = useState<"explore" | "map" | "favorites" | "settings">(
     "explore",
   );
@@ -116,7 +116,7 @@ function App() {
   const marketController = useRef<AbortController | null>(null);
   const searchGeneration = useRef(0);
   const [favorites, setFavorites] = useStored<Favorite[]>(
-    "cerca-favorites-v1",
+    "cerca-favorites-v2",
     [],
   );
   const [recent, setRecent] = useStored<RecentSearch[]>("cerca-recent-v1", []);
@@ -256,7 +256,7 @@ function App() {
     }
     setCompare([...compare, { stay, search: query }]);
   }
-  async function loadMarkets(town = detail?.search.town ?? search.town) {
+  async function loadMarkets(town = search.town) {
     marketController.current?.abort();
     const controller = new AbortController();
     marketController.current = controller;
@@ -265,7 +265,11 @@ function App() {
     setMarketTownId(town.id);
     const timeout = setTimeout(() => controller.abort(), 25000);
     try {
-      const result = await findMarkets(town, controller.signal);
+      const result = await findMarkets(
+        town,
+        controller.signal,
+        marketStatus === "success",
+      );
       if (marketController.current === controller) {
         setMarkets(result);
         setMarketStatus("success");
@@ -295,7 +299,7 @@ function App() {
   function openDetail(stay: Stay, query = search) {
     setModal(null);
     setDetail({ stay, search: query });
-    if (marketTownId !== query.town.id) {
+    if (marketTownId !== stay.id) {
       marketController.current?.abort();
       marketController.current = null;
       setMarketTownId("");
@@ -314,7 +318,11 @@ function App() {
         key={stay.id}
         stay={stay}
         search={query}
-        markets={marketTownId === query.town.id ? markets : []}
+        markets={
+          marketTownId === query.town.id || marketTownId === stay.id
+            ? markets
+            : []
+        }
         saved={isSaved(stay.id)}
         compared={isCompared(stay.id)}
         onFavorite={() => toggleFavorite(stay, query)}
@@ -466,24 +474,12 @@ function App() {
                 </button>
               </div>
               <div className="quick-filters">
-                <button onClick={() => setModal("filters")}>
-                  <Wallet size={14} /> Hasta {money(filters.maxPrice)} / noche
-                </button>
+                <span className="quick-filters-note">
+                  <Wallet size={14} /> Precio actualizado en Booking
+                </span>
                 <button onClick={() => setModal("filters")}>
                   <LocateFixed size={14} /> A menos de {filters.maxDistance} km
                   del centro
-                </button>
-                <button
-                  className={filters.cancellation ? "selected" : ""}
-                  onClick={() =>
-                    setFilters({
-                      ...filters,
-                      cancellation: !filters.cancellation,
-                    })
-                  }
-                >
-                  <ShieldCheck size={14} /> Cancelación gratuita
-                  {filters.cancellation && <Check size={12} />}
                 </button>
                 <span className="quick-filters-note">
                   <Check size={13} /> Tu escapada, a tu medida
@@ -497,7 +493,7 @@ function App() {
                     <span className="heading-dot">.</span>
                   </h2>
                   <p>
-                    {visible.length} alojamientos de ejemplo <span>·</span>{" "}
+                    {visible.length} hoteles reales del catálogo <span>·</span>{" "}
                     {nights(search)} noches <span>·</span> {search.guests}{" "}
                     {search.guests === 1 ? "huésped" : "huéspedes"}
                   </p>
@@ -511,9 +507,11 @@ function App() {
                       value={sort}
                       onChange={(event) => setSort(event.target.value)}
                     >
-                      <option value="price">Menor precio total</option>
+                      <option value="recommended">
+                        Con fotografía primero
+                      </option>
+                      <option value="name">Nombre del alojamiento</option>
                       <option value="distance">Más cerca del centro</option>
-                      <option value="rating">Mejor valoración</option>
                     </select>
                   </label>
                   <div className="view-toggle">
@@ -540,9 +538,9 @@ function App() {
                 <span>
                   <Info size={16} />
                   <span>
-                    <strong>Estás explorando una demo.</strong> Alojamientos,
-                    fotos, precios y valoraciones de ejemplo. Comprueba la
-                    disponibilidad real en la plataforma.
+                    <strong>Alojamientos reales, enlaces de Booking.</strong>{" "}
+                    Catálogo abierto con cobertura limitada. Comprueba precio,
+                    disponibilidad y capacidad para tus fechas en la plataforma.
                   </span>
                 </span>
                 <button onClick={() => setModal("help")}>
@@ -586,8 +584,9 @@ function App() {
                   <SearchIcon size={35} />
                   <h3>Un pequeño cambio puede abrir más puertas</h3>
                   <p>
-                    No hay alojamientos de demostración que encajen con estos
-                    filtros. Prueba con otro presupuesto o tipo de estancia.
+                    No hay hoteles en nuestro catálogo abierto que encajen con
+                    esta zona y estos filtros. El catálogo no incluye todos los
+                    alojamientos de España.
                   </p>
                   <button
                     className="primary-button"
@@ -595,6 +594,15 @@ function App() {
                   >
                     Restablecer filtros
                   </button>
+                  <a
+                    className="secondary-button"
+                    href={bookingUrl(search, "Booking")}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Buscar más alojamientos en Booking{" "}
+                    <ArrowUpRight size={15} />
+                  </a>
                 </div>
               ) : tab === "map" ? (
                 <div className="map-results">
@@ -662,7 +670,7 @@ function App() {
                 </span>
                 <div>
                   <h3>Tu presupuesto primero</h3>
-                  <p>Compara el precio total, sin hacer cuentas.</p>
+                  <p>Consulta tarifas para tus fechas en Booking.</p>
                 </div>
               </div>
               <div>
@@ -703,7 +711,7 @@ function App() {
               <>
                 <div className="saved-count">
                   {favorites.length} alojamientos guardados{" "}
-                  <span>· Ejemplos de demostración</span>
+                  <span>· Alojamientos reales</span>
                 </div>
                 <div className="stays-grid">
                   {favorites.map((entry) =>
@@ -839,7 +847,9 @@ function App() {
                     cerca.
                   </span>
                   <p>Menos buscar. Más disfrutar.</p>
-                  <span className="version-badge">MVP · MODO DEMOSTRACIÓN</span>
+                  <span className="version-badge">
+                    CATÁLOGO REAL · WIKIDATA
+                  </span>
                   <button
                     className="text-button"
                     onClick={() => setModal("help")}
@@ -986,7 +996,7 @@ function App() {
               {
                 n: "02",
                 title: "Encuentra tu rincón",
-                text: "Filtra por presupuesto, tipo de estancia y distancia. Guarda favoritos y compara hasta tres opciones.",
+                text: "Filtra por distancia y supermercados cercanos. Guarda favoritos y compara hasta tres opciones.",
               },
               {
                 n: "03",
@@ -1005,13 +1015,16 @@ function App() {
             <div className="demo-disclaimer">
               <Info size={21} />
               <p>
-                <strong>Transparencia desde el principio.</strong> Este MVP no
-                está conectado a proveedores autorizados de alojamiento. Los
-                alojamientos, ubicaciones, fotografías, precios, servicios y
-                reseñas son ficticios o ilustrativos. No confirman
-                disponibilidad y no se pueden reservar. Los enlaces abren
-                búsquedas reales en Booking y Airbnb. Los supermercados proceden
-                de OpenStreetMap y no se inventan.
+                <strong>Transparencia desde el principio.</strong> Los hoteles
+                proceden de un catálogo abierto de Wikidata (CC0), con
+                identidad, coordenadas e identificador de Booking. Las fotos
+                disponibles corresponden al establecimiento y muestran su autor
+                y licencia. No inventamos precios, reseñas, servicios ni
+                disponibilidad. Booking confirma las condiciones para tus fechas
+                y grupo. El catálogo puede estar incompleto o contener
+                información antigua. Los supermercados proceden de OpenStreetMap
+                (ODbL), con fecha de consulta. No se extraen tarifas de las
+                plataformas mediante scraping.
               </p>
             </div>
             <button className="primary-button" onClick={() => setModal(null)}>
@@ -1034,10 +1047,11 @@ function App() {
             </p>
             <p>
               Las consultas de localidades y coordenadas se envían a Nominatim,
-              los supermercados a Overpass y el mapa a OpenStreetMap. Los
-              enlaces de reserva y rutas abren servicios externos con sus
-              propias políticas. La ubicación requiere tu autorización y no se
-              consulta en segundo plano.
+              los supermercados a Overpass o a la API de OpenStreetMap, las
+              fotos a Wikimedia y el mapa a OpenStreetMap. Los enlaces de
+              reserva y rutas abren servicios externos con sus propias
+              políticas. La ubicación requiere tu autorización y no se consulta
+              en segundo plano.
             </p>
             <h3>Olvidar y empezar de nuevo</h3>
             <p>
@@ -1053,6 +1067,7 @@ function App() {
                 setTheme("system");
                 try {
                   localStorage.removeItem("cerca-search-v1");
+                  localStorage.removeItem("cerca-favorites-v1");
                 } catch {
                   /* opcional */
                 }
@@ -1087,12 +1102,18 @@ function App() {
           saved={isSaved(detail.stay.id)}
           onFavorite={() => toggleFavorite(detail.stay, detail.search)}
           onClose={() => setDetail(null)}
-          markets={marketTownId === detail.search.town.id ? markets : []}
-          marketStatus={
-            marketTownId === detail.search.town.id ? marketStatus : "idle"
-          }
+          markets={marketTownId === detail.stay.id ? markets : []}
+          marketStatus={marketTownId === detail.stay.id ? marketStatus : "idle"}
           marketError={marketError}
-          loadMarkets={() => loadMarkets(detail.search.town)}
+          loadMarkets={() =>
+            loadMarkets({
+              ...detail.search.town,
+              id: detail.stay.id,
+              name: detail.stay.name,
+              lat: detail.stay.lat,
+              lng: detail.stay.lng,
+            })
+          }
         />
       )}
     </div>

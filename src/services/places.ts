@@ -102,56 +102,136 @@ export async function reverseTown(lat: number, lng: number): Promise<Town> {
     lng: Number(data.lon ?? lng),
   };
 }
+type OsmElement = {
+  type: string;
+  id: number;
+  lat?: number;
+  lon?: number;
+  center?: { lat: number; lon: number };
+  nodes?: number[];
+  tags?: Record<string, string>;
+};
 const marketCache = new Map<string, { time: number; data: Market[] }>();
+export function parseMarkets(elements: OsmElement[], local = false): Market[] {
+  const nodes = new Map(
+    elements.filter((e) => e.type === "node").map((e) => [e.id, e]),
+  );
+  const result: Market[] = [];
+  for (const item of elements) {
+    const tags = item.tags ?? {};
+    if (tags.shop !== "supermarket" && tags.shop !== "convenience") continue;
+    let lat = item.lat ?? item.center?.lat,
+      lng = item.lon ?? item.center?.lon;
+    if (lat === undefined && item.nodes?.length) {
+      const points = item.nodes
+        .map((id) => nodes.get(id))
+        .filter(
+          (p): p is OsmElement & { lat: number; lon: number } =>
+            p?.lat !== undefined && p?.lon !== undefined,
+        );
+      if (points.length) {
+        lat = points.reduce((sum, p) => sum + p.lat, 0) / points.length;
+        lng = points.reduce((sum, p) => sum + p.lon, 0) / points.length;
+      }
+    }
+    if (
+      !Number.isFinite(lat) ||
+      !Number.isFinite(lng) ||
+      Math.abs(lat!) > 90 ||
+      Math.abs(lng!) > 180
+    )
+      continue;
+    const market: Market = {
+      id: `${item.type}-${item.id}`,
+      name: tags.name || tags.brand || "Tienda de alimentación",
+      address:
+        [tags["addr:street"], tags["addr:housenumber"]]
+          .filter(Boolean)
+          .join(" ") || "Dirección no disponible en OpenStreetMap",
+      lat: lat!,
+      lng: lng!,
+      hours: tags.opening_hours,
+      source: "osm",
+      retrievedAt: new Date().toISOString().slice(0, 10),
+      coverage: local ? "local" : "radius",
+    };
+    if (
+      !result.some(
+        (m) =>
+          m.name.toLowerCase() === market.name.toLowerCase() &&
+          Math.abs(m.lat - market.lat) < 0.0003 &&
+          Math.abs(m.lng - market.lng) < 0.0003,
+      )
+    )
+      result.push(market);
+  }
+  return result;
+}
 export async function findMarkets(
   town: Town,
-  signal?: AbortSignal,
+  signal: AbortSignal = AbortSignal.timeout(22000),
+  refresh = false,
 ): Promise<Market[]> {
+  signal.throwIfAborted();
   const key = `${town.lat.toFixed(3)},${town.lng.toFixed(3)}`;
   const cached = marketCache.get(key);
-  if (cached && Date.now() - cached.time < 3600000) return cached.data;
-  const query = `[out:json][timeout:20];nwr["shop"~"^(supermarket|convenience)$"](around:6000,${town.lat},${town.lng});out center tags;`;
-  const response = await fetch("https://overpass-api.de/api/interpreter", {
-    method: "POST",
-    body: new URLSearchParams({ data: query }),
-    signal: signal ?? AbortSignal.timeout(25000),
-  });
-  if (!response.ok)
-    throw new Error(
-      "OpenStreetMap no responde en este momento. Puedes volver a intentarlo.",
-    );
-  const json = (await response.json()) as {
-    elements: Array<{
-      type: string;
-      id: number;
-      lat?: number;
-      lon?: number;
-      center?: { lat: number; lon: number };
-      tags?: Record<string, string>;
-    }>;
-  };
-  const data = json.elements
-    .map((item): Market | null => {
-      const lat = item.lat ?? item.center?.lat;
-      const lng = item.lon ?? item.center?.lon;
-      if (lat === undefined || lng === undefined) return null;
-      const tags = item.tags ?? {};
-      const street = [tags["addr:street"], tags["addr:housenumber"]]
-        .filter(Boolean)
-        .join(" ");
-      return {
-        id: `${item.type}-${item.id}`,
-        name: tags.name || tags.brand || "Supermercado local",
-        address: street || "Dirección no disponible en OpenStreetMap",
-        lat,
-        lng,
-        hours: tags.opening_hours,
-        source: "osm",
-      };
-    })
-    .filter((item): item is Market => item !== null);
-  marketCache.set(key, { time: Date.now(), data });
-  return data;
+  if (!refresh && cached && Date.now() - cached.time < 3600000)
+    return cached.data;
+  const query = `[out:json][timeout:5];nwr["shop"~"^(supermarket|convenience)$"](around:3000,${town.lat},${town.lng});out center tags;`;
+  try {
+    const response = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      body: new URLSearchParams({ data: query }),
+      signal: AbortSignal.any([signal, AbortSignal.timeout(4000)]),
+    });
+    if (!response.ok) throw new Error("Overpass unavailable");
+    const json = await response.json();
+    if (json.remark || !Array.isArray(json.elements))
+      throw new Error("Incomplete response");
+    const data = parseMarkets(json.elements);
+    if (data.length) marketCache.set(key, { time: Date.now(), data });
+    return data;
+  } catch {
+    signal.throwIfAborted();
+  }
+  // Fallback oficial de lectura, en una ventana pequeña para no descargar ciudades.
+  // Si supera el límite de nodos, reducimos el área una sola vez.
+  for (const delta of [0.0025, 0.00125]) {
+    try {
+      const bbox = [
+        town.lng - delta,
+        town.lat - delta,
+        town.lng + delta,
+        town.lat + delta,
+      ].join(",");
+      const response = await fetch(
+        `https://api.openstreetmap.org/api/0.6/map.json?bbox=${bbox}`,
+        {
+          signal: AbortSignal.any([signal, AbortSignal.timeout(7500)]),
+        },
+      );
+      if (!response.ok) throw new Error("OSM unavailable");
+      const json = await response.json();
+      if (!Array.isArray(json.elements))
+        throw new Error("Invalid OSM response");
+      const data = parseMarkets(json.elements, true);
+      if (data.length) marketCache.set(key, { time: Date.now(), data });
+      return data;
+    } catch {
+      signal.throwIfAborted();
+    }
+  }
+  // Copia real y fechada del centro de Granada para cortes de los servicios públicos.
+  const { default: saved } = await import("../data/real/granada-markets.json");
+  signal.throwIfAborted();
+  const local = saved.filter(
+    (m) =>
+      Math.abs(m.lat - town.lat) < 0.006 && Math.abs(m.lng - town.lng) < 0.006,
+  ) as Market[];
+  if (local.length) return local.map((m) => ({ ...m, cached: true }));
+  throw new Error(
+    "OpenStreetMap no responde en este momento. Puedes volver a intentarlo.",
+  );
 }
 export const mapsUrl = (lat: number, lng: number) =>
   `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=walking`;

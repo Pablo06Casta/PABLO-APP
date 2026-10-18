@@ -8,7 +8,10 @@ export default defineConfig({
     rolldownOptions: {
       output: {
         codeSplitting: {
-          groups: [{ name: "municipios", test: /municipalities/ }],
+          groups: [
+            { name: "municipios", test: /municipalities/ },
+            { name: "alojamientos", test: /real\/stays\.json/ },
+          ],
         },
       },
     },

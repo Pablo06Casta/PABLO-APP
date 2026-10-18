@@ -3365,3 +3365,121 @@
   text-decoration: underline;
   padding: 0 0 0 5px;
 }
+
+/* Real catalogue: no substitute bedroom photos or invented tariffs. */
+.stay-photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 34px;
+  box-sizing: border-box;
+  background: linear-gradient(145deg, #eaf1fa, #d6e2ef);
+  color: #49617c;
+  text-align: center;
+}
+.stay-photo-placeholder > span {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.stay-photo-placeholder > small {
+  font-size: 11px;
+  font-weight: 400;
+}
+.real-badge {
+  position: absolute;
+  bottom: 13px;
+  left: 13px;
+  padding: 6px 10px;
+  color: #fff;
+  background: #214d42e8;
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: 650;
+}
+.photo-credit {
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted, #737b88);
+  font-size: 9px;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.photo-credit a {
+  text-decoration: underline;
+}
+.card-booking-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #edf3ff;
+  color: #2856ba;
+  border: 1px solid #d7e4ff;
+  padding: 11px 13px;
+  border-radius: 9px;
+  margin-top: 12px;
+  font-weight: 650;
+  font-size: 13px;
+}
+.card-booking-link:hover {
+  background: #dce9ff;
+}
+.card-heading button {
+  white-space: normal;
+  text-align: left;
+  line-height: 1.4;
+}
+.detail-nightly > strong {
+  font-size: 23px;
+}
+.gallery-main.stay-photo-placeholder {
+  min-height: 280px;
+}
+.comparison-table .stay-photo-placeholder {
+  height: 130px;
+  padding: 10px;
+}
+.comparison-table .stay-photo-placeholder > span {
+  font-size: 10px;
+}
+.map-selected > .stay-photo-placeholder {
+  width: 80px;
+  flex-shrink: 0;
+  height: 100px;
+  padding: 10px;
+}
+.map-selected > .stay-photo-placeholder > span,
+.map-selected > .stay-photo-placeholder > small {
+  display: none;
+}
+[data-theme="dark"] .stay-photo-placeholder {
+  background: linear-gradient(145deg, #243044, #192434);
+  color: #b2c7e5;
+}
+[data-theme="dark"] .card-booking-link {
+  background: #203255;
+  border-color: #314970;
+  color: #bdd4ff;
+}
+@media (max-width: 600px) {
+  .results-controls {
+    gap: 8px;
+  }
+  .sort-select {
+    min-width: 0;
+    flex: 1;
+  }
+  .sort-select select {
+    min-width: 0;
+    width: 100%;
+  }
+  .view-toggle {
+    flex-shrink: 0;
+  }
+}

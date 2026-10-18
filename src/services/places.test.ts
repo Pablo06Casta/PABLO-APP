@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { findMarkets, findTown, reverseTown } from "./places";
+import { findMarkets, findTown, reverseTown, parseMarkets } from "./places";
 afterEach(() => vi.unstubAllGlobals());
 describe("Proveedores públicos de lugares", () => {
   it("interpreta supermercados OSM de nodos y edificios sin inventar direcciones", async () => {
@@ -13,6 +13,7 @@ describe("Proveedores públicos de lugares", () => {
             lat: 37.17,
             lon: -3.59,
             tags: {
+              shop: "supermarket",
               name: "Mercadona",
               "addr:street": "Calle Real",
               "addr:housenumber": "8",
@@ -23,9 +24,13 @@ describe("Proveedores públicos de lugares", () => {
             type: "way",
             id: 456,
             center: { lat: 37.18, lon: -3.6 },
-            tags: { brand: "Lidl" },
+            tags: { shop: "supermarket", brand: "Lidl" },
           },
-          { type: "way", id: 789, tags: { name: "Sin coordenadas" } },
+          {
+            type: "way",
+            id: 789,
+            tags: { shop: "supermarket", name: "Sin coordenadas" },
+          },
         ],
       }),
     }));
@@ -61,6 +66,94 @@ describe("Proveedores públicos de lugares", () => {
         lng: -3.703,
       }),
     ).rejects.toThrow("OpenStreetMap no responde");
+  });
+  it("consulta la API oficial al fallar Overpass y conserva la cobertura local", async () => {
+    const request = vi.fn(async (input: RequestInfo | URL) =>
+      String(input).includes("overpass")
+        ? { ok: false, status: 502 }
+        : {
+            ok: true,
+            json: async () => ({
+              elements: [
+                { type: "node", id: 100, lat: 41.1, lon: -2.1 },
+                { type: "node", id: 101, lat: 41.102, lon: -2.102 },
+                {
+                  type: "way",
+                  id: 200,
+                  nodes: [100, 101],
+                  tags: { shop: "supermarket", name: "Tienda real" },
+                },
+              ],
+            }),
+          },
+    );
+    vi.stubGlobal("fetch", request);
+    const result = await findMarkets({
+      id: "fallback",
+      name: "Prueba",
+      region: "España",
+      lat: 41.1,
+      lng: -2.1,
+    });
+    expect(result).toHaveLength(1);
+    expect(result[0]).toMatchObject({
+      name: "Tienda real",
+      lat: 41.101,
+      lng: -2.101,
+      coverage: "local",
+    });
+    expect(String(request.mock.calls[1][0])).toContain(
+      "api.openstreetmap.org/api/0.6/map.json?bbox=",
+    );
+  });
+  it("no transforma errores parciales de Overpass en cero supermercados y permite reconsultar vacíos", async () => {
+    const request = vi.fn(async (input: RequestInfo | URL) => ({
+      ok: true,
+      json: async () =>
+        String(input).includes("overpass")
+          ? { remark: "runtime timeout", elements: [] }
+          : { elements: [] },
+    }));
+    vi.stubGlobal("fetch", request);
+    const town = {
+      id: "empty",
+      name: "Prueba",
+      region: "España",
+      lat: 41.5,
+      lng: -2.5,
+    };
+    expect(await findMarkets(town)).toEqual([]);
+    expect(await findMarkets(town)).toEqual([]);
+    expect(request).toHaveBeenCalledTimes(4);
+  });
+  it("respeta cancelación sin consultar proveedores alternativos", async () => {
+    const controller = new AbortController();
+    controller.abort();
+    const request = vi.fn();
+    vi.stubGlobal("fetch", request);
+    await expect(
+      findMarkets(
+        { id: "abort", name: "Prueba", region: "España", lat: 40, lng: -2 },
+        controller.signal,
+      ),
+    ).rejects.toThrow();
+    expect(request).not.toHaveBeenCalled();
+  });
+  it("descarta coordenadas corruptas y tiendas duplicadas", () => {
+    const first = {
+      type: "node",
+      id: 300,
+      lat: 40,
+      lon: -3,
+      tags: { shop: "supermarket", name: "Tienda" },
+    };
+    expect(
+      parseMarkets([
+        first,
+        { ...first, id: 301 },
+        { ...first, id: 302, lat: NaN },
+      ]),
+    ).toHaveLength(1);
   });
   it("limita las búsquedas geográficas a España", async () => {
     const request = vi.fn(async (_input: RequestInfo | URL) => ({

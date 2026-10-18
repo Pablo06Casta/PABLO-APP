@@ -8,6 +8,22 @@ import {
 } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
+import { realStays } from "./services/lodging";
+import { towns } from "./data/towns";
+import { initialFilters, filterStays } from "./lib/search";
+const query = {
+  town: towns[0],
+  checkIn: "2027-03-27",
+  checkOut: "2027-03-30",
+  guests: 2,
+};
+const count = filterStays(
+  realStays(query),
+  query,
+  initialFilters,
+  [],
+  "distance",
+).length;
 import { findMarkets, findTown } from "./services/places";
 
 vi.mock("./components/MapView", () => ({
@@ -36,13 +52,18 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe("CERCA: flujos del viajero", () => {
-  it("identifica la demo y no consulta ubicación ni APIs al cargar", () => {
+  it("muestra hoteles reales y enlaces específicos sin consultar ubicación al cargar", () => {
     render(<App />);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
       "¿Dónde quieres alojarte?",
     );
-    expect(screen.getAllByRole("article")).toHaveLength(8);
-    expect(screen.getByText("Estás explorando una demo.")).toBeTruthy();
+    expect(screen.getAllByRole("article")).toHaveLength(count);
+    expect(
+      screen.getByText("Alojamientos reales, enlaces de Booking."),
+    ).toBeTruthy();
+    expect(
+      screen.getAllByRole("link", { name: /^Ver .+ en Booking$/ }),
+    ).toHaveLength(count);
     expect(findTown).not.toHaveBeenCalled();
     expect(findMarkets).not.toHaveBeenCalled();
   });
@@ -67,29 +88,32 @@ describe("CERCA: flujos del viajero", () => {
     );
     expect(findTown).not.toHaveBeenCalled();
   });
-  it("filtra el presupuesto y recupera los resultados al restablecer", async () => {
+  it("filtra la distancia y recupera los resultados al restablecer", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(screen.getByRole("button", { name: "Filtros" }));
     const dialog = screen.getByRole("dialog");
-    const max = within(dialog).getByRole("spinbutton", { name: "Máximo (€)" });
-    await user.clear(max);
-    await user.type(max, "55");
+    await user.selectOptions(
+      within(dialog).getByRole("combobox", {
+        name: "Distancia máxima al centro",
+      }),
+      "0.5",
+    );
     await user.click(
       within(dialog).getByRole("button", { name: "Aplicar filtros" }),
     );
-    expect(screen.getAllByRole("article")).toHaveLength(2);
+    expect(screen.getAllByRole("article").length).toBeLessThan(count);
     await user.click(screen.getByRole("button", { name: /Filtros/ }));
     await user.click(screen.getByRole("button", { name: "Restablecer" }));
     await user.click(screen.getByRole("button", { name: "Aplicar filtros" }));
-    expect(screen.getAllByRole("article")).toHaveLength(8);
+    expect(screen.getAllByRole("article")).toHaveLength(count);
   });
   it("guarda favoritos, los muestra y los conserva al volver a abrir", async () => {
     const user = userEvent.setup();
     const app = render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Guardar en favoritos: Un refugio lleno de luz",
+        name: "Guardar en favoritos: Eurostars Puerta Real",
       }),
     );
     const nav = screen.getByRole("navigation", {
@@ -98,14 +122,14 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(within(nav).getByRole("button", { name: /Favoritos/ }));
     expect(screen.getAllByRole("article")).toHaveLength(1);
     expect(
-      JSON.parse(localStorage.getItem("cerca-favorites-v1")!),
+      JSON.parse(localStorage.getItem("cerca-favorites-v2")!),
     ).toHaveLength(1);
     app.unmount();
     render(<App />);
     expect(
       screen
         .getByRole("button", {
-          name: "Quitar de favoritos: Un refugio lleno de luz",
+          name: "Quitar de favoritos: Eurostars Puerta Real",
         })
         .getAttribute("aria-pressed"),
     ).toBe("true");
@@ -126,27 +150,30 @@ describe("CERCA: flujos del viajero", () => {
     ).toBeTruthy();
     expect(screen.getAllByRole("button", { name: "Quitar" })).toHaveLength(3);
   });
-  it("muestra el desglose y enlaces con las fechas y huéspedes seleccionados", async () => {
+  it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Detalles de Un refugio lleno de luz",
+        name: "Detalles de Eurostars Puerta Real",
       }),
     );
     const dialog = screen.getByRole("dialog");
     expect(
-      within(dialog).getByText("Este alojamiento es ficticio."),
+      within(dialog).getByText("Alojamiento real del catálogo abierto."),
     ).toBeTruthy();
-    expect(within(dialog).getByText("Total demo")).toBeTruthy();
+    expect(within(dialog).queryByText("Total demo")).toBeNull();
+    expect(
+      within(dialog).getByRole("link", { name: /Ver fuente/ }),
+    ).toBeTruthy();
     const url = new URL(
       (
         within(dialog).getByRole("link", {
-          name: "Buscar en Booking",
+          name: "Ver este hotel en Booking",
         }) as HTMLAnchorElement
       ).href,
     );
-    expect(url.searchParams.get("ss")).toContain("Granada");
+    expect(url.searchParams.get("dest_id")).toBe("90089");
     expect(url.searchParams.get("group_adults")).toBe("2");
     expect(url.searchParams.get("checkin")).toBe(
       JSON.parse(localStorage.getItem("cerca-search-v1")!).checkIn,
@@ -171,7 +198,7 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Guardar en favoritos: Un refugio lleno de luz",
+        name: "Guardar en favoritos: Eurostars Puerta Real",
       }),
     );
     await user.click(screen.getByRole("button", { name: "Abrir ajustes" }));
@@ -184,7 +211,7 @@ describe("CERCA: flujos del viajero", () => {
       screen.getByRole("button", { name: "Borrar mis datos de CERCA" }),
     );
     expect(
-      JSON.parse(localStorage.getItem("cerca-favorites-v1")!),
+      JSON.parse(localStorage.getItem("cerca-favorites-v2")!),
     ).toHaveLength(0);
     expect(document.documentElement.dataset.theme).toBe("light");
   });

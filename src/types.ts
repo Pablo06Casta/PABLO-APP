@@ -7,7 +7,11 @@ export type Town = {
   approximate?: boolean;
 };
 export type StayType =
-  "Todos" | "Apartamento" | "Hotel" | "Casa rural" | "Habitación";
+  | "Todos"
+  | "Apartamento"
+  | "Hotel"
+  | "Casa rural"
+  | "Habitación";
 export type Search = {
   town: Town;
   checkIn: string;
@@ -18,18 +22,27 @@ export type Stay = {
   id: string;
   name: string;
   type: Exclude<StayType, "Todos">;
-  nightly: number;
-  cleaningFee: number;
-  rating: number;
-  reviews: number;
-  capacity: number;
+  nightly: number | null;
+  cleaningFee: number | null;
+  rating: number | null;
+  reviews: number | null;
+  capacity: number | null;
   lat: number;
   lng: number;
   address: string;
   images: string[];
   amenities: string[];
-  freeCancellation: boolean;
-  demo: boolean;
+  freeCancellation: boolean | null;
+  bookingId?: string;
+  bookingPath?: string;
+  sourceUrl: string;
+  retrievedAt: string;
+  photoCredit?: {
+    author: string;
+    licence: string;
+    licenceUrl: string;
+    source: string;
+  };
 };
 export type Filters = {
   minPrice: number;
@@ -50,6 +63,9 @@ export type Market = {
   lng: number;
   hours?: string;
   source: "osm";
+  retrievedAt?: string;
+  coverage?: "local" | "radius";
+  cached?: boolean;
 };
 export type RecentSearch = { town: Town; date: string };
 export type Theme = "light" | "dark" | "system";

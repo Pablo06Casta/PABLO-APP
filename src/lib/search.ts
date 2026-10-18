@@ -34,7 +34,9 @@ export function nights(search: Pick<Search, "checkIn" | "checkOut">) {
   );
 }
 export const totalPrice = (stay: Stay, search: Search) =>
-  stay.nightly * nights(search) + stay.cleaningFee;
+  stay.nightly === null || stay.cleaningFee === null
+    ? null
+    : stay.nightly * nights(search) + stay.cleaningFee;
 export function distance(
   a: { lat: number; lng: number },
   b: { lat: number; lng: number },
@@ -51,7 +53,10 @@ export const formatDistance = (km: number) =>
   km < 1
     ? `${Math.round(km * 1000)} m`
     : `${km.toFixed(1).replace(".", ",")} km`;
-export function nearestMarkets(stay: Stay, markets: Market[]) {
+export function nearestMarkets(
+  stay: { lat: number; lng: number },
+  markets: Market[],
+) {
   return markets
     .map((market) => ({ ...market, distance: distance(stay, market) }))
     .sort((a, b) => a.distance - b.distance);
@@ -65,12 +70,16 @@ export function filterStays(
 ) {
   const selected = stays.filter(
     (stay) =>
-      stay.nightly >= filters.minPrice &&
-      stay.nightly <= filters.maxPrice &&
+      (stay.nightly === null
+        ? filters.minPrice === initialFilters.minPrice &&
+          filters.maxPrice === initialFilters.maxPrice
+        : stay.nightly >= filters.minPrice &&
+          stay.nightly <= filters.maxPrice) &&
       distance(stay, search.town) <= filters.maxDistance &&
-      stay.capacity >= search.guests &&
+      (stay.capacity === null || stay.capacity >= search.guests) &&
       (filters.type === "Todos" || stay.type === filters.type) &&
-      stay.rating >= filters.minRating &&
+      (!filters.minRating ||
+        (stay.rating !== null && stay.rating >= filters.minRating)) &&
       (!filters.cancellation || stay.freeCancellation) &&
       (!filters.parking || stay.amenities.includes("Aparcamiento")) &&
       (!filters.kitchen || stay.amenities.includes("Cocina")) &&
@@ -80,12 +89,37 @@ export function filterStays(
         )),
   );
   return selected.sort((a, b) =>
-    sort === "distance"
-      ? distance(a, search.town) - distance(b, search.town)
-      : sort === "rating"
-        ? b.rating - a.rating
-        : totalPrice(a, search) - totalPrice(b, search),
+    sort === "recommended"
+      ? Number(Boolean(b.images.length)) - Number(Boolean(a.images.length)) ||
+        distance(a, search.town) - distance(b, search.town)
+      : sort === "distance"
+        ? distance(a, search.town) - distance(b, search.town)
+        : sort === "rating"
+          ? (b.rating ?? -1) - (a.rating ?? -1)
+          : sort === "name"
+            ? a.name.localeCompare(b.name, "es")
+            : (totalPrice(a, search) ?? Infinity) -
+              (totalPrice(b, search) ?? Infinity),
   );
+}
+export function stayBookingUrl(stay: Stay, search: Search) {
+  // Las rutas conocidas abren la ficha; los IDs numéricos seleccionan ese hotel.
+  const url = stay.bookingPath
+    ? new URL(`https://www.booking.com/hotel/${stay.bookingPath}.html`)
+    : new URL("https://www.booking.com/searchresults.es.html");
+  if (!stay.bookingPath) {
+    if (!stay.bookingId || !/^\d+$/.test(stay.bookingId)) return undefined;
+    url.searchParams.set("dest_type", "hotel");
+    url.searchParams.set("dest_id", stay.bookingId);
+    url.searchParams.set("highlighted_hotels", stay.bookingId);
+    url.searchParams.set("ss", stay.name);
+  }
+  url.searchParams.set("checkin", search.checkIn);
+  url.searchParams.set("checkout", search.checkOut);
+  url.searchParams.set("group_adults", String(search.guests));
+  url.searchParams.set("no_rooms", "1");
+  url.searchParams.set("group_children", "0");
+  return url.href;
 }
 export function bookingUrl(search: Search, platform: "Booking" | "Airbnb") {
   if (platform === "Airbnb") {

@@ -121,8 +121,14 @@ export function Markets({
         ))}
       {status === "success" && (
         <p className="market-attribution">
-          Datos © OpenStreetMap contributors. Distancias en línea recta y
-          tiempos a pie aproximados, no rutas calculadas. Los horarios pueden
+          {markets.some((m) => m.cached)
+            ? `Copia guardada del ${markets[0]?.retrievedAt}. No se pudo actualizar. `
+            : `Datos consultados el ${markets[0]?.retrievedAt ?? "fecha no disponible"}. `}
+          {markets.some((m) => m.coverage === "local")
+            ? "Cobertura local limitada alrededor del punto consultado; no incluye toda la localidad. "
+            : "Consulta hasta 3 km alrededor del punto elegido. "}
+          Datos © OpenStreetMap contributors (ODbL). Distancias en línea recta
+          y tiempos a pie aproximados, no rutas calculadas. Los horarios pueden
           cambiar.
         </p>
       )}
