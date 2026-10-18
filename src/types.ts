@@ -11,12 +11,25 @@ export type StayType =
   | "Apartamento"
   | "Hotel"
   | "Casa rural"
+  | "Casa"
   | "Habitación";
 export type Search = {
   town: Town;
+  venue?: Venue;
   checkIn: string;
   checkOut: string;
   guests: number;
+};
+export type Venue = {
+  id: string;
+  name: string;
+  city: string;
+  region: string;
+  address: string;
+  location: { lat: number; lng: number } | null;
+  status: "confirmed" | "pending";
+  sourceUrl: string;
+  verifiedAt: string;
 };
 export type Stay = {
   id: string;
@@ -35,6 +48,12 @@ export type Stay = {
   freeCancellation: boolean | null;
   bookingId?: string;
   bookingPath?: string;
+  platform?: "Booking" | "Airbnb";
+  airbnbId?: string;
+  observedNightly?: number;
+  observedAt?: string;
+  minimumNights?: number;
+  approximateLocation?: boolean;
   sourceUrl: string;
   retrievedAt: string;
   photoCredit?: {
@@ -45,6 +64,7 @@ export type Stay = {
   };
 };
 export type Filters = {
+  platform?: "Todos" | "Booking" | "Airbnb";
   minPrice: number;
   maxPrice: number;
   maxDistance: number;

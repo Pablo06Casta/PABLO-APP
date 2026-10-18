@@ -60,7 +60,7 @@ describe("Catálogo real, enlaces y filtros", () => {
       filterStays(
         stays,
         query,
-        { ...initialFilters, maxPrice: 55 },
+        { ...initialFilters, maxPrice: 5 },
         [],
         "distance",
       ),

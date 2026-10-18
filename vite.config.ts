@@ -11,6 +11,7 @@ export default defineConfig({
           groups: [
             { name: "municipios", test: /municipalities/ },
             { name: "alojamientos", test: /real\/stays\.json/ },
+            { name: "airbnb", test: /real\/airbnb\.json/ },
           ],
         },
       },
@@ -26,7 +27,7 @@ export default defineConfig({
         name: "CERCA · Encuentra tu lugar",
         short_name: "CERCA",
         description:
-          "Alojamientos a tu medida y supermercados a un paseo. Explora España con CERCA.",
+          "Viajes de bádminton: alojamientos y supermercados cerca de tu pabellón.",
         lang: "es",
         start_url: "./",
         scope: "./",

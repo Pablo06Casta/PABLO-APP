@@ -1,7 +1,10 @@
 import type { Filters, Market, Search, Stay } from "../types";
+import { searchOrigin } from "../data/venues";
+import { estimateStay } from "./estimates";
 export const initialFilters: Filters = {
   minPrice: 0,
-  maxPrice: 150,
+  maxPrice: 50,
+  platform: "Todos",
   maxDistance: 5,
   type: "Todos",
   minRating: 0,
@@ -68,14 +71,17 @@ export function filterStays(
   markets: Market[],
   sort: string,
 ) {
+  if (search.venue && !search.venue.location) return [];
+  const origin = searchOrigin(search);
   const selected = stays.filter(
     (stay) =>
-      (stay.nightly === null
-        ? filters.minPrice === initialFilters.minPrice &&
-          filters.maxPrice === initialFilters.maxPrice
-        : stay.nightly >= filters.minPrice &&
-          stay.nightly <= filters.maxPrice) &&
-      distance(stay, search.town) <= filters.maxDistance &&
+      estimateStay(stay, search).perPersonNight >= filters.minPrice &&
+      estimateStay(stay, search).perPersonNight <= filters.maxPrice &&
+      (!filters.platform ||
+        filters.platform === "Todos" ||
+        (stay.platform ?? "Booking") === filters.platform) &&
+      (!stay.minimumNights || nights(search) >= stay.minimumNights) &&
+      distance(stay, origin) <= filters.maxDistance &&
       (stay.capacity === null || stay.capacity >= search.guests) &&
       (filters.type === "Todos" || stay.type === filters.type) &&
       (!filters.minRating ||
@@ -91,15 +97,16 @@ export function filterStays(
   return selected.sort((a, b) =>
     sort === "recommended"
       ? Number(Boolean(b.images.length)) - Number(Boolean(a.images.length)) ||
-        distance(a, search.town) - distance(b, search.town)
+        distance(a, origin) - distance(b, origin)
       : sort === "distance"
-        ? distance(a, search.town) - distance(b, search.town)
+        ? distance(a, origin) - distance(b, origin)
         : sort === "rating"
           ? (b.rating ?? -1) - (a.rating ?? -1)
           : sort === "name"
             ? a.name.localeCompare(b.name, "es")
-            : (totalPrice(a, search) ?? Infinity) -
-              (totalPrice(b, search) ?? Infinity),
+            : estimateStay(a, search).perPersonNight -
+                estimateStay(b, search).perPersonNight ||
+              distance(a, origin) - distance(b, origin),
   );
 }
 export function stayBookingUrl(stay: Stay, search: Search) {
@@ -117,11 +124,21 @@ export function stayBookingUrl(stay: Stay, search: Search) {
   url.searchParams.set("checkin", search.checkIn);
   url.searchParams.set("checkout", search.checkOut);
   url.searchParams.set("group_adults", String(search.guests));
-  url.searchParams.set("no_rooms", "1");
+  url.searchParams.set("no_rooms", String(Math.ceil(search.guests / 2)));
   url.searchParams.set("group_children", "0");
   return url.href;
 }
+export function stayPlatformUrl(stay: Stay, search: Search) {
+  if (stay.platform !== "Airbnb") return stayBookingUrl(stay, search);
+  if (!stay.airbnbId || !/^\d+$/.test(stay.airbnbId)) return undefined;
+  const url = new URL(`https://www.airbnb.es/rooms/${stay.airbnbId}`);
+  url.searchParams.set("check_in", search.checkIn);
+  url.searchParams.set("check_out", search.checkOut);
+  url.searchParams.set("adults", String(search.guests));
+  return url.href;
+}
 export function bookingUrl(search: Search, platform: "Booking" | "Airbnb") {
+  const origin = searchOrigin(search);
   if (platform === "Airbnb") {
     const url = new URL(
       `https://www.airbnb.es/s/${encodeURIComponent(search.town.name + "--España")}/homes`,
@@ -129,14 +146,23 @@ export function bookingUrl(search: Search, platform: "Booking" | "Airbnb") {
     url.searchParams.set("checkin", search.checkIn);
     url.searchParams.set("checkout", search.checkOut);
     url.searchParams.set("adults", String(search.guests));
+    url.searchParams.set("lat", String(origin.lat));
+    url.searchParams.set("lng", String(origin.lng));
+    url.searchParams.set("ne_lat", String(origin.lat + 0.045));
+    url.searchParams.set("ne_lng", String(origin.lng + 0.055));
+    url.searchParams.set("sw_lat", String(origin.lat - 0.045));
+    url.searchParams.set("sw_lng", String(origin.lng - 0.055));
+    url.searchParams.set("search_by_map", "true");
     return url.href;
   }
   const url = new URL("https://www.booking.com/searchresults.es.html");
   url.searchParams.set("ss", search.town.name + ", España");
+  url.searchParams.set("latitude", String(origin.lat));
+  url.searchParams.set("longitude", String(origin.lng));
   url.searchParams.set("checkin", search.checkIn);
   url.searchParams.set("checkout", search.checkOut);
   url.searchParams.set("group_adults", String(search.guests));
-  url.searchParams.set("no_rooms", "1");
+  url.searchParams.set("no_rooms", String(Math.ceil(search.guests / 2)));
   url.searchParams.set("group_children", "0");
   return url.href;
 }

@@ -77,14 +77,22 @@ export function Markets({
       {status === "success" && !visible.length && (
         <div className="market-empty">
           <ShoppingBasket size={30} />
-          <h3>No hay supermercados registrados cerca</h3>
+          <h3>No encontramos comercios en el área consultada</h3>
           <p>
-            OpenStreetMap puede no tener todos los establecimientos de esta
-            zona.
+            La consulta tiene cobertura local limitada y OpenStreetMap puede no
+            tener todos los establecimientos. Amplía la búsqueda en Google Maps.
           </p>
           <button className="secondary-button" onClick={onLoad}>
             Volver a consultar
           </button>
+          <a
+            className="text-button"
+            href={`https://www.google.com/maps/search/supermercados/@${origin.lat},${origin.lng},15z`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Ampliar en Google Maps <ExternalLink size={14} />
+          </a>
         </div>
       )}
       {status === "success" &&

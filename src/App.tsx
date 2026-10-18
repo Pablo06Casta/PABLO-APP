@@ -41,8 +41,18 @@ import type {
   StayType,
   Theme,
   Town,
+  Venue,
 } from "./types";
-import { towns } from "./data/towns";
+import { normalize } from "./data/towns";
+import {
+  defaultVenue,
+  venues,
+  townForVenue,
+  searchOrigin,
+  venueLabel,
+} from "./data/venues";
+import { VenuePicker } from "./components/VenuePicker";
+import { PlatformSearches } from "./components/PlatformSearches";
 import {
   initialFilters,
   bookingUrl,
@@ -64,7 +74,7 @@ import { Markets } from "./components/Markets";
 import "./App.css";
 
 type Selection = { stay: Stay; search: Search };
-type Favorite = { stay: Stay; town: Town };
+type Favorite = { stay: Stay; town: Town; venue?: Venue };
 type InstallPrompt = Event & {
   prompt: () => Promise<void>;
   userChoice: Promise<{ outcome: string }>;
@@ -75,17 +85,19 @@ const categories: Array<{ name: StayType; label: string; icon: typeof Home }> =
     { name: "Todos", label: "Todos los alojamientos", icon: LayoutGrid },
     { name: "Apartamento", label: "Apartamentos", icon: Building2 },
     { name: "Hotel", label: "Hoteles", icon: BedDouble },
-    { name: "Casa rural", label: "Casas rurales", icon: Trees },
+    { name: "Casa", label: "Casas", icon: Trees },
     { name: "Habitación", label: "Habitaciones", icon: Home },
   ];
 function initialSearch(): Search {
   const fallback: Search = {
-    town: towns[0],
+    town: townForVenue(defaultVenue),
+    venue: defaultVenue,
     checkIn: isoDate(7),
     checkOut: isoDate(10),
     guests: 2,
   };
-  const value = readStorage<Search>("cerca-search-v1", fallback);
+  const value = readStorage<Search>("cerca-search-v3", fallback);
+  if (value?.venue) value.venue = venues.find((v) => v.id === value.venue?.id);
   return value?.town?.name &&
     Number.isFinite(value.town.lat) &&
     value.checkIn >= isoDate(0) &&
@@ -99,7 +111,7 @@ function App() {
   const [search, setSearch] = useState<Search>(initialSearch);
   const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
-  const [sort, setSort] = useState("recommended");
+  const [sort, setSort] = useState("price");
   const [tab, setTab] = useState<"explore" | "map" | "favorites" | "settings">(
     "explore",
   );
@@ -129,7 +141,7 @@ function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("cerca-search-v1", JSON.stringify(search));
+      localStorage.setItem("cerca-search-v3", JSON.stringify(search));
     } catch {
       /* Almacenamiento opcional */
     }
@@ -158,15 +170,17 @@ function App() {
     return () => clearTimeout(timeout);
   }, [toast]);
 
+  const origin = searchOrigin(search);
   const currentMarkets = useMemo(
-    () => (marketTownId === search.town.id ? markets : []),
-    [marketTownId, search.town.id, markets],
+    () => (marketTownId === origin.id ? markets : []),
+    [marketTownId, origin.id, markets],
   );
   const visible = useMemo(
     () => filterStays(stays, search, filters, currentMarkets, sort),
     [stays, search, filters, currentMarkets, sort],
   );
   const activeFilterCount = [
+    "platform",
     "minPrice",
     "maxPrice",
     "maxDistance",
@@ -185,6 +199,17 @@ function App() {
     compare.some((entry) => entry.stay.id === id);
 
   async function runSearch(next: Search) {
+    const sameCity = (v: Venue) =>
+      normalize(v.city) === normalize(next.town.name);
+    const venue =
+      next.venue && sameCity(next.venue)
+        ? next.venue
+        : normalize(next.town.name) === normalize(search.town.name) &&
+            search.venue
+          ? search.venue
+          : venues.find((v) => sameCity(v) && v.location);
+    next = { ...next, venue };
+
     const generation = ++searchGeneration.current;
     marketController.current?.abort();
     marketController.current = null;
@@ -196,7 +221,7 @@ function App() {
     setSearchError("");
     setTab("explore");
     setCompare([]);
-    if (next.town.approximate) {
+    if (!next.venue && next.town.approximate) {
       try {
         const matches = await findTown(
           next.town.name + ", " + next.town.region,
@@ -235,7 +260,7 @@ function App() {
     setFavorites(
       saved
         ? favorites.filter((entry) => entry.stay.id !== stay.id)
-        : [...favorites, { stay, town: query.town }],
+        : [...favorites, { stay, town: query.town, venue: query.venue }],
     );
     setToast(
       saved
@@ -256,7 +281,14 @@ function App() {
     }
     setCompare([...compare, { stay, search: query }]);
   }
-  async function loadMarkets(town = search.town) {
+  async function loadMarkets(town = searchOrigin(search)) {
+    if (search.venue && !search.venue.location && town.id === search.town.id) {
+      setMarketStatus("error");
+      setMarketError(
+        "Primero hay que confirmar la ubicación de este pabellón.",
+      );
+      return;
+    }
     marketController.current?.abort();
     const controller = new AbortController();
     marketController.current = controller;
@@ -299,7 +331,7 @@ function App() {
   function openDetail(stay: Stay, query = search) {
     setModal(null);
     setDetail({ stay, search: query });
-    if (marketTownId !== stay.id) {
+    if (marketTownId !== searchOrigin(query).id) {
       marketController.current?.abort();
       marketController.current = null;
       setMarketTownId("");
@@ -309,8 +341,8 @@ function App() {
   }
   function showMarkets() {
     setModal("markets");
-    if (marketStatus === "idle" || marketTownId !== search.town.id)
-      void loadMarkets(search.town);
+    if (marketStatus === "idle" || marketTownId !== origin.id)
+      void loadMarkets(origin);
   }
   function card(stay: Stay, query = search) {
     return (
@@ -318,11 +350,7 @@ function App() {
         key={stay.id}
         stay={stay}
         search={query}
-        markets={
-          marketTownId === query.town.id || marketTownId === stay.id
-            ? markets
-            : []
-        }
+        markets={marketTownId === searchOrigin(query).id ? markets : []}
         saved={isSaved(stay.id)}
         compared={isCompared(stay.id)}
         onFavorite={() => toggleFavorite(stay, query)}
@@ -409,16 +437,22 @@ function App() {
             <section className="hero" aria-labelledby="main-title">
               <div className="hero-eyebrow">
                 <span className="eyebrow-line" />
-                <Sparkles size={13} /> MENOS BUSCAR. MÁS DISFRUTAR.
+                <Sparkles size={13} /> MENOS DESPLAZAMIENTOS. MÁS BÁDMINTON.
                 <span className="eyebrow-line" />
               </div>
               <h1 id="main-title">
-                ¿Dónde quieres <span>alojarte?</span>
+                Tu torneo, <span>todo cerca.</span>
               </h1>
               <p>
-                Encuentra tu lugar. Y todo lo que necesitas,{" "}
-                <strong>cerca.</strong>
+                Alojamientos para tu equipo y supermercados junto al pabellón.
+                Compara presupuestos y reserva en la plataforma.
               </p>
+              <VenuePicker
+                search={search}
+                onSelect={(venue) =>
+                  runSearch({ ...search, town: townForVenue(venue), venue })
+                }
+              />
               <SearchBar
                 key={`${search.town.id}-${search.checkIn}-${search.checkOut}-${search.guests}`}
                 search={search}
@@ -431,19 +465,29 @@ function App() {
                     ? "Vuelve a explorar:"
                     : "Un poco de inspiración:"}
                 </span>
-                {(recent.length
-                  ? recent.slice(0, 4).map((entry) => entry.town)
-                  : towns.slice(0, 4)
-                ).map((town) => (
-                  <button
-                    key={town.id}
-                    onClick={() => runSearch({ ...search, town })}
-                  >
-                    <MapPin size={12} />
-                    {town.name}
-                    <ArrowUpRight size={12} />
-                  </button>
-                ))}
+                {venues
+                  .filter((v) => v.location)
+                  .filter(
+                    (v, index, all) =>
+                      all.findIndex((x) => x.city === v.city) === index,
+                  )
+                  .slice(0, 4)
+                  .map((venue) => (
+                    <button
+                      key={venue.id}
+                      onClick={() =>
+                        runSearch({
+                          ...search,
+                          town: townForVenue(venue),
+                          venue,
+                        })
+                      }
+                    >
+                      <MapPin size={12} />
+                      {venue.city}
+                      <ArrowUpRight size={12} />
+                    </button>
+                  ))}
               </div>
             </section>
             <section className="browse-section" aria-label="Alojamientos">
@@ -475,11 +519,12 @@ function App() {
               </div>
               <div className="quick-filters">
                 <span className="quick-filters-note">
-                  <Wallet size={14} /> Precio actualizado en Booking
+                  <Wallet size={14} /> Hasta {filters.maxPrice} € / persona y
+                  noche · estimación
                 </span>
                 <button onClick={() => setModal("filters")}>
                   <LocateFixed size={14} /> A menos de {filters.maxDistance} km
-                  del centro
+                  del {search.venue ? "pabellón" : "centro"}
                 </button>
                 <span className="quick-filters-note">
                   <Check size={13} /> Tu escapada, a tu medida
@@ -493,7 +538,7 @@ function App() {
                     <span className="heading-dot">.</span>
                   </h2>
                   <p>
-                    {visible.length} hoteles reales del catálogo <span>·</span>{" "}
+                    {visible.length} alojamientos del catálogo <span>·</span>{" "}
                     {nights(search)} noches <span>·</span> {search.guests}{" "}
                     {search.guests === 1 ? "huésped" : "huéspedes"}
                   </p>
@@ -507,11 +552,16 @@ function App() {
                       value={sort}
                       onChange={(event) => setSort(event.target.value)}
                     >
+                      <option value="price">
+                        Menor precio estimado por persona
+                      </option>
                       <option value="recommended">
                         Con fotografía primero
                       </option>
                       <option value="name">Nombre del alojamiento</option>
-                      <option value="distance">Más cerca del centro</option>
+                      <option value="distance">
+                        Más cerca del {search.venue ? "pabellón" : "centro"}
+                      </option>
                     </select>
                   </label>
                   <div className="view-toggle">
@@ -538,16 +588,19 @@ function App() {
                 <span>
                   <Info size={16} />
                   <span>
-                    <strong>Alojamientos reales, enlaces de Booking.</strong>{" "}
-                    Catálogo abierto con cobertura limitada. Comprueba precio,
-                    disponibilidad y capacidad para tus fechas en la plataforma.
+                    <strong>Precios orientativos, alojamientos reales.</strong>{" "}
+                    Estimaciones de planificación, no ofertas confirmadas.
+                    Booking usa un modelo sin tarifa observada; Airbnb usa datos
+                    históricos fechados. Los importes pueden cambiar y no
+                    incluyen cargos adicionales.
                   </span>
                 </span>
                 <button onClick={() => setModal("help")}>
                   Saber más <ArrowUpRight size={13} />
                 </button>
               </div>
-              {search.town.approximate && (
+              <PlatformSearches search={search} />
+              {search.town.approximate && !search.venue && (
                 <p className="coordinate-notice">
                   El centro de {search.town.name} es aproximado (centroide
                   municipal). Las distancias se calculan respecto a ese punto.
@@ -584,9 +637,10 @@ function App() {
                   <SearchIcon size={35} />
                   <h3>Un pequeño cambio puede abrir más puertas</h3>
                   <p>
-                    No hay hoteles en nuestro catálogo abierto que encajen con
-                    esta zona y estos filtros. El catálogo no incluye todos los
-                    alojamientos de España.
+                    No hay fichas del catálogo que encajen con este presupuesto,
+                    estancia y distancia al pabellón. Puedes ampliar los filtros
+                    o consultar las búsquedas de plataforma. Algunos destinos
+                    aún no tienen fichas importadas de ambas plataformas.
                   </p>
                   <button
                     className="primary-button"
@@ -618,7 +672,7 @@ function App() {
                     />
                     <button
                       className="map-markets-toggle secondary-button"
-                      onClick={() => loadMarkets(search.town)}
+                      onClick={() => loadMarkets(origin)}
                       disabled={marketStatus === "loading"}
                     >
                       <ShoppingBasket size={16} />
@@ -655,7 +709,7 @@ function App() {
                 <span className="small-caps">SIÉNTETE UN POCO MÁS EN CASA</span>
                 <h2>La compra, a un paseo.</h2>
                 <p>
-                  Descubre supermercados reales cerca de tu estancia.
+                  Descubre supermercados reales cerca del pabellón.
                   <br className="desktop-break" /> Lo esencial, sin dar vueltas.
                 </p>
               </div>
@@ -670,7 +724,7 @@ function App() {
                 </span>
                 <div>
                   <h3>Tu presupuesto primero</h3>
-                  <p>Consulta tarifas para tus fechas en Booking.</p>
+                  <p>Compara presupuestos orientativos para tu equipo.</p>
                 </div>
               </div>
               <div>
@@ -715,7 +769,11 @@ function App() {
                 </div>
                 <div className="stays-grid">
                   {favorites.map((entry) =>
-                    card(entry.stay, { ...search, town: entry.town }),
+                    card(entry.stay, {
+                      ...search,
+                      town: entry.town,
+                      venue: entry.venue,
+                    }),
                   )}
                 </div>
               </>
@@ -848,7 +906,7 @@ function App() {
                   </span>
                   <p>Menos buscar. Más disfrutar.</p>
                   <span className="version-badge">
-                    CATÁLOGO REAL · WIKIDATA
+                    BÁDMINTON · BOOKING + AIRBNB
                   </span>
                   <button
                     className="text-button"
@@ -949,34 +1007,36 @@ function App() {
       {modal === "filters" && (
         <FiltersDialog
           filters={filters}
+          nearVenue={Boolean(search.venue)}
           onClose={() => setModal(null)}
           onApply={(next) => {
             setFilters(next);
             setModal(null);
           }}
           hasMarkets={currentMarkets.length > 0}
-          loadMarkets={() => loadMarkets(search.town)}
+          loadMarkets={() => loadMarkets(origin)}
           marketsLoading={marketStatus === "loading"}
           marketError={marketStatus === "error" ? marketError : ""}
         />
       )}
       {modal === "markets" && (
         <Dialog
-          title={`Supermercados cerca de ${search.town.name}`}
+          title={`Supermercados cerca de ${venueLabel(search)}`}
           onClose={() => setModal(null)}
           wide
         >
           <div className="markets-dialog-content">
             <p className="muted">
-              Establecimientos reales ordenados por proximidad al centro de la
-              localidad.
+              Establecimientos reales ordenados por proximidad a{" "}
+              {venueLabel(search)}. Las distancias son aproximadas en línea
+              recta.
             </p>
             <Markets
-              markets={marketTownId === search.town.id ? markets : []}
-              origin={search.town}
+              markets={marketTownId === origin.id ? markets : []}
+              origin={origin}
               status={marketStatus}
               error={marketError}
-              onLoad={() => loadMarkets(search.town)}
+              onLoad={() => loadMarkets(origin)}
             />
           </div>
         </Dialog>
@@ -990,13 +1050,13 @@ function App() {
             {[
               {
                 n: "01",
-                title: "Elige dónde y cuándo",
-                text: "Busca una ciudad o pueblo español, elige tus fechas y dinos cuántos venís.",
+                title: "Elige tu pabellón y fechas",
+                text: "Elige una instalación de bádminton, las fechas del torneo y las personas que viajan.",
               },
               {
                 n: "02",
                 title: "Encuentra tu rincón",
-                text: "Filtra por distancia y supermercados cercanos. Guarda favoritos y compara hasta tres opciones.",
+                text: "Ordena por presupuesto estimado por persona y noche, filtra por plataforma, tipo y distancia al pabellón. Guarda y compara opciones.",
               },
               {
                 n: "03",
@@ -1016,15 +1076,16 @@ function App() {
               <Info size={21} />
               <p>
                 <strong>Transparencia desde el principio.</strong> Los hoteles
-                proceden de un catálogo abierto de Wikidata (CC0), con
-                identidad, coordenadas e identificador de Booking. Las fotos
-                disponibles corresponden al establecimiento y muestran su autor
-                y licencia. No inventamos precios, reseñas, servicios ni
-                disponibilidad. Booking confirma las condiciones para tus fechas
-                y grupo. El catálogo puede estar incompleto o contener
-                información antigua. Los supermercados proceden de OpenStreetMap
-                (ODbL), con fecha de consulta. No se extraen tarifas de las
-                plataformas mediante scraping.
+                de Booking proceden de Wikidata y las fichas de Airbnb de Inside
+                Airbnb, con fecha y licencia de atribución. Las estimaciones de
+                Booking usan un modelo común por ciudad y categoría; no permiten
+                afirmar qué hotel tiene hoy la tarifa más baja. Las de Airbnb
+                parten de tarifas históricas, sin confirmar disponibilidad o
+                cargos adicionales. En empates ordenamos por distancia al
+                pabellón. Los anuncios de Airbnb tienen ubicación aproximada. El
+                catálogo es limitado: las búsquedas externas amplían opciones y
+                no se presentan como fichas importadas. Las instalaciones sin
+                coordenadas confirmadas no generan recomendaciones de cercanía.
               </p>
             </div>
             <button className="primary-button" onClick={() => setModal(null)}>
@@ -1066,7 +1127,7 @@ function App() {
                 setRecent([]);
                 setTheme("system");
                 try {
-                  localStorage.removeItem("cerca-search-v1");
+                  localStorage.removeItem("cerca-search-v3");
                   localStorage.removeItem("cerca-favorites-v1");
                 } catch {
                   /* opcional */
@@ -1102,18 +1163,16 @@ function App() {
           saved={isSaved(detail.stay.id)}
           onFavorite={() => toggleFavorite(detail.stay, detail.search)}
           onClose={() => setDetail(null)}
-          markets={marketTownId === detail.stay.id ? markets : []}
-          marketStatus={marketTownId === detail.stay.id ? marketStatus : "idle"}
-          marketError={marketError}
-          loadMarkets={() =>
-            loadMarkets({
-              ...detail.search.town,
-              id: detail.stay.id,
-              name: detail.stay.name,
-              lat: detail.stay.lat,
-              lng: detail.stay.lng,
-            })
+          markets={
+            marketTownId === searchOrigin(detail.search).id ? markets : []
           }
+          marketStatus={
+            marketTownId === searchOrigin(detail.search).id
+              ? marketStatus
+              : "idle"
+          }
+          marketError={marketError}
+          loadMarkets={() => loadMarkets(searchOrigin(detail.search))}
         />
       )}
     </div>

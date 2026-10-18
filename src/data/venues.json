@@ -1,0 +1,312 @@
+[
+  {
+    "id": "granollers-congost",
+    "city": "Granollers",
+    "region": "Barcelona",
+    "name": "Pavelló Municipal del Congost",
+    "location": {
+      "lat": 41.61390077,
+      "lng": 2.27919764
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/443385487",
+    "verifiedAt": "2026-10-18",
+    "address": "Carrer de Maria Palau · entorno del Pavelló Congost"
+  },
+  {
+    "id": "solares-mies",
+    "city": "Solares",
+    "region": "Cantabria",
+    "name": "Polideportivo Municipal Mies del Corro",
+    "location": {
+      "lat": 43.3774799,
+      "lng": -3.7383571
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/21761765",
+    "verifiedAt": "2026-10-18",
+    "address": "Calle Mies del Corro, Medio Cudeyo"
+  },
+  {
+    "id": "santander-palacio",
+    "city": "Santander",
+    "region": "Cantabria",
+    "name": "Palacio de Deportes de Santander",
+    "location": {
+      "lat": 43.47557836,
+      "lng": -3.79589843
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/786247222",
+    "verifiedAt": "2026-10-18",
+    "address": "Calle del Alcalde Vega Lamera, 3"
+  },
+  {
+    "id": "santander-ruth",
+    "city": "Santander",
+    "region": "Cantabria",
+    "name": "Complejo Municipal Ruth Beitia",
+    "location": {
+      "lat": 43.4615309,
+      "lng": -3.8530537
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/698529004",
+    "verifiedAt": "2026-10-18",
+    "address": "Complejo Municipal de Deportes Ruth Beitia, Avenida del Deporte, La Albericia, Barrio Cañas, San Román de la Llanilla, Santander, Cantabria, 39011"
+  },
+  {
+    "id": "vitoria-aronova",
+    "city": "Vitoria-Gasteiz",
+    "region": "Álava",
+    "name": "Aronova Badminton Center",
+    "location": null,
+    "status": "pending",
+    "sourceUrl": "",
+    "verifiedAt": "2026-10-18",
+    "address": "Dirección por confirmar"
+  },
+  {
+    "id": "vitoria-aldabe",
+    "city": "Vitoria-Gasteiz",
+    "region": "Álava",
+    "name": "Centro Cívico Aldabe",
+    "location": {
+      "lat": 42.8520861,
+      "lng": -2.6735104
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/node/10845338160",
+    "verifiedAt": "2026-10-18",
+    "address": "Centro Cívico Aldabe"
+  },
+  {
+    "id": "vitoria-salburua",
+    "city": "Vitoria-Gasteiz",
+    "region": "Álava",
+    "name": "Centro Cívico Salburua",
+    "location": {
+      "lat": 42.8439512,
+      "lng": -2.6512927
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/207972646",
+    "verifiedAt": "2026-10-18",
+    "address": "CC Salburua GE, Bratislava hiribidea, Santo Tomas, Salburua, Vitoria-Gasteiz, Gasteizko kuadrilla, Araba / Álava, Euskadi, 01003"
+  },
+  {
+    "id": "estrada-coto",
+    "city": "A Estrada",
+    "region": "Pontevedra",
+    "name": "Pavillón Manuel Coto Ferreiro",
+    "location": {
+      "lat": 42.6938069,
+      "lng": -8.5044784
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/160223732",
+    "verifiedAt": "2026-10-18",
+    "address": "Pavillón Polideportivo Manuel Coto Ferreiro, Avenida da Cultura, Figueiroa de Arriba, A Estrada, Tabeirós - Terra de Montes, Pontevedra, Galicia, 36680"
+  },
+  {
+    "id": "alicante-tecnificacion",
+    "city": "Alicante",
+    "region": "Alicante",
+    "name": "Centro de Tecnificación de la Comunidad Valenciana",
+    "location": {
+      "lat": 38.35399511,
+      "lng": -0.49467328
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/74316387",
+    "verifiedAt": "2026-10-18",
+    "address": "Centro de Tecnificación · Monte Tossal"
+  },
+  {
+    "id": "alicante-pitiu",
+    "city": "Alicante",
+    "region": "Alicante",
+    "name": "Pabellón Pitiu Rochel",
+    "location": {
+      "lat": 38.3561658,
+      "lng": -0.4929562
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/74338579",
+    "verifiedAt": "2026-10-18",
+    "address": "Pabellón Municipal Central Pitiu Rochel, Carrer Camí de Ronda, el Tossal, Alacant / Alicante, l'Alacantí, Alacant / Alicante, Comunitat Valenciana, 03004"
+  },
+  {
+    "id": "benalmadena-arroyo",
+    "city": "Benalmádena",
+    "region": "Málaga",
+    "name": "Polideportivo Municipal Arroyo de la Miel",
+    "location": {
+      "lat": 36.6041059,
+      "lng": -4.5320139
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/336956247",
+    "verifiedAt": "2026-10-18",
+    "address": "Polideportivo Arroyo de la Miel, Calle Paloma, Arroyo de la Miel, Arroyo de la Miel-Benalmádena Costa, Benalmádena, Costa del Sol Occidental, Málaga, Andalucía, 29631"
+  },
+  {
+    "id": "cartagena-wssell",
+    "city": "Cartagena",
+    "region": "Murcia",
+    "name": "Pabellón Municipal Wssell de Guimbarda",
+    "location": {
+      "lat": 37.6131864,
+      "lng": -0.98654121
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/224035490",
+    "verifiedAt": "2026-10-18",
+    "address": "Calle Wssell de Guimbarda"
+  },
+  {
+    "id": "cartagena-palacio",
+    "city": "Cartagena",
+    "region": "Murcia",
+    "name": "Palacio de Deportes de Cartagena",
+    "location": {
+      "lat": 37.6127201,
+      "lng": -1.0074507
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/233853239",
+    "verifiedAt": "2026-10-18",
+    "address": "Palacio de Deportes, Avenida del Cantón, Barriada de Villalba, Barrio de la Concepción, San Antonio Abad, Cartagena, Campo de Cartagena y Mar Menor, Región de Murcia, 30394"
+  },
+  {
+    "id": "estella-tierra",
+    "city": "Estella-Lizarra",
+    "region": "Navarra",
+    "name": "Polideportivo Municipal Tierra Estella",
+    "location": {
+      "lat": 42.67120065,
+      "lng": -2.03695385
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/341612137",
+    "verifiedAt": "2026-10-18",
+    "address": "Polideportivo Lizarreria, Estella-Lizarra"
+  },
+  {
+    "id": "huelva-palacio",
+    "city": "Huelva",
+    "region": "Huelva",
+    "name": "Palacio de Deportes de Huelva",
+    "location": {
+      "lat": 37.2656661,
+      "lng": -6.9236242
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/296828476",
+    "verifiedAt": "2026-10-18",
+    "address": "Palacio de Deportes, Avenida Fuerzas Armadas, Huelva, Comarca Metropolitana de Huelva, Huelva, Andalucía, 21007"
+  },
+  {
+    "id": "huelva-andres",
+    "city": "Huelva",
+    "region": "Huelva",
+    "name": "Pabellón Andrés Estrada",
+    "location": {
+      "lat": 37.2584637,
+      "lng": -6.9408132
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/486975360",
+    "verifiedAt": "2026-10-18",
+    "address": "Andrés Estrada, Calle Teniente de Navío Celestino Díaz Hernández, Huelva, Comarca Metropolitana de Huelva, Huelva, Andalucía, 21003"
+  },
+  {
+    "id": "ibiza-blanca",
+    "city": "Ibiza",
+    "region": "Islas Baleares",
+    "name": "Polideportivo Insular Blanca Dona",
+    "location": null,
+    "status": "pending",
+    "sourceUrl": "",
+    "verifiedAt": "2026-10-18",
+    "address": "Dirección por confirmar"
+  },
+  {
+    "id": "ibiza-raspallar",
+    "city": "Ibiza",
+    "region": "Islas Baleares",
+    "name": "Poliesportiu des Raspallar",
+    "location": null,
+    "status": "pending",
+    "sourceUrl": "",
+    "verifiedAt": "2026-10-18",
+    "address": "Dirección por confirmar"
+  },
+  {
+    "id": "rinconada-fernando",
+    "city": "La Rinconada",
+    "region": "Sevilla",
+    "name": "Pabellón Municipal Fernando Martín",
+    "location": {
+      "lat": 37.4798046,
+      "lng": -5.9503115
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/1477833190",
+    "verifiedAt": "2026-10-18",
+    "address": "Pabellón Municipal Fernando Martín, Calle Isaac Peral, San José de la Rinconada, La Rinconada, Sevilla, Andalucía, 41309"
+  },
+  {
+    "id": "madrid-barajas",
+    "city": "Madrid",
+    "region": "Madrid",
+    "name": "Centro de Tecnificación de Madrid · Barajas",
+    "location": null,
+    "status": "pending",
+    "sourceUrl": "",
+    "verifiedAt": "2026-10-18",
+    "address": "Centro de tecnificación de Barajas: dirección por confirmar"
+  },
+  {
+    "id": "paracuellos-municipal",
+    "city": "Paracuellos de Jarama",
+    "region": "Madrid",
+    "name": "Polideportivo Municipal de Paracuellos",
+    "location": {
+      "lat": 40.5039063,
+      "lng": -3.5236122
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/28125882",
+    "verifiedAt": "2026-10-18",
+    "address": "Polideportivo Municipal de Paracuellos del Jarama, Avenida de los Deportes, Paracuellos de Jarama, Comunidad de Madrid, 28860"
+  },
+  {
+    "id": "oviedo-corredoria",
+    "city": "Oviedo",
+    "region": "Asturias",
+    "name": "Centro Deportivo Corredoria Arena",
+    "location": {
+      "lat": 43.3822054,
+      "lng": -5.8230385
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/269150293",
+    "verifiedAt": "2026-10-18",
+    "address": "Corredoria Arena, Calle Maestro Don Marciano, La Carisa, Conceyín, La Corredoria, Oviedo / Uviéu, Oviedo, Asturias / Asturies, 33011"
+  },
+  {
+    "id": "oviedo-cristo",
+    "city": "Oviedo",
+    "region": "Asturias",
+    "name": "Complejo Deportivo El Cristo",
+    "location": {
+      "lat": 43.353665,
+      "lng": -5.8701554
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/relation/17874845",
+    "verifiedAt": "2026-10-18",
+    "address": "Instalaciones deportivas de El Cristo, Calle Julián Clavería, Truébano, El Cristo, Oviedo / Uviéu, Oviedo, Asturias / Asturies, 33006"
+  }
+]

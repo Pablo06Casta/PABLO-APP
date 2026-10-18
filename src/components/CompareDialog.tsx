@@ -1,6 +1,13 @@
 import { Heart } from "lucide-react";
 import type { Search, Stay } from "../types";
-import { distance, formatDistance, stayBookingUrl } from "../lib/search";
+import {
+  distance,
+  formatDistance,
+  money,
+  stayPlatformUrl,
+} from "../lib/search";
+import { estimateStay } from "../lib/estimates";
+import { searchOrigin } from "../data/venues";
 import { Dialog } from "./Dialog";
 import { PhotoCredit, StayPhoto } from "./StayPhoto";
 type Selection = { stay: Stay; search: Search };
@@ -19,8 +26,8 @@ export function CompareDialog({
     <Dialog title="¿Con cuál te quedas?" onClose={onClose} wide>
       <div className="compare-body">
         <p className="muted">
-          Compara hasta tres hoteles reales. Las tarifas y condiciones se
-          consultan en Booking.
+          Compara hasta tres alojamientos reales. Los importes son presupuestos
+          orientativos por persona y noche, no ofertas confirmadas.
         </p>
         <div className="compare-scroll">
           <table className="comparison-table">
@@ -54,24 +61,33 @@ export function CompareDialog({
             </thead>
             <tbody>
               <tr>
-                <th>Precio y disponibilidad</th>
+                <th>Precio estimado por persona/noche</th>
                 {selections.map(({ stay, search }) => (
                   <td key={stay.id}>
+                    <strong>
+                      ≈ {money(estimateStay(stay, search).perPersonNight)}
+                    </strong>
+                    <br />
+                    <small>
+                      ≈ {money(estimateStay(stay, search).totalGroup)} por el
+                      grupo · sin extras
+                    </small>
+                    <br />
                     <a
-                      href={stayBookingUrl(stay, search)}
+                      href={stayPlatformUrl(stay, search)}
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Consultar en Booking
+                      Ver en {stay.platform ?? "Booking"}
                     </a>
                   </td>
                 ))}
               </tr>
               <tr>
-                <th>Distancia al centro</th>
+                <th>Distancia al pabellón</th>
                 {selections.map(({ stay, search }) => (
                   <td key={stay.id}>
-                    {formatDistance(distance(stay, search.town))}
+                    {formatDistance(distance(stay, searchOrigin(search)))}
                   </td>
                 ))}
               </tr>
@@ -86,7 +102,10 @@ export function CompareDialog({
                 {selections.map(({ stay }) => (
                   <td key={stay.id}>
                     <a href={stay.sourceUrl} target="_blank" rel="noreferrer">
-                      Wikidata · {stay.retrievedAt}
+                      {stay.platform === "Airbnb"
+                        ? "Inside Airbnb"
+                        : "Wikidata"}{" "}
+                      · {stay.observedAt ?? stay.retrievedAt}
                     </a>
                   </td>
                 ))}

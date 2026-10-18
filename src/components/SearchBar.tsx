@@ -88,7 +88,13 @@ export function SearchBar({
     }
     setOpen(false);
     setGuestOpen(false);
-    onSearch({ town, checkIn, checkOut, guests });
+    onSearch({
+      town,
+      checkIn,
+      checkOut,
+      guests,
+      venue: town.id === search.town.id ? search.venue : undefined,
+    });
   }
   function locate() {
     if (!navigator.geolocation) {
@@ -136,7 +142,7 @@ export function SearchBar({
               id="destination"
               ref={input}
               value={query}
-              placeholder="Ciudad o pueblo de España"
+              placeholder="Ciudad del torneo"
               role="combobox"
               aria-expanded={open}
               aria-controls={listId}

@@ -9,12 +9,13 @@ import {
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 import { realStays } from "./services/lodging";
-import { towns } from "./data/towns";
-import { initialFilters, filterStays } from "./lib/search";
+import { defaultVenue, townForVenue, venues } from "./data/venues";
+import { initialFilters, filterStays, isoDate } from "./lib/search";
 const query = {
-  town: towns[0],
-  checkIn: "2027-03-27",
-  checkOut: "2027-03-30",
+  town: townForVenue(defaultVenue),
+  venue: defaultVenue,
+  checkIn: isoDate(7),
+  checkOut: isoDate(10),
   guests: 2,
 };
 const count = filterStays(
@@ -55,15 +56,18 @@ describe("CERCA: flujos del viajero", () => {
   it("muestra hoteles reales y enlaces específicos sin consultar ubicación al cargar", () => {
     render(<App />);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
-      "¿Dónde quieres alojarte?",
+      "Tu torneo, todo cerca.",
     );
     expect(screen.getAllByRole("article")).toHaveLength(count);
     expect(
-      screen.getByText("Alojamientos reales, enlaces de Booking."),
+      screen.getByText("Precios orientativos, alojamientos reales."),
     ).toBeTruthy();
     expect(
-      screen.getAllByRole("link", { name: /^Ver .+ en Booking$/ }),
+      screen.getAllByRole("link", { name: /^Ver .+ en (Booking|Airbnb)$/ }),
     ).toHaveLength(count);
+    expect(
+      screen.getByRole("combobox", { name: "Tu pabellón de competición" }),
+    ).toBeTruthy();
     expect(findTown).not.toHaveBeenCalled();
     expect(findMarkets).not.toHaveBeenCalled();
   });
@@ -83,7 +87,7 @@ describe("CERCA: flujos del viajero", () => {
         screen.getByRole("heading", { name: /Quédate en Málaga/ }),
       ).toBeTruthy(),
     );
-    expect(JSON.parse(localStorage.getItem("cerca-search-v1")!).town.name).toBe(
+    expect(JSON.parse(localStorage.getItem("cerca-search-v3")!).town.name).toBe(
       "Málaga",
     );
     expect(findTown).not.toHaveBeenCalled();
@@ -95,7 +99,7 @@ describe("CERCA: flujos del viajero", () => {
     const dialog = screen.getByRole("dialog");
     await user.selectOptions(
       within(dialog).getByRole("combobox", {
-        name: "Distancia máxima al centro",
+        name: "Distancia máxima al pabellón",
       }),
       "0.5",
     );
@@ -113,7 +117,7 @@ describe("CERCA: flujos del viajero", () => {
     const app = render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Guardar en favoritos: Eurostars Puerta Real",
+        name: "Guardar en favoritos: NH Canciller Ayala Vitoria",
       }),
     );
     const nav = screen.getByRole("navigation", {
@@ -129,7 +133,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(
       screen
         .getByRole("button", {
-          name: "Quitar de favoritos: Eurostars Puerta Real",
+          name: "Quitar de favoritos: NH Canciller Ayala Vitoria",
         })
         .getAttribute("aria-pressed"),
     ).toBe("true");
@@ -155,12 +159,12 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Detalles de Eurostars Puerta Real",
+        name: "Detalles de NH Canciller Ayala Vitoria",
       }),
     );
     const dialog = screen.getByRole("dialog");
     expect(
-      within(dialog).getByText("Alojamiento real del catálogo abierto."),
+      within(dialog).getByText("Alojamiento real, presupuesto estimado."),
     ).toBeTruthy();
     expect(within(dialog).queryByText("Total demo")).toBeNull();
     expect(
@@ -169,14 +173,14 @@ describe("CERCA: flujos del viajero", () => {
     const url = new URL(
       (
         within(dialog).getByRole("link", {
-          name: "Ver este hotel en Booking",
+          name: "Ver este alojamiento en Booking",
         }) as HTMLAnchorElement
       ).href,
     );
-    expect(url.searchParams.get("dest_id")).toBe("90089");
+    expect(url.searchParams.get("dest_id")).toBeTruthy();
     expect(url.searchParams.get("group_adults")).toBe("2");
     expect(url.searchParams.get("checkin")).toBe(
-      JSON.parse(localStorage.getItem("cerca-search-v1")!).checkIn,
+      JSON.parse(localStorage.getItem("cerca-search-v3")!).checkIn,
     );
   });
   it("consulta supermercados reales solo al solicitarlos", async () => {
@@ -187,6 +191,11 @@ describe("CERCA: flujos del viajero", () => {
     );
     await screen.findByText("Supermercado registrado");
     expect(findMarkets).toHaveBeenCalledTimes(1);
+    expect(vi.mocked(findMarkets).mock.calls[0][0]).toMatchObject({
+      id: defaultVenue.id,
+      lat: defaultVenue.location!.lat,
+      lng: defaultVenue.location!.lng,
+    });
     expect(
       screen.getByRole("link", {
         name: "Cómo llegar a Supermercado registrado",
@@ -198,7 +207,7 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     await user.click(
       screen.getByRole("button", {
-        name: "Guardar en favoritos: Eurostars Puerta Real",
+        name: "Guardar en favoritos: NH Canciller Ayala Vitoria",
       }),
     );
     await user.click(screen.getByRole("button", { name: "Abrir ajustes" }));
@@ -214,5 +223,46 @@ describe("CERCA: flujos del viajero", () => {
       JSON.parse(localStorage.getItem("cerca-favorites-v2")!),
     ).toHaveLength(0);
     expect(document.documentElement.dataset.theme).toBe("light");
+  });
+  it("cambia de pabellón y consulta supermercados desde esa instalación", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Tu pabellón de competición" }),
+      "solares-mies",
+    );
+    await waitFor(() =>
+      expect(
+        screen.getByRole("heading", { name: /Quédate en Solares/ }),
+      ).toBeTruthy(),
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Supermercados cerca" }),
+    );
+    await screen.findByText("Supermercado registrado");
+    const venue = venues.find((v) => v.id === "solares-mies")!;
+    expect(vi.mocked(findMarkets).mock.calls.at(-1)![0]).toMatchObject({
+      id: venue.id,
+      ...venue.location,
+    });
+  });
+  it("filtra Airbnb y presupuesto y mantiene el orden de menor a mayor", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(screen.getByRole("button", { name: "Filtros" }));
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Plataforma" }),
+      "Airbnb",
+    );
+    const max = screen.getByRole("spinbutton", { name: "Máximo (€)" });
+    await user.clear(max);
+    await user.type(max, "45");
+    await user.click(screen.getByRole("button", { name: "Aplicar filtros" }));
+    const cards = screen.getAllByRole("article");
+    expect(cards.length).toBeGreaterThan(0);
+    const prices = cards.map((c) => Number(c.dataset.estimate));
+    expect(prices).toEqual([...prices].sort((a, b) => a - b));
+    expect(prices.every((p) => p <= 45)).toBe(true);
+    expect(cards.every((c) => c.dataset.platform === "Airbnb")).toBe(true);
   });
 });

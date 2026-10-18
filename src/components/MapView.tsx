@@ -9,6 +9,9 @@ import {
   X,
 } from "lucide-react";
 import type { Market, Search, Stay } from "../types";
+import { money } from "../lib/search";
+import { estimateStay } from "../lib/estimates";
+import { searchOrigin } from "../data/venues";
 import { PhotoCredit, StayPhoto } from "./StayPhoto";
 export function MapView({
   stays,
@@ -23,6 +26,7 @@ export function MapView({
   onOpen: (stay: Stay) => void;
   compact?: boolean;
 }) {
+  const origin = searchOrigin(search);
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<L.Map | null>(null);
   const layerRef = useRef<L.LayerGroup | null>(null);
@@ -35,7 +39,7 @@ export function MapView({
     const map = L.map(container.current, {
       zoomControl: false,
       scrollWheelZoom: false,
-    }).setView([search.town.lat, search.town.lng], compact ? 14 : 13);
+    }).setView([origin.lat, origin.lng], compact ? 14 : 13);
     mapRef.current = map;
     L.control.zoom({ position: "bottomright" }).addTo(map);
     const tiles = L.tileLayer(
@@ -58,15 +62,15 @@ export function MapView({
       layerRef.current = null;
       tilesRef.current = null;
     };
-  }, [compact, search.town]);
+  }, [compact, origin.lat, origin.lng]);
   useEffect(() => {
     const layer = layerRef.current;
     const map = mapRef.current;
     if (!layer || !map) return;
     layer.clearLayers();
-    map.setView([search.town.lat, search.town.lng], compact ? 14 : 13);
+    map.setView([origin.lat, origin.lng], compact ? 14 : 13);
     setSelected(null);
-    L.circleMarker([search.town.lat, search.town.lng], {
+    L.circleMarker([origin.lat, origin.lng], {
       radius: 7,
       color: "#fff",
       weight: 3,
@@ -75,7 +79,7 @@ export function MapView({
     })
       .addTo(layer)
       .bindTooltip(
-        `${search.town.approximate ? "Referencia aproximada de" : "Centro de"} ${search.town.name}`,
+        `${search.venue ? "Pabellón:" : "Centro de"} ${origin.name}`,
         { direction: "top" },
       );
     for (const stay of stays) {
@@ -84,7 +88,7 @@ export function MapView({
         keyboard: true,
         icon: L.divIcon({
           className: "stay-marker-wrapper",
-          html: `<span class="stay-map-marker">Hotel</span>`,
+          html: `<span class="stay-map-marker">≈${money(estimateStay(stay, search).perPersonNight)}</span>`,
           iconSize: [68, 35],
           iconAnchor: [34, 17],
         }),
@@ -108,7 +112,7 @@ export function MapView({
       popup.append(name, address);
       marker.bindPopup(popup);
     }
-  }, [stays, markets, search.town, compact]);
+  }, [stays, markets, search, compact, origin.lat, origin.lng, origin.name]);
   return (
     <div className={`map-shell ${compact ? "map-compact" : ""}`}>
       <div
@@ -119,20 +123,17 @@ export function MapView({
       />
       <div className="map-legend">
         <span>
-          <i /> Hoteles reales
+          <i /> Estimación €/persona/noche
         </span>
         <span>
-          <ShoppingBasket size={14} /> Supermercados reales
+          <ShoppingBasket size={14} /> Compra cerca del pabellón
         </span>
       </div>
       <button
         className="map-locate icon-button"
-        aria-label="Centrar mapa en la localidad"
+        aria-label="Centrar mapa en el pabellón"
         onClick={() =>
-          mapRef.current?.setView(
-            [search.town.lat, search.town.lng],
-            compact ? 14 : 13,
-          )
+          mapRef.current?.setView([origin.lat, origin.lng], compact ? 14 : 13)
         }
       >
         <LocateFixed size={20} />
@@ -161,7 +162,10 @@ export function MapView({
               <MapPin size={12} /> {search.town.name} · alojamiento real
             </p>
             <b>
-              <small>Precio en Booking</small>
+              <small>
+                ≈ {money(estimateStay(selected, search).perPersonNight)} /
+                persona y noche
+              </small>
             </b>
           </div>
           <button
