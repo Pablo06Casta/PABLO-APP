@@ -1,0 +1,46 @@
+.app-shell { max-width: 1200px; padding: 0 56px; margin: 0 auto; }
+.site-header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1px solid #d9dfd2; gap: 20px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font-size: 14px; font-weight: 800; letter-spacing: 1.5px; }
+.brand-mark { display: grid; place-items: center; background: #213b30; color: #e0eda7; width: 40px; height: 40px; border-radius: 12px; font-size: 30px; font-weight: 650; letter-spacing: -2px; padding-bottom: 5px; }
+.nav-link { font-size: 13px; text-decoration: none; font-weight: 600; }
+.nav-link span { margin-left: 10px; }
+.hero { padding: 84px 0 78px; }
+.eyebrow { display: flex; align-items: center; gap: 9px; font-size: 11px; font-weight: 650; letter-spacing: 2px; margin: 0 0 25px; }
+.eyebrow span { width: 7px; height: 7px; border-radius: 50%; background: #597a36; }
+h1 { font-size: clamp(64px, 9vw, 112px); line-height: 1.02; letter-spacing: -6px; font-weight: 550; margin: 0 0 26px; }
+h1 em { font-family: Georgia, serif; font-weight: 400; color: #648044; }
+.hero-description { max-width: 430px; color: #5c6d60; font-size: 17px; line-height: 1.75; margin: 0 0 30px; }
+.primary-link { display: inline-flex; align-items: center; gap: 28px; text-decoration: none; font-size: 14px; font-weight: 650; border-bottom: 1px solid #213b30; padding-bottom: 9px; }
+.demo { scroll-margin-top: 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; border-top: 1px solid #d9dfd2; padding: 52px 0 64px; align-items: center; }
+.section-number { font-size: 11px; letter-spacing: 1.6px; color: #5c6d60; }
+h2 { font-size: 40px; line-height: 1.15; letter-spacing: -1.5px; font-weight: 550; margin: 22px 0 18px; }
+.demo-copy p { max-width: 290px; color: #5c6d60; font-size: 15px; line-height: 1.75; margin: 0; }
+.counter-card { background: #eaf0dc; border: 1px solid #dae3c9; border-radius: 24px; padding: 32px; text-align: center; }
+.counter-label { font-size: 10px; letter-spacing: 2px; font-weight: 650; }
+.counter-value { display: block; font-size: 88px; line-height: 1.5; font-weight: 500; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.counter-actions { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.counter-actions button { padding: 12px 20px; border-radius: 10px; font-size: 13px; font-weight: 600; transition: background 120ms ease; }
+.add-button { background: #213b30; color: #fff; border: 1px solid #213b30; }
+.add-button:hover { background: #355744; }
+.add-button span { margin-right: 4px; }
+.reset-button { background: transparent; color: #213b30; border: 1px solid #b5c3a1; }
+.reset-button:hover:not(:disabled) { background: #dce7c8; }
+.reset-button:disabled { color: #66715c; border-color: #c5d0b4; }
+.counter-note { color: #5c6d60; font-size: 11px; line-height: 1.6; margin: 23px 0 0; }
+.site-footer { display: flex; justify-content: space-between; gap: 20px; padding: 25px 0 32px; border-top: 1px solid #d9dfd2; color: #5c6d60; font-size: 11px; }
+.site-footer span:first-child { font-weight: 700; letter-spacing: 1.2px; }
+
+@media (max-width: 700px) {
+  .app-shell { padding: 0 24px; }
+  .site-header { padding: 22px 0; }
+  .brand { font-size: 12px; gap: 8px; }
+  .nav-link { font-size: 12px; }
+  .nav-link span { margin-left: 3px; }
+  .hero { padding: 56px 0; }
+  h1 { font-size: clamp(58px, 13vw, 84px); letter-spacing: -3.5px; }
+  .hero-description { font-size: 16px; }
+  .demo { grid-template-columns: 1fr; gap: 28px; padding: 38px 0 42px; }
+  h2 { font-size: 34px; }
+  .counter-card { padding: 28px 18px; }
+  .site-footer { font-size: 10px; }
+}
