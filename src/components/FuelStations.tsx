@@ -12,6 +12,24 @@ import { distance, formatDistance } from "../lib/search";
 import { fuelDirectionsUrl } from "../services/places";
 import references from "../data/real/fuel-references.json";
 
+type StoredFuelReference = {
+  destination: string;
+  name: string;
+  address: string;
+  venueHint?: string;
+  lat?: number;
+  lng?: number;
+  sourceUrl?: string;
+  retrievedAt?: string;
+  hours?: string;
+};
+
+const storedReferences = references as {
+  providedAt: string;
+  priceComparator: string;
+  stations: StoredFuelReference[];
+};
+
 function normalize(value: string) {
   return value
     .normalize("NFD")
@@ -56,13 +74,23 @@ export function FuelStations({
   const showResults =
     status === "success" || (status === "loading" && sorted.length > 0);
   const mapsSearch = `https://www.google.com/maps/search/gasolineras/@${origin.lat},${origin.lng},14z`;
-  const saved = references.stations.filter((station) => {
-    if (!destination || normalize(station.destination) !== normalize(destination))
-      return false;
-    if (!("venueHint" in station) || !station.venueHint || !venueName)
-      return true;
-    return normalize(venueName).includes(normalize(station.venueHint));
-  });
+  const saved = storedReferences.stations
+    .filter((station) => {
+      if (!destination || normalize(station.destination) !== normalize(destination))
+        return false;
+      if (!station.venueHint || !venueName)
+        return true;
+      return normalize(venueName).includes(normalize(station.venueHint));
+    })
+    .sort((first, second) => {
+      const firstDistance = Number.isFinite(first.lat) && Number.isFinite(first.lng)
+        ? distance(origin, { lat: first.lat!, lng: first.lng! })
+        : Number.POSITIVE_INFINITY;
+      const secondDistance = Number.isFinite(second.lat) && Number.isFinite(second.lng)
+        ? distance(origin, { lat: second.lat!, lng: second.lng! })
+        : Number.POSITIVE_INFINITY;
+      return firstDistance - secondDistance;
+    });
 
   return (
     <div className="markets-panel">
@@ -73,7 +101,7 @@ export function FuelStations({
         </div>
         <a
           className="primary-button"
-          href={references.priceComparator}
+          href={storedReferences.priceComparator}
           target="_blank"
           rel="noreferrer"
         >
@@ -93,33 +121,60 @@ export function FuelStations({
             </div>
             <span>{saved.length} opciones</span>
           </div>
-          {saved.map((station, index) => (
-            <article
-              className="market-card fuel-reference-card"
-              key={`${station.destination}-${station.name}-${station.address}-${index}`}
-            >
-              <span className="market-logo"><Fuel size={23} /></span>
-              <div className="market-info">
-                <h4>{station.name}</h4>
-                <p>{station.address}</p>
-                {"venueHint" in station && station.venueHint && (
-                  <span><MapPin size={12} /> Referencia: {station.venueHint}</span>
-                )}
-              </div>
-              <a
-                className="directions-button fuel-route"
-                href={fuelReferenceMapsUrl(station.name, station.address)}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={`Ver ubicación de ${station.name}, ${station.address}`}
+          {saved.map((station, index) => {
+            const hasCoordinates =
+              Number.isFinite(station.lat) && Number.isFinite(station.lng);
+            const storedDistance = hasCoordinates
+              ? distance(origin, { lat: station.lat!, lng: station.lng! })
+              : null;
+            return (
+              <article
+                className="market-card fuel-reference-card"
+                key={`${station.destination}-${station.name}-${station.address}-${index}`}
               >
-                <MapPin size={16} /><span>Ver ubicación</span>
-              </a>
-            </article>
-          ))}
+                <span className="market-logo"><Fuel size={23} /></span>
+                <div className="market-info">
+                  <h4>{station.name}</h4>
+                  <p>{station.address}</p>
+                  {storedDistance !== null ? (
+                    <span><Navigation size={12} /> {formatDistance(storedDistance)} en línea recta</span>
+                  ) : station.venueHint ? (
+                    <span><MapPin size={12} /> Referencia: {station.venueHint}</span>
+                  ) : null}
+                  {station.hours && <small><Clock3 size={12} /> {station.hours}</small>}
+                  {station.sourceUrl && (
+                    <a className="market-source" href={station.sourceUrl} target="_blank" rel="noreferrer">
+                      Ver en OpenStreetMap <ExternalLink size={11} />
+                    </a>
+                  )}
+                </div>
+                <a
+                  className="directions-button fuel-route"
+                  href={hasCoordinates
+                    ? fuelDirectionsUrl(origin, {
+                        id: station.sourceUrl ?? station.name,
+                        name: station.name,
+                        address: station.address,
+                        lat: station.lat!,
+                        lng: station.lng!,
+                        sourceUrl: station.sourceUrl ?? "",
+                        retrievedAt: station.retrievedAt ?? storedReferences.providedAt,
+                        coverage: "local",
+                      })
+                    : fuelReferenceMapsUrl(station.name, station.address)}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`${hasCoordinates ? "Ver ruta en coche a" : "Ver ubicación de"} ${station.name}, ${station.address}`}
+                >
+                  <Navigation size={16} /><span>{hasCoordinates ? "Ruta en coche" : "Ver ubicación"}</span>
+                </a>
+              </article>
+            );
+          })}
           <p className="market-attribution">
-            Lista aportada el {references.providedAt}. No está ordenada por
-            cercanía y CERCA no ha comprobado sus precios actuales.
+            Lista actualizada el {storedReferences.providedAt}. Las entradas con
+            coordenadas se ordenan por distancia; CERCA no
+            ha comprobado sus precios actuales.
           </p>
         </section>
       )}

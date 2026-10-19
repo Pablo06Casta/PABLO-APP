@@ -92,7 +92,11 @@ export function realStays(query: Search): Stay[] {
       retrievedAt: catalogue.retrievedAt,
       referenceNightly: price?.nightly,
       priceReferenceSource: price?.source as Stay["priceReferenceSource"],
-      priceReferenceAt: price ? priceReferences.providedAt : undefined,
+      priceReferenceAt: price
+        ? "providedAt" in price
+          ? String(price.providedAt)
+          : priceReferences.providedAt
+        : undefined,
       photoCredit:
         local[hotel.id] ??
         ("photo" in hotel && hotel.photo ? hotel.photo : undefined),
@@ -131,7 +135,11 @@ export function realStays(query: Search): Stay[] {
         "retrievedAt" in hotel ? String(hotel.retrievedAt) : osm.retrievedAt,
       referenceNightly: price?.nightly,
       priceReferenceSource: price?.source as Stay["priceReferenceSource"],
-      priceReferenceAt: price ? priceReferences.providedAt : undefined,
+      priceReferenceAt: price
+        ? "providedAt" in price
+          ? String(price.providedAt)
+          : priceReferences.providedAt
+        : undefined,
       });
     });
   return [...hotels, ...nearbyHotels];

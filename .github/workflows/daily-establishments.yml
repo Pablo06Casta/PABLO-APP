@@ -1,0 +1,75 @@
+name: Ampliar establecimientos cercanos
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Dos horas UTC cubren las 06:00 de Europe/Madrid en horario de verano e invierno.
+    - cron: "0 4 * * *"
+    - cron: "0 5 * * *"
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: cerca-daily-establishments
+  cancel-in-progress: false
+
+jobs:
+  expand:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Comprobar las 06:00 en España
+        id: local-time
+        shell: python
+        run: |
+          from datetime import datetime
+          import json
+          from zoneinfo import ZoneInfo
+          import os
+
+          manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+          local = datetime.now(ZoneInfo("Europe/Madrid"))
+          state = json.load(open("src/data/real/daily-expansion-state.json", encoding="utf-8"))
+          last_run = state.get("lastRunAt")
+          last_local_date = None
+          if last_run:
+              last_local_date = datetime.fromisoformat(last_run).astimezone(ZoneInfo("Europe/Madrid")).date()
+          allowed = manual or (local.hour >= 6 and last_local_date != local.date())
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"allowed={'true' if allowed else 'false'}\n")
+              output.write(f"local_time={local.isoformat()}\n")
+      - uses: actions/setup-node@v4
+        if: steps.local-time.outputs.allowed == 'true'
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Añadir establecimientos verificados
+        if: steps.local-time.outputs.allowed == 'true'
+        run: python3 scripts/daily-expand-establishments.py
+      - name: Validar la aplicación
+        if: steps.local-time.outputs.allowed == 'true'
+        run: npm ci && npm run check
+      - name: Guardar y publicar la ampliación
+        id: save
+        if: steps.local-time.outputs.allowed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/venues.json src/data/real/osm-stays.json src/data/real/hotel-price-references.json src/data/real/fuel-references.json src/data/real/venue-markets.json src/data/real/daily-expansion-state.json
+          if git diff --cached --quiet; then
+            echo "No hay cambios que guardar"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "Amplía establecimientos cercanos automáticamente"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Iniciar comprobación y publicación de CERCA
+        if: steps.save.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref main
