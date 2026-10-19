@@ -1,0 +1,1677 @@
+{
+  "providedAt": "2026-10-19",
+  "currency": "EUR",
+  "unit": "alojamiento/noche",
+  "note": "Referencias aportadas por el responsable de CERCA. No son tarifas en tiempo real ni garantizan disponibilidad.",
+  "prices": [
+    {
+      "destination": "A Estrada",
+      "name": "Pensión restaurante La Bombilla",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "AC Hotel Alicante by Marriott",
+      "nightly": 139,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Amelia Habitaciones",
+      "nightly": 108,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Apartamentos Barbara 3",
+      "nightly": 116,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "B&B Hotel Alicante Centro",
+      "nightly": 99,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "B&B La Milagrosa",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Bypillow Paseo",
+      "nightly": 98,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Casa Alberola Alicante, Curio Collection by Hilton",
+      "nightly": 166,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Chameleon",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Color Suites Alicante",
+      "nightly": 90,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "DormirDCine (DDC)",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Eurostars Centrum Alicante",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Eurostars Lucentum",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Eurostars Mediterranea Plaza",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Explanada Hotel",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hospes Amérigo Alicante",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hostal La Lonja",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hostal Les Monges Palace",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hostal Residencia Campoy",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hostal Santa Ana",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hostel Dos Estaciones",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Alicante Gran Sol",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Boutique Alicante Palacete S.XVII",
+      "nightly": 166,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Cervantes",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Goya",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Leuka",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel San Remo",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Serawa Alicante",
+      "nightly": 159,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Hotel Spa Porta Maris by Melia",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "La City Hotel",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Luces de Catedral",
+      "nightly": 194,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Mayor",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Melia Alicante",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "NH Alicante",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "NH Cristal",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Odyssey Rooms",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Old Centre Inn",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Palacio Salvetti Suites",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Pensión Milán",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Pension Versalles",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Rambla",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "San Francisco",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Smile & Co Hostal",
+      "nightly": 120,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Suites del Mar by Melia",
+      "nightly": 149,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Alicante",
+      "name": "The Market Hostel Alicante",
+      "nightly": 25,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Tomate Rooms",
+      "nightly": 140,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Travelodge Alicante Puerto",
+      "nightly": 84,
+      "source": "Booking"
+    },
+    {
+      "destination": "Alicante",
+      "name": "Ventura Premium",
+      "nightly": 124,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Agata Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Aguila Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Aloha Playa",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "AluaSun Costa Park",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "AluaSun Lago Rojo",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Apartamentos Benal Beach",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Apartamentos Ecuador Park",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Benalmadena Palace",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Benalmadena Playa",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Casa Paraiso Boutique B&B",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "El Tiburon Hotel Boutique & Spa",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Globales Los Patos Park",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hercules Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hostal Los Geranios",
+      "nightly": 53,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hostal Serramar",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hostal Sol y Miel",
+      "nightly": 59,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Alay",
+      "nightly": 122,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Bali",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Best Siroco",
+      "nightly": 104,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Best Triton",
+      "nightly": 150,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Betania",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Isabel",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Las Arenas Affiliated by Meliá",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Marina",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel MedPlaya Alba Beach",
+      "nightly": 79,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Riu Palace Nautilus",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel San Fermin",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Torrequebrada",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Vistamar",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Hotel Zen Airport",
+      "nightly": 65,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Iris Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Jupiter Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Laderas del Mediterráneo",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Medplaya Hotel Pez Espada",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Medplaya Hotel Riviera",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Melia Costa del Sol",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Minerva Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "MS Aguamarina Suites",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "MS Amaragua",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Palia La Roca",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Pierre & Vacances Benalmadena Principe",
+      "nightly": 89,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Royal Oasis Club at Pueblo Quinta",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Sahara Sunset Club",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Sentido Benalmadena Beach",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Sol Principe",
+      "nightly": 116,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Sol Torremolinos - Don Pablo",
+      "nightly": 143,
+      "source": "Booking"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Vincci Selección Aleysa",
+      "nightly": 104,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Zodiac Apartments",
+      "nightly": 89,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Apartamentos Mariola",
+      "nightly": 55,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "B&B Hotel Cartagena Cartagonova",
+      "nightly": 68,
+      "source": "Booking"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Cartagena Spain",
+      "nightly": 65,
+      "source": "Booking"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Carthago Suites",
+      "nightly": 45,
+      "source": "Booking"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Hotel Cartagenera",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Hotel Los Habaneros",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Hotel NH Campo de Cartagena",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "La Casa De Las Flores",
+      "nightly": 55,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Loop INN",
+      "nightly": 55,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Manolo",
+      "nightly": 55,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "NH Cartagena",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Pensión Balcones Azules",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Pensión Isabelita",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Pensión la Purísima",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "San Sebastián Suites",
+      "nightly": 55,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Sercotel Alfonso XIII",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Sercotel Carlos III",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Ágora Hostel",
+      "nightly": 102,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Albergue - Hostería de Curtidores",
+      "nightly": 102,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Albergue Capuchinos Rocamador",
+      "nightly": 102,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Albergue Juvenil Municipal Oncineda",
+      "nightly": 102,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Alda Estella Hostel",
+      "nightly": 102,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Apartamentos Terraza Ega",
+      "nightly": 110,
+      "source": "Booking"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "El Volante",
+      "nightly": 106,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Estella",
+      "nightly": 106,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Hospedería Chapitel",
+      "nightly": 102,
+      "source": "Booking"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Hotel Ureder",
+      "nightly": 64,
+      "source": "Booking"
+    },
+    {
+      "destination": "Granollers",
+      "name": "Ciutat de Granollers",
+      "nightly": 90,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Granollers",
+      "name": "Fonda Europa",
+      "nightly": 90,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Huelva",
+      "name": "AC Hotel Huelva by Marriott",
+      "nightly": 94,
+      "source": "Booking"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Costa de la Luz",
+      "nightly": 66,
+      "source": "Booking"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Exe Tartessos",
+      "nightly": 74,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Hotel Familia Conde",
+      "nightly": 71,
+      "source": "Booking"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Hotel Hacienda Montija",
+      "nightly": 74,
+      "source": "Booking"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Hotel Senator",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Marina",
+      "nightly": 74,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Huelva",
+      "name": "NH Luz Huelva",
+      "nightly": 105,
+      "source": "Booking"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "hostal santa ana",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Hostal Venta El Cruce",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Hotel El Cruce",
+      "nightly": 91,
+      "source": "Estimado"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Hotel Villa Maria",
+      "nightly": 91,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "AC Hotel Oviedo Fórum by Marriott",
+      "nightly": 99,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Albergue La Peregrina",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Apartamentos Pedregal",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Apartamentos Rurales Antojanes",
+      "nightly": 119,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Aparthotel Campus",
+      "nightly": 76,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Auditorio Rooms Boutique",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "B48 Oviedo Ópera",
+      "nightly": 66,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Barceló Oviedo Cervantes",
+      "nightly": 124,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Blau Hotel Las Caldas",
+      "nightly": 149,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "El Ovetense",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "El Vasco Rooms",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Eurostars Palacio de Cristal",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Exe Hotel El Magistral",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Exe Oviedo Centro",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Gran Hotel España",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Gran Hotel Regente",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Green Hostel",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "HiHome Hostel",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hostal Álvarez",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hostal Fidalgo",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hostal Foncalada",
+      "nightly": 44,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel & Spa Princesa Munia",
+      "nightly": 109,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Alda Centro Oviedo",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Astures",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Campoamor",
+      "nightly": 82,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Carbayón",
+      "nightly": 50,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Carreño",
+      "nightly": 44,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Castro Real",
+      "nightly": 53,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Clarín",
+      "nightly": 99,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Duerming Longoria Plaza",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel El Retiro de Cardea",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Favila",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Fruela",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel IDH Ángel",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Las Lomas",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Nature Oviedo",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Palacio de La Viñona",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Ramiro I",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Rosal",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Santa Clara",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Santa Cruz",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Sercotel Ciudad de Oviedo",
+      "nightly": 88,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Soho Boutique Oviedo",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel Vetusta",
+      "nightly": 66,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Iberik Hotel Santo Domingo Plaza",
+      "nightly": 81,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "La Hospedería Oviedo",
+      "nightly": 23,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Limehome Oviedo Postigo Bajo",
+      "nightly": 91,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Nap Hotel Carta Puebla",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Nap Oviedo",
+      "nightly": 64,
+      "source": "Booking"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "NH Hotel Oviedo Principado",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "NUVÓ Hotel Boutique",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pensión Berdasco",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pensión Cabezas",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pensión González",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pension Oviedo",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pensión Riesgo",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Pensión Romero",
+      "nightly": 79,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Silken Monumental Naranco",
+      "nightly": 82,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Suite 1907 Oviedo",
+      "nightly": 65,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Viviendas Oviedo Catedral",
+      "nightly": 83,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Zalle Oviedo Suites",
+      "nightly": 59,
+      "source": "Booking"
+    },
+    {
+      "destination": "Paracuellos de Jarama",
+      "name": "Hostal Paracuellos",
+      "nightly": 56,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Albergue turístico Villa Miguela",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Apartamentos Las Brisas",
+      "nightly": 90,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Boutique Las Brisas",
+      "nightly": 77,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Central Suites Santander",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "El Balcón de la Bahía",
+      "nightly": 64,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Enjoy Santander",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Eurostars Hotel Real",
+      "nightly": 189,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Gran Hotel Sardinero",
+      "nightly": 94,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Gran Hotel Victoria",
+      "nightly": 99,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hospedaje Cervantes",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostal Cabo Mayor",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostal Carlos III",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostal La Mexicana",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostal La Torre",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostal Rocamar",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostel Santander",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hoster B&B&B",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostería Las Palmeras",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hostería Santander",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Apartamentos Don Carlos",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Art",
+      "nightly": 103,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Bahia",
+      "nightly": 71,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Citrea",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Dorma Sardinero",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Hoyuela",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Palacio del Mar",
+      "nightly": 78,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Soho Boutique Palacio de Pombo",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Sol Boutique",
+      "nightly": 84,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Hotel Vincci Puertochico",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Isabel Rooms",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Le Petit Boutique Hotel",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Lemon Suites",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "NH Ciudad de Santander",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Pensión Botín",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Pensión La Bolera",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Pensión Plaza",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Pensión Real",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Plaza Pombo B&B",
+      "nightly": 84,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Rhin Garden",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Royal Suite Santander",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Santemar",
+      "nightly": 79,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Silken Coliseum",
+      "nightly": 94,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Suit Home Pinares",
+      "nightly": 95,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Suite Home Sardinero",
+      "nightly": 59,
+      "source": "Booking"
+    },
+    {
+      "destination": "Santander",
+      "name": "Urban Suites Santander",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Santander",
+      "name": "Vintage",
+      "nightly": 78,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Apartamentos rurales Sobremazas",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Apartamentos Turísticos Villa Fresnedo",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Casona La Tudanca",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Castilla Termal Balnerio de Solares",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Hospedaje Rada",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Hostal Casa Enrique",
+      "nightly": 85,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Solares",
+      "name": "Hotel Adelma",
+      "nightly": 85,
+      "source": "Booking"
+    },
+    {
+      "destination": "Solares",
+      "name": "Hotel Spa Villa Pasiega",
+      "nightly": 102,
+      "source": "Booking"
+    },
+    {
+      "destination": "Solares",
+      "name": "Posada El Hidalgo",
+      "nightly": 59,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "abba Jazz Hotel",
+      "nightly": 85,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "AC Hotel General Álava",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Albergue de la Catedral",
+      "nightly": 75,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Apartahotel Líbere Vitoria",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Centro Vitoria",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Dato",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Dato 2",
+      "nightly": 65,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Gran Hotel Lakua",
+      "nightly": 149,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Habitaka",
+      "nightly": 75,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Hostal del Arquitecto",
+      "nightly": 34,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Hotel Arts-Gasteiz",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Hotel Hito",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Hotel La Bilbaína",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Iradier",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Kora Green City",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "La Casa de Los Arquillos",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Logune Rooms",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "NH Canciller Ayala Vitoria",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Nirea",
+      "nightly": 70,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Palacio de Elorriaga",
+      "nightly": 113,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Pensión Amaia",
+      "nightly": 75,
+      "source": "Estimado"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Sercotel Boulevard Vitoria-Gasteiz",
+      "nightly": 71,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Silken Ciudad de Vitoria",
+      "nightly": 142,
+      "source": "Booking"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Vas Hotel",
+      "nightly": 113,
+      "source": "Estimado"
+    }
+  ]
+}
+

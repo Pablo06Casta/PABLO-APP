@@ -55,6 +55,9 @@ export type Stay = {
   airbnbId?: string;
   observedNightly?: number;
   observedAt?: string;
+  referenceNightly?: number;
+  priceReferenceSource?: "Booking" | "Estimado";
+  priceReferenceAt?: string;
   minimumNights?: number;
   approximateLocation?: boolean;
   sourceUrl: string;

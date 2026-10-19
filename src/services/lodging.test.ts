@@ -82,4 +82,23 @@ describe("Más alojamientos reales cerca del pabellón", () => {
     expect(url.pathname).toBe("/hotel/es/don-luis.html");
     expect(url.searchParams.get("checkin")).toBe(query.checkIn);
   });
+
+  it("incorpora los precios medios aportados y resuelve nombres comerciales completos", () => {
+    const stays = realStays(queryFor("alicante-pitiu"));
+    expect(
+      stays.find((item) => item.name === "AC Hotel Alicante by Marriott"),
+    ).toMatchObject({
+      referenceNightly: 139,
+      priceReferenceSource: "Booking",
+      priceReferenceAt: "2026-10-19",
+    });
+    expect(
+      stays.find((item) =>
+        item.name.startsWith("Hotel Boutique Alicante Palacete S.XVII"),
+      ),
+    ).toMatchObject({
+      referenceNightly: 166,
+      priceReferenceSource: "Booking",
+    });
+  });
 });

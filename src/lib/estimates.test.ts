@@ -16,7 +16,12 @@ const query: Search = {
   checkOut: "2027-03-30",
   guests: 2,
 };
-const hotel = realStays(query).find((s) => s.platform === "Booking")!;
+const hotel: Stay = {
+  ...realStays(query).find((s) => s.platform === "Booking")!,
+  referenceNightly: undefined,
+  priceReferenceSource: undefined,
+  priceReferenceAt: undefined,
+};
 const apartment: Stay = {
   ...hotel,
   id: "airbnb-1234567890123456789",
@@ -47,6 +52,22 @@ describe("Presupuestos orientativos para el torneo", () => {
         stayPlatformUrl(hotel, { ...query, guests: 3 })!,
       ).searchParams.get("no_rooms"),
     ).toBe("2");
+  });
+  it("usa el precio medio aportado sin aplicar de nuevo ciudad o temporada", () => {
+    const result = estimateStay(
+      {
+        ...hotel,
+        referenceNightly: 139,
+        priceReferenceSource: "Booking",
+        priceReferenceAt: "2026-10-19",
+      },
+      { ...query, guests: 2, checkIn: "2027-07-10", checkOut: "2027-07-12" },
+    );
+    expect(result.nightlyGroup).toBe(139);
+    expect(result.perPersonNight).toBe(70);
+    expect(result.source).toBe("supplied");
+    expect(result.explanation).toContain("fuente indicada: Booking");
+    expect(result.explanation).toContain("no una tarifa en tiempo real");
   });
   it("reparte entre el grupo la tarifa histórica de una vivienda, sin multiplicarla por habitaciones", () => {
     const result = estimateStay(apartment, { ...query, guests: 4 });

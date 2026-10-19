@@ -200,9 +200,12 @@ export function LegalInformation({
       </button>
       <h3>Precios y enlaces de reserva</h3>
       <p>
-        Las cifras son estimaciones propias de CERCA, sin consultar tarifas
-        actuales de Booking o Airbnb. No son ofertas, descuentos ni
-        disponibilidad confirmada; pueden excluir impuestos y cargos. Eventos,
+        Algunas tarjetas muestran precios medios aportados al proyecto, con la
+        fuente indicada como Booking o como estimación. CERCA no consulta ni
+        actualiza esas cifras directamente en Booking o Airbnb. Cuando no existe
+        una referencia para el alojamiento, utiliza su propio modelo de
+        planificación. Ninguna cifra es una oferta, descuento, tarifa actual o
+        disponibilidad confirmada; puede excluir impuestos y cargos. Eventos,
         puentes y fiestas pueden cambiar las condiciones. El orden por precio es
         orientativo y no identifica el hotel con menor tarifa real. Un
         identificador o enlace publicado no acredita que la ficha siga activa.

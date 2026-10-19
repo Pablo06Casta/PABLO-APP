@@ -130,11 +130,15 @@ describe("CERCA: flujos del viajero", () => {
   it("guarda favoritos, los muestra y los conserva al volver a abrir", async () => {
     const user = userEvent.setup();
     const app = render(<App />);
-    await user.click(
-      screen.getByRole("button", {
-        name: "Guardar en favoritos: NH Canciller Ayala Vitoria",
-      }),
+    const favorite = within(screen.getAllByRole("article")[0]).getByRole(
+      "button",
+      { name: /^Guardar en favoritos:/ },
     );
+    const stayName = favorite.getAttribute("aria-label")!.replace(
+      "Guardar en favoritos: ",
+      "",
+    );
+    await user.click(favorite);
     const nav = screen.getByRole("navigation", {
       name: "Navegación principal",
     });
@@ -148,7 +152,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(
       screen
         .getByRole("button", {
-          name: "Quitar de favoritos: NH Canciller Ayala Vitoria",
+          name: `Quitar de favoritos: ${stayName}`,
         })
         .getAttribute("aria-pressed"),
     ).toBe("true");
@@ -204,10 +208,12 @@ describe("CERCA: flujos del viajero", () => {
   it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {
     const user = userEvent.setup();
     render(<App />);
+    const directLink = screen.getAllByRole("link", {
+      name: /^Ver .+ en Booking$/,
+    })[0];
+    const directCard = directLink.closest("article")!;
     await user.click(
-      screen.getByRole("button", {
-        name: "Detalles de NH Canciller Ayala Vitoria",
-      }),
+      within(directCard).getByRole("button", { name: /^Detalles de/ }),
     );
     const dialog = screen.getByRole("dialog");
     expect(
@@ -224,7 +230,7 @@ describe("CERCA: flujos del viajero", () => {
         }) as HTMLAnchorElement
       ).href,
     );
-    expect(url.searchParams.get("dest_id")).toBeTruthy();
+    expect(url.hostname).toBe("www.booking.com");
     expect(url.searchParams.get("group_adults")).toBe("2");
     expect(url.searchParams.get("checkin")).toBe(query.checkIn);
   });
@@ -251,8 +257,8 @@ describe("CERCA: flujos del viajero", () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(
-      screen.getByRole("button", {
-        name: "Guardar en favoritos: NH Canciller Ayala Vitoria",
+      within(screen.getAllByRole("article")[0]).getByRole("button", {
+        name: /^Guardar en favoritos:/,
       }),
     );
     await user.click(screen.getByRole("button", { name: "Abrir ajustes" }));

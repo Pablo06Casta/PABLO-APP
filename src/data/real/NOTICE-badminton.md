@@ -54,12 +54,13 @@ La búsqueda de gasolineras se inicia expresamente desde su ventana. Consulta `a
 
 No son tarifas, descuentos, ofertas ni garantía de disponibilidad. No se añaden precios aleatorios por nombre o identificador.
 
+- `hotel-price-references.json` conserva 278 precios medios aportados al proyecto el 19 de octubre de 2026. La columna de origen distingue «Booking» y «Estimado» tal como se recibió; CERCA no verificó esos importes mediante una API ni los actualiza en tiempo real. Se emparejan por destino y nombre normalizado, con cinco alias explícitos para nombres comerciales completos. Se muestran como referencia orientativa por alojamiento y noche, antes de impuestos o extras no confirmados.
 - CERCA, estimación propia para los alojamientos: base declarada de 75 €/habitación doble, multiplicada por un factor de ciudad (1–1,65), temporada de verano (1,2, de junio a agosto) y habitaciones dobles previstas (`ceil(personas/2)`). Es un modelo propio sin tarifa observada de ese hotel. No demuestra cuál tiene hoy la tarifa más baja.
 - El filtro y el orden usan la estimación central por persona y noche. En empates se ordena por distancia al pabellón. El rango de −30 % a +40 % es ilustrativo y no tiene garantía estadística.
 - Se muestra presupuesto de grupo para todas las noches, sin impuestos o cargos adicionales no publicados. Las condiciones, vigencia del anuncio y disponibilidad deben comprobarse en la plataforma.
 
 ## Revisión de transparencia y privacidad, 19 de octubre de 2026
 
-No hay extracción automatizada de Booking/Airbnb ni API de inventario conectada. Los enlaces publicados no acreditan vigencia o disponibilidad. No se utilizan marcas gráficas de las plataformas ni se afirma afiliación. El precio es un modelo propio de CERCA; los rangos no garantizan precios reales.
+No hay extracción automatizada de Booking/Airbnb ni API de inventario conectada. Los enlaces publicados no acreditan vigencia o disponibilidad. No se utilizan marcas gráficas de las plataformas ni se afirma afiliación. Los precios son referencias aportadas o estimaciones propias de CERCA; los rangos no garantizan precios reales.
 
 La búsqueda y los recientes no persisten sin la opción explícita «Recordar». Los favoritos y la apariencia son acciones elegidas por el usuario. Fotos remotas y mapas requieren activación durante cada visita y se pueden desactivar; el catálogo inicial no los solicita. Se publican en `dist/data/` copias JSON de las bases OSM con fechas, atribución, transformaciones, exclusiones y licencias, enlazadas desde «Privacidad y licencias». Los créditos fotográficos enlazan por separado fuente y licencia. No existe una certificación jurídica de todos los tratamientos o de los derechos individuales de cada obra.
