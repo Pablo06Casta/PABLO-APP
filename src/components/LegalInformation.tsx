@@ -208,6 +208,22 @@ export function LegalInformation({
         identificador o enlace publicado no acredita que la ficha siga activa.
         Confirma todo en la plataforma antes de reservar.
       </p>
+      <h3>Calendario de competiciones</h3>
+      <p>
+        Las fechas, ciudades y nombres de los torneos se seleccionan del{" "}
+        <a
+          href="https://www.badminton.es/calendar/192/Calendario-FESBA"
+          target="_blank"
+          rel="noreferrer"
+        >
+          calendario público de la Federación Española de Bádminton
+        </a>
+        . Cada tarjeta enlaza a su ficha oficial y muestra la fecha de consulta
+        de CERCA. La federación puede modificar fechas o sedes; coincidir en
+        ciudad no confirma el pabellón. CERCA actualiza su copia al publicar la
+        web y no envía tus búsquedas a la federación; su sitio se abre solo al
+        pulsar un enlace.
+      </p>
       <h3>Fuentes, licencias y descarga de datos</h3>
       <p>
         Los datos estructurados de Wikidata se reutilizan bajo{" "}

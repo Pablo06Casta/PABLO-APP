@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Python bytecode from the FESBA calendar checks
+__pycache__/

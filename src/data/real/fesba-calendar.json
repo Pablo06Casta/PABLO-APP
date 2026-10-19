@@ -1,0 +1,609 @@
+{
+  "source": "https://www.badminton.es/calendar/192/Calendario-FESBA",
+  "retrievedAt": "2026-10-19",
+  "updatedYears": [
+    2026,
+    2027
+  ],
+  "scope": "Competiciones con ciudad publicada en España; cursos y actividades excluidos. La ciudad no confirma el pabellón.",
+  "events": [
+    {
+      "id": "92406",
+      "name": "Andalucía TOP TTR Sub-15 y Sub-19",
+      "startDate": "2026-10-24",
+      "city": "Córdoba",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92406/Andalucia-TOP-TTR-Sub15-y-Sub19"
+    },
+    {
+      "id": "92526",
+      "name": "C. Valenciana Máster Territorial Sub-13 y Sub-17 (n6)",
+      "startDate": "2026-10-24",
+      "city": "Enguera",
+      "destination": null,
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92526/C-Valenciana-Master-Territorial-Sub13-y-Sub17-n6"
+    },
+    {
+      "id": "92393",
+      "name": "Navarra Máster Territorial Sub-13, Sub-17 y Absoluto (n6)",
+      "startDate": "2026-10-24",
+      "city": "Estella-lizarra",
+      "destination": "Estella-Lizarra",
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92393/Navarra-Master-Territorial-Sub13-Sub17-y-Absoluto-n6",
+      "endDate": "2026-10-24"
+    },
+    {
+      "id": "92486",
+      "name": "Canarias Autonómico Sénior",
+      "startDate": "2026-10-24",
+      "city": "Granadilla",
+      "destination": null,
+      "group": "TTR",
+      "category": "",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92486/Canarias-Autonomico-Senior"
+    },
+    {
+      "id": "91506",
+      "name": "Aragón Autonómico Sub-13, Sub-17 y Absoluto",
+      "startDate": "2026-10-24",
+      "city": "Utrillas (Teruel)",
+      "destination": null,
+      "group": "TTR",
+      "category": "",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91506/Aragon-Autonomico-Sub13-Sub17-y-Absoluto"
+    },
+    {
+      "id": "91516",
+      "name": "Galicia Máster Territorial Sub-15 y Sub-19 (n6)",
+      "startDate": "2026-10-24",
+      "city": "Vigo",
+      "destination": null,
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91516/Galicia-Master-Territorial-Sub15-y-Sub19-n6"
+    },
+    {
+      "id": "92419",
+      "name": "Cataluña TOP TTR Sub-11, Sub-13, Sub-15, Sub-17, Sub-19 y Absoluto",
+      "startDate": "2026-10-24",
+      "city": "Viladecans",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92419/Cataluna-TOP-TTR-Sub11-Sub13-Sub15-Sub17-Sub19-y-Absoluto"
+    },
+    {
+      "id": "88229",
+      "name": "TOP Máster Absoluto",
+      "startDate": "2026-10-24",
+      "city": "Villanueva De La Vera",
+      "destination": null,
+      "group": "ESP_Absoluto",
+      "category": "n2",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88229/TOP-Master-Absoluto"
+    },
+    {
+      "id": "92663",
+      "name": "Asturias TOP TTR Sub-15, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-10-25",
+      "city": "Vegadeo",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92663/Asturias-TOP-TTR-Sub15-Sub19-Absoluto-y-Senior"
+    },
+    {
+      "id": "88231",
+      "name": "Máster n4-Sub 15 y Sub 19",
+      "startDate": "2026-10-31",
+      "city": "Huelva",
+      "destination": "Huelva",
+      "group": "ESP_Jóvenes",
+      "category": "n4",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88231/Master-n4Sub-15-y-Sub-19",
+      "endDate": "2026-11-01"
+    },
+    {
+      "id": "92527",
+      "name": "Cantabria TOP TTR Sub-11, Sub-13, Sub-15, Sub-17, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-10-31",
+      "city": "Liencres",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92527/Cantabria-TOP-TTR-Sub11-Sub13-Sub15-Sub17-Sub19-Absoluto-y-Senior"
+    },
+    {
+      "id": "92415",
+      "name": "Canarias TOP TTR Sub-13, Sub-19 y Sénior",
+      "startDate": "2026-10-31",
+      "city": "San Juan de la Rambla",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92415/Canarias-TOP-TTR-Sub13-Sub19-y-Senior"
+    },
+    {
+      "id": "92162",
+      "name": "Galicia TOP TTR Sub-13 y Sub-17",
+      "startDate": "2026-10-31",
+      "city": "Santiago",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92162/Galicia-TOP-TTR-Sub13-y-Sub17"
+    },
+    {
+      "id": "92523",
+      "name": "País Vasco TOP TTR Sub-15, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-10-31",
+      "city": "Vitoria - Gasteiz",
+      "destination": "Vitoria-Gasteiz",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92523/Pais-Vasco-TOP-TTR-Sub15-Sub19-Absoluto-y-Senior",
+      "endDate": "2026-10-31"
+    },
+    {
+      "id": "90670",
+      "name": "Madrid TOP TTR Sub-11 y Absoluto",
+      "startDate": "2026-11-01",
+      "city": "Guadarrama",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/90670/Madrid-TOP-TTR-Sub11-y-Absoluto"
+    },
+    {
+      "id": "88232",
+      "name": "Campeonatos de España Sub-17",
+      "startDate": "2026-11-06",
+      "city": "Granollers",
+      "destination": "Granollers",
+      "group": "Ctos. España",
+      "category": "Sub-17",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88232/Campeonatos-de-Espana-Sub17",
+      "endDate": "2026-11-08"
+    },
+    {
+      "id": "88234",
+      "name": "Máster n3-Sénior",
+      "startDate": "2026-11-07",
+      "city": "Cartagena",
+      "destination": "Cartagena",
+      "group": "ESP_Sénior",
+      "category": "n3",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88234/Master-n3Senior",
+      "endDate": "2026-11-08"
+    },
+    {
+      "id": "88233",
+      "name": "Máster n1-n4 Absoluto",
+      "startDate": "2026-11-07",
+      "city": "Gijón",
+      "destination": null,
+      "group": "ESP_Absoluto",
+      "category": "n1-n4",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88233/Master-n1n4-Absoluto"
+    },
+    {
+      "id": "92489",
+      "name": "Canarias Máster Territorial Absoluto (n5)",
+      "startDate": "2026-11-07",
+      "city": "Granadilla",
+      "destination": null,
+      "group": "TTR",
+      "category": "n5",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92489/Canarias-Master-Territorial-Absoluto-n5"
+    },
+    {
+      "id": "92490",
+      "name": "Canarias TOP TTR Sub-11",
+      "startDate": "2026-11-07",
+      "city": "Granadilla",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92490/Canarias-TOP-TTR-Sub11"
+    },
+    {
+      "id": "92407",
+      "name": "Andalucía TTR Sub-13, Sub-15, Sub-17 y Sub-19",
+      "startDate": "2026-11-07",
+      "city": "San José de la Rinconada",
+      "destination": "La Rinconada",
+      "group": "TTR",
+      "category": "n8",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92407/Andalucia-TTR-Sub13-Sub15-Sub17-y-Sub19",
+      "endDate": "2026-11-07"
+    },
+    {
+      "id": "88237",
+      "name": "Spanish International U17 2026",
+      "startDate": "2026-11-13",
+      "city": "Ibiza",
+      "destination": "Ibiza",
+      "group": "Sub-17",
+      "category": "U17 Int. Series",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88237/Spanish-International-U17-2026",
+      "endDate": "2026-11-15"
+    },
+    {
+      "id": "88238",
+      "name": "Spanish U15 International (CPRN)",
+      "startDate": "2026-11-13",
+      "city": "Ibiza",
+      "destination": "Ibiza",
+      "group": "Sub-15",
+      "category": "Sub 15",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88238/Spanish-U15-International-CPRN",
+      "endDate": "2026-11-15"
+    },
+    {
+      "id": "92725",
+      "name": "Extremadura TOP TTR Absoluto y Sénior",
+      "startDate": "2026-11-14",
+      "city": "Badajoz",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92725/Extremadura-TOP-TTR-Absoluto-y-Senior"
+    },
+    {
+      "id": "92420",
+      "name": "Cataluña TOP TTR Sub-11, Sub-13, Sub-15 y Absoluto",
+      "startDate": "2026-11-14",
+      "city": "Canovelles",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92420/Cataluna-TOP-TTR-Sub11-Sub13-Sub15-y-Absoluto"
+    },
+    {
+      "id": "91288",
+      "name": "Murcia TOP TTR Sub-11, Sub-15, Sub-19 y Sénior",
+      "startDate": "2026-11-14",
+      "city": "Cartagena",
+      "destination": "Cartagena",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91288/Murcia-TOP-TTR-Sub11-Sub15-Sub19-y-Senior",
+      "endDate": "2026-11-14"
+    },
+    {
+      "id": "92488",
+      "name": "Canarias Autonómico Sub-11, Sub-13 y Sub-19",
+      "startDate": "2026-11-14",
+      "city": "El Sauzal",
+      "destination": null,
+      "group": "TTR",
+      "category": "",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92488/Canarias-Autonomico-Sub11-Sub13-y-Sub19"
+    },
+    {
+      "id": "88236",
+      "name": "Circuito Nacional Parabadminton",
+      "startDate": "2026-11-14",
+      "city": "Moral de Calatrava - Ciudad Real",
+      "destination": null,
+      "group": "Parabádminton",
+      "category": "Parabádminton",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88236/Circuito-Nacional-Parabadminton"
+    },
+    {
+      "id": "91728",
+      "name": "Castilla y León TOP TTR Sub-13 y Sub-17",
+      "startDate": "2026-11-14",
+      "city": "Villagonzalo de Pedernales",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91728/Castilla-y-Leon-TOP-TTR-Sub13-y-Sub17"
+    },
+    {
+      "id": "92524",
+      "name": "País Vasco TOP TTR Sub-15, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-11-14",
+      "city": "Vitoria - Gasteiz",
+      "destination": "Vitoria-Gasteiz",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92524/Pais-Vasco-TOP-TTR-Sub15-Sub19-Absoluto-y-Senior",
+      "endDate": "2026-11-14"
+    },
+    {
+      "id": "88239",
+      "name": "Campeonatos de España Sub-19 y Sub-11",
+      "startDate": "2026-11-20",
+      "city": "Huelva",
+      "destination": "Huelva",
+      "group": "Ctos. España",
+      "category": "Sub-19",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88239/Campeonatos-de-Espana-Sub19-y-Sub11",
+      "endDate": "2026-11-22"
+    },
+    {
+      "id": "92408",
+      "name": "Andalucía TOP TTR Sénior",
+      "startDate": "2026-11-21",
+      "city": "Alhaurín de la Torre",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92408/Andalucia-TOP-TTR-Senior"
+    },
+    {
+      "id": "91726",
+      "name": "Aragón TOP TTR Sub-13, Sub-15, Sub-17, Absoluto y Sénior",
+      "startDate": "2026-11-21",
+      "city": "Binefar (Huesca)",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91726/Aragon-TOP-TTR-Sub13-Sub15-Sub17-Absoluto-y-Senior"
+    },
+    {
+      "id": "92767",
+      "name": "Asturias TOP TTR Sub-13, Sub-15, Sub-17, Absoluto y Sénior",
+      "startDate": "2026-11-21",
+      "city": "Langreo",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92767/Asturias-TOP-TTR-Sub13-Sub15-Sub17-Absoluto-y-Senior"
+    },
+    {
+      "id": "90887",
+      "name": "Castilla y León TOP TTR Absoluto y Sénior",
+      "startDate": "2026-11-21",
+      "city": "Tudela de Duero (Valladolid)",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/90887/Castilla-y-Leon-TOP-TTR-Absoluto-y-Senior"
+    },
+    {
+      "id": "92776",
+      "name": "Baleares Autonómico Sub-11, Sub-13, Sub-15, Sub-17 y Sub-19",
+      "startDate": "2026-11-22",
+      "city": "Ibiza",
+      "destination": "Ibiza",
+      "group": "TTR",
+      "category": "",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92776/Baleares-Autonomico-Sub11-Sub13-Sub15-Sub17-y-Sub19",
+      "endDate": "2026-11-22"
+    },
+    {
+      "id": "88241",
+      "name": "Campeonatos de España Sub-23",
+      "startDate": "2026-11-27",
+      "city": "Ibiza",
+      "destination": "Ibiza",
+      "group": "Ctos. España",
+      "category": "Sub-23",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88241/Campeonatos-de-Espana-Sub23",
+      "endDate": "2026-11-29"
+    },
+    {
+      "id": "88240",
+      "name": "Campeonatos de España Sub-15",
+      "startDate": "2026-11-27",
+      "city": "Teguise",
+      "destination": null,
+      "group": "Ctos. España",
+      "category": "Sub-15",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88240/Campeonatos-de-Espana-Sub15"
+    },
+    {
+      "id": "92320",
+      "name": "Canarias TOP TTR Sub-11, Sub-13, Sub-17 y Absoluto",
+      "startDate": "2026-11-28",
+      "city": "El Rosario",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92320/Canarias-TOP-TTR-Sub11-Sub13-Sub17-y-Absoluto"
+    },
+    {
+      "id": "91517",
+      "name": "Galicia Máster Territorial Sénior (n6)",
+      "startDate": "2026-11-28",
+      "city": "Ourense",
+      "destination": null,
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91517/Galicia-Master-Territorial-Senior-n6"
+    },
+    {
+      "id": "92409",
+      "name": "Andalucía TTR Sub-11, Sub-13, Sub-15, Sub-17, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-11-28",
+      "city": "Torre de Benagalbón",
+      "destination": null,
+      "group": "TTR",
+      "category": "n8",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92409/Andalucia-TTR-Sub11-Sub13-Sub15-Sub17-Sub19-Absoluto-y-Senior"
+    },
+    {
+      "id": "92421",
+      "name": "Cataluña TTR Sub-11, Sub-13, Sub-15, Sub-17 y Sub-19",
+      "startDate": "2026-11-28",
+      "city": "Vilanova del Vallés",
+      "destination": null,
+      "group": "TTR",
+      "category": "n8",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92421/Cataluna-TTR-Sub11-Sub13-Sub15-Sub17-y-Sub19"
+    },
+    {
+      "id": "90665",
+      "name": "Madrid Master Territorial Sénior (n5)",
+      "startDate": "2026-11-29",
+      "city": "Guadarrama",
+      "destination": null,
+      "group": "TTR",
+      "category": "n5",
+      "sourceUrl": "https://www.badminton.es/calendarevent/90665/Madrid-Master-Territorial-Senior-n5"
+    },
+    {
+      "id": "88242",
+      "name": "Campeonatos de España Sub-13",
+      "startDate": "2026-12-04",
+      "city": "Ribadeo (Lugo)",
+      "destination": null,
+      "group": "Ctos. España",
+      "category": "Sub-13",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88242/Campeonatos-de-Espana-Sub13"
+    },
+    {
+      "id": "92410",
+      "name": "Andalucía TTR Sub-13, Sub-15, Sub-17 y Sub-19",
+      "startDate": "2026-12-05",
+      "city": "Huelva",
+      "destination": "Huelva",
+      "group": "TTR",
+      "category": "n8",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92410/Andalucia-TTR-Sub13-Sub15-Sub17-y-Sub19",
+      "endDate": "2026-12-05"
+    },
+    {
+      "id": "88243",
+      "name": "Máster Sénior",
+      "startDate": "2026-12-05",
+      "city": "Toledo",
+      "destination": null,
+      "group": "ESP_Sénior",
+      "category": "",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88243/Master-Senior"
+    },
+    {
+      "id": "88244",
+      "name": "C. de España de Selecciones Autonómicas Absoluto",
+      "startDate": "2026-12-11",
+      "city": "Arrecife",
+      "destination": null,
+      "group": "Ctos. España",
+      "category": "Absoluto",
+      "sourceUrl": "https://www.badminton.es/calendarevent/88244/C-de-Espana-de-Selecciones-Autonomicas-Absoluto"
+    },
+    {
+      "id": "92721",
+      "name": "Aragón TOP TTR Sub-11, Sub-13, Sub-15, Sub-17, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-12-12",
+      "city": "Alfajarin (Zaragoza)",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92721/Aragon-TOP-TTR-Sub11-Sub13-Sub15-Sub17-Sub19-Absoluto-y-Senior"
+    },
+    {
+      "id": "92496",
+      "name": "Baleares Máster Territorial Absoluto y Sénior (n6)",
+      "startDate": "2026-12-12",
+      "city": "Mao",
+      "destination": null,
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92496/Baleares-Master-Territorial-Absoluto-y-Senior-n6"
+    },
+    {
+      "id": "90892",
+      "name": "Castilla y León TOP TTR Sub-11, Sub-15 y Sub-19",
+      "startDate": "2026-12-12",
+      "city": "Villamuriel de Cerrato (Palencia)",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/90892/Castilla-y-Leon-TOP-TTR-Sub11-Sub15-y-Sub19"
+    },
+    {
+      "id": "89647",
+      "name": "Concentración Tecnificación Invierno Para Badminton",
+      "startDate": "2026-12-18",
+      "city": "Toledo",
+      "destination": null,
+      "group": "Parabádminton",
+      "category": "Concentración",
+      "sourceUrl": "https://www.badminton.es/calendarevent/89647/Concentracion-Tecnificacion-Invierno-Para-Badminton"
+    },
+    {
+      "id": "92423",
+      "name": "Cataluña Máster Territorial Sub-13, Sub-17 y Absoluto (n6)",
+      "startDate": "2026-12-19",
+      "city": "Granollers",
+      "destination": "Granollers",
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92423/Cataluna-Master-Territorial-Sub13-Sub17-y-Absoluto-n6",
+      "endDate": "2026-12-19"
+    },
+    {
+      "id": "92422",
+      "name": "Cataluña TOP TTR Sub-11, Sub-15, Sub-19 y Sénior",
+      "startDate": "2026-12-19",
+      "city": "Granollers",
+      "destination": "Granollers",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92422/Cataluna-TOP-TTR-Sub11-Sub15-Sub19-y-Senior",
+      "endDate": "2026-12-19"
+    },
+    {
+      "id": "92835",
+      "name": "Aragón TOP TTR Sub-15, Sub-19 y Sénior",
+      "startDate": "2026-12-19",
+      "city": "Huesca",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92835/Aragon-TOP-TTR-Sub15-Sub19-y-Senior"
+    },
+    {
+      "id": "91289",
+      "name": "Murcia Máster Territorial Sub-11, Sub-15, Sub-19 y Sénior (n6)",
+      "startDate": "2026-12-19",
+      "city": "Las Torres de Cotillas",
+      "destination": null,
+      "group": "TTR",
+      "category": "n6",
+      "sourceUrl": "https://www.badminton.es/calendarevent/91289/Murcia-Master-Territorial-Sub11-Sub15-Sub19-y-Senior-n6"
+    },
+    {
+      "id": "92416",
+      "name": "Canarias TOP TTR Sub-15, Absoluto y Sénior",
+      "startDate": "2026-12-19",
+      "city": "San Juan de la Rambla",
+      "destination": null,
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92416/Canarias-TOP-TTR-Sub15-Absoluto-y-Senior"
+    },
+    {
+      "id": "92525",
+      "name": "País Vasco TOP TTR Sub-15, Sub-19, Absoluto y Sénior",
+      "startDate": "2026-12-19",
+      "city": "Vitoria - Gasteiz",
+      "destination": "Vitoria-Gasteiz",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92525/Pais-Vasco-TOP-TTR-Sub15-Sub19-Absoluto-y-Senior",
+      "endDate": "2026-12-19"
+    },
+    {
+      "id": "92859",
+      "name": "País Vasco TOP TTR Absoluto",
+      "startDate": "2027-01-30",
+      "city": "Vitoria - Gasteiz",
+      "destination": "Vitoria-Gasteiz",
+      "group": "TTR",
+      "category": "n7",
+      "sourceUrl": "https://www.badminton.es/calendarevent/92859/Pais-Vasco-TOP-TTR-Absoluto",
+      "endDate": "2027-01-30"
+    }
+  ]
+}

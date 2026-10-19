@@ -28,6 +28,7 @@ import {
   Sparkles,
   Sun,
   Trees,
+  Trophy,
   UserRound,
   Wallet,
   X,
@@ -75,6 +76,8 @@ import { LazyMap as MapView } from "./components/LazyMap";
 import { Markets } from "./components/Markets";
 import { ExternalServices } from "./components/ExternalServices";
 import { LegalInformation } from "./components/LegalInformation";
+import { TournamentCalendar } from "./components/TournamentCalendar";
+import { suggestedTripDates, type Tournament } from "./data/tournaments";
 import "./App.css";
 
 type Selection = { stay: Stay; search: Search };
@@ -129,9 +132,9 @@ function AppContent() {
   const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
   const [sort, setSort] = useState("price");
-  const [tab, setTab] = useState<"explore" | "map" | "favorites" | "settings">(
-    "explore",
-  );
+  const [tab, setTab] = useState<
+    "explore" | "map" | "tournaments" | "favorites" | "settings"
+  >("explore");
   const [modal, setModal] = useState<
     "filters" | "markets" | "help" | "privacy" | "compare" | "trip" | null
   >(null);
@@ -429,6 +432,7 @@ function AppContent() {
   const tabs = [
     { id: "explore" as const, label: "Explorar", icon: Compass },
     { id: "map" as const, label: "Mapa", icon: MapIcon },
+    { id: "tournaments" as const, label: "Torneos", icon: Trophy },
     { id: "favorites" as const, label: "Favoritos", icon: Heart },
     { id: "settings" as const, label: "Ajustes", icon: Settings },
   ];
@@ -461,6 +465,12 @@ function AppContent() {
               onClick={() => setTab("explore")}
             >
               Alojamientos
+            </button>
+            <button
+              className={tab === "tournaments" ? "active" : ""}
+              onClick={() => setTab("tournaments")}
+            >
+              Torneos
             </button>
             <button onClick={showMarkets}>
               Supermercados cerca <span className="new-dot" />
@@ -828,6 +838,22 @@ function AppContent() {
           </>
         )}
 
+        {tab === "tournaments" && (
+          <TournamentCalendar
+            search={search}
+            onPlan={(event: Tournament, venue: Venue) => {
+              const { checkIn, checkOut } = suggestedTripDates(event);
+              void runSearch({
+                town: townForVenue(venue),
+                venue,
+                checkIn,
+                checkOut,
+                guests: search.guests,
+              });
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          />
+        )}
         {tab === "favorites" && (
           <section className="saved-page">
             <div className="page-eyebrow">

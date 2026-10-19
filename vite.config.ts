@@ -67,7 +67,7 @@ export default defineConfig({
         name: "CERCA · Encuentra tu lugar",
         short_name: "CERCA",
         description:
-          "Viajes de bádminton: alojamientos y supermercados cerca de tu pabellón.",
+          "Viajes de bádminton: torneos, alojamientos y supermercados cerca del pabellón.",
         lang: "es",
         start_url: "./",
         scope: "./",
