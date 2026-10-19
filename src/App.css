@@ -2225,6 +2225,22 @@
 .trip-field { display: grid; gap: 6px; margin: 12px 0; font-size: 12px; font-weight: 650; }
 .trip-field input, .trip-field select { width: 100%; min-width: 0; border: 1px solid var(--line); border-radius: 9px; padding: 11px; background: var(--surface); color: var(--text); font: inherit; }
 .trip-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 12px 0; }
+.hero-trip-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 220px));
+  justify-content: center;
+  align-items: stretch;
+  gap: 12px;
+  max-width: 480px;
+  margin: 18px auto 22px;
+}
+.hero-trip-actions > .secondary-button {
+  width: 100%;
+  min-height: 48px;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+}
 .group-budget { margin: 30px 0 0; padding: 28px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); }
 .group-budget-heading { display: flex; justify-content: space-between; align-items: start; gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 22px; }
 .group-budget-heading .small-caps { display: flex; align-items: center; gap: 7px; color: var(--accent); }
@@ -2262,6 +2278,13 @@
 .budget-error { padding: 12px; background: var(--accent-soft); border-radius: 9px; color: var(--text); font-size: 12px; }
 @media (max-width: 950px) { .group-budget-layout { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
+@media (max-width: 480px) {
+  .hero-trip-actions {
+    grid-template-columns: minmax(0, 300px);
+    max-width: 300px;
+    margin-top: 16px;
+  }
+}
 .compare-thumbnails {
   display: flex;
   padding-left: 5px;

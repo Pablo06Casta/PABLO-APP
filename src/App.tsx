@@ -596,8 +596,8 @@ function AppContent() {
                 busy={busy}
                 onSearch={runSearch}
               />
-              <div className="trip-actions">
-                <button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button>
+              <div className="trip-actions hero-trip-actions">
+                <button className="secondary-button" onClick={() => setModal("trip")}>Compartir viaje</button>
                 <button className="secondary-button" onClick={showFuel}><Fuel size={16} /> Buscar gasolineras cerca</button>
               </div>
               <div className="quick-destinations">
