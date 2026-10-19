@@ -46,6 +46,7 @@ export function StayCard({
       className="stay-card"
       data-estimate={estimate.perPersonNight}
       data-platform={stay.platform ?? "Booking"}
+      data-booking-search={Boolean(stay.bookingSearch)}
     >
       <div className="card-photo">
         <button
@@ -65,7 +66,9 @@ export function StayCard({
           <Heart size={20} fill={saved ? "currentColor" : "none"} />
         </button>
         <span className={`real-badge platform-${stay.platform?.toLowerCase()}`}>
-          {stay.platform ?? "Booking"} · ficha real
+          {stay.bookingSearch
+            ? "Alojamiento real · buscar en Booking"
+            : `${stay.platform ?? "Booking"} · ficha real`}
         </span>
       </div>
       <PhotoCredit stay={stay} />
@@ -127,9 +130,10 @@ export function StayCard({
           href={link}
           target="_blank"
           rel="noreferrer"
-          aria-label={`Ver ${stay.name} en ${stay.platform ?? "Booking"}`}
+          aria-label={`${stay.bookingSearch ? "Buscar" : "Ver"} ${stay.name} en ${stay.platform ?? "Booking"}`}
         >
-          Ver en {stay.platform ?? "Booking"}
+          {stay.bookingSearch ? "Buscar en" : "Ver en"}{" "}
+          {stay.platform ?? "Booking"}
           <ArrowUpRight size={15} />
         </a>
       )}

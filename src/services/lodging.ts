@@ -2,6 +2,7 @@ import type { Search, Stay } from "../types";
 import catalogue from "../data/real/stays.json";
 import additional from "../data/real/venue-stays.json";
 import airbnb from "../data/real/airbnb.json";
+import osm from "../data/real/osm-stays.json";
 import { searchOrigin } from "../data/venues";
 import localPhotos from "../data/real/local-photos.json";
 import { distance } from "../lib/search";
@@ -86,11 +87,40 @@ export function realStays(query: Search): Stay[] {
       sourceUrl: airbnb.sourceUrl,
       retrievedAt: airbnb.retrievedAt,
     }));
-  return [...hotels, ...apartments];
+  const nearbyHotels: Stay[] = osm.hotels
+    .filter((hotel) => distance(hotel, origin) <= 10)
+    .map((hotel) => ({
+      id: hotel.id,
+      name: hotel.name,
+      type: hotel.type as Stay["type"],
+      platform: "Booking",
+      bookingPath:
+        "bookingPath" in hotel ? String(hotel.bookingPath) : undefined,
+      bookingSearch: !("bookingPath" in hotel),
+      bookingSourceUrl:
+        "bookingSourceUrl" in hotel
+          ? String(hotel.bookingSourceUrl)
+          : undefined,
+      sourceName: "OpenStreetMap",
+      nightly: null,
+      cleaningFee: null,
+      rating: null,
+      reviews: null,
+      capacity: null,
+      lat: hotel.lat,
+      lng: hotel.lng,
+      address: hotel.address,
+      images: [],
+      amenities: [],
+      freeCancellation: null,
+      sourceUrl: hotel.sourceUrl,
+      retrievedAt: osm.retrievedAt,
+    }));
+  return [...hotels, ...nearbyHotels, ...apartments];
 }
 
 export const lodgingProvider: LodgingProvider = {
-  id: "wikidata-spain-booking",
+  id: "verified-lodging-catalogues",
   mode: "catalogue",
   async search(query) {
     return realStays(query);

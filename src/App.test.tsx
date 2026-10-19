@@ -53,7 +53,7 @@ beforeEach(() => {
 afterEach(cleanup);
 
 describe("CERCA: flujos del viajero", () => {
-  it("muestra hoteles reales y enlaces específicos sin consultar ubicación al cargar", () => {
+  it("muestra alojamientos reales y distingue enlaces directos de búsquedas sin geolocalizar al cargar", () => {
     render(<App />);
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
       "Tu torneo, todo cerca.",
@@ -63,8 +63,16 @@ describe("CERCA: flujos del viajero", () => {
       screen.getByText("Precios orientativos, alojamientos reales."),
     ).toBeTruthy();
     expect(
-      screen.getAllByRole("link", { name: /^Ver .+ en (Booking|Airbnb)$/ }),
+      screen.getAllByRole("link", {
+        name: /^(Ver|Buscar) .+ en (Booking|Airbnb)$/,
+      }),
     ).toHaveLength(count);
+    expect(
+      screen.getAllByRole("link", { name: /^Buscar .+ en Booking$/ }).length,
+    ).toBeGreaterThan(10);
+    expect(
+      screen.getByText(/alojamientos para buscar en Booking/),
+    ).toBeTruthy();
     expect(
       screen.getByRole("combobox", { name: "Tu pabellón de competición" }),
     ).toBeTruthy();

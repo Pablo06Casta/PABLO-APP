@@ -48,6 +48,9 @@ export type Stay = {
   freeCancellation: boolean | null;
   bookingId?: string;
   bookingPath?: string;
+  bookingSearch?: boolean;
+  sourceName?: string;
+  bookingSourceUrl?: string;
   platform?: "Booking" | "Airbnb";
   airbnbId?: string;
   observedNightly?: number;

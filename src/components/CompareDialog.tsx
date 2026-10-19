@@ -78,7 +78,8 @@ export function CompareDialog({
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Ver en {stay.platform ?? "Booking"}
+                      {stay.bookingSearch ? "Buscar en" : "Ver en"}{" "}
+                      {stay.platform ?? "Booking"}
                     </a>
                   </td>
                 ))}
@@ -104,7 +105,7 @@ export function CompareDialog({
                     <a href={stay.sourceUrl} target="_blank" rel="noreferrer">
                       {stay.platform === "Airbnb"
                         ? "Inside Airbnb"
-                        : "Wikidata"}{" "}
+                        : (stay.sourceName ?? "Wikidata")}{" "}
                       · {stay.observedAt ?? stay.retrievedAt}
                     </a>
                   </td>

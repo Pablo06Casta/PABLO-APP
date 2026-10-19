@@ -1,0 +1,47 @@
+{
+  "retrievedAt": "2026-10-19",
+  "links": [
+    {
+      "id": "osm-node-2289226446",
+      "name": "Hotel Don Luis",
+      "bookingPath": "es/don-luis",
+      "bookingSourceUrl": "http://hoteldonluismadrid.com/"
+    },
+    {
+      "id": "osm-node-13510403954",
+      "name": "Apartamentos Pueblo Quinta",
+      "bookingPath": "es/aptos-pueblo-quinta.es",
+      "bookingSourceUrl": "https://www.hotelesnew.com/apartamentos-pueblo-quinta/"
+    },
+    {
+      "id": "osm-way-503459536",
+      "name": "Pension Oviedo",
+      "bookingPath": "es/pension-oviedo.es",
+      "bookingSourceUrl": "https://pensionoviedo.top/"
+    },
+    {
+      "id": "osm-node-4124214066",
+      "name": "Hotel Hoyuela",
+      "bookingPath": "es/hoyuela",
+      "bookingSourceUrl": "https://www.hotelhoyuela.es/"
+    },
+    {
+      "id": "osm-way-782477242",
+      "name": "Gran Hotel Sardinero",
+      "bookingPath": "es/gran-hotel-sardinero",
+      "bookingSourceUrl": "https://www.sardinerohoteles.com"
+    },
+    {
+      "id": "osm-node-2316880549",
+      "name": "Ventura Premium",
+      "bookingPath": "es/ventura-san-fernando.es",
+      "bookingSourceUrl": "https://venturapremium.com/"
+    },
+    {
+      "id": "osm-way-265435789",
+      "name": "Amelia Habitaciones",
+      "bookingPath": "es/hab-miguel-soler.es",
+      "bookingSourceUrl": "https://ameliahabitaciones.top/"
+    }
+  ]
+}

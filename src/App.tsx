@@ -542,6 +542,15 @@ function App() {
                     {nights(search)} noches <span>·</span> {search.guests}{" "}
                     {search.guests === 1 ? "huésped" : "huéspedes"}
                   </p>
+                  {visible.some((stay) => stay.bookingSearch) && (
+                    <p className="catalogue-coverage">
+                      {visible.filter((stay) => !stay.bookingSearch).length}{" "}
+                      enlaces directos
+                      {" · "}
+                      {visible.filter((stay) => stay.bookingSearch).length}{" "}
+                      alojamientos para buscar en Booking
+                    </p>
+                  )}
                 </div>
                 <div className="results-controls">
                   <label className="sort-select">
@@ -934,7 +943,13 @@ function App() {
             <MapPin size={16} />
             cerca.
           </a>
-          <span>Hecho para viajar sin complicaciones.</span>
+          <a
+            href="https://www.openstreetmap.org/copyright"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Alojamientos y comercios: © OpenStreetMap contributors
+          </a>
         </div>
         <nav aria-label="Información">
           <button onClick={() => setModal("help")}>Sobre CERCA</button>
@@ -1076,15 +1091,18 @@ function App() {
               <Info size={21} />
               <p>
                 <strong>Transparencia desde el principio.</strong> Los hoteles
-                de Booking proceden de Wikidata y las fichas de Airbnb de Inside
-                Airbnb, con fecha y licencia de atribución. Las estimaciones de
-                Booking usan un modelo común por ciudad y categoría; no permiten
-                afirmar qué hotel tiene hoy la tarifa más baja. Las de Airbnb
-                parten de tarifas históricas, sin confirmar disponibilidad o
-                cargos adicionales. En empates ordenamos por distancia al
-                pabellón. Los anuncios de Airbnb tienen ubicación aproximada. El
-                catálogo es limitado: las búsquedas externas amplían opciones y
-                no se presentan como fichas importadas. Las instalaciones sin
+                proceden de Wikidata y OpenStreetMap; las fichas de Airbnb, de
+                Inside Airbnb, con fecha y licencia de atribución. Los enlaces
+                «Buscar en Booking» consultan el nombre del hotel y su
+                ubicación: pueden devolver otros resultados y no confirman una
+                ficha en esa plataforma. Las estimaciones de Booking usan un
+                modelo común por ciudad y categoría; no permiten afirmar qué
+                hotel tiene hoy la tarifa más baja. Las de Airbnb parten de
+                tarifas históricas, sin confirmar disponibilidad o cargos
+                adicionales. En empates ordenamos por distancia al pabellón. Los
+                anuncios de Airbnb tienen ubicación aproximada. El catálogo es
+                limitado: las búsquedas externas amplían opciones y no se
+                presentan como fichas importadas. Las instalaciones sin
                 coordenadas confirmadas no generan recomendaciones de cercanía.
               </p>
             </div>

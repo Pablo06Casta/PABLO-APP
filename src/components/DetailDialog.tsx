@@ -89,7 +89,9 @@ export function DetailDialog({
               <p>
                 {stay.platform === "Airbnb"
                   ? `Anuncio de Airbnb recopilado por Inside Airbnb. Tarifa de referencia observada el ${stay.observedAt}. La localización publicada es aproximada; la dirección exacta se confirma en la plataforma.`
-                  : `Identidad e identificador de Booking del catálogo Wikidata. No hay tarifa observada de este hotel: el presupuesto usa el modelo de planificación indicado.`}
+                  : stay.bookingSearch
+                    ? "Alojamiento localizado en OpenStreetMap. El enlace busca su nombre y ubicación en Booking; confirma que el resultado corresponde al hotel antes de reservar. No se ha verificado una ficha ni disponibilidad en Booking. El presupuesto usa el modelo de planificación indicado."
+                    : `Alojamiento con identificador o enlace publicado de Booking. Fuente: ${stay.sourceName ?? "Wikidata"}. No hay tarifa observada de este hotel: el presupuesto usa el modelo de planificación indicado.`}
               </p>
               <p>
                 {stay.capacity
@@ -126,6 +128,30 @@ export function DetailDialog({
                   . Selección y estimaciones elaboradas por CERCA.
                 </small>
               )}
+              {stay.sourceName === "OpenStreetMap" && (
+                <small>
+                  © OpenStreetMap contributors ·{" "}
+                  <a
+                    href="https://www.openstreetmap.org/copyright"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    ODbL 1.0
+                  </a>
+                  {" · "}Consulta: {stay.retrievedAt}. Las condiciones y el
+                  estado del alojamiento pueden cambiar.
+                </small>
+              )}
+              {stay.bookingSourceUrl && (
+                <a
+                  className="text-button"
+                  href={stay.bookingSourceUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Fuente del enlace de Booking <ArrowUpRight size={15} />
+                </a>
+              )}
             </section>
             <section className="detail-section">
               <h3>
@@ -141,7 +167,9 @@ export function DetailDialog({
                 rel="noreferrer"
               >
                 Ruta al pabellón
-                {stay.approximateLocation ? " desde la zona aproximada" : ""}{" "}
+                {stay.approximateLocation
+                  ? " desde la zona aproximada"
+                  : ""}{" "}
                 <ArrowUpRight size={15} />
               </a>
               <MapView
@@ -208,16 +236,20 @@ export function DetailDialog({
                 target="_blank"
                 rel="noreferrer"
               >
-                Ver este alojamiento en {stay.platform ?? "Booking"}{" "}
-                <ArrowUpRight size={17} />
+                {stay.bookingSearch
+                  ? "Buscar este alojamiento en"
+                  : "Ver este alojamiento en"}{" "}
+                {stay.platform ?? "Booking"} <ArrowUpRight size={17} />
               </a>
             )}
             <small className="external-note">
               {stay.platform === "Airbnb"
                 ? "Enlace a la ficha del anuncio de Airbnb."
-                : stay.bookingPath
-                  ? "Enlace a la ficha publicada de Booking."
-                  : "Booking selecciona este hotel mediante su identificador."}{" "}
+                : stay.bookingSearch
+                  ? "Búsqueda por nombre y ubicación; puede devolver otros hoteles."
+                  : stay.bookingPath
+                    ? "Enlace a la ficha publicada de Booking."
+                    : "Booking selecciona este hotel mediante su identificador."}{" "}
               Se incluyen las fechas y huéspedes.
             </small>
           </aside>

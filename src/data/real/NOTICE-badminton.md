@@ -31,6 +31,16 @@ Los puntos de Airbnb son aproximados. No se consideran direcciones exactas ni pe
 
 `stays.json`: catálogo CC0 de Wikidata ya incluido en CERCA. `venue-stays.json` añade un registro cercano a una de las sedes, procedente de una consulta Wikidata con P10532/P3607 y coordenadas. Identificadores: P10532 (numérico) y P3607 (ruta). Fuente: https://www.wikidata.org/ . No se hace scraping de Booking ni se inventan fichas o valoraciones.
 
+### Ampliación del 19 de octubre de 2026
+
+`osm-stays.json` es una selección derivada de **189 alojamientos adicionales** publicados en OpenStreetMap, bajo **ODbL 1.0**, © OpenStreetMap contributors: https://www.openstreetmap.org/copyright . Conserva nombre, tipo de alojamiento, coordenadas, dirección pública y enlace al objeto OSM. Las geometrías de edificios se convierten al promedio de sus nodos, que puede diferir de la entrada; las distancias son en línea recta. Cada alojamiento está a menos de 10 km de al menos un pabellón confirmado. No es una lista exhaustiva ni una comprobación de apertura o acceso en las fechas del usuario. No se importan identidades de colaboradores OSM, teléfonos ni datos de huéspedes.
+
+Fuente: API oficial de lectura `https://api.openstreetmap.org/api/0.6/map.json?bbox=...`, consultada en ventanas acotadas alrededor de los pabellones y sus zonas hoteleras. Reproducción: `python scripts/import-osm-hotels.py /ruta/mapas/*.json --retrieved-at AAAA-MM-DD`. El importador elimina duplicados por objeto y por identidad/nombre próximo; `osm-stays-exclusions.json` documenta 19 exclusiones revisadas, incluidos otros nombres de hoteles ya importados, nombres no identificables y alojamientos con acceso específico sin verificar. Las tres bases se conservan en ficheros separados con sus propias licencias.
+
+`published-booking-links.json` documenta siete rutas de Booking que se encontraron publicadas en sitios web enlazados desde OSM, con URL de la página fuente y fecha de consulta. Cinco pertenecen a nuevos alojamientos; dos corresponden a establecimientos ya representados o excluidos y no crean tarjetas duplicadas. Solo se reutilizan los enlaces publicados, sin afiliación, fotos, precios, reseñas ni condiciones comerciales del sitio. La existencia del enlace no confirma que la ficha siga activa ni disponibilidad. No se han inferido slugs a partir del nombre.
+
+Los otros **184** alojamientos adicionales no tienen ficha verificada en Booking. La tarjeta dice **«Alojamiento real · buscar en Booking»**, su botón **«Buscar en Booking»** y el detalle explica que es una búsqueda por nombre y coordenadas que puede devolver otros hoteles. La selección de plataforma «Booking» incluye los hoteles que se pueden consultar en esa plataforma mediante búsqueda; no afirma que sean inventario importado de Booking. Se mantienen desconocidos tarifas, reseñas, capacidad, cancelación y servicios. No se incorporó el CSV comercial de Bright Data ni datos antiguos de GeoNames investigados durante la búsqueda. El plugin de Booking no estaba disponible y no se presenta como conectado.
+
 ## Estimaciones de planificación
 
 No son tarifas, descuentos, ofertas ni garantía de disponibilidad. No se añaden precios aleatorios por nombre o identificador.

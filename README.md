@@ -7,7 +7,7 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 ## Qué funciona
 
 - Selector con las 23 instalaciones comunicadas por el usuario, en 15 destinos. Hay 19 puntos comprobados y cuatro pendientes, identificados sin simular cercanía.
-- Alojamientos de Booking con identidad/ID de Wikidata (2.322 fichas originales y una adicional) y selección de 198 anuncios reales de Airbnb de Inside Airbnb. Cobertura limitada, no inventario completo.
+- Alojamientos con identidad/ID de Booking de Wikidata (2.322 fichas originales y una adicional), 189 alojamientos adicionales de OpenStreetMap cerca de los pabellones y 198 anuncios reales de Airbnb de Inside Airbnb. Los cinco enlaces de Booking publicados en las webs de los nuevos hoteles abren su ficha; los otros 184 se identifican como búsquedas por nombre y ubicación, sin afirmar que estén disponibles en Booking. Cobertura limitada, no inventario completo.
 - Orden inicial por **menor precio estimado por persona y noche**, con desempate por distancia al pabellón. Presupuesto inicial editable de 50 €/persona/noche.
 - Filtros de presupuesto, plataforma, categoría, distancia al pabellón, capacidad/estancia mínima conocidas y servicios publicados. Nunca se confirma capacidad desconocida: los hoteles sin datos presuponen habitaciones dobles y lo indican.
 - Detalle con rango orientativo, presupuesto del grupo, explicación de estimación, fuente, fechas y enlace del anuncio. En Airbnb se respetan los IDs largos como cadenas y se usan `check_in`, `check_out` y `adults`; Booking recibe hotel y habitaciones dobles previstas.
@@ -20,7 +20,7 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 
 Se filtra y ordena con la misma estimación central por persona y noche. Los hoteles no reciben variaciones aleatorias por nombre/ID. Para grupos impares se prevén habitaciones dobles completas. Los anuncios de Airbnb se descartan si incumplen la capacidad o estancia mínima publicadas; no se multiplican apartamentos para simular plazas adicionales.
 
-El usuario reserva en la plataforma: CERCA no cobra ni confirma reservas. Las fichas pueden estar antiguas o retiradas. El catálogo tiene huecos, por ejemplo A Estrada no tiene fichas importadas en esta selección. Las búsquedas externas de ambas plataformas amplían la zona con fechas y huéspedes y se distinguen de las fichas reales importadas. No se hace scraping de Booking o Airbnb.
+El usuario reserva en la plataforma: CERCA no cobra ni confirma reservas. Las fichas pueden estar antiguas o retiradas. «Ver en Booking» abre una ruta publicada o selecciona un identificador conocido; «Buscar en Booking» consulta el nombre y la ubicación de un alojamiento real de OSM, pero puede devolver otros resultados. No confirma su presencia en Booking. El catálogo tiene huecos; las búsquedas externas de ambas plataformas amplían la zona con fechas y huéspedes. No se hace scraping de Booking o Airbnb ni se simula una conexión con el plugin de Booking, que no está disponible en esta sesión.
 
 Fuentes, licencias, fechas, método y límites: [NOTICE-badminton.md](src/data/real/NOTICE-badminton.md). Datos Airbnb: Inside Airbnb, CC BY 4.0, con selección y cálculos de CERCA. Wikidata: CC0. Puntos de Airbnb aproximados; sede/tiendas: © OpenStreetMap contributors, ODbL.
 
@@ -65,4 +65,4 @@ CERCA_BASE_PATH=/PABLO-APP/ npm run build -- --outDir /tmp/cerca-pages-dist
 CERCA_BASE_PATH=/PABLO-APP/ npm run preview -- --outDir /tmp/cerca-pages-dist --host 127.0.0.1 --port 5181 --strictPort
 ```
 
-Se conserva `scripts/refresh-catalogue.py` para el catálogo base de Wikidata y sus fotografías libres. No actualiza por sí mismo la selección de sedes/Airbnb: una nueva selección debe conservar fuentes, fechas, licencia y criterios de `NOTICE-badminton.md` y ejecutar las comprobaciones.
+Se conserva `scripts/refresh-catalogue.py` para el catálogo base de Wikidata y sus fotografías libres. `scripts/import-osm-hotels.py` importa exportaciones oficiales `map.json` sin datos personales de colaboradores, aplica el radio de 10 km, elimina duplicados y respeta exclusiones revisadas. No consulta Booking ni inventa rutas. La actualización de sedes/Airbnb debe conservar fuentes, fechas, licencia y criterios de `NOTICE-badminton.md` y ejecutar las comprobaciones.

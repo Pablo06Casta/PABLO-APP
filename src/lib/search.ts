@@ -115,11 +115,16 @@ export function stayBookingUrl(stay: Stay, search: Search) {
     ? new URL(`https://www.booking.com/hotel/${stay.bookingPath}.html`)
     : new URL("https://www.booking.com/searchresults.es.html");
   if (!stay.bookingPath) {
-    if (!stay.bookingId || !/^\d+$/.test(stay.bookingId)) return undefined;
-    url.searchParams.set("dest_type", "hotel");
-    url.searchParams.set("dest_id", stay.bookingId);
-    url.searchParams.set("highlighted_hotels", stay.bookingId);
-    url.searchParams.set("ss", stay.name);
+    if (stay.bookingId && /^\d+$/.test(stay.bookingId)) {
+      url.searchParams.set("dest_type", "hotel");
+      url.searchParams.set("dest_id", stay.bookingId);
+      url.searchParams.set("highlighted_hotels", stay.bookingId);
+      url.searchParams.set("ss", stay.name);
+    } else if (stay.bookingSearch) {
+      url.searchParams.set("ss", `${stay.name}, ${stay.address}`);
+      url.searchParams.set("latitude", String(stay.lat));
+      url.searchParams.set("longitude", String(stay.lng));
+    } else return undefined;
   }
   url.searchParams.set("checkin", search.checkIn);
   url.searchParams.set("checkout", search.checkOut);
