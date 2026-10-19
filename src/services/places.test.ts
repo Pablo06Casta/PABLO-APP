@@ -1,5 +1,13 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { findMarkets, findTown, reverseTown, parseMarkets } from "./places";
+import {
+  findMarkets,
+  findTown,
+  reverseTown,
+  parseMarkets,
+  savedMarkets,
+} from "./places";
+import { venues, townForVenue } from "../data/venues";
+import { distance } from "../lib/search";
 afterEach(() => vi.unstubAllGlobals());
 describe("Proveedores públicos de lugares", () => {
   it("interpreta supermercados OSM de nodos y edificios sin inventar direcciones", async () => {
@@ -35,13 +43,17 @@ describe("Proveedores públicos de lugares", () => {
       }),
     }));
     vi.stubGlobal("fetch", request);
-    const markets = await findMarkets({
-      id: "test",
-      name: "Granada",
-      region: "Andalucía",
-      lat: 37.17,
-      lng: -3.59,
-    });
+    const markets = await findMarkets(
+      {
+        id: "test",
+        name: "Granada",
+        region: "Andalucía",
+        lat: 37.17,
+        lng: -3.59,
+      },
+      undefined,
+      true,
+    );
     expect(markets).toHaveLength(2);
     expect(markets[0]).toMatchObject({
       id: "node-123",
@@ -154,6 +166,104 @@ describe("Proveedores públicos de lugares", () => {
         { ...first, id: 302, lat: NaN },
       ]),
     ).toHaveLength(1);
+  });
+  it("no vuelve a incorporar comercios con una clasificación de supermercado revisada como inconsistente", () => {
+    expect(
+      parseMarkets([
+        {
+          type: "way",
+          id: 115525107,
+          center: { lat: 37.25858, lon: -6.92336 },
+          tags: { shop: "supermarket", name: "MediaMarkt" },
+        },
+      ]),
+    ).toEqual([]);
+  });
+  it("muestra supermercados reales y fechados para todas las sedes confirmadas sin depender de la red", async () => {
+    const request = vi.fn();
+    vi.stubGlobal("fetch", request);
+    for (const venue of venues.filter((item) => item.location)) {
+      const origin = {
+        ...townForVenue(venue),
+        ...venue.location!,
+        id: venue.id,
+      };
+      const shops = await findMarkets(origin);
+      expect(shops.some((shop) => shop.kind === "supermarket")).toBe(true);
+      expect(new Set(shops.map((shop) => shop.id)).size).toBe(shops.length);
+      for (const shop of shops) {
+        expect(distance(shop, venue.location!)).toBeLessThanOrEqual(3);
+        expect(shop.source).toBe("osm");
+        expect(shop.cached).toBe(true);
+        expect(shop.retrievedAt).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+        expect(shop.sourceUrl).toMatch(
+          /^https:\/\/www.openstreetmap.org\/(node|way|relation)\/\d+$/,
+        );
+      }
+    }
+    expect(request).not.toHaveBeenCalled();
+  });
+  it("conserva los datos guardados si falla la actualización de una sede", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => ({ ok: false, status: 503 })),
+    );
+    const venue = venues.find((item) => item.id === "estrada-coto")!;
+    const origin = {
+      ...townForVenue(venue),
+      ...venue.location!,
+      lat: venue.location!.lat + 0.00002,
+    };
+    const shops = await findMarkets(origin, undefined, true);
+    expect(shops.map((shop) => shop.name)).toEqual(
+      expect.arrayContaining(["Familia", "Mercadona", "Froiz"]),
+    );
+    expect(shops.every((shop) => shop.cached)).toBe(true);
+    expect(shops.every((shop) => shop.retrievedAt === "2026-10-19")).toBe(true);
+  });
+  it("no borra los supermercados conocidos fuera de la pequeña ventana de actualización", async () => {
+    const venue = venues.find((item) => item.id === "estrada-coto")!;
+    const origin = {
+      ...townForVenue(venue),
+      ...venue.location!,
+      lat: venue.location!.lat + 0.00004,
+    };
+    const saved = savedMarkets(origin),
+      shop = saved[0];
+    const [type, id] = shop.id.split("-");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (input: RequestInfo | URL) =>
+        String(input).includes("overpass")
+          ? { ok: false }
+          : {
+              ok: true,
+              json: async () => ({
+                elements: [
+                  {
+                    type,
+                    id: Number(id),
+                    center: { lat: shop.lat, lon: shop.lng },
+                    tags: {
+                      shop: shop.kind,
+                      name: shop.name,
+                      "addr:street": "Dirección actualizada",
+                    },
+                  },
+                ],
+              }),
+            },
+      ),
+    );
+    const result = await findMarkets(origin, undefined, true);
+    expect(result.map((item) => item.id)).toEqual(
+      expect.arrayContaining(saved.map((item) => item.id)),
+    );
+    expect(result.find((item) => item.id === shop.id)?.address).toBe(
+      "Dirección actualizada",
+    );
+    expect(result.find((item) => item.id === shop.id)?.cached).not.toBe(true);
+    expect(result.filter((item) => item.cached).length).toBeGreaterThan(0);
   });
   it("limita las búsquedas geográficas a España", async () => {
     const request = vi.fn(async (_input: RequestInfo | URL) => ({

@@ -1578,6 +1578,52 @@
   border-radius: 10px;
   margin-top: 12px;
 }
+.markets-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 8px;
+}
+.markets-toolbar strong {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.markets-toolbar > .secondary-button {
+  flex-shrink: 0;
+  font-size: 11px;
+}
+.market-kind-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.market-kind-filters .secondary-button {
+  font-size: 10px;
+  padding: 8px 10px;
+}
+.market-kind-filters [aria-pressed="true"] {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.market-info > .market-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  color: var(--accent);
+  margin-top: 8px;
+}
+.market-refresh-note {
+  background: var(--surface-soft);
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
 .market-card {
   display: flex;
   align-items: center;

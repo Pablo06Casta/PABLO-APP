@@ -11,7 +11,7 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 - Orden inicial por **menor precio estimado por persona y noche**, con desempate por distancia al pabellón. Presupuesto inicial editable de 50 €/persona/noche.
 - Filtros de presupuesto, plataforma, categoría, distancia al pabellón, capacidad/estancia mínima conocidas y servicios publicados. Nunca se confirma capacidad desconocida: los hoteles sin datos presuponen habitaciones dobles y lo indican.
 - Detalle con rango orientativo, presupuesto del grupo, explicación de estimación, fuente, fechas y enlace del anuncio. En Airbnb se respetan los IDs largos como cadenas y se usan `check_in`, `check_out` y `adults`; Booking recibe hotel y habitaciones dobles previstas.
-- Supermercados ordenados desde el pabellón, incluidos en el mapa junto a alojamientos y sede. Los detalles también consultan la sede, no el centro de ciudad. Distancias en línea recta y minutos a pie aproximados, no rutas calculadas. «Cómo llegar» abre Google Maps.
+- Supermercados ordenados desde el pabellón, incluidos en el mapa junto a alojamientos y sede. Catálogo fechado de 271 supermercados y 120 tiendas de alimentación para las 19 sedes confirmadas: carga inmediata, selección de tipo y actualización explícita sin perder los resultados guardados. Los detalles cargan la compra al abrirse, desde su propia sede. Distancias en línea recta y minutos a pie aproximados, no rutas calculadas. «Cómo llegar» abre Google Maps.
 - Favoritos, comparación de tres opciones, navegación móvil, modo oscuro y PWA. El autocompletado de municipios se conserva para destinos adicionales; donde no hay sede elegida se identifica el modo centro de ciudad.
 
 ## Datos y precios
@@ -41,7 +41,7 @@ npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
 Utiliza el checkout existente: cada tarea en la nube ya está aislada y no requiere worktrees. Si 5173 ya sirve CERCA, reutilízalo. Los procesos deben arrancarse de nuevo en cada máquina. No se necesitan claves privadas para este catálogo abierto.
 
 ```sh
-npm run check       # Lint, 34 pruebas, tipos, build y smoke HTTP/PWA.
+npm run check       # Lint, 45 pruebas, tipos, build y smoke HTTP/PWA.
 npm run test:watch
 npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
@@ -50,7 +50,7 @@ Las pruebas de proveedores usan fixtures para comprobar fallos y recuperación y
 
 ## Servicios y publicación
 
-Los comercios se consultan en Overpass; si falla, se usa una ventana pequeña mediante la API oficial de lectura OSM, reducida una vez si supera el límite de nodos. La cobertura local se indica y no equivale a todos los supermercados de una ciudad. Hay caché de una hora; los vacíos no se cachean. Una copia fechada del centro de Granada, heredada del catálogo anterior, solo se utiliza ante fallos y se identifica como tal. No se generan comercios ficticios.
+La consulta inicial utiliza `venue-markets.json`, con comercios reales de OSM y fecha de consulta, hasta 3 km del pabellón. Incluye 391 comercios únicos y cobertura para las 19 sedes con coordenadas. La copia previa de Granada se conserva para búsquedas en esa zona. El botón «Actualizar supermercados» consulta Overpass y, si falla, la API oficial de lectura OSM en una ventana limitada (±0,006°, reducida a ±0,003° si falla). Una respuesta local no elimina comercios guardados fuera de esa ventana; se conserva su fecha. Si falla la actualización, la lista guardada sigue disponible. Las sedes sin coordenadas se mantienen pendientes sin simular proximidad. Hay caché en memoria de una hora; los vacíos no se cachean. Se distinguen supermercados y tiendas de alimentación y se enlaza cada nuevo registro a OSM. La cobertura es parcial y no acredita apertura, inventario o tarifas actuales.
 
 La geolocalización es opcional y requiere acción y permiso del navegador. Nominatim solo se consulta explícitamente; el autocompletado de 8.132 municipios es local y las coordenadas municipales no precisadas se identifican como aproximadas. Las sedes seleccionadas usan sus propios puntos comprobados.
 

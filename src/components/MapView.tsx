@@ -110,6 +110,12 @@ export function MapView({
       const address = document.createElement("p");
       address.textContent = market.address;
       popup.append(name, address);
+      const directions = document.createElement("a");
+      directions.href = `https://www.google.com/maps/dir/?api=1&destination=${market.lat},${market.lng}&travelmode=walking`;
+      directions.target = "_blank";
+      directions.rel = "noreferrer";
+      directions.textContent = "Cómo llegar";
+      popup.append(directions);
       marker.bindPopup(popup);
     }
   }, [stays, markets, search, compact, origin.lat, origin.lng, origin.name]);

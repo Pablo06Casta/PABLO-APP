@@ -232,6 +232,45 @@ describe("CERCA: flujos del viajero", () => {
     ).toHaveLength(0);
     expect(document.documentElement.dataset.theme).toBe("light");
   });
+  it("carga la compra desde el pabellón al abrir el detalle y conserva la lista si falla actualizar", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(
+      within(screen.getAllByRole("article")[0]).getByRole("button", {
+        name: /^Detalles de/,
+      }),
+    );
+    await screen.findByText("Supermercado registrado");
+    expect(vi.mocked(findMarkets).mock.calls[0][0]).toMatchObject({
+      id: defaultVenue.id,
+      ...defaultVenue.location,
+    });
+    vi.mocked(findMarkets).mockRejectedValueOnce(
+      new Error("Network unavailable"),
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Actualizar supermercados" }),
+    );
+    await screen.findByText(
+      /No se pudo actualizar. Puedes seguir usando los datos guardados/,
+    );
+    expect(screen.getByText("Supermercado registrado")).toBeTruthy();
+  });
+  it("no consulta comercios junto a una sede sin coordenadas confirmadas", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.selectOptions(
+      screen.getByRole("combobox", { name: "Tu pabellón de competición" }),
+      "vitoria-aronova",
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Supermercados cerca" }),
+    );
+    await screen.findByText(
+      "Primero hay que confirmar la ubicación de este pabellón.",
+    );
+    expect(findMarkets).not.toHaveBeenCalled();
+  });
   it("cambia de pabellón y consulta supermercados desde esa instalación", async () => {
     const user = userEvent.setup();
     render(<App />);

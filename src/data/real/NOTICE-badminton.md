@@ -41,6 +41,16 @@ Fuente: API oficial de lectura `https://api.openstreetmap.org/api/0.6/map.json?b
 
 Los otros **184** alojamientos adicionales no tienen ficha verificada en Booking. La tarjeta dice **«Alojamiento real · buscar en Booking»**, su botón **«Buscar en Booking»** y el detalle explica que es una búsqueda por nombre y coordenadas que puede devolver otros hoteles. La selección de plataforma «Booking» incluye los hoteles que se pueden consultar en esa plataforma mediante búsqueda; no afirma que sean inventario importado de Booking. Se mantienen desconocidos tarifas, reseñas, capacidad, cancelación y servicios. No se incorporó el CSV comercial de Bright Data ni datos antiguos de GeoNames investigados durante la búsqueda. El plugin de Booking no estaba disponible y no se presenta como conectado.
 
+## Supermercados y tiendas de alimentación
+
+`venue-markets.json`: **391 comercios únicos de OpenStreetMap**, de los que **271** tienen la etiqueta `shop=supermarket` y **120** `shop=convenience`. Consulta: **19 de octubre de 2026**, a través de exportaciones oficiales acotadas `api.openstreetmap.org/api/0.6/map.json`. El fichero conserva las URLs y límites de las ventanas consultadas, cobertura por sede, tipo, coordenadas, dirección y horario cuando están publicados, fecha y enlace al objeto OSM de cada comercio. Se reutilizan las exportaciones reales obtenidas ese mismo día para la ampliación de alojamientos, sin nuevos barridos masivos de ciudades.
+
+© OpenStreetMap contributors, **ODbL 1.0**, https://www.openstreetmap.org/copyright . Selección y transformación por CERCA: promedio de nodos de edificios para ubicarlos, filtro a 3 km de alguna sede confirmada y eliminación de duplicados por ID y por nombre/punto próximo. No se incluyen identidades de colaboradores ni datos privados. Reproducción: `python scripts/import-market-catalogue.py /ruta/mapas/*.json --retrieved-at AAAA-MM-DD`, indicando la fecha real de obtención de las exportaciones. `market-exclusions.json` documenta seis comercios especializados o con clasificación inconsistente, excluidos tanto del catálogo como de las actualizaciones. Cada una de las 19 sedes confirmadas tiene al menos un supermercado documentado; las cuatro pendientes siguen sin recomendaciones de cercanía.
+
+La primera consulta utiliza el catálogo fechado, identificado como guardado. La lista empieza por supermercados; las tiendas se pueden incluir expresamente. «Actualizar supermercados» intenta Overpass (3 km) y, si falla, la API oficial OSM en una ventana local limitada. Una respuesta local no demuestra que hayan desaparecido los comercios guardados fuera de su ventana. Se conserva su fecha y cobertura, así como la lista anterior durante la actualización o ante fallos. La copia anterior de Granada mantiene su fecha y se limita a su área, como el resto del catálogo.
+
+Los enlaces «Cómo llegar» abren las coordenadas reales del comercio en Google Maps. Las distancias mostradas son en línea recta, y los tiempos a pie aproximados. El catálogo no acredita que el comercio siga abierto, su inventario ni sus horarios actuales. La cobertura es parcial, no un inventario exhaustivo de todos los supermercados de una localidad.
+
 ## Estimaciones de planificación
 
 No son tarifas, descuentos, ofertas ni garantía de disponibilidad. No se añaden precios aleatorios por nombre o identificador.

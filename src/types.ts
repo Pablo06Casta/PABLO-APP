@@ -86,6 +86,8 @@ export type Market = {
   lng: number;
   hours?: string;
   source: "osm";
+  sourceUrl?: string;
+  kind?: "supermarket" | "convenience";
   retrievedAt?: string;
   coverage?: "local" | "radius";
   cached?: boolean;

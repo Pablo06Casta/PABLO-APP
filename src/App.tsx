@@ -281,26 +281,32 @@ function App() {
     }
     setCompare([...compare, { stay, search: query }]);
   }
-  async function loadMarkets(town = searchOrigin(search)) {
-    if (search.venue && !search.venue.location && town.id === search.town.id) {
+  async function loadMarkets(query = search) {
+    const town = searchOrigin(query);
+    const previousMarkets = marketTownId === town.id ? markets : [];
+    marketController.current?.abort();
+    if (query.venue && !query.venue.location) {
+      marketController.current = null;
+      setMarkets([]);
+      setMarketTownId(town.id);
       setMarketStatus("error");
       setMarketError(
         "Primero hay que confirmar la ubicación de este pabellón.",
       );
       return;
     }
-    marketController.current?.abort();
     const controller = new AbortController();
     marketController.current = controller;
     setMarketStatus("loading");
     setMarketError("");
+    if (marketTownId !== town.id) setMarkets([]);
     setMarketTownId(town.id);
     const timeout = setTimeout(() => controller.abort(), 25000);
     try {
       const result = await findMarkets(
         town,
         controller.signal,
-        marketStatus === "success",
+        marketStatus === "success" && marketTownId === town.id,
       );
       if (marketController.current === controller) {
         setMarkets(result);
@@ -323,7 +329,13 @@ function App() {
             ? error.message
             : "No podemos conectar con OpenStreetMap en este momento. Comprueba tu conexión o vuelve a intentarlo.",
         );
-      setMarketStatus("error");
+      if (previousMarkets.length) {
+        setMarkets(previousMarkets);
+        setMarketStatus("success");
+        setMarketError(
+          "No se pudo actualizar. Puedes seguir usando los datos guardados y su fecha de consulta.",
+        );
+      } else setMarketStatus("error");
     } finally {
       clearTimeout(timeout);
     }
@@ -332,17 +344,13 @@ function App() {
     setModal(null);
     setDetail({ stay, search: query });
     if (marketTownId !== searchOrigin(query).id) {
-      marketController.current?.abort();
-      marketController.current = null;
-      setMarketTownId("");
-      setMarketStatus("idle");
-      setMarkets([]);
+      void loadMarkets(query);
     }
   }
   function showMarkets() {
     setModal("markets");
     if (marketStatus === "idle" || marketTownId !== origin.id)
-      void loadMarkets(origin);
+      void loadMarkets(search);
   }
   function card(stay: Stay, query = search) {
     return (
@@ -681,7 +689,7 @@ function App() {
                     />
                     <button
                       className="map-markets-toggle secondary-button"
-                      onClick={() => loadMarkets(origin)}
+                      onClick={() => loadMarkets(search)}
                       disabled={marketStatus === "loading"}
                     >
                       <ShoppingBasket size={16} />
@@ -1029,7 +1037,7 @@ function App() {
             setModal(null);
           }}
           hasMarkets={currentMarkets.length > 0}
-          loadMarkets={() => loadMarkets(origin)}
+          loadMarkets={() => loadMarkets(search)}
           marketsLoading={marketStatus === "loading"}
           marketError={marketStatus === "error" ? marketError : ""}
         />
@@ -1051,7 +1059,7 @@ function App() {
               origin={origin}
               status={marketStatus}
               error={marketError}
-              onLoad={() => loadMarkets(origin)}
+              onLoad={() => loadMarkets(search)}
             />
           </div>
         </Dialog>
@@ -1126,8 +1134,10 @@ function App() {
             </p>
             <p>
               Las consultas de localidades y coordenadas se envían a Nominatim,
-              los supermercados a Overpass o a la API de OpenStreetMap, las
-              fotos a Wikimedia y el mapa a OpenStreetMap. Los enlaces de
+              las fotos a Wikimedia y el mapa a OpenStreetMap. Los supermercados
+              se muestran primero desde el catálogo guardado y fechado; al
+              actualizar o consultar una zona sin datos guardados se envía la
+              ubicación a Overpass o a la API de OpenStreetMap. Los enlaces de
               reserva y rutas abren servicios externos con sus propias
               políticas. La ubicación requiere tu autorización y no se consulta
               en segundo plano.
@@ -1190,7 +1200,7 @@ function App() {
               : "idle"
           }
           marketError={marketError}
-          loadMarkets={() => loadMarkets(searchOrigin(detail.search))}
+          loadMarkets={() => loadMarkets(detail.search)}
         />
       )}
     </div>

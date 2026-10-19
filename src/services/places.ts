@@ -1,4 +1,8 @@
 import type { Market, Town } from "../types";
+import catalogue from "../data/real/venue-markets.json";
+import granadaMarkets from "../data/real/granada-markets.json";
+import marketExclusions from "../data/real/market-exclusions.json";
+import { distance } from "../lib/search";
 const geocodeCache = new Map<string, Town[]>();
 let lastGeocode = 0;
 let geocodeQueue: Promise<void> = Promise.resolve();
@@ -112,6 +116,7 @@ type OsmElement = {
   tags?: Record<string, string>;
 };
 const marketCache = new Map<string, { time: number; data: Market[] }>();
+const excludedMarketIds = new Set(Object.keys(marketExclusions));
 export function parseMarkets(elements: OsmElement[], local = false): Market[] {
   const nodes = new Map(
     elements.filter((e) => e.type === "node").map((e) => [e.id, e]),
@@ -120,6 +125,7 @@ export function parseMarkets(elements: OsmElement[], local = false): Market[] {
   for (const item of elements) {
     const tags = item.tags ?? {};
     if (tags.shop !== "supermarket" && tags.shop !== "convenience") continue;
+    if (excludedMarketIds.has(`${item.type}-${item.id}`)) continue;
     let lat = item.lat ?? item.center?.lat,
       lng = item.lon ?? item.center?.lon;
     if (lat === undefined && item.nodes?.length) {
@@ -152,6 +158,8 @@ export function parseMarkets(elements: OsmElement[], local = false): Market[] {
       lng: lng!,
       hours: tags.opening_hours,
       source: "osm",
+      sourceUrl: `https://www.openstreetmap.org/${item.type}/${item.id}`,
+      kind: tags.shop,
       retrievedAt: new Date().toISOString().slice(0, 10),
       coverage: local ? "local" : "radius",
     };
@@ -167,16 +175,63 @@ export function parseMarkets(elements: OsmElement[], local = false): Market[] {
   }
   return result;
 }
+
+// Saved public OSM facts make the venue searches work offline and during outages.
+// They retain their real retrieval date and never claim live opening/availability.
+export function savedMarkets(origin: Pick<Town, "lat" | "lng">): Market[] {
+  return ([...catalogue.markets, ...granadaMarkets] as Market[])
+    .filter((market) => distance(origin, market) <= 3)
+    .map((market) => ({ ...market, cached: true }))
+    .sort((a, b) => distance(origin, a) - distance(origin, b));
+}
+
+function combineMarkets(
+  origin: Pick<Town, "lat" | "lng">,
+  saved: Market[],
+  live: Market[],
+): Market[] {
+  // A small local response cannot invalidate shops outside its queried window.
+  const combined = new Map(saved.map((market) => [market.id, market]));
+  for (const market of live) combined.set(market.id, market);
+  return [...combined.values()]
+    .filter((market) => distance(origin, market) <= 3)
+    .filter(
+      (market, index, all) =>
+        !all
+          .slice(0, index)
+          .some(
+            (other) =>
+              other.name.toLocaleLowerCase("es") ===
+                market.name.toLocaleLowerCase("es") &&
+              distance(other, market) < 0.035,
+          ),
+    )
+    .sort((a, b) => distance(origin, a) - distance(origin, b));
+}
+
 export async function findMarkets(
   town: Town,
   signal: AbortSignal = AbortSignal.timeout(22000),
   refresh = false,
 ): Promise<Market[]> {
   signal.throwIfAborted();
-  const key = `${town.lat.toFixed(3)},${town.lng.toFixed(3)}`;
+  if (
+    !Number.isFinite(town.lat) ||
+    !Number.isFinite(town.lng) ||
+    Math.abs(town.lat) > 90 ||
+    Math.abs(town.lng) > 180
+  )
+    throw new Error("La ubicación no es válida para buscar supermercados.");
+  const key = `${town.lat.toFixed(5)},${town.lng.toFixed(5)}`;
   const cached = marketCache.get(key);
   if (!refresh && cached && Date.now() - cached.time < 3600000)
     return cached.data;
+  const stored = combineMarkets(
+    town,
+    savedMarkets(town),
+    cached?.data.map((market) => ({ ...market, cached: true })) ?? [],
+  );
+  if (!refresh && stored.length) return stored;
   const query = `[out:json][timeout:5];nwr["shop"~"^(supermarket|convenience)$"](around:3000,${town.lat},${town.lng});out center tags;`;
   try {
     const response = await fetch("https://overpass-api.de/api/interpreter", {
@@ -188,7 +243,8 @@ export async function findMarkets(
     const json = await response.json();
     if (json.remark || !Array.isArray(json.elements))
       throw new Error("Incomplete response");
-    const data = parseMarkets(json.elements);
+    const data = combineMarkets(town, [], parseMarkets(json.elements));
+    if (!data.length && stored.length) return stored;
     if (data.length) marketCache.set(key, { time: Date.now(), data });
     return data;
   } catch {
@@ -196,7 +252,7 @@ export async function findMarkets(
   }
   // Fallback oficial de lectura, en una ventana pequeña para no descargar ciudades.
   // Si supera el límite de nodos, reducimos el área una sola vez.
-  for (const delta of [0.0025, 0.00125]) {
+  for (const delta of [0.006, 0.003]) {
     try {
       const bbox = [
         town.lng - delta,
@@ -214,21 +270,17 @@ export async function findMarkets(
       const json = await response.json();
       if (!Array.isArray(json.elements))
         throw new Error("Invalid OSM response");
-      const data = parseMarkets(json.elements, true);
-      if (data.length) marketCache.set(key, { time: Date.now(), data });
+      const live = parseMarkets(json.elements, true);
+      const data = combineMarkets(town, stored, live);
+      if (live.length && data.length)
+        marketCache.set(key, { time: Date.now(), data });
       return data;
     } catch {
       signal.throwIfAborted();
     }
   }
-  // Copia real y fechada del centro de Granada para cortes de los servicios públicos.
-  const { default: saved } = await import("../data/real/granada-markets.json");
   signal.throwIfAborted();
-  const local = saved.filter(
-    (m) =>
-      Math.abs(m.lat - town.lat) < 0.006 && Math.abs(m.lng - town.lng) < 0.006,
-  ) as Market[];
-  if (local.length) return local.map((m) => ({ ...m, cached: true }));
+  if (stored.length) return stored;
   throw new Error(
     "OpenStreetMap no responde en este momento. Puedes volver a intentarlo.",
   );
