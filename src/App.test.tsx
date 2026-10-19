@@ -26,7 +26,7 @@ const count = filterStays(
   [],
   "distance",
 ).length;
-import { findMarkets, findTown } from "./services/places";
+import { findFuelStations, findMarkets, findTown } from "./services/places";
 
 vi.mock("./components/MapView", () => ({
   MapView: () => <div aria-label="Mapa de prueba" />,
@@ -44,6 +44,13 @@ vi.mock("./services/places", () => ({
       source: "osm",
     },
   ]),
+  findFuelStations: vi.fn(async () => [{
+    id: "node-700", name: "Gasolinera registrada", address: "Calle de prueba",
+    lat: 42.855, lng: -2.67, sourceUrl: "https://www.openstreetmap.org/node/700",
+    retrievedAt: "2026-10-19", coverage: "radius",
+  }]),
+  fuelDirectionsUrl: (origin: {lat: number; lng: number}, station: {lat: number; lng: number}) =>
+    `https://www.google.com/maps/dir/?api=1&origin=${origin.lat},${origin.lng}&destination=${station.lat},${station.lng}&travelmode=driving`,
   mapsUrl: (lat: number, lng: number) =>
     `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
 }));
@@ -320,6 +327,20 @@ describe("CERCA: flujos del viajero", () => {
       id: venue.id,
       ...venue.location,
     });
+  });
+  it("busca gasolineras solo tras la acción del usuario y bloquea sedes pendientes", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.click(screen.getByRole("button", { name: "Gasolineras cerca" }));
+    expect(findFuelStations).not.toHaveBeenCalled();
+    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Buscar gasolineras" }));
+    await screen.findByText("Gasolinera registrada");
+    expect(vi.mocked(findFuelStations).mock.calls[0][0]).toMatchObject({ id: defaultVenue.id, ...defaultVenue.location });
+    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Cerrar" }));
+    await user.selectOptions(screen.getByRole("combobox", { name: "Tu pabellón de competición" }), "vitoria-aronova");
+    await user.click(screen.getByRole("button", { name: "Gasolineras cerca" }));
+    expect(within(screen.getByRole("dialog")).getByText(/aún no tiene coordenadas confirmadas/)).toBeTruthy();
+    expect(vi.mocked(findFuelStations)).toHaveBeenCalledTimes(1);
   });
   it("filtra presupuesto y mantiene el orden de menor a mayor sin anuncios importados", async () => {
     const user = userEvent.setup();

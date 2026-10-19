@@ -1,4 +1,4 @@
-import type { Market, Town } from "../types";
+import type { FuelStation, Market, Town } from "../types";
 import catalogue from "../data/real/venue-markets.json";
 import granadaMarkets from "../data/real/granada-markets.json";
 import marketExclusions from "../data/real/market-exclusions.json";
@@ -290,3 +290,94 @@ export async function findMarkets(
 }
 export const mapsUrl = (lat: number, lng: number) =>
   `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=walking`;
+
+export function fuelDirectionsUrl(origin: Pick<Town, "lat" | "lng">, station: FuelStation) {
+  const url = new URL("https://www.google.com/maps/dir/");
+  url.search = new URLSearchParams({
+    api: "1",
+    origin: `${origin.lat},${origin.lng}`,
+    destination: `${station.lat},${station.lng}`,
+    travelmode: "driving",
+  }).toString();
+  return url.toString();
+}
+
+const fuelCache = new Map<string, { time: number; data: FuelStation[] }>();
+
+export function parseFuelStations(elements: OsmElement[], local = false): FuelStation[] {
+  const nodes = new Map(elements.filter((item) => item.type === "node").map((item) => [item.id, item]));
+  const stations: FuelStation[] = [];
+  for (const item of elements) {
+    const tags = item.tags ?? {};
+    if (tags.amenity !== "fuel") continue;
+    let lat = item.lat ?? item.center?.lat;
+    let lng = item.lon ?? item.center?.lon;
+    if ((lat === undefined || lng === undefined) && item.nodes?.length) {
+      const points = item.nodes.map((id) => nodes.get(id)).filter((point): point is OsmElement & { lat: number; lon: number } => point?.lat !== undefined && point?.lon !== undefined);
+      if (points.length) {
+        lat = points.reduce((sum, point) => sum + point.lat, 0) / points.length;
+        lng = points.reduce((sum, point) => sum + point.lon, 0) / points.length;
+      }
+    }
+    if (lat === undefined || lng === undefined || !Number.isFinite(lat) || !Number.isFinite(lng) || Math.abs(lat) > 90 || Math.abs(lng) > 180) continue;
+    stations.push({
+      id: `${item.type}-${item.id}`,
+      name: tags.name || tags.brand || tags.operator || "Gasolinera sin nombre",
+      address: [tags["addr:street"], tags["addr:housenumber"]].filter(Boolean).join(" ") || "Dirección no disponible en OpenStreetMap",
+      lat,
+      lng,
+      hours: tags.opening_hours,
+      sourceUrl: `https://www.openstreetmap.org/${item.type}/${item.id}`,
+      retrievedAt: new Date().toISOString().slice(0, 10),
+      coverage: local ? "local" : "radius",
+    });
+  }
+  return stations;
+}
+
+export async function findFuelStations(
+  origin: Pick<Town, "lat" | "lng">,
+  signal: AbortSignal = AbortSignal.timeout(22000),
+  refresh = false,
+): Promise<FuelStation[]> {
+  signal.throwIfAborted();
+  if (!Number.isFinite(origin.lat) || !Number.isFinite(origin.lng) || Math.abs(origin.lat) > 90 || Math.abs(origin.lng) > 180)
+    throw new Error("La ubicación no es válida para buscar gasolineras.");
+  const key = `${origin.lat.toFixed(5)},${origin.lng.toFixed(5)}`;
+  const cached = fuelCache.get(key);
+  if (!refresh && cached && Date.now() - cached.time < 3600000) return cached.data;
+  const query = `[out:json][timeout:5];nwr["amenity"="fuel"](around:5000,${origin.lat},${origin.lng});out center tags;`;
+  try {
+    const response = await fetch("https://overpass-api.de/api/interpreter", {
+      credentials: "omit", method: "POST", body: new URLSearchParams({ data: query }),
+      signal: AbortSignal.any([signal, AbortSignal.timeout(4000)]),
+    });
+    if (!response.ok) throw new Error("Overpass unavailable");
+    const json = await response.json();
+    if (json.remark || !Array.isArray(json.elements)) throw new Error("Incomplete response");
+    const stations = parseFuelStations(json.elements).filter((station) => distance(origin, station) <= 5).sort((a, b) => distance(origin, a) - distance(origin, b));
+    if (stations.length) fuelCache.set(key, { time: Date.now(), data: stations });
+    return stations;
+  } catch {
+    signal.throwIfAborted();
+  }
+  for (const delta of [0.008, 0.004]) {
+    try {
+      const bbox = [origin.lng - delta, origin.lat - delta, origin.lng + delta, origin.lat + delta].join(",");
+      const response = await fetch(`https://api.openstreetmap.org/api/0.6/map.json?bbox=${bbox}`, {
+        credentials: "omit", signal: AbortSignal.any([signal, AbortSignal.timeout(7500)]),
+      });
+      if (!response.ok) throw new Error("OSM unavailable");
+      const json = await response.json();
+      if (!Array.isArray(json.elements)) throw new Error("Invalid OSM response");
+      const stations = parseFuelStations(json.elements, true).filter((station) => distance(origin, station) <= 5).sort((a, b) => distance(origin, a) - distance(origin, b));
+      if (stations.length) fuelCache.set(key, { time: Date.now(), data: stations });
+      return stations;
+    } catch {
+      signal.throwIfAborted();
+    }
+  }
+  signal.throwIfAborted();
+  if (cached?.data.length) return cached.data;
+  throw new Error("OpenStreetMap no responde en este momento. Puedes volver a intentarlo.");
+}

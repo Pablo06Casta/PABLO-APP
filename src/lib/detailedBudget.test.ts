@@ -28,6 +28,19 @@ describe("presupuesto completo del grupo", () => {
     expect(result!.lodgingCents).toBeGreaterThan(0);
     expect(result!.totalCents).toBe(8501 + result!.lodgingCents);
   });
+  it("asigna gastos distintos a personas concretas sin repartirlos entre todos", () => {
+    const personal: BudgetEntry = {
+      id: "4", category: "Comida", concept: "Merienda", amount: "",
+      scope: "individual", days: "1", individualAmounts: ["10", "5", ""],
+    };
+    const { result } = calculateDetailedBudget({ ...input, entries: [...entries, personal] });
+    expect(result!.entries.at(-1)?.individualCents).toEqual([1000, 500, 0]);
+    expect(result!.entries.at(-1)?.cents).toBe(1500);
+    expect(result!.individualTotals).toEqual([1000, 500, 0]);
+    expect(result!.contributions).toEqual([3834, 3334, 2833]);
+    expect(result!.contributions.reduce((sum, amount) => sum + amount, 0)).toBe(result!.totalCents);
+    expect(calculateDetailedBudget({ ...input, entries: [{ ...personal, individualAmounts: ["-10", "5"] }] }).result).toBeNull();
+  });
   it("valida viajeros, precios, días, conceptos y capacidad", () => {
     expect(calculateDetailedBudget({ ...input, peopleRaw: "0" }).result).toBeNull();
     expect(calculateDetailedBudget({ ...input, entries: [{ ...entries[0], amount: "-1" }] }).result).toBeNull();

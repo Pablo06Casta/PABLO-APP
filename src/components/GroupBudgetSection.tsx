@@ -41,6 +41,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
       amount: "",
       scope: "group",
       days: "1",
+      individualAmounts: [],
     }]);
   }
   function updateExpense(id: string, patch: Partial<BudgetEntry>) {
@@ -106,7 +107,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
           </div>
 
           <div className="budget-block">
-            <div className="budget-block-title"><div><h2>Gastos del grupo</h2><p className="budget-helper">Añade restaurantes, comidas, gasolinas, transportes, alojamientos u otros conceptos con el precio que elijas.</p></div><button className="secondary-button" onClick={addExpense} disabled={entries.length >= 50}><Plus size={16} /> Añadir gasto</button></div>
+            <div className="budget-block-title"><div><h2>Gastos del grupo</h2><p className="budget-helper">Añade restaurantes, comidas, gasolinas, transportes, alojamientos u otros conceptos. Puedes repartir un gasto común o indicar un importe diferente para cada viajero.</p></div><button className="secondary-button" onClick={addExpense} disabled={entries.length >= 50}><Plus size={16} /> Añadir gasto</button></div>
             {!entries.length && <p className="budget-empty">Todavía no has añadido gastos. Pulsa «Añadir gasto» para empezar.</p>}
             <div className="budget-expenses">
               {entries.map((entry, index) => <div className="budget-expense" key={entry.id}>
@@ -118,20 +119,33 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
                   <label className="trip-field">Nombre del gasto
                     <input value={entry.concept} maxLength={100} placeholder="Ej. Cena del sábado" onChange={(event) => updateExpense(entry.id, { concept: event.target.value })} />
                   </label>
-                  <label className="trip-field">Precio (€)
+                  {entry.scope !== "individual" && <label className="trip-field">Precio (€)
                     <input value={entry.amount} inputMode="decimal" placeholder="0,00" onChange={(event) => updateExpense(entry.id, { amount: event.target.value })} />
-                  </label>
+                  </label>}
                   <label className="trip-field">Este precio es
                     <select value={entry.scope} onChange={(event) => updateExpense(entry.id, { scope: event.target.value as BudgetScope })}>
                       <option value="group">Total del grupo</option>
                       <option value="person">Por persona</option>
                       <option value="personDay">Por persona y día</option>
+                      <option value="individual">Importe distinto por viajero</option>
                     </select>
                   </label>
                   {entry.scope === "personDay" && <label className="trip-field">Días para este gasto
                     <input type="number" min="1" max="366" step="1" value={entry.days} onChange={(event) => updateExpense(entry.id, { days: event.target.value })} />
                   </label>}
                 </div>
+                {entry.scope === "individual" && <div className="budget-individual">
+                  <p className="budget-helper">Indica el gasto de cada persona. Un campo vacío cuenta como 0 €. Estos importes solo se suman a esa persona.</p>
+                  <div className="budget-names">
+                    {Array.from({ length: people }, (_, personIndex) => <label className="trip-field" key={personIndex}>{names[personIndex]?.trim() || `Viajero ${personIndex + 1}`} (€)
+                      <input inputMode="decimal" placeholder="0,00" value={entry.individualAmounts?.[personIndex] ?? ""} onChange={(event) => {
+                        const individualAmounts = [...(entry.individualAmounts ?? [])];
+                        individualAmounts[personIndex] = event.target.value;
+                        updateExpense(entry.id, { individualAmounts });
+                      }} />
+                    </label>)}
+                  </div>
+                </div>}
                 {result && <p className="budget-line-total">Total de este gasto: <strong>{euros(result.entries[index].cents)}</strong></p>}
               </div>)}
             </div>
@@ -150,8 +164,8 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
             </div>
             <div className="budget-grand-total"><span>Total del grupo</span><strong>{euros(result.totalCents)}</strong></div>
             <h3>Aportación por persona</h3>
-            <p className="budget-helper">Reparto a partes iguales. Si sobran céntimos, se asignan en el orden de la lista para que la suma sea exacta.</p>
-            <div className="budget-contributions">{result.names.map((name, index) => <p key={index}><span>{name}</span><strong>{euros(result.contributions[index])}</strong></p>)}</div>
+            <p className="budget-helper">Los gastos comunes se reparten a partes iguales; los importes individuales se añaden solo a su viajero. Si sobran céntimos del reparto común, se asignan por orden de la lista.</p>
+            <div className="budget-contributions">{result.names.map((name, index) => <p key={index}><span>{name}{result.individualTotals[index] > 0 && <small> · individual {euros(result.individualTotals[index])}</small>}</span><strong>{euros(result.contributions[index])}</strong></p>)}</div>
             <button className="primary-button budget-download" disabled={pdfBusy || (!stay && !entries.length)} onClick={downloadPdf}><ArrowDownToLine size={17} /> {pdfBusy ? "Generando PDF…" : "Descargar presupuesto en PDF"}</button>
             {pdfMessage && <p role="status">{pdfMessage}</p>}
           </>}

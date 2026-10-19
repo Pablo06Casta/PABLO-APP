@@ -1,15 +1,43 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   findMarkets,
+  findFuelStations,
+  fuelDirectionsUrl,
   findTown,
   reverseTown,
   parseMarkets,
+  parseFuelStations,
   savedMarkets,
 } from "./places";
 import { venues, townForVenue } from "../data/venues";
 import { distance } from "../lib/search";
 afterEach(() => vi.unstubAllGlobals());
 describe("Proveedores públicos de lugares", () => {
+  it("busca gasolineras OSM reales y crea rutas desde el origen elegido", async () => {
+    const origin = { id: "venue", name: "Sede", region: "España", lat: 40, lng: -3 };
+    const request = vi.fn(async () => ({ ok: true, json: async () => ({ elements: [
+      { type: "node", id: 1, lat: 40.002, lon: -3.001, tags: { amenity: "fuel", name: "Gasolinera Uno" } },
+      { type: "node", id: 2, lat: 40.003, lon: -3.002, tags: { amenity: "restaurant", name: "No combustible" } },
+    ] }) }));
+    vi.stubGlobal("fetch", request);
+    const result = await findFuelStations(origin, undefined, true);
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe("Gasolinera Uno");
+    expect(String((request.mock.calls[0] as unknown[])[0])).toContain("overpass-api.de");
+    const body = (request.mock.calls[0] as unknown[])[1] as RequestInit;
+    expect(String(body.body)).toContain("amenity");
+    const url = new URL(fuelDirectionsUrl(origin, result[0]));
+    expect(url.searchParams.get("origin")).toBe("40,-3");
+    expect(url.searchParams.get("destination")).toBe("40.002,-3.001");
+    expect(url.searchParams.get("travelmode")).toBe("driving");
+    expect(parseFuelStations([{ type: "node", id: 3, lat: 91, lon: -3, tags: { amenity: "fuel" } }])).toEqual([]);
+  });
+  it("rechaza coordenadas inválidas y conserva un estado de error si OSM no responde", async () => {
+    const bad = { lat: 99, lng: -3 };
+    await expect(findFuelStations(bad)).rejects.toThrow("ubicación no es válida");
+    vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false })));
+    await expect(findFuelStations({ lat: 42, lng: -4 }, undefined, true)).rejects.toThrow("OpenStreetMap no responde");
+  });
   it("interpreta supermercados OSM de nodos y edificios sin inventar direcciones", async () => {
     const request = vi.fn(async (_input: RequestInfo | URL) => ({
       ok: true,

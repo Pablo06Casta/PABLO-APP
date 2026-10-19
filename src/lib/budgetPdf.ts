@@ -8,6 +8,8 @@ type BudgetPdfData = {
   entries: CalculatedEntry[];
   lodgingCents: number;
   totalCents: number;
+  sharedCents: number;
+  individualTotals: number[];
   contributions: number[];
 };
 
@@ -66,14 +68,17 @@ export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, sta
   pdf.setFontSize(10);
   pdf.text(`${data.people} viajeros · ${search.checkIn} a ${search.checkOut}`, 16, y);
   y += 8;
-  pdf.text("Reparto igualitario. La diferencia de céntimos se asigna por orden de la lista.", 16, y);
+  pdf.text("Gastos comunes repartidos por igual; importes individuales añadidos a cada viajero.", 16, y, { maxWidth: 178 });
   y += 8;
 
   heading("Gastos del viaje");
   if (stay) row(`Alojamiento CERCA: ${stay.name}`, data.lodgingCents, "Estimación para toda la estancia; no es una reserva ni un precio confirmado.");
   for (const entry of data.entries) {
-    const scope = entry.scope === "group" ? "Importe total" : entry.scope === "person" ? "Por persona" : `Por persona y día · ${entry.days} días`;
+    const scope = entry.scope === "group" ? "Importe total" : entry.scope === "person" ? "Por persona" : entry.scope === "personDay" ? `Por persona y día · ${entry.days} días` : "Importes individuales detallados a continuación";
     row(`${entry.category}: ${entry.concept}`, entry.cents, scope);
+    if (entry.scope === "individual") entry.individualCents?.forEach((cents, index) => {
+      if (cents > 0) row(`  ${data.names[index]}`, cents);
+    });
   }
   if (!stay && !data.entries.length) row("Sin gastos añadidos", 0);
   heading("Totales por categoría");
@@ -82,9 +87,11 @@ export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, sta
     if (cents > 0) row(category, cents);
   }
   heading("Resumen");
+  row("Gastos comunes", data.sharedCents);
+  if (data.individualTotals.some((amount) => amount > 0)) row("Gastos individuales", data.individualTotals.reduce((sum, amount) => sum + amount, 0));
   row("Total del grupo", data.totalCents);
   heading("Aportación de cada viajero");
-  data.names.forEach((name, index) => row(name, data.contributions[index]));
+  data.names.forEach((name, index) => row(name, data.contributions[index], `Individual: ${euro(data.individualTotals[index])}; resto: gastos comunes.`));
   space(16);
   pdf.setFont("helvetica", "normal");
   pdf.setFontSize(8);

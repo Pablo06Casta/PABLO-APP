@@ -10,6 +10,7 @@ import {
   Compass,
   Download,
   Earth,
+  Fuel,
   Heart,
   HelpCircle,
   Home,
@@ -35,6 +36,7 @@ import {
 } from "lucide-react";
 import type {
   Filters,
+  FuelStation,
   Market,
   RecentSearch,
   Search,
@@ -63,7 +65,7 @@ import {
 } from "./lib/search";
 import { readStorage, useStored } from "./lib/storage";
 import { realStays, lodgingProvider } from "./services/lodging";
-import { findMarkets, findTown } from "./services/places";
+import { findFuelStations, findMarkets, findTown } from "./services/places";
 import { SearchBar } from "./components/SearchBar";
 import { StayCard } from "./components/StayCard";
 import { FiltersDialog } from "./components/FiltersDialog";
@@ -75,6 +77,7 @@ import { GroupBudgetSection } from "./components/GroupBudgetSection";
 import { readTrip } from "./lib/trip";
 import { LazyMap as MapView } from "./components/LazyMap";
 import { Markets } from "./components/Markets";
+import { FuelStations } from "./components/FuelStations";
 import { ExternalServices } from "./components/ExternalServices";
 import { LegalInformation } from "./components/LegalInformation";
 import { TournamentCalendar } from "./components/TournamentCalendar";
@@ -137,7 +140,7 @@ function AppContent() {
     "explore" | "map" | "tournaments" | "favorites" | "settings"
   >("explore");
   const [modal, setModal] = useState<
-    "filters" | "markets" | "help" | "privacy" | "compare" | "trip" | null
+    "filters" | "markets" | "fuel" | "help" | "privacy" | "compare" | "trip" | null
   >(null);
   const [detail, setDetail] = useState<Selection | null>(null);
   const [busy, setBusy] = useState(false);
@@ -147,6 +150,11 @@ function AppContent() {
   const [marketStatus, setMarketStatus] = useState("idle");
   const [marketError, setMarketError] = useState("");
   const marketController = useRef<AbortController | null>(null);
+  const [fuelStations, setFuelStations] = useState<FuelStation[]>([]);
+  const [fuelOriginId, setFuelOriginId] = useState("");
+  const [fuelStatus, setFuelStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [fuelError, setFuelError] = useState("");
+  const fuelController = useRef<AbortController | null>(null);
   const searchGeneration = useRef(0);
   const [favorites, setFavorites] = useStored<Favorite[]>(
     "cerca-favorites-v2",
@@ -276,6 +284,12 @@ function AppContent() {
     const generation = ++searchGeneration.current;
     marketController.current?.abort();
     marketController.current = null;
+    fuelController.current?.abort();
+    fuelController.current = null;
+    setFuelStations([]);
+    setFuelOriginId("");
+    setFuelStatus("idle");
+    setFuelError("");
     setMarketStatus("idle");
     setMarketError("");
     setMarkets([]);
@@ -415,6 +429,45 @@ function AppContent() {
     if (marketStatus === "idle" || marketTownId !== origin.id)
       void loadMarkets(search);
   }
+  async function loadFuel(query = search) {
+    const place = searchOrigin(query);
+    const previous = fuelOriginId === place.id ? fuelStations : [];
+    fuelController.current?.abort();
+    if (query.venue && !query.venue.location) {
+      setFuelStations([]);
+      setFuelOriginId(place.id);
+      setFuelStatus("error");
+      setFuelError("Primero hay que confirmar la ubicación de este pabellón.");
+      return;
+    }
+    const controller = new AbortController();
+    fuelController.current = controller;
+    setFuelStatus("loading");
+    setFuelError("");
+    if (fuelOriginId !== place.id) setFuelStations([]);
+    setFuelOriginId(place.id);
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    try {
+      const found = await findFuelStations(place, controller.signal, fuelStatus === "success" && fuelOriginId === place.id);
+      if (fuelController.current === controller) {
+        setFuelStations(found);
+        setFuelStatus("success");
+      }
+    } catch (cause) {
+      if (fuelController.current !== controller) return;
+      setFuelError(cause instanceof Error && !controller.signal.aborted ? cause.message : "La consulta ha tardado demasiado. Vuelve a intentarlo.");
+      if (previous.length) {
+        setFuelStations(previous);
+        setFuelStatus("success");
+        setFuelError("No se pudo actualizar. Puedes seguir consultando los resultados anteriores.");
+      } else setFuelStatus("error");
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  function showFuel() {
+    setModal("fuel");
+  }
   function card(stay: Stay, query = search) {
     return (
       <StayCard
@@ -476,6 +529,7 @@ function AppContent() {
             <button onClick={showMarkets}>
               Supermercados cerca <span className="new-dot" />
             </button>
+            <button onClick={showFuel}>Gasolineras cerca</button>
             <button
               className={tab === "favorites" ? "active" : ""}
               onClick={() => setTab("favorites")}
@@ -525,7 +579,7 @@ function AppContent() {
                 Tu torneo, <span>todo cerca.</span>
               </h1>
               <p>
-                Alojamientos para tu equipo y supermercados junto al pabellón.
+                Alojamientos para tu equipo, supermercados y gasolineras junto al pabellón.
                 Compara presupuestos y reserva en la plataforma.
               </p>
               {tripWarning && <p className="trip-warning" role="alert">{tripWarning}</p>}
@@ -542,7 +596,10 @@ function AppContent() {
                 busy={busy}
                 onSearch={runSearch}
               />
-              <div className="trip-actions"><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button></div>
+              <div className="trip-actions">
+                <button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button>
+                <button className="secondary-button" onClick={showFuel}><Fuel size={16} /> Buscar gasolineras cerca</button>
+              </div>
               <div className="quick-destinations">
                 <span>
                   {recent.length
@@ -806,9 +863,10 @@ function AppContent() {
                   <br className="desktop-break" /> Lo esencial, sin dar vueltas.
                 </p>
               </div>
-              <button className="primary-button" onClick={showMarkets}>
-                Explorar supermercados <ArrowRight size={17} />
-              </button>
+              <div className="nearby-actions">
+                <button className="primary-button" onClick={showMarkets}>Explorar supermercados <ArrowRight size={17} /></button>
+                <button className="secondary-button" onClick={showFuel}><Fuel size={17} /> Buscar gasolineras</button>
+              </div>
             </section>
             <section className="benefits" aria-label="Por qué CERCA">
               <div>
@@ -1164,6 +1222,13 @@ function AppContent() {
           </div>
         </Dialog>
       )}
+      {modal === "fuel" && <Dialog title={`Gasolineras cerca de ${venueLabel(search)}`} onClose={() => setModal(null)} wide>
+        <div className="markets-dialog-content">
+          {search.venue && !search.venue.location
+            ? <p className="budget-error" role="status">Este pabellón aún no tiene coordenadas confirmadas. No podemos buscar gasolineras cercanas hasta verificarlas.</p>
+            : <FuelStations stations={fuelOriginId === origin.id ? fuelStations : []} origin={origin} status={fuelOriginId === origin.id ? fuelStatus : "idle"} error={fuelError} onLoad={() => loadFuel(search)} />}
+        </div>
+      </Dialog>}
       {modal === "help" && (
         <Dialog
           title="Tu escapada, en tres pasos"
@@ -1184,7 +1249,7 @@ function AppContent() {
               {
                 n: "03",
                 title: "Descubre lo que tienes cerca",
-                text: "Consulta supermercados reales y abre Booking o Airbnb con tu búsqueda para ver opciones y disponibilidad actualizadas.",
+                text: "Consulta supermercados y gasolineras de OpenStreetMap. Abre Booking o Airbnb con tu búsqueda para ver opciones y disponibilidad actualizadas.",
               },
             ].map((step) => (
               <div className="help-step" key={step.n}>

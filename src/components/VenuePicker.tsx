@@ -56,7 +56,7 @@ export function VenuePicker({
             </strong>
             <p>
               {search.venue.location
-                ? "Alojamientos y supermercados calculados desde este pabellón."
+                ? "Alojamientos, supermercados y gasolineras buscados desde este pabellón."
                 : "La ubicación de esta instalación necesita confirmación. No mostramos distancias ni recomendaciones de proximidad hasta verificarla."}
             </p>
           </div>

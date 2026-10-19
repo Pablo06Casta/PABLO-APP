@@ -92,5 +92,16 @@ export type Market = {
   coverage?: "local" | "radius";
   cached?: boolean;
 };
+export type FuelStation = {
+  id: string;
+  name: string;
+  address: string;
+  lat: number;
+  lng: number;
+  hours?: string;
+  sourceUrl: string;
+  retrievedAt: string;
+  coverage: "radius" | "local";
+};
 export type RecentSearch = { town: Town; date: string };
 export type Theme = "light" | "dark" | "system";

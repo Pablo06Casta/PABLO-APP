@@ -46,6 +46,10 @@ La primera consulta utiliza el catálogo fechado, identificado como guardado. La
 
 Los enlaces «Cómo llegar» abren las coordenadas reales del comercio en Google Maps. Las distancias mostradas son en línea recta, y los tiempos a pie aproximados. El catálogo no acredita que el comercio siga abierto, su inventario ni sus horarios actuales. La cobertura es parcial, no un inventario exhaustivo de todos los supermercados de una localidad.
 
+## Gasolineras
+
+La búsqueda de gasolineras se inicia expresamente desde su ventana. Consulta `amenity=fuel` en OpenStreetMap alrededor del pabellón o localidad seleccionados (hasta 5 km mediante Overpass; si falla, una ventana local de la API oficial OSM). No guarda un catálogo de gasolineras ni precios de combustible. Muestra la distancia en línea recta, la fecha de consulta y el enlace a la fuente. El enlace de ruta en coche abre Google Maps con las coordenadas del origen y de la gasolinera; la aplicación no calcula duración ni carga el mapa antes de abrirlo. Para pabellones sin coordenadas confirmadas no se realiza la búsqueda.
+
 ## Estimaciones de planificación
 
 No son tarifas, descuentos, ofertas ni garantía de disponibilidad. No se añaden precios aleatorios por nombre o identificador.
