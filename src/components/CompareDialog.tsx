@@ -33,7 +33,7 @@ export function CompareDialog({
           puentes y fiestas pueden cambiar el precio. Confirma el importe para
           tus fechas en los enlaces de reserva.
         </p>
-        <button className="secondary-button trip-open" onClick={onTrip}>Compartir viaje y calcular presupuesto</button>
+        <button className="secondary-button trip-open" onClick={onTrip}>Compartir viaje</button>
         <div className="compare-scroll">
           <table className="comparison-table">
             <thead>

@@ -71,6 +71,7 @@ import { DetailDialog } from "./components/DetailDialog";
 import { Dialog } from "./components/Dialog";
 import { CompareDialog } from "./components/CompareDialog";
 import { TripDialog } from "./components/TripDialog";
+import { GroupBudgetSection } from "./components/GroupBudgetSection";
 import { readTrip } from "./lib/trip";
 import { LazyMap as MapView } from "./components/LazyMap";
 import { Markets } from "./components/Markets";
@@ -509,6 +510,9 @@ function AppContent() {
       </header>
 
       <main id="main" className="main-container">
+        <div hidden={tab !== "explore" && tab !== "map"}>
+          <GroupBudgetSection search={search} stays={shareableCompare.map((entry) => entry.stay)} />
+        </div>
         {(tab === "explore" || tab === "map") && (
           <>
             <section className="hero" aria-labelledby="main-title">
@@ -538,7 +542,7 @@ function AppContent() {
                 busy={busy}
                 onSearch={runSearch}
               />
-              <div className="trip-actions"><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Presupuesto del grupo</button></div>
+              <div className="trip-actions"><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button></div>
               <div className="quick-destinations">
                 <span>
                   {recent.length

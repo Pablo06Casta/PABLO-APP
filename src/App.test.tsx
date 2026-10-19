@@ -162,22 +162,37 @@ describe("CERCA: flujos del viajero", () => {
     ).toBeTruthy();
     expect(screen.getAllByRole("button", { name: "Quitar" })).toHaveLength(3);
   });
-  it("recupera la comparación del enlace y permite repartir el presupuesto", async () => {
+  it("recupera el enlace y permite presupuestar en una sección independiente", async () => {
     const chosen = realStays(query)[0];
     const url = makeTripUrl(window.location.href, query, [chosen]);
     window.history.replaceState({}, "", url);
     const user = userEvent.setup();
     render(<App />);
     expect(screen.getByText("1 de 3")).toBeTruthy();
-    await user.click(screen.getByRole("button", { name: "Presupuesto del grupo" }));
-    const dialog = screen.getByRole("dialog", { name: "Tu viaje en grupo" });
-    expect((within(dialog).getByLabelText("Enlace del viaje") as HTMLInputElement).value).toContain("trip=");
-    await user.clear(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }));
-    await user.type(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }), "0");
-    expect(within(dialog).getByRole("alert").textContent).toContain("al menos una persona");
-    await user.clear(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }));
-    await user.type(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }), "2");
-    expect(within(dialog).getByText("Por persona:")).toBeTruthy();
+    const budget = screen.getByRole("region", { name: /Presupuesto del grupo/ });
+    await user.selectOptions(within(budget).getByRole("combobox", { name: "Alojamiento estimado" }), chosen.id);
+    await user.type(within(budget).getByRole("textbox", { name: "Viajero 1" }), "Ana");
+    await user.click(within(budget).getByRole("button", { name: "Añadir gasto" }));
+    await user.type(within(budget).getByRole("textbox", { name: "Nombre del gasto" }), "Cena del equipo");
+    await user.type(within(budget).getByRole("textbox", { name: "Precio (€)" }), "45,50");
+    expect(within(budget).getByText("Ana")).toBeTruthy();
+    expect(within(budget).getByRole("button", { name: "Descargar presupuesto en PDF" }).hasAttribute("disabled")).toBe(false);
+    await user.click(screen.getByRole("button", { name: "Compartir viaje" }));
+    const dialog = screen.getByRole("dialog", { name: "Compartir viaje" });
+    const link = (within(dialog).getByLabelText("Enlace del viaje") as HTMLInputElement).value;
+    expect(link).toContain("trip=");
+    expect(link).not.toContain("Ana");
+    expect(link).not.toContain("Cena");
+  });
+  it("conserva el presupuesto al visitar otras secciones", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    await user.type(screen.getByRole("textbox", { name: "Viajero 1" }), "María");
+    const nav = screen.getByRole("navigation", { name: "Navegación principal" });
+    await user.click(within(nav).getByRole("button", { name: /Favoritos/ }));
+    expect(screen.queryByRole("region", { name: /Presupuesto del grupo/ })).toBeNull();
+    await user.click(within(nav).getByRole("button", { name: "Alojamientos" }));
+    expect((screen.getByRole("textbox", { name: "Viajero 1" }) as HTMLInputElement).value).toBe("María");
   });
   it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {
     const user = userEvent.setup();
