@@ -23,6 +23,7 @@ async function geocodingRequest(url: URL, signal: AbortSignal) {
     lastGeocode = Date.now();
     return await fetch(url, {
       signal,
+      credentials: "omit",
       headers: { Accept: "application/json" },
     });
   } finally {
@@ -235,6 +236,7 @@ export async function findMarkets(
   const query = `[out:json][timeout:5];nwr["shop"~"^(supermarket|convenience)$"](around:3000,${town.lat},${town.lng});out center tags;`;
   try {
     const response = await fetch("https://overpass-api.de/api/interpreter", {
+      credentials: "omit",
       method: "POST",
       body: new URLSearchParams({ data: query }),
       signal: AbortSignal.any([signal, AbortSignal.timeout(4000)]),
@@ -263,6 +265,7 @@ export async function findMarkets(
       const response = await fetch(
         `https://api.openstreetmap.org/api/0.6/map.json?bbox=${bbox}`,
         {
+          credentials: "omit",
           signal: AbortSignal.any([signal, AbortSignal.timeout(7500)]),
         },
       );

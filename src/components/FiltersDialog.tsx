@@ -75,7 +75,7 @@ export function FiltersDialog({
         </section>
         <section className="filter-grid">
           <label>
-            Plataforma
+            Consulta externa
             <select
               value={draft.platform ?? "Todos"}
               onChange={(e) =>
@@ -87,7 +87,6 @@ export function FiltersDialog({
             >
               <option>Todos</option>
               <option>Booking</option>
-              <option>Airbnb</option>
             </select>
           </label>
           <label>

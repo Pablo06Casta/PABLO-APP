@@ -93,7 +93,7 @@ export function DetailDialog({
                   ? `Anuncio de Airbnb recopilado por Inside Airbnb. Tarifa de referencia observada el ${stay.observedAt}. La localización publicada es aproximada; la dirección exacta se confirma en la plataforma.`
                   : stay.bookingSearch
                     ? "Alojamiento localizado en OpenStreetMap. El enlace busca su nombre y ubicación en Booking; confirma que el resultado corresponde al hotel antes de reservar. No se ha verificado una ficha ni disponibilidad en Booking. El presupuesto usa el modelo de planificación indicado."
-                    : `Alojamiento con identificador o enlace publicado de Booking. Fuente: ${stay.sourceName ?? "Wikidata"}. No hay tarifa observada de este hotel: el presupuesto usa el modelo de planificación indicado.`}
+                    : `Alojamiento con identificador o enlace publicado de Booking. Fuente: ${stay.sourceName ?? "Wikidata"}. El enlace no confirma que la ficha siga activa ni disponibilidad. No hay tarifa observada de este hotel: el presupuesto usa el modelo propio de CERCA.`}
               </p>
               <p>
                 {stay.capacity

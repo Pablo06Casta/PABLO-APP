@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowDownUp,
   ArrowRight,
@@ -71,6 +71,8 @@ import { Dialog } from "./components/Dialog";
 import { CompareDialog } from "./components/CompareDialog";
 import { LazyMap as MapView } from "./components/LazyMap";
 import { Markets } from "./components/Markets";
+import { ExternalServices } from "./components/ExternalServices";
+import { LegalInformation } from "./components/LegalInformation";
 import "./App.css";
 
 type Selection = { stay: Stay; search: Search };
@@ -96,7 +98,9 @@ function initialSearch(): Search {
     checkOut: isoDate(10),
     guests: 2,
   };
-  const value = readStorage<Search>("cerca-search-v3", fallback);
+  const value = readStorage<boolean>("cerca-remember-search-v1", false)
+    ? readStorage<Search>("cerca-search-v3", fallback)
+    : fallback;
   if (value?.venue) value.venue = venues.find((v) => v.id === value.venue?.id);
   return value?.town?.name &&
     Number.isFinite(value.town.lat) &&
@@ -108,6 +112,15 @@ function initialSearch(): Search {
     : fallback;
 }
 function App() {
+  const [photos, setPhotos] = useState(false);
+  const [maps, setMaps] = useState(false);
+  return (
+    <ExternalServices.Provider value={{ photos, setPhotos, maps, setMaps }}>
+      <AppContent />
+    </ExternalServices.Provider>
+  );
+}
+function AppContent() {
   const [search, setSearch] = useState<Search>(initialSearch);
   const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
@@ -130,8 +143,18 @@ function App() {
   const [favorites, setFavorites] = useStored<Favorite[]>(
     "cerca-favorites-v2",
     [],
+    (items) =>
+      Array.isArray(items)
+        ? items.filter((entry) => entry.stay?.platform !== "Airbnb")
+        : [],
   );
-  const [recent, setRecent] = useStored<RecentSearch[]>("cerca-recent-v1", []);
+  const [rememberSearch, setRememberSearch] = useState(() =>
+    readStorage<boolean>("cerca-remember-search-v1", false),
+  );
+  const [recent, setRecent] = useState<RecentSearch[]>(() =>
+    rememberSearch ? readStorage<RecentSearch[]>("cerca-recent-v1", []) : [],
+  );
+  const { photos, setPhotos, maps, setMaps } = useContext(ExternalServices);
   const [theme, setTheme] = useStored<Theme>("cerca-theme-v1", "system");
   const [compare, setCompare] = useState<Selection[]>([]);
   const [toast, setToast] = useState("");
@@ -141,11 +164,36 @@ function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem("cerca-search-v3", JSON.stringify(search));
+      if (rememberSearch) {
+        localStorage.setItem("cerca-remember-search-v1", "true");
+        localStorage.setItem("cerca-search-v3", JSON.stringify(search));
+        localStorage.setItem("cerca-recent-v1", JSON.stringify(recent));
+      } else {
+        localStorage.removeItem("cerca-remember-search-v1");
+        localStorage.removeItem("cerca-search-v3");
+        localStorage.removeItem("cerca-recent-v1");
+      }
     } catch {
       /* Almacenamiento opcional */
     }
-  }, [search]);
+  }, [search, rememberSearch, recent]);
+  useEffect(() => {
+    // Retira anuncios de terceros conservados por versiones anteriores.
+    try {
+      const stored = readStorage<Favorite[]>("cerca-favorites-v2", []);
+      if (
+        Array.isArray(stored) &&
+        stored.some((item) => item.stay?.platform === "Airbnb")
+      ) {
+        if (favorites.length)
+          localStorage.setItem("cerca-favorites-v2", JSON.stringify(favorites));
+        else localStorage.removeItem("cerca-favorites-v2");
+      }
+      localStorage.removeItem("cerca-favorites-v1");
+    } catch {
+      /* Almacenamiento opcional */
+    }
+  }, [favorites]);
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const apply = () => {
@@ -606,10 +654,10 @@ function App() {
                   <Info size={16} />
                   <span>
                     <strong>Precios orientativos, alojamientos reales.</strong>{" "}
-                    Estimaciones de planificación, no ofertas confirmadas.
-                    Booking usa un modelo sin tarifa observada; Airbnb usa datos
-                    históricos fechados. Los importes pueden cambiar y no
-                    incluyen cargos adicionales.
+                    Estimaciones de planificación, no ofertas confirmadas. CERCA
+                    calcula un presupuesto propio sin consultar tarifas actuales
+                    de Booking o Airbnb. No acredita disponibilidad ni cuál es
+                    el alojamiento más barato. Extras no incluidos.
                   </span>
                 </span>
                 <button onClick={() => setModal("help")}>
@@ -895,8 +943,9 @@ function App() {
                     <ShieldCheck size={21} /> Tu privacidad, primero
                   </h2>
                   <p>
-                    Los favoritos, las búsquedas y los ajustes se guardan en
-                    este navegador. Sin cuentas, sin anuncios.
+                    Los favoritos y la apariencia se guardan cuando los eliges.
+                    Recordar búsquedas es opcional. Sin cuentas, anuncios ni
+                    analítica.
                   </p>
                   <p>
                     La ubicación solo se consulta cuando la solicitas y
@@ -923,7 +972,7 @@ function App() {
                   </span>
                   <p>Menos buscar. Más disfrutar.</p>
                   <span className="version-badge">
-                    BÁDMINTON · BOOKING + AIRBNB
+                    BÁDMINTON · PROYECTO INDEPENDIENTE
                   </span>
                   <button
                     className="text-button"
@@ -959,10 +1008,16 @@ function App() {
             Alojamientos y comercios: © OpenStreetMap contributors
           </a>
         </div>
+        <p className="independence-notice">
+          CERCA es un proyecto personal de Pablo, sin ingresos ni afiliación con
+          Booking.com o Airbnb. Las reservas se realizan en sus plataformas.
+        </p>
         <nav aria-label="Información">
           <button onClick={() => setModal("help")}>Sobre CERCA</button>
           <span>·</span>
-          <button onClick={() => setModal("privacy")}>Privacidad</button>
+          <button onClick={() => setModal("privacy")}>
+            Privacidad y licencias
+          </button>
           <span>·</span>
           <span>© {currentYear} CERCA</span>
         </nav>
@@ -1099,16 +1154,16 @@ function App() {
               <Info size={21} />
               <p>
                 <strong>Transparencia desde el principio.</strong> Los hoteles
-                proceden de Wikidata y OpenStreetMap; las fichas de Airbnb, de
-                Inside Airbnb, con fecha y licencia de atribución. Los enlaces
-                «Buscar en Booking» consultan el nombre del hotel y su
-                ubicación: pueden devolver otros resultados y no confirman una
-                ficha en esa plataforma. Las estimaciones de Booking usan un
+                proceden de Wikidata y OpenStreetMap. No copiamos catálogos de
+                Booking o Airbnb. Airbnb se consulta mediante una búsqueda
+                externa; no mostramos anuncios importados. Los enlaces «Buscar
+                en Booking» consultan el nombre del hotel y su ubicación: pueden
+                devolver otros resultados y no confirman una ficha en esa
+                plataforma. Los enlaces publicados tampoco garantizan que la
+                ficha siga activa. Las estimaciones propias de CERCA usan un
                 modelo común por ciudad y categoría; no permiten afirmar qué
-                hotel tiene hoy la tarifa más baja. Las de Airbnb parten de
-                tarifas históricas, sin confirmar disponibilidad o cargos
-                adicionales. En empates ordenamos por distancia al pabellón. Los
-                anuncios de Airbnb tienen ubicación aproximada. El catálogo es
+                hotel tiene hoy la tarifa más baja ni confirmar disponibilidad.
+                En empates ordenamos por distancia al pabellón. El catálogo es
                 limitado: las búsquedas externas amplían opciones y no se
                 presentan como fichas importadas. Las instalaciones sin
                 coordenadas confirmadas no generan recomendaciones de cercanía.
@@ -1125,50 +1180,39 @@ function App() {
           title="Tus datos, bajo tu control"
           onClose={() => setModal(null)}
         >
-          <div className="privacy-content">
-            <ShieldCheck size={35} className="blue" />
-            <h3>Solo lo necesario</h3>
-            <p>
-              Guardamos favoritos, destinos recientes, fechas y apariencia en el
-              almacenamiento local de este navegador. No necesitas una cuenta.
-            </p>
-            <p>
-              Las consultas de localidades y coordenadas se envían a Nominatim,
-              las fotos a Wikimedia y el mapa a OpenStreetMap. Los supermercados
-              se muestran primero desde el catálogo guardado y fechado; al
-              actualizar o consultar una zona sin datos guardados se envía la
-              ubicación a Overpass o a la API de OpenStreetMap. Los enlaces de
-              reserva y rutas abren servicios externos con sus propias
-              políticas. La ubicación requiere tu autorización y no se consulta
-              en segundo plano.
-            </p>
-            <h3>Olvidar y empezar de nuevo</h3>
-            <p>
-              Este botón elimina los datos de CERCA guardados en este navegador,
-              incluidos favoritos y búsquedas. No borra datos de las plataformas
-              externas.
-            </p>
-            <button
-              className="danger-button"
-              onClick={() => {
-                setFavorites([]);
-                setRecent([]);
-                setTheme("system");
-                try {
-                  localStorage.removeItem("cerca-search-v3");
-                  localStorage.removeItem("cerca-favorites-v1");
-                } catch {
-                  /* opcional */
-                }
-                setModal(null);
-                setToast(
-                  "Se han eliminado tus favoritos, búsquedas guardadas y ajustes.",
-                );
-              }}
-            >
-              Borrar mis datos de CERCA
-            </button>
-          </div>
+          <LegalInformation
+            photos={photos}
+            setPhotos={setPhotos}
+            maps={maps}
+            setMaps={setMaps}
+            rememberSearch={rememberSearch}
+            setRememberSearch={setRememberSearch}
+            clearData={() => {
+              setFavorites([]);
+              setRecent([]);
+              setTheme("system");
+              setRememberSearch(false);
+              setPhotos(false);
+              setMaps(false);
+              try {
+                for (const key of [
+                  "cerca-search-v3",
+                  "cerca-remember-search-v1",
+                  "cerca-recent-v1",
+                  "cerca-favorites-v1",
+                  "cerca-favorites-v2",
+                  "cerca-theme-v1",
+                ])
+                  localStorage.removeItem(key);
+              } catch {
+                /* Almacenamiento opcional */
+              }
+              setModal(null);
+              setToast(
+                "Se han eliminado tus favoritos, búsquedas guardadas y ajustes.",
+              );
+            }}
+          />
         </Dialog>
       )}
       {modal === "compare" && (

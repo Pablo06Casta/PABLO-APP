@@ -2,27 +2,27 @@
 
 **Web:** https://pablo06casta.github.io/PABLO-APP/
 
-Encuentra alojamientos reales y supermercados alrededor del **pabellón de competición**. Selecciona sede, fechas y grupo; compara presupuestos orientativos por persona y noche y abre la ficha de Booking o Airbnb para comprobar condiciones y reservar en la plataforma.
+Encuentra alojamientos reales y supermercados alrededor del **pabellón de competición**. Selecciona sede, fechas y grupo; compara presupuestos orientativos por persona y noche y abre Booking o una búsqueda externa de Airbnb para comprobar condiciones y reservar en la plataforma.
 
 ## Qué funciona
 
 - Selector con las 23 instalaciones comunicadas por el usuario, en 15 destinos. Hay 19 puntos comprobados y cuatro pendientes, identificados sin simular cercanía.
-- Alojamientos con identidad/ID de Booking de Wikidata (2.322 fichas originales y una adicional), 233 alojamientos adicionales de OpenStreetMap cerca de los pabellones y 198 anuncios reales de Airbnb de Inside Airbnb. Los cinco enlaces de Booking publicados en las webs de los nuevos hoteles abren su ficha; los otros 228 se identifican como búsquedas por nombre y ubicación, sin afirmar que estén disponibles en Booking. Cobertura limitada, no inventario completo.
+- Alojamientos con identidad/ID de Booking de Wikidata (2.322 fichas originales y una adicional), 233 alojamientos adicionales de OpenStreetMap cerca de los pabellones; Airbnb se ofrece únicamente como búsqueda externa. Los cinco enlaces de Booking publicados en las webs de los nuevos hoteles abren su ficha; los otros 228 se identifican como búsquedas por nombre y ubicación, sin afirmar que estén disponibles en Booking. Cobertura limitada, no inventario completo.
 - Orden inicial por **menor precio estimado por persona y noche**, con desempate por distancia al pabellón. Presupuesto inicial editable de 50 €/persona/noche.
 - Filtros de presupuesto, plataforma, categoría, distancia al pabellón, capacidad/estancia mínima conocidas y servicios publicados. Nunca se confirma capacidad desconocida: los hoteles sin datos presuponen habitaciones dobles y lo indican.
-- Detalle con rango orientativo, presupuesto del grupo, explicación de estimación, fuente, fechas y enlace del anuncio. En Airbnb se respetan los IDs largos como cadenas y se usan `check_in`, `check_out` y `adults`; Booking recibe hotel y habitaciones dobles previstas.
+- Detalle con rango orientativo, presupuesto del grupo, explicación de estimación, fuente, fechas y enlace del anuncio. La búsqueda externa de Airbnb conserva destino, fechas y grupo; Booking recibe hotel y habitaciones dobles previstas.
 - Supermercados ordenados desde el pabellón, incluidos en el mapa junto a alojamientos y sede. Catálogo fechado de 307 supermercados y 143 tiendas de alimentación para las 19 sedes confirmadas: carga inmediata, selección de tipo y actualización explícita sin perder los resultados guardados. Los detalles cargan la compra al abrirse, desde su propia sede. Distancias en línea recta y minutos a pie aproximados, no rutas calculadas. «Cómo llegar» abre Google Maps.
 - Favoritos, comparación de tres opciones, navegación móvil, modo oscuro y PWA. El autocompletado de municipios se conserva para destinos adicionales; donde no hay sede elegida se identifica el modo centro de ciudad.
 
 ## Datos y precios
 
-**No son ofertas confirmadas.** Booking usa un modelo de planificación común por ciudad y categoría, sin observar tarifas de cada hotel; no permite afirmar cuál tiene hoy el precio real más bajo. Airbnb usa una tarifa histórica con fecha, capacidad y estancia mínima del catálogo. Los rangos no tienen garantía estadística. Los importes pueden cambiar y excluyen extras/impuestos no publicados. Eventos, torneos, puentes y fiestas pueden modificar el precio y la disponibilidad al cambiar fechas. El aviso aparece en listado, tarjetas, detalle y comparación; «Consultar precios en Booking» conserva fechas, grupo y zona. No se detectan eventos ni se inventan recargos: el modelo de planificación permanece identificado como estimación.
+**No son ofertas confirmadas.** CERCA usa un modelo propio de planificación común por ciudad y categoría, sin observar tarifas de cada hotel; no permite afirmar cuál tiene hoy el precio real más bajo. No se publican tarifas históricas ni anuncios importados de Airbnb. Los rangos no tienen garantía estadística. Los importes pueden cambiar y excluyen extras/impuestos no publicados. Eventos, torneos, puentes y fiestas pueden modificar el precio y la disponibilidad al cambiar fechas. El aviso aparece en listado, tarjetas, detalle y comparación; «Consultar precios en Booking» conserva fechas, grupo y zona. No se detectan eventos ni se inventan recargos: el modelo de planificación permanece identificado como estimación.
 
-Se filtra y ordena con la misma estimación central por persona y noche. Los hoteles no reciben variaciones aleatorias por nombre/ID. Para grupos impares se prevén habitaciones dobles completas. Los anuncios de Airbnb se descartan si incumplen la capacidad o estancia mínima publicadas; no se multiplican apartamentos para simular plazas adicionales.
+Se filtra y ordena con la misma estimación central por persona y noche. Los hoteles no reciben variaciones aleatorias por nombre/ID. Para grupos impares se prevén habitaciones dobles completas.
 
 El usuario reserva en la plataforma: CERCA no cobra ni confirma reservas. Las fichas pueden estar antiguas o retiradas. «Ver en Booking» abre una ruta publicada o selecciona un identificador conocido; «Buscar en Booking» consulta el nombre y la ubicación de un alojamiento real de OSM, pero puede devolver otros resultados. No confirma su presencia en Booking. El catálogo tiene huecos; las búsquedas externas de ambas plataformas amplían la zona con fechas y huéspedes. No se hace scraping de Booking o Airbnb ni se simula una conexión con el plugin de Booking, que no está disponible en esta sesión.
 
-Fuentes, licencias, fechas, método y límites: [NOTICE-badminton.md](src/data/real/NOTICE-badminton.md). Datos Airbnb: Inside Airbnb, CC BY 4.0, con selección y cálculos de CERCA. Wikidata: CC0. Puntos de Airbnb aproximados; sede/tiendas: © OpenStreetMap contributors, ODbL.
+Fuentes, licencias, fechas, método y límites: [NOTICE-badminton.md](src/data/real/NOTICE-badminton.md). Wikidata: CC0. Sedes/tiendas y alojamientos OSM: © OpenStreetMap contributors, ODbL. Los datos importados de Inside Airbnb se retiraron por no tener acreditados todos los derechos necesarios.
 
 Pendientes de confirmar: Aronova Badminton Center (Vitoria), Centro de Tecnificación de Madrid/Barajas y los dos pabellones de Ibiza. Los demás se pueden seleccionar sin esperar esas aclaraciones.
 
@@ -41,7 +41,7 @@ npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
 Utiliza el checkout existente: cada tarea en la nube ya está aislada y no requiere worktrees. Si 5173 ya sirve CERCA, reutilízalo. Los procesos deben arrancarse de nuevo en cada máquina. No se necesitan claves privadas para este catálogo abierto.
 
 ```sh
-npm run check       # Lint, 45 pruebas, tipos, build y smoke HTTP/PWA.
+npm run check       # Lint, pruebas, tipos, build y smoke HTTP/PWA.
 npm run test:watch
 npm run preview -- --host 127.0.0.1 --port 4173 --strictPort
 ```
@@ -56,7 +56,7 @@ La geolocalización es opcional y requiere acción y permiso del navegador. Nomi
 
 La PWA conserva interfaz, catálogo y fotos locales sin conexión tras la primera carga, sin precargar teselas. Los servicios públicos tienen límites: para tráfico significativo se necesita backend con caché y un proveedor con capacidad contratada. Una integración comercial de inventario en tiempo real requiere una API autorizada y gestión segura de credenciales fuera del cliente.
 
-La instalación utiliza `registry.npmjs.org`. Servicios de ejecución: `nominatim.openstreetmap.org`, `overpass-api.de`, `api.openstreetmap.org`, `tile.openstreetmap.org`, `thumb.wikimedia.org` y `upload.wikimedia.org`. Los enlaces abren Booking, Airbnb, Commons, Inside Airbnb y Google Maps. La preparación de datos usa APIs públicas y descargas autorizadas de `query.wikidata.org`, `commons.wikimedia.org` y `data.insideairbnb.com`.
+La instalación utiliza `registry.npmjs.org`. Servicios de ejecución: `nominatim.openstreetmap.org`, `overpass-api.de`, `api.openstreetmap.org`, `tile.openstreetmap.org`, `thumb.wikimedia.org` y `upload.wikimedia.org`. Los enlaces abren Booking, Airbnb, Commons y Google Maps. La preparación de datos usa APIs públicas de `query.wikidata.org`, `commons.wikimedia.org`.
 
 El workflow `.github/workflows/ci.yml` comprueba, compila para `/PABLO-APP/` y publica en GitHub Pages mediante Actions. Para probar esa ruta:
 
@@ -65,4 +65,14 @@ CERCA_BASE_PATH=/PABLO-APP/ npm run build -- --outDir /tmp/cerca-pages-dist
 CERCA_BASE_PATH=/PABLO-APP/ npm run preview -- --outDir /tmp/cerca-pages-dist --host 127.0.0.1 --port 5181 --strictPort
 ```
 
-Se conserva `scripts/refresh-catalogue.py` para el catálogo base de Wikidata y sus fotografías libres. `scripts/import-osm-hotels.py` importa exportaciones oficiales `map.json` sin datos personales de colaboradores, aplica el radio de 10 km, elimina duplicados y respeta exclusiones revisadas. No consulta Booking ni inventa rutas. La actualización de sedes/Airbnb debe conservar fuentes, fechas, licencia y criterios de `NOTICE-badminton.md` y ejecutar las comprobaciones.
+Se conserva `scripts/refresh-catalogue.py` para el catálogo base de Wikidata y sus fotografías libres. `scripts/import-osm-hotels.py` importa exportaciones oficiales `map.json` sin datos personales de colaboradores, aplica el radio de 10 km, elimina duplicados y respeta exclusiones revisadas. No consulta Booking ni inventa rutas. La actualización de sedes y alojamientos abiertos debe conservar fuentes, fechas, licencia y criterios de `NOTICE-badminton.md` y ejecutar las comprobaciones.
+
+## Transparencia y privacidad
+
+Proyecto personal de Pablo, sin ingresos ni afiliación con Booking.com o Airbnb. La información pública no acredita disponibilidad, vigencia de enlaces ni la legalidad turística de cada alojamiento. Los avisos no sustituyen permisos de reutilización. No reactivar importaciones de las plataformas sin autorización y derechos acreditados.
+
+«Privacidad y licencias» ofrece controles para recordar búsquedas (desactivado por defecto), mostrar fotos remotas y cargar mapas (opciones en memoria, apagadas al iniciar cada visita), borrar los datos locales y descargar bases OSM bajo ODbL. Favoritos y apariencia se guardan cuando el usuario los elige; búsquedas y recientes no persisten sin activación expresa. Se retiran favoritos Airbnb de versiones anteriores. El borrado no afecta a registros de proveedores ni al almacenamiento técnico de la PWA; se explica cómo quitarlo desde el navegador.
+
+El contacto público es la incidencia de GitHub del repositorio, asociada a la cuenta del responsable. No publicar datos personales en incidencias públicas. No se ha aportado correo privado ni identidad legal completa del operador: la política no debe presentarse como certificación jurídica exhaustiva. Las conexiones de proveedores y sus transferencias requieren revisión según su configuración y contratos reales.
+
+Durante la compilación se generan `dist/data/*.json` con copias de los datos OSM empleados, exclusiones y aviso municipal. El archivo `public/data/README.md` explica transformación, fuentes y licencias. Las fotografías muestran autor, enlace a fuente y enlace a licencia; los archivos decorativos antiguos sin uso se retiran del paquete. No hay teselas en la caché sin conexión.

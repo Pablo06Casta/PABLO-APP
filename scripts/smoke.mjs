@@ -56,6 +56,25 @@ try {
       [137, 80, 78, 71, 13, 10, 26, 10],
     );
   }
+  // La oferta ODbL debe servir las bases utilizadas, no el HTML de la SPA.
+  for (const file of [
+    "osm-stays.json",
+    "venue-markets.json",
+    "granada-markets.json",
+    "venues.json",
+  ]) {
+    const result = await fetch(new URL(`data/${file}`, root));
+    assert.equal(result.status, 200, file);
+    assert.match(result.headers.get("content-type") ?? "", /json/);
+    const data = await result.json();
+    assert.ok(
+      Array.isArray(data) ? data.length > 0 : Object.keys(data).length > 0,
+      file,
+    );
+  }
+  const dataNotice = await fetch(new URL("data/README.md", root));
+  assert.equal(dataNotice.status, 200);
+  assert.match(await dataNotice.text(), /ODbL 1.0/);
   const sw = await fetch(new URL("sw.js", root));
   assert.equal(sw.status, 200);
   assert.ok((await sw.text()).length > 100);

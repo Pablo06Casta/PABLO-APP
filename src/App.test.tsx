@@ -95,9 +95,7 @@ describe("CERCA: flujos del viajero", () => {
         screen.getByRole("heading", { name: /Quédate en Málaga/ }),
       ).toBeTruthy(),
     );
-    expect(JSON.parse(localStorage.getItem("cerca-search-v3")!).town.name).toBe(
-      "Málaga",
-    );
+    expect(localStorage.getItem("cerca-search-v3")).toBeNull();
     expect(findTown).not.toHaveBeenCalled();
   });
   it("filtra la distancia y recupera los resultados al restablecer", async () => {
@@ -187,9 +185,7 @@ describe("CERCA: flujos del viajero", () => {
     );
     expect(url.searchParams.get("dest_id")).toBeTruthy();
     expect(url.searchParams.get("group_adults")).toBe("2");
-    expect(url.searchParams.get("checkin")).toBe(
-      JSON.parse(localStorage.getItem("cerca-search-v3")!).checkIn,
-    );
+    expect(url.searchParams.get("checkin")).toBe(query.checkIn);
   });
   it("consulta supermercados reales solo al solicitarlos", async () => {
     const user = userEvent.setup();
@@ -227,9 +223,7 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(
       screen.getByRole("button", { name: "Borrar mis datos de CERCA" }),
     );
-    expect(
-      JSON.parse(localStorage.getItem("cerca-favorites-v2")!),
-    ).toHaveLength(0);
+    expect(localStorage.getItem("cerca-favorites-v2")).toBeNull();
     expect(document.documentElement.dataset.theme).toBe("light");
   });
   it("carga la compra desde el pabellón al abrir el detalle y conserva la lista si falla actualizar", async () => {
@@ -293,13 +287,13 @@ describe("CERCA: flujos del viajero", () => {
       ...venue.location,
     });
   });
-  it("filtra Airbnb y presupuesto y mantiene el orden de menor a mayor", async () => {
+  it("filtra presupuesto y mantiene el orden de menor a mayor sin anuncios importados", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(screen.getByRole("button", { name: "Filtros" }));
     await user.selectOptions(
-      screen.getByRole("combobox", { name: "Plataforma" }),
-      "Airbnb",
+      screen.getByRole("combobox", { name: "Consulta externa" }),
+      "Booking",
     );
     const max = screen.getByRole("spinbutton", { name: "Máximo (€)" });
     await user.clear(max);
@@ -310,6 +304,78 @@ describe("CERCA: flujos del viajero", () => {
     const prices = cards.map((c) => Number(c.dataset.estimate));
     expect(prices).toEqual([...prices].sort((a, b) => a - b));
     expect(prices.every((p) => p <= 45)).toBe(true);
-    expect(cards.every((c) => c.dataset.platform === "Airbnb")).toBe(true);
+    expect(cards.every((c) => c.dataset.platform === "Booking")).toBe(true);
+  });
+  it("solo recuerda búsquedas al activarlo y las elimina al retirar la opción", async () => {
+    const user = userEvent.setup();
+    let app = render(<App />);
+    expect(localStorage.getItem("cerca-search-v3")).toBeNull();
+    await user.click(
+      screen.getByRole("button", { name: "Privacidad y licencias" }),
+    );
+    const checkbox = screen.getByRole("checkbox", {
+      name: /Recordar mis búsquedas/,
+    });
+    expect((checkbox as HTMLInputElement).checked).toBe(false);
+    await user.click(checkbox);
+    expect(JSON.parse(localStorage.getItem("cerca-search-v3")!).town.id).toBe(
+      query.town.id,
+    );
+    app.unmount();
+    app = render(<App />);
+    await user.click(
+      screen.getByRole("button", { name: "Privacidad y licencias" }),
+    );
+    expect(
+      (
+        screen.getByRole("checkbox", {
+          name: /Recordar mis búsquedas/,
+        }) as HTMLInputElement
+      ).checked,
+    ).toBe(true);
+    expect(
+      (
+        screen.getByRole("checkbox", {
+          name: /fotos externas/,
+        }) as HTMLInputElement
+      ).checked,
+    ).toBe(false);
+    await user.click(
+      screen.getByRole("checkbox", { name: /Recordar mis búsquedas/ }),
+    );
+    expect(localStorage.getItem("cerca-search-v3")).toBeNull();
+    expect(localStorage.getItem("cerca-recent-v1")).toBeNull();
+    expect(localStorage.getItem("cerca-remember-search-v1")).toBeNull();
+  });
+  it("retira anuncios Airbnb guardados por versiones anteriores sin borrar favoritos abiertos", () => {
+    const hotel = realStays(query)[0];
+    localStorage.setItem(
+      "cerca-favorites-v2",
+      JSON.stringify([
+        { stay: hotel, town: query.town },
+        {
+          stay: { ...hotel, id: "airbnb-old", platform: "Airbnb" },
+          town: query.town,
+        },
+      ]),
+    );
+    localStorage.setItem("cerca-search-v3", JSON.stringify(query));
+    render(<App />);
+    expect(
+      JSON.parse(localStorage.getItem("cerca-favorites-v2")!).map(
+        (entry: { stay: { id: string } }) => entry.stay.id,
+      ),
+    ).toEqual([hotel.id]);
+    expect(localStorage.getItem("cerca-search-v3")).toBeNull();
+    expect(
+      screen
+        .getByRole("link", { name: "Buscar en Airbnb" })
+        .getAttribute("href"),
+    ).toMatch(/^https:\/\/www.airbnb.es\/s\//);
+    expect(
+      screen
+        .getAllByRole("article")
+        .every((card) => card.dataset.platform !== "Airbnb"),
+    ).toBe(true);
   });
 });

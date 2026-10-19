@@ -68,7 +68,7 @@ export function StayCard({
         <span className={`real-badge platform-${stay.platform?.toLowerCase()}`}>
           {stay.bookingSearch
             ? "Alojamiento real · buscar en Booking"
-            : `${stay.platform ?? "Booking"} · ficha real`}
+            : `${stay.platform ?? "Booking"} · enlace publicado`}
         </span>
       </div>
       <PhotoCredit stay={stay} />
@@ -122,7 +122,7 @@ export function StayCard({
       <p className="estimate-source">
         {estimate.source === "historical"
           ? `Referencia histórica · ${stay.observedAt}`
-          : "Modelo orientativo · tarifa no observada"}
+          : "Estimación de CERCA · tarifa no observada"}
       </p>
       <p className="card-total event-price-notice">
         Eventos, puentes y fiestas pueden cambiar el precio. Confírmalo para tus

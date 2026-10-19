@@ -249,7 +249,8 @@ export function SearchBar({
                 </button>
               )}
               <small className="data-credit">
-                Búsqueda de localidades: © OpenStreetMap
+                Buscar fuera del catálogo envía el texto a Nominatim (OpenStreetMap).
+                Usar mi ubicación envía las coordenadas autorizadas para identificar tu localidad.
               </small>
             </div>
           )}

@@ -43,6 +43,6 @@ export function estimateStay(stay: Stay, search: Search) {
     source: observed ? ("historical" as const) : ("model" as const),
     explanation: observed
       ? `Referencia de Inside Airbnb del ${stay.observedAt}. Ajuste de verano ×${season}. No incluye cargos adicionales ni confirma disponibilidad.`
-      : `Modelo orientativo: ${base} € por habitación doble × factor de ciudad ${cityFactor} × temporada ${season} × ${rooms} habitación(es). No es una tarifa observada de este hotel. Extras e impuestos no confirmados.`,
+      : `Modelo propio de CERCA: ${base} € por habitación doble × factor de ciudad ${cityFactor} × temporada ${season} × ${rooms} habitación(es). No es una tarifa observada de este hotel. Extras e impuestos no confirmados.`,
   };
 }

@@ -12,7 +12,7 @@ export function PlatformSearches({ search }: { search: Search }) {
       <div>
         <strong>Amplía las opciones cerca de {venueLabel(search)}</strong>
         <p>
-          Estas búsquedas externas no son fichas importadas ni ofertas
+          CERCA no está afiliada a estas plataformas. Estas búsquedas externas no son ofertas
           confirmadas. Conservan tus fechas, grupo y zona.
         </p>
         <p className="event-price-notice">
@@ -25,7 +25,7 @@ export function PlatformSearches({ search }: { search: Search }) {
         Consultar precios en Booking <ArrowUpRight size={15} />
       </a>
       <a href={bookingUrl(search, "Airbnb")} target="_blank" rel="noreferrer">
-        Más en Airbnb <ArrowUpRight size={15} />
+        Buscar en Airbnb <ArrowUpRight size={15} />
       </a>
     </section>
   );

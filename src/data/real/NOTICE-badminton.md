@@ -10,22 +10,9 @@ Consulta y selección: 18 de octubre de 2026. CERCA no está afiliada a Booking 
 
 Pendientes: Aronova Badminton Center (Vitoria), Centro de Tecnificación de Madrid/Barajas, Polideportivo Insular Blanca Dona y Poliesportiu des Raspallar (Ibiza). La lista no confirma que cada instalación aloje un torneo concreto: el organizador debe confirmar su sede.
 
-## Airbnb: datos abiertos de Inside Airbnb
+## Airbnb: únicamente búsqueda externa
 
-`airbnb.json`: selección de **198 anuncios reales**, con ID conservado como cadena para evitar redondeos de identificadores largos. Datos de [Inside Airbnb](https://insideairbnb.com/get-the-data/), bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). CERCA realizó selección, normalización de tipos y servicios, y cálculos de estimaciones. No se importaron nombres de anfitriones, fotos ni datos de contacto.
-
-Fuentes de la selección:
-
-- Euskadi: https://data.insideairbnb.com/spain/pv/euskadi/2026-09-25/data/listings.csv.gz
-- Madrid: https://data.insideairbnb.com/spain/comunidad-de-madrid/madrid/2026-09-17/data/listings.csv.gz
-- Málaga: https://data.insideairbnb.com/spain/andaluc%C3%ADa/malaga/2026-09-28/data/listings.csv.gz
-- Sevilla: https://data.insideairbnb.com/spain/andaluc%C3%ADa/sevilla/2026-09-25/data/listings.csv.gz
-
-Se conserva `last_scraped` de cada fila como fecha de observación; puede diferir de la fecha de la carpeta publicada. El diccionario confirma que `price` es precio diario en moneda local y que el símbolo `$` es un artefacto de exportación, no un indicador de dólares: https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit . En estas regiones la moneda local es EUR.
-
-La selección considera anuncios a menos de 10 km de una sede confirmada, con tarifa observada entre 0 y 350 € (excluido cero), estancia mínima publicada no superior a siete noches y alguna disponibilidad anual en la captura. Se retienen hasta 25 más cercanos y 25 con menor tarifa histórica por sede, eliminando duplicados por ID. La disponibilidad anual histórica no confirma disponibilidad en las fechas del usuario. En la app se aplica además capacidad, estancia mínima, presupuesto y distancia solicitados.
-
-Los puntos de Airbnb son aproximados. No se consideran direcciones exactas ni permiten garantizar una distancia peatonal. La cobertura no incluye todas las localidades; una búsqueda externa de Airbnb no se muestra como un anuncio importado. Los enlaces `/rooms/<id>` proceden de identificadores reales del dataset, no se generan a partir de nombres.
+El 19 de octubre de 2026 se retiró el catálogo de 198 registros procedentes de Inside Airbnb. Su licencia anunciada CC BY 4.0 no acredita por sí sola todos los derechos de terceros sobre el contenido original. No se importan anuncios, tarifas, fotos, títulos, coordenadas o datos de anfitriones de Airbnb; el usuario puede abrir una búsqueda externa con su destino, fechas y grupo. No reactivar importaciones sin acreditar los derechos necesarios y las condiciones de la plataforma. Los favoritos antiguos de Airbnb se eliminan del navegador al abrir esta versión. La retirada del catálogo vigente no reescribe el historial Git ni las cachés que ya existan en dispositivos externos.
 
 ## Booking
 
@@ -63,7 +50,12 @@ Los enlaces «Cómo llegar» abren las coordenadas reales del comercio en Google
 
 No son tarifas, descuentos, ofertas ni garantía de disponibilidad. No se añaden precios aleatorios por nombre o identificador.
 
-- Booking: base declarada de 75 €/habitación doble, multiplicada por un factor de ciudad (1–1,65), temporada de verano (1,2, de junio a agosto) y habitaciones dobles previstas (`ceil(personas/2)`). Es un modelo propio sin tarifa observada de ese hotel. No demuestra cuál tiene hoy la tarifa más baja.
-- Airbnb: tarifa histórica publicada del anuncio, multiplicada por 1,2 si la estancia es en junio–agosto. Se comparte la unidad entre el grupo solo si la capacidad publicada lo permite. No se presupone que el mismo apartamento pueda reservarse varias veces.
+- CERCA, estimación propia para los alojamientos: base declarada de 75 €/habitación doble, multiplicada por un factor de ciudad (1–1,65), temporada de verano (1,2, de junio a agosto) y habitaciones dobles previstas (`ceil(personas/2)`). Es un modelo propio sin tarifa observada de ese hotel. No demuestra cuál tiene hoy la tarifa más baja.
 - El filtro y el orden usan la estimación central por persona y noche. En empates se ordena por distancia al pabellón. El rango de −30 % a +40 % es ilustrativo y no tiene garantía estadística.
 - Se muestra presupuesto de grupo para todas las noches, sin impuestos o cargos adicionales no publicados. Las condiciones, vigencia del anuncio y disponibilidad deben comprobarse en la plataforma.
+
+## Revisión de transparencia y privacidad, 19 de octubre de 2026
+
+No hay extracción automatizada de Booking/Airbnb ni API de inventario conectada. Los enlaces publicados no acreditan vigencia o disponibilidad. No se utilizan marcas gráficas de las plataformas ni se afirma afiliación. El precio es un modelo propio de CERCA; los rangos no garantizan precios reales.
+
+La búsqueda y los recientes no persisten sin la opción explícita «Recordar». Los favoritos y la apariencia son acciones elegidas por el usuario. Fotos remotas y mapas requieren activación durante cada visita y se pueden desactivar; el catálogo inicial no los solicita. Se publican en `dist/data/` copias JSON de las bases OSM con fechas, atribución, transformaciones, exclusiones y licencias, enlazadas desde «Privacidad y licencias». Los créditos fotográficos enlazan por separado fuente y licencia. No existe una certificación jurídica de todos los tratamientos o de los derechos individuales de cada obra.
