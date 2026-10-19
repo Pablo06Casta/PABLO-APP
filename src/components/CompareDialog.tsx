@@ -16,11 +16,13 @@ export function CompareDialog({
   onClose,
   onOpen,
   remove,
+  onTrip,
 }: {
   selections: Selection[];
   onClose: () => void;
   onOpen: (selection: Selection) => void;
   remove: (id: string) => void;
+  onTrip: () => void;
 }) {
   return (
     <Dialog title="¿Con cuál te quedas?" onClose={onClose} wide>
@@ -31,6 +33,7 @@ export function CompareDialog({
           puentes y fiestas pueden cambiar el precio. Confirma el importe para
           tus fechas en los enlaces de reserva.
         </p>
+        <button className="secondary-button trip-open" onClick={onTrip}>Compartir viaje y calcular presupuesto</button>
         <div className="compare-scroll">
           <table className="comparison-table">
             <thead>

@@ -19,6 +19,7 @@ import { Dialog } from "./Dialog";
 import { Markets } from "./Markets";
 import { LazyMap as MapView } from "./LazyMap";
 import { PhotoCredit, StayPhoto } from "./StayPhoto";
+import { routeUrl } from "../lib/routes";
 export function DetailDialog({
   stay,
   search,
@@ -43,7 +44,6 @@ export function DetailDialog({
   const origin = searchOrigin(search),
     link = stayPlatformUrl(stay, search),
     estimate = estimateStay(stay, search);
-  const route = `https://www.google.com/maps/dir/?api=1&origin=${stay.lat},${stay.lng}&destination=${origin.lat},${origin.lng}&travelmode=walking`;
   return (
     <Dialog title={stay.name} onClose={onClose} wide>
       <div className="detail-content">
@@ -159,28 +159,13 @@ export function DetailDialog({
               <h3>
                 <MapPin size={20} /> Tu pabellón y alojamiento
               </h3>
-              <p>
-                {venueLabel(search)} · distancias aproximadas en línea recta.
-              </p>
-              <a
-                className="text-button"
-                href={route}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Ruta al pabellón
-                {stay.approximateLocation
-                  ? " desde la zona aproximada"
-                  : ""}{" "}
-                <ArrowUpRight size={15} />
-              </a>
-              <MapView
-                stays={[stay]}
-                search={search}
-                markets={markets}
-                onOpen={() => {}}
-                compact
-              />
+              <p>{venueLabel(search)} · {formatDistance(distance(stay, origin))} en línea recta. No es la distancia de la ruta.</p>
+              {search.venue?.status === "confirmed" && search.venue.location ? <>
+                <p>Al abrir un trayecto, se enviarán a Google Maps las coordenadas del alojamiento y del pabellón. CERCA no carga la ruta ni calcula duración o distancia por carretera. Consulta esos datos en Google Maps.</p>
+                {stay.approximateLocation && <p>El origen del alojamiento es aproximado; confirma la dirección exacta antes de viajar.</p>}
+                <div className="trip-actions">{([ ["walking", "Andando"], ["driving", "En coche"], ["transit", "Transporte público"] ] as const).map(([mode, label]) => <a key={mode} className="secondary-button" href={routeUrl(stay, search, mode)!} target="_blank" rel="noreferrer">{label} · Google Maps <ArrowUpRight size={15} /></a>)}</div>
+              </> : <p role="status">No hay rutas: falta confirmar las coordenadas del pabellón.</p>}
+              {search.venue?.status === "confirmed" && search.venue.location && <MapView stays={[stay]} search={search} markets={markets} onOpen={() => {}} compact />}
             </section>
           </div>
           <aside className="price-breakdown">

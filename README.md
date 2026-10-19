@@ -13,6 +13,9 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 - Detalle con rango orientativo, presupuesto del grupo, explicación de estimación, fuente, fechas y enlace del anuncio. La búsqueda externa de Airbnb conserva destino, fechas y grupo; Booking recibe hotel y habitaciones dobles previstas.
 - Supermercados ordenados desde el pabellón, incluidos en el mapa junto a alojamientos y sede. Catálogo fechado de 307 supermercados y 143 tiendas de alimentación para las 19 sedes confirmadas: carga inmediata, selección de tipo y actualización explícita sin perder los resultados guardados. Los detalles cargan la compra al abrirse, desde su propia sede. Distancias en línea recta y minutos a pie aproximados, no rutas calculadas. «Cómo llegar» abre Google Maps.
 - Favoritos, comparación de tres opciones, navegación móvil, modo oscuro y PWA. El autocompletado de municipios se conserva para destinos adicionales; donde no hay sede elegida se identifica el modo centro de ciudad.
+- Viajes compartidos mediante enlace con sede, fechas, viajeros y hasta tres identificadores del catálogo. Al abrirlo se comprueban todos los campos; si una ficha desaparece, se conserva el resto. Los gastos de la calculadora no se comparten. Quien tenga el enlace puede ver la selección.
+- Presupuesto del grupo con una sola opción de alojamiento, noches completas, transporte y otros importes totales, comida por persona y día, días de comida y reparto editable. Los importes de CERCA son orientativos; el resto procede del usuario.
+- En el detalle de cada alojamiento, enlaces de Google Maps para trayectos andando, en coche y en transporte público hasta un pabellón confirmado. CERCA solo muestra la distancia en línea recta y no calcula tiempos de ruta. Abrir Google Maps envía las dos coordenadas; el mapa de OpenStreetMap del detalle se carga a petición.
 
 ## Datos y precios
 

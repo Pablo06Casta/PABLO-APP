@@ -69,6 +69,8 @@ import { FiltersDialog } from "./components/FiltersDialog";
 import { DetailDialog } from "./components/DetailDialog";
 import { Dialog } from "./components/Dialog";
 import { CompareDialog } from "./components/CompareDialog";
+import { TripDialog } from "./components/TripDialog";
+import { readTrip } from "./lib/trip";
 import { LazyMap as MapView } from "./components/LazyMap";
 import { Markets } from "./components/Markets";
 import { ExternalServices } from "./components/ExternalServices";
@@ -121,7 +123,9 @@ function App() {
   );
 }
 function AppContent() {
-  const [search, setSearch] = useState<Search>(initialSearch);
+  const [sharedTrip] = useState(() => new URL(window.location.href).searchParams.get("trip"));
+  const [restoredTrip] = useState(() => sharedTrip === null ? null : readTrip(sharedTrip));
+  const [search, setSearch] = useState<Search>(() => restoredTrip?.search ?? initialSearch());
   const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
   const [sort, setSort] = useState("price");
@@ -129,7 +133,7 @@ function AppContent() {
     "explore",
   );
   const [modal, setModal] = useState<
-    "filters" | "markets" | "help" | "privacy" | "compare" | null
+    "filters" | "markets" | "help" | "privacy" | "compare" | "trip" | null
   >(null);
   const [detail, setDetail] = useState<Selection | null>(null);
   const [busy, setBusy] = useState(false);
@@ -156,13 +160,18 @@ function AppContent() {
   );
   const { photos, setPhotos, maps, setMaps } = useContext(ExternalServices);
   const [theme, setTheme] = useStored<Theme>("cerca-theme-v1", "system");
-  const [compare, setCompare] = useState<Selection[]>([]);
+  const [compare, setCompare] = useState<Selection[]>(() => restoredTrip?.search ? restoredTrip.stays.map((stay) => ({ stay, search: restoredTrip.search! })) : []);
+  const currentStayIds = useMemo(() => new Set(realStays(search).map((stay) => stay.id)), [search]);
+  const shareableCompare = compare.filter((entry) => currentStayIds.has(entry.stay.id));
+  const [tripWarning, setTripWarning] = useState(restoredTrip?.warning ?? "");
+  const restoredSearch = useRef(Boolean(restoredTrip?.search));
   const [toast, setToast] = useState("");
   const [installPrompt, setInstallPrompt] = useState<InstallPrompt | null>(
     null,
   );
 
   useEffect(() => {
+    if (restoredSearch.current) return;
     try {
       if (rememberSearch) {
         localStorage.setItem("cerca-remember-search-v1", "true");
@@ -247,6 +256,8 @@ function AppContent() {
     compare.some((entry) => entry.stay.id === id);
 
   async function runSearch(next: Search) {
+    restoredSearch.current = false;
+    setTripWarning("");
     const sameCity = (v: Venue) =>
       normalize(v.city) === normalize(next.town.name);
     const venue =
@@ -503,6 +514,8 @@ function AppContent() {
                 Alojamientos para tu equipo y supermercados junto al pabellón.
                 Compara presupuestos y reserva en la plataforma.
               </p>
+              {tripWarning && <p className="trip-warning" role="alert">{tripWarning}</p>}
+              {restoredTrip?.search && !tripWarning && <p className="trip-warning" role="status">Viaje compartido recuperado. Cualquier persona con este enlace puede ver el pabellón, fechas, viajeros y alojamientos seleccionados.</p>}
               <VenuePicker
                 search={search}
                 onSelect={(venue) =>
@@ -515,6 +528,7 @@ function AppContent() {
                 busy={busy}
                 onSearch={runSearch}
               />
+              <div className="trip-actions"><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Compartir viaje</button><button className="secondary-button trip-open" onClick={() => setModal("trip")}>Presupuesto del grupo</button></div>
               <div className="quick-destinations">
                 <span>
                   {recent.length
@@ -1097,6 +1111,7 @@ function AppContent() {
           marketError={marketStatus === "error" ? marketError : ""}
         />
       )}
+      {modal === "trip" && <TripDialog search={search} stays={shareableCompare.map((entry) => entry.stay)} omitted={compare.length - shareableCompare.length} onClose={() => setModal(null)} />}
       {modal === "markets" && (
         <Dialog
           title={`Supermercados cerca de ${venueLabel(search)}`}
@@ -1218,6 +1233,7 @@ function AppContent() {
       {modal === "compare" && (
         <CompareDialog
           selections={compare}
+          onTrip={() => setModal("trip")}
           onClose={() => setModal(null)}
           onOpen={(selection) => {
             setModal(null);

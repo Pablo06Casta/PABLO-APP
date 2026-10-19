@@ -33,8 +33,9 @@ export default defineConfig({
       configureServer(server) {
         server.middlewares.use((req, res, next) => {
           const pathname = new URL(req.url ?? "/", "http://localhost").pathname;
-          const match = pathname.match(/\/data\/([^/]+)$/);
-          const name = match?.[1] ?? "";
+          const prefix = `${server.config.base}data/`;
+          if (!pathname.startsWith(prefix)) return next();
+          const name = pathname.slice(prefix.length);
           if (!Object.hasOwn(datasets, name)) return next();
           res.setHeader(
             "Content-Type",

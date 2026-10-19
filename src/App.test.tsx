@@ -11,6 +11,7 @@ import App from "./App";
 import { realStays } from "./services/lodging";
 import { defaultVenue, townForVenue, venues } from "./data/venues";
 import { initialFilters, filterStays, isoDate } from "./lib/search";
+import { makeTripUrl } from "./lib/trip";
 const query = {
   town: townForVenue(defaultVenue),
   venue: defaultVenue,
@@ -48,6 +49,7 @@ vi.mock("./services/places", () => ({
 }));
 beforeEach(() => {
   localStorage.clear();
+  window.history.replaceState({}, "", "/");
   vi.clearAllMocks();
 });
 afterEach(cleanup);
@@ -159,6 +161,23 @@ describe("CERCA: flujos del viajero", () => {
       screen.getByRole("dialog", { name: "¿Con cuál te quedas?" }),
     ).toBeTruthy();
     expect(screen.getAllByRole("button", { name: "Quitar" })).toHaveLength(3);
+  });
+  it("recupera la comparación del enlace y permite repartir el presupuesto", async () => {
+    const chosen = realStays(query)[0];
+    const url = makeTripUrl(window.location.href, query, [chosen]);
+    window.history.replaceState({}, "", url);
+    const user = userEvent.setup();
+    render(<App />);
+    expect(screen.getByText("1 de 3")).toBeTruthy();
+    await user.click(screen.getByRole("button", { name: "Presupuesto del grupo" }));
+    const dialog = screen.getByRole("dialog", { name: "Tu viaje en grupo" });
+    expect((within(dialog).getByLabelText("Enlace del viaje") as HTMLInputElement).value).toContain("trip=");
+    await user.clear(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }));
+    await user.type(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }), "0");
+    expect(within(dialog).getByRole("alert").textContent).toContain("al menos una persona");
+    await user.clear(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }));
+    await user.type(within(dialog).getByRole("spinbutton", { name: "Personas que comparten gastos" }), "2");
+    expect(within(dialog).getByText("Por persona:")).toBeTruthy();
   });
   it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {
     const user = userEvent.setup();
