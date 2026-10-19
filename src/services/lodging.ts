@@ -114,7 +114,8 @@ export function realStays(query: Search): Stay[] {
       amenities: [],
       freeCancellation: null,
       sourceUrl: hotel.sourceUrl,
-      retrievedAt: osm.retrievedAt,
+      retrievedAt:
+        "retrievedAt" in hotel ? String(hotel.retrievedAt) : osm.retrievedAt,
     }));
   return [...hotels, ...nearbyHotels, ...apartments];
 }

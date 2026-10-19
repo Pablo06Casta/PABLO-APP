@@ -86,13 +86,18 @@ def main():
     parser.add_argument('maps', nargs='+')
     parser.add_argument('--retrieved-at', required=True)
     parser.add_argument('--output', default=str(ROOT/'src/data/real/osm-stays.json'))
+    parser.add_argument('--merge-from', help='Preserve previously imported real hotels and their retrieval dates.')
     args = parser.parse_args()
     venues = [v for v in json.loads((ROOT/'src/data/venues.json').read_text()) if v['location']]
     existing = json.loads((ROOT/'src/data/real/stays.json').read_text())['hotels'] + json.loads((ROOT/'src/data/real/venue-stays.json').read_text())['hotels']
     exclusions = json.loads((ROOT/'src/data/real/osm-stays-exclusions.json').read_text())
     links = {link['id']: link for link in json.loads((ROOT/'src/data/real/published-booking-links.json').read_text())['links']}
+    previous = json.loads(Path(args.merge_from).read_text()) if args.merge_from else {'hotels': []}
+    records = {hotel['id']: {**hotel, 'retrievedAt': hotel.get('retrievedAt', previous.get('retrievedAt'))} for hotel in previous['hotels']}
+    for hotel in read_maps(args.maps, venues):
+        records[hotel['id']] = {**records.get(hotel['id'], {}), **hotel, 'retrievedAt': args.retrieved_at}
     imported = []
-    for hotel in sorted(read_maps(args.maps, venues), key=lambda h: (not bool(h.get('bookingPath')), h['name'])):
+    for hotel in sorted(records.values(), key=lambda h: (not bool(h.get('bookingPath')), h['name'])):
         if hotel['id'] in exclusions:
             continue
         if any(same_property(hotel, other) for other in existing + imported):

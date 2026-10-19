@@ -24,10 +24,17 @@ def main():
     parser.add_argument('maps', nargs='+')
     parser.add_argument('--retrieved-at', required=True, type=date.fromisoformat)
     parser.add_argument('--output', default=str(ROOT/'src/data/real/venue-markets.json'))
+    parser.add_argument('--merge-from', help='Keep previously published shops, source URLs and real retrieval dates.')
     args = parser.parse_args()
     venues = [v for v in json.loads((ROOT/'src/data/venues.json').read_text()) if v['location']]
     shops, sources = {}, set()
+    if args.merge_from:
+        previous = json.loads(Path(args.merge_from).read_text())
+        shops.update((shop['id'], shop) for shop in previous['markets'])
+        sources.update(previous['sources'])
     exclusions = json.loads((ROOT/'src/data/real/market-exclusions.json').read_text())
+    for key in exclusions:
+        shops.pop(key, None)
     for path in args.maps:
         data = json.loads(Path(path).read_text())
         if not data.get('generator', '').startswith('openstreetmap-cgimap') or not data.get('bounds'):

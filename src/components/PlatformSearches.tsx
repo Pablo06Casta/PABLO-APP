@@ -15,9 +15,14 @@ export function PlatformSearches({ search }: { search: Search }) {
           Estas búsquedas externas no son fichas importadas ni ofertas
           confirmadas. Conservan tus fechas, grupo y zona.
         </p>
+        <p className="event-price-notice">
+          Al cambiar las fechas, los eventos, torneos, puentes y fiestas pueden
+          cambiar el precio y la disponibilidad. Consulta el precio para tus
+          fechas mediante el enlace a Booking.
+        </p>
       </div>
       <a href={bookingUrl(search, "Booking")} target="_blank" rel="noreferrer">
-        Más en Booking <ArrowUpRight size={15} />
+        Consultar precios en Booking <ArrowUpRight size={15} />
       </a>
       <a href={bookingUrl(search, "Airbnb")} target="_blank" rel="noreferrer">
         Más en Airbnb <ArrowUpRight size={15} />

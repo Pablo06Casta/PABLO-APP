@@ -77,9 +77,11 @@ export function DetailDialog({
           <p>
             <strong>Alojamiento real, presupuesto estimado.</strong> El precio
             mostrado orienta la planificación del viaje; no es una oferta
-            confirmada y puede cambiar. Confirma disponibilidad, impuestos,
-            cargos y cancelación en {stay.platform ?? "Booking"} antes de
-            reservar.
+            confirmada y puede cambiar. Al cambiar las fechas, los eventos,
+            torneos, puentes y fiestas pueden cambiar el precio y la
+            disponibilidad. Consulta el precio para tus fechas mediante el
+            enlace a {stay.platform ?? "Booking"}. Confirma impuestos, cargos y
+            cancelación en {stay.platform ?? "Booking"} antes de reservar.
           </p>
         </div>
         <div className="detail-columns">

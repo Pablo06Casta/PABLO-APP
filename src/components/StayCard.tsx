@@ -124,6 +124,10 @@ export function StayCard({
           ? `Referencia histórica · ${stay.observedAt}`
           : "Modelo orientativo · tarifa no observada"}
       </p>
+      <p className="card-total event-price-notice">
+        Eventos, puentes y fiestas pueden cambiar el precio. Confírmalo para tus
+        fechas en {stay.platform ?? "Booking"}.
+      </p>
       {link && (
         <a
           className="card-booking-link"

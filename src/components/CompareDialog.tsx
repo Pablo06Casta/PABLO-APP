@@ -27,7 +27,9 @@ export function CompareDialog({
       <div className="compare-body">
         <p className="muted">
           Compara hasta tres alojamientos reales. Los importes son presupuestos
-          orientativos por persona y noche, no ofertas confirmadas.
+          orientativos por persona y noche, no ofertas confirmadas. Los eventos,
+          puentes y fiestas pueden cambiar el precio. Confirma el importe para
+          tus fechas en los enlaces de reserva.
         </p>
         <div className="compare-scroll">
           <table className="comparison-table">

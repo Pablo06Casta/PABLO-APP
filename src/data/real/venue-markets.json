@@ -4,38 +4,54 @@
   "attribution": "© OpenStreetMap contributors",
   "licenceUrl": "https://www.openstreetmap.org/copyright",
   "sources": [
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-0.43964,38.35155,-0.42164,38.36355",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-0.495,38.339,-0.477,38.351",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-0.506,38.34,-0.488,38.352",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-0.51643,38.33024,-0.49843,38.34224",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-0.99543,37.59288,-0.97743,37.60488",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-1.0015412,37.6031864,-0.9715412,37.6231864",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-1.0224507,37.6027201,-0.9924507,37.6227201",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.0519539,42.6612007,-2.0219539,42.6812007",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.6662927,42.8339512,-2.6362927,42.8539512",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.67246,42.85455,-2.65446,42.86655",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.683,42.844,-2.663,42.859",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.683,42.8445,-2.665,42.8565",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.684,42.834,-2.666,42.846",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.69856,42.86298,-2.68056,42.87498",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.5386122,40.4939063,-3.5086122,40.5139063",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.586,40.467,-3.568,40.479",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.60106,40.48594,-3.58306,40.49794",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.70025,43.38286,-3.68225,43.39486",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.7533571,43.3674799,-3.7233571,43.3874799",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.797,43.468,-3.779,43.48",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.8022928,43.457085,-3.7842928,43.469085",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.81398,43.45926,-3.80318,43.46646",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-3.8680537,43.4515309,-3.8380537,43.4715309",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-4.509173,36.632616,-4.491173,36.644616",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-4.539,36.583,-4.521,36.595",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-4.5470139,36.5941059,-4.5170139,36.6141059",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-4.59043,36.56874,-4.57243,36.58074",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.8380385,43.3722054,-5.8080385,43.3922054",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.847,43.361,-5.829,43.373",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.858,43.357,-5.84,43.369",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.8851554,43.343665,-5.8551554,43.363665",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.89352,43.29502,-5.87552,43.30702",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.93278,43.32556,-5.91478,43.33756",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-5.9653115,37.4698046,-5.9353115,37.4898046",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-6.91155,37.28285,-6.89355,37.29485",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-6.9344584,37.269455,-6.9164584,37.281455",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-6.9386242,37.2556661,-6.9086242,37.2756661",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-6.9558132,37.2484637,-6.9258132,37.2684637",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-8.5194784,42.6838069,-8.4894784,42.7038069",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=2.2641976,41.6039008,2.2941976,41.6239008",
-    "https://api.openstreetmap.org/api/0.6/map.json?bbox=2.279,41.602,2.297,41.614"
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=2.279,41.602,2.297,41.614",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=2.28715,41.5951,2.30515,41.6071"
   ],
   "coverage": [
     {
       "venueId": "granollers-congost",
-      "supermarkets": 8,
-      "shops": 21
+      "supermarkets": 10,
+      "shops": 23
     },
     {
       "venueId": "solares-mies",
@@ -44,8 +60,8 @@
     },
     {
       "venueId": "santander-palacio",
-      "supermarkets": 5,
-      "shops": 6
+      "supermarkets": 24,
+      "shops": 43
     },
     {
       "venueId": "santander-ruth",
@@ -54,13 +70,13 @@
     },
     {
       "venueId": "vitoria-aldabe",
-      "supermarkets": 45,
-      "shops": 65
+      "supermarkets": 53,
+      "shops": 74
     },
     {
       "venueId": "vitoria-salburua",
-      "supermarkets": 45,
-      "shops": 65
+      "supermarkets": 50,
+      "shops": 70
     },
     {
       "venueId": "estrada-coto",
@@ -69,13 +85,13 @@
     },
     {
       "venueId": "alicante-tecnificacion",
-      "supermarkets": 30,
-      "shops": 49
+      "supermarkets": 34,
+      "shops": 54
     },
     {
       "venueId": "alicante-pitiu",
-      "supermarkets": 30,
-      "shops": 49
+      "supermarkets": 34,
+      "shops": 54
     },
     {
       "venueId": "benalmadena-arroyo",
@@ -84,13 +100,13 @@
     },
     {
       "venueId": "cartagena-wssell",
-      "supermarkets": 29,
-      "shops": 34
+      "supermarkets": 30,
+      "shops": 38
     },
     {
       "venueId": "cartagena-palacio",
-      "supermarkets": 29,
-      "shops": 35
+      "supermarkets": 30,
+      "shops": 39
     },
     {
       "venueId": "estella-tierra",
@@ -99,13 +115,13 @@
     },
     {
       "venueId": "huelva-palacio",
-      "supermarkets": 23,
-      "shops": 35
+      "supermarkets": 25,
+      "shops": 37
     },
     {
       "venueId": "huelva-andres",
-      "supermarkets": 23,
-      "shops": 36
+      "supermarkets": 25,
+      "shops": 38
     },
     {
       "venueId": "rinconada-fernando",
@@ -639,6 +655,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-11148941371",
+      "name": "Dia Market",
+      "kind": "supermarket",
+      "lat": 43.4647283,
+      "lng": -3.7958049,
+      "address": "Calle de Andrés del Río",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/11148941371",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-11150213386",
       "name": "Mycash",
       "kind": "supermarket",
@@ -772,6 +800,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-11828781498",
+      "name": "Carrefour Express",
+      "kind": "convenience",
+      "lat": 43.4662559,
+      "lng": -3.7900839,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/11828781498",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-11878489107",
       "name": "100grams",
       "kind": "convenience",
@@ -869,6 +909,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-12036594323",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.4636714,
+      "lng": -3.8115793,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/12036594323",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-12037527629",
       "name": "Supermercado El Norte",
       "kind": "supermarket",
@@ -879,6 +931,19 @@
       "sourceUrl": "https://www.openstreetmap.org/node/12037527629",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "node-1209089565",
+      "name": "Dia",
+      "kind": "supermarket",
+      "lat": 43.4635288,
+      "lng": -3.810573,
+      "address": "Calle de la Enseñanza 4",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1209089565",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:00"
     },
     {
       "id": "node-12135506727",
@@ -928,6 +993,18 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Su,PH 09:00-21:00"
+    },
+    {
+      "id": "node-12520230020",
+      "name": "BM",
+      "kind": "supermarket",
+      "lat": 43.4646886,
+      "lng": -3.7949954,
+      "address": "Paseo de Canalejas 11",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/12520230020",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
     },
     {
       "id": "node-12544208118",
@@ -1061,6 +1138,19 @@
       "sourceUrl": "https://www.openstreetmap.org/node/12839838029",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "node-12844565302",
+      "name": "A puñaos",
+      "kind": "convenience",
+      "lat": 43.4636221,
+      "lng": -3.8061395,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/12844565302",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 10:00-14:00, 17:30-20:30, Sa 10:00-14:30"
     },
     {
       "id": "node-12883394860",
@@ -1396,6 +1486,19 @@
       "coverage": "local"
     },
     {
+      "id": "node-1387193870",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.463244,
+      "lng": -3.7978806,
+      "address": "Calle de Hernán Cortés 55",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1387193870",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:30"
+    },
+    {
       "id": "node-13912000101",
       "name": "Korovai",
       "kind": "convenience",
@@ -1553,6 +1656,31 @@
       "coverage": "local"
     },
     {
+      "id": "node-1542017275",
+      "name": "BM",
+      "kind": "supermarket",
+      "lat": 43.4634835,
+      "lng": -3.790453,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1542017275",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-1675139425",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 38.3397316,
+      "lng": -0.4997953,
+      "address": "Avinguda del Catedràtic Soler 40",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1675139425",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:00"
+    },
+    {
       "id": "node-1678426068",
       "name": "Dialprix",
       "kind": "supermarket",
@@ -1564,6 +1692,30 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Sa 08:30-21:30"
+    },
+    {
+      "id": "node-1695897141",
+      "name": "Panaderia Cisneros 17",
+      "kind": "convenience",
+      "lat": 43.4632861,
+      "lng": -3.8127378,
+      "address": "Calle del Cardenal Cisneros 17",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1695897141",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-1695906682",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.4633603,
+      "lng": -3.8120239,
+      "address": "Calle del Cardenal Cisneros 20",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1695906682",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
     },
     {
       "id": "node-1707833629",
@@ -1638,6 +1790,19 @@
       "sourceUrl": "https://www.openstreetmap.org/node/1855444669",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "node-1936373543",
+      "name": "Alcampo",
+      "kind": "supermarket",
+      "lat": 43.4644009,
+      "lng": -3.8016757,
+      "address": "Calle de Santa Lucía 31",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/1936373543",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:00; Su off"
     },
     {
       "id": "node-1968934061",
@@ -1721,6 +1886,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/2148893944",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-2301462360",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 37.2790752,
+      "lng": -6.9302122,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2301462360",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -1911,6 +2088,45 @@
       "coverage": "local"
     },
     {
+      "id": "node-2592646163",
+      "name": "Autoservicio Ángel",
+      "kind": "convenience",
+      "lat": 43.464038,
+      "lng": -3.7999024,
+      "address": "Calle de Lope de Vega 21",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592646163",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-14:30,17:00-21:00; Sa 09:00-14:30"
+    },
+    {
+      "id": "node-2592648498",
+      "name": "Udaco",
+      "kind": "convenience",
+      "lat": 43.4604136,
+      "lng": -3.8112752,
+      "address": "Calle Alta 16",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592648498",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 08:30-14:30,17:30-20:30"
+    },
+    {
+      "id": "node-2592648502",
+      "name": "Covirán",
+      "kind": "supermarket",
+      "lat": 43.4648354,
+      "lng": -3.8120868,
+      "address": "Calle de Joaquín Reguera Sevilla 4",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592648502",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-14:30,17:00-21:00; Sa 09:00-14:30,18:30-21:30"
+    },
+    {
       "id": "node-2592648563",
       "name": "D'arriba",
       "kind": "convenience",
@@ -1924,6 +2140,58 @@
       "hours": "Mo-Su 10:00-14:00,17:00-21:30"
     },
     {
+      "id": "node-2592650854",
+      "name": "Gira",
+      "kind": "convenience",
+      "lat": 43.4632765,
+      "lng": -3.8133281,
+      "address": "Calle del Cardenal Cisneros 21",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592650854",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 10:30-14:00,17:30-20:30"
+    },
+    {
+      "id": "node-2592652518",
+      "name": "La Casa del Bacalao",
+      "kind": "convenience",
+      "lat": 43.4619981,
+      "lng": -3.8115989,
+      "address": "Calle de Amós de Escalante 10",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592652518",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:30-14:00,17:00-20:30; Sa 10:00-14:00"
+    },
+    {
+      "id": "node-2592652862",
+      "name": "La Tienda de Puri",
+      "kind": "convenience",
+      "lat": 43.4647761,
+      "lng": -3.8046751,
+      "address": "Calle del Río de la Pila 15",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592652862",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-14:30,18:00-21:30; Sa 10:00-14:30"
+    },
+    {
+      "id": "node-2592653566",
+      "name": "Mantequerías Frankfort",
+      "kind": "convenience",
+      "lat": 43.4628465,
+      "lng": -3.8073775,
+      "address": "Calle de Rualasal 5",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592653566",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-14:00,17:00-20:30; Sa 09:00-14:00"
+    },
+    {
       "id": "node-2592655396",
       "name": "Panadería Miklen",
       "kind": "convenience",
@@ -1935,6 +2203,32 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Su 09:00-15:00,17:00-22:00"
+    },
+    {
+      "id": "node-2592656993",
+      "name": "Unide",
+      "kind": "supermarket",
+      "lat": 43.4649526,
+      "lng": -3.7988511,
+      "address": "Paseo de Menéndez Pelayo 6",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592656993",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-22:00; Su 10:00-15:00"
+    },
+    {
+      "id": "node-2592658170",
+      "name": "Turrones y Helados Monerris",
+      "kind": "convenience",
+      "lat": 43.4620249,
+      "lng": -3.8112701,
+      "address": "Calle de Amós de Escalante 8",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/2592658170",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 10:00-13:30,16:00-20:30; Sa 10:00-13:30,16:00-20:30; Su 10:00-15:00,17:00-22:00"
     },
     {
       "id": "node-2618477150",
@@ -2462,6 +2756,19 @@
       "hours": "Mo-Sa 09:00-21:30"
     },
     {
+      "id": "node-3670703981",
+      "name": "Supermercado C/Cañon",
+      "kind": "supermarket",
+      "lat": 37.5997647,
+      "lng": -0.9852122,
+      "address": "Calle del Cañón 11",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/3670703981",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-20:30; PH,Su 10:00-14:00"
+    },
+    {
       "id": "node-3672055934",
       "name": "Dia",
       "kind": "supermarket",
@@ -2511,6 +2818,19 @@
       "coverage": "local"
     },
     {
+      "id": "node-3743429309",
+      "name": "Carrefour Express",
+      "kind": "convenience",
+      "lat": 37.6021241,
+      "lng": -0.9872531,
+      "address": "Calle Puerta de Murcia 8",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/3743429309",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-22:00; Su 09:30-14:30"
+    },
+    {
       "id": "node-3792449478",
       "name": "Veritas",
       "kind": "supermarket",
@@ -2531,6 +2851,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/3792449480",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-3883187899",
+      "name": "Spar",
+      "kind": "supermarket",
+      "lat": 38.3358017,
+      "lng": -0.5070472,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/3883187899",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -2609,6 +2941,18 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Sa 10:00-21:15"
+    },
+    {
+      "id": "node-4327125703",
+      "name": "Entre Horas",
+      "kind": "convenience",
+      "lat": 37.6010807,
+      "lng": -0.9850748,
+      "address": "Calle San Miguel",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/4327125703",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
     },
     {
       "id": "node-4414011891",
@@ -2733,6 +3077,19 @@
       "coverage": "local"
     },
     {
+      "id": "node-4879963685",
+      "name": "Eroski",
+      "kind": "supermarket",
+      "lat": 42.8618638,
+      "lng": -2.6667408,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/4879963685",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 10:00-22:00"
+    },
+    {
       "id": "node-4893725421",
       "name": "La Favorita",
       "kind": "convenience",
@@ -2778,6 +3135,18 @@
       "address": "Plaza Juan XXIII 3",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/4990591905",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-4990679149",
+      "name": "La Parada",
+      "kind": "convenience",
+      "lat": 37.5997057,
+      "lng": -0.9852989,
+      "address": "Calle del Cañón 9",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/4990679149",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -3126,6 +3495,18 @@
       "hours": "Mo-Sa 10:00-21:00"
     },
     {
+      "id": "node-562884448",
+      "name": "BM",
+      "kind": "supermarket",
+      "lat": 42.854882,
+      "lng": -2.6567681,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/562884448",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-5633632920",
       "name": "Tienda de alimentación",
       "kind": "convenience",
@@ -3273,6 +3654,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-5796462363",
+      "name": "El Jamón",
+      "kind": "supermarket",
+      "lat": 37.2775719,
+      "lng": -6.9303148,
+      "address": "Calle Jazmín",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/5796462363",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-583228809",
       "name": "Covirán",
       "kind": "supermarket",
@@ -3359,6 +3752,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-6256048551",
+      "name": "Covirán",
+      "kind": "supermarket",
+      "lat": 42.8659195,
+      "lng": -2.6954435,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/6256048551",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-6288270888",
       "name": "Slavyanka",
       "kind": "convenience",
@@ -3391,6 +3796,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/6339843953",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-6355801944",
+      "name": "Dialprix",
+      "kind": "supermarket",
+      "lat": 38.3414798,
+      "lng": -0.5101363,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/6355801944",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -3518,6 +3935,19 @@
       "coverage": "local"
     },
     {
+      "id": "node-6698654060",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.4627295,
+      "lng": -3.8070989,
+      "address": "Calle de Rualasal 14",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/6698654060",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:30"
+    },
+    {
       "id": "node-6732790900",
       "name": "Unide",
       "kind": "supermarket",
@@ -3562,6 +3992,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/674102489",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-6752805685",
+      "name": "Sobaos y Quesadas Luca",
+      "kind": "convenience",
+      "lat": 43.4619981,
+      "lng": -3.8115687,
+      "address": "Calle de Amós de Escalante 10",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/6752805685",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -3629,6 +4071,42 @@
       "hours": "Mo-Sa 09:00-21:00"
     },
     {
+      "id": "node-705088923",
+      "name": "Carrefour Market",
+      "kind": "supermarket",
+      "lat": 43.4615937,
+      "lng": -3.8131989,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/705088923",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7083790385",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 41.6007626,
+      "lng": 2.2906059,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7083790385",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7154667103",
+      "name": "Zelai Alai",
+      "kind": "convenience",
+      "lat": 42.865722,
+      "lng": -2.6910241,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7154667103",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "node-7244403185",
       "name": "Mandarin Food Products",
       "kind": "supermarket",
@@ -3637,6 +4115,139 @@
       "address": "Calle Antonio de Nebrija 16",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/7244403185",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7294237444",
+      "name": "Comerciantes Plaza del Este",
+      "kind": "convenience",
+      "lat": 43.4630718,
+      "lng": -3.8040228,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7294237444",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7323391143",
+      "name": "Spar",
+      "kind": "supermarket",
+      "lat": 38.3409846,
+      "lng": -0.5104522,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7323391143",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7364321262",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.4650119,
+      "lng": -3.7909974,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7364321262",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-15:00,17:00-21:00; Sa 09:00-15:00"
+    },
+    {
+      "id": "node-7380139997",
+      "name": "Ultramarinos La Hermida",
+      "kind": "convenience",
+      "lat": 43.4661656,
+      "lng": -3.797127,
+      "address": "Paseo de Menéndez Pelayo 28",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7380139997",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7380140015",
+      "name": "Alimentación Tetuán",
+      "kind": "supermarket",
+      "lat": 43.4659705,
+      "lng": -3.7942592,
+      "address": "Calle de Tetuán 33",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7380140015",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7402581212",
+      "name": "Covirán",
+      "kind": "supermarket",
+      "lat": 43.4644668,
+      "lng": -3.8079456,
+      "address": "Cuesta de la Atalaya 15",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7402581212",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7470168859",
+      "name": "Alimentación Xu",
+      "kind": "convenience",
+      "lat": 43.463809,
+      "lng": -3.8107016,
+      "address": "Plaza de la Leña 4",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7470168859",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7497187489",
+      "name": "BM",
+      "kind": "supermarket",
+      "lat": 43.4631306,
+      "lng": -3.8074291,
+      "address": "Calle de Santa Clara 8",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7497187489",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7497265092",
+      "name": "Lupa",
+      "kind": "supermarket",
+      "lat": 43.4636201,
+      "lng": -3.8070372,
+      "address": "Calle de Guevara 6",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7497265092",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7503026438",
+      "name": "Fortuna",
+      "kind": "convenience",
+      "lat": 43.4637296,
+      "lng": -3.8041722,
+      "address": "Plaza del Río de la Pila 25",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7503026438",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7510693819",
+      "name": "China",
+      "kind": "convenience",
+      "lat": 43.4637383,
+      "lng": -3.806425,
+      "address": "Calle de Guevara 23",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7510693819",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -3661,6 +4272,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/7519900289",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7551257486",
+      "name": "Alimentación Express",
+      "kind": "convenience",
+      "lat": 43.4638872,
+      "lng": -3.8047383,
+      "address": "Calle de Guevara 31",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7551257486",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -3722,6 +4345,18 @@
       "address": "Calle de Fernando de los Ríos 8",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/7692037978",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-7834301950",
+      "name": "Dia",
+      "kind": "supermarket",
+      "lat": 43.4689559,
+      "lng": -3.8015767,
+      "address": "Calle de Fernando de los Ríos 61",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7834301950",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -4058,6 +4693,19 @@
       "sourceUrl": "https://www.openstreetmap.org/node/9225397510",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "node-9229698394",
+      "name": "El Súper de los Pastores",
+      "kind": "convenience",
+      "lat": 43.463723,
+      "lng": -3.7885111,
+      "address": "Avenida de la Reina Victoria 37",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/9229698394",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:30-15:00,17:30-21:30; Su 09:30-15:00"
     },
     {
       "id": "node-9234023410",
@@ -4404,6 +5052,18 @@
       "coverage": "local"
     },
     {
+      "id": "way-1131300143",
+      "name": "Eroski",
+      "kind": "supermarket",
+      "lat": 42.8656078625,
+      "lng": -2.6848628375,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/1131300143",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "way-1138134605",
       "name": "Alimerka",
       "kind": "supermarket",
@@ -4415,6 +5075,19 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Sa 09:00-21:30"
+    },
+    {
+      "id": "way-1147713764",
+      "name": "Carrefour Express",
+      "kind": "convenience",
+      "lat": 38.33793238,
+      "lng": -0.5004474200000001,
+      "address": "Carrer de Federico Mayo",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/1147713764",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Su 09:00-21:00"
     },
     {
       "id": "way-118936880",
@@ -4474,6 +5147,18 @@
       "address": "Dirección no disponible en OpenStreetMap",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/way/1226264147",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "way-1230701513",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 42.8583903,
+      "lng": -2.6597404300000003,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/1230701513",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -4551,6 +5236,30 @@
       "coverage": "local"
     },
     {
+      "id": "way-150169555",
+      "name": "ALDI",
+      "kind": "supermarket",
+      "lat": 42.864282228571426,
+      "lng": -2.6598674428571427,
+      "address": "Kantabrikoaren hiribidea 10",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/150169555",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "way-150169558",
+      "name": "Lidl",
+      "kind": "supermarket",
+      "lat": 42.86323697,
+      "lng": -2.6604187500000003,
+      "address": "Gamarrako atea 38",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/150169558",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
       "id": "way-175855033",
       "name": "Froiz",
       "kind": "supermarket",
@@ -4571,6 +5280,31 @@
       "address": "Avenida de Pontevedra",
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/way/175857888",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "way-177392735",
+      "name": "Consum",
+      "kind": "supermarket",
+      "lat": 41.60134525833333,
+      "lng": 2.2871292,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/177392735",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:15-21:15; Aug 31: off"
+    },
+    {
+      "id": "way-203559198",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 42.864941101388894,
+      "lng": -2.6870400319444445,
+      "address": "Andia mendiaren kalea 10",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/203559198",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
     },
@@ -4867,6 +5601,19 @@
       "retrievedAt": "2026-10-19",
       "coverage": "local",
       "hours": "Mo-Sa 09:00-21:00"
+    },
+    {
+      "id": "way-810173296",
+      "name": "Covirán",
+      "kind": "supermarket",
+      "lat": 43.46625363333333,
+      "lng": -3.8058149666666665,
+      "address": "Calle de José Martínez Mazas 10",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/810173296",
+      "retrievedAt": "2026-10-19",
+      "coverage": "local",
+      "hours": "Mo-Fr 09:00-14:30; Sa 09:00-15:00; Mo-Fr 17:00-20:30"
     },
     {
       "id": "way-854460753",

@@ -17,5 +17,11 @@
   "osm-node-6635257434": "Residencia con condiciones de acceso sin verificar.",
   "osm-way-23948668": "Residencia universitaria; reservas turísticas sin verificar.",
   "osm-node-7416548200": "Duplica Medplaya Hotel Riviera del catálogo Wikidata.",
-  "osm-node-270746470": "Registro sin nombre identificable."
+  "osm-node-270746470": "Registro sin nombre identificable.",
+  "osm-node-1242093865": "Duplica Hotel Boutique Calas de Alicante del catálogo Wikidata.",
+  "osm-way-791285812": "Hotel Dorma Coliseum: mismo establecimiento que Silken Coliseum del catálogo Wikidata.",
+  "osm-node-13680211002": "Aerotel Terminal 4: identidad y posible duplicación de Air Rooms Madrid Airport pendientes de contrastar; no se añade otra tarjeta en el mismo punto.",
+  "osm-node-4124212961": "Albergue de Peregrinos Santos Mártires: condiciones de acceso para viaje deportivo sin verificar.",
+  "osm-way-224287064": "Residencia Universitaria Calle Caballero: acceso turístico sin verificar.",
+  "osm-way-44048126": "Duplica Hotel Boutique Calas de Alicante del catálogo Wikidata; el edificio y el nodo no crean hoteles distintos."
 }
