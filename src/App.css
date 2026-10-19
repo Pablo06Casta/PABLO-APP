@@ -2296,11 +2296,11 @@
 .trip-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 12px 0; }
 .hero-trip-actions {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 220px));
+  grid-template-columns: repeat(3, minmax(0, 220px));
   justify-content: center;
   align-items: stretch;
   gap: 12px;
-  max-width: 480px;
+  max-width: 708px;
   margin: 18px auto 22px;
 }
 .hero-trip-actions > .secondary-button {
@@ -2346,7 +2346,7 @@
 .budget-download { width: 100%; justify-content: center; margin: 16px 0; }
 .budget-error { padding: 12px; background: var(--accent-soft); border-radius: 9px; color: var(--text); font-size: 12px; }
 @media (max-width: 950px) { .group-budget-layout { grid-template-columns: 1fr; } }
-@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
+@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
 @media (max-width: 480px) {
   .hero-trip-actions {
     grid-template-columns: minmax(0, 300px);

@@ -82,6 +82,7 @@ import { ExternalServices } from "./components/ExternalServices";
 import { LegalInformation } from "./components/LegalInformation";
 import { TournamentCalendar } from "./components/TournamentCalendar";
 import { suggestedTripDates, type Tournament } from "./data/tournaments";
+import fuelReferences from "./data/real/fuel-references.json";
 import "./App.css";
 
 type Selection = { stay: Stay; search: Search };
@@ -599,6 +600,14 @@ function AppContent() {
               <div className="trip-actions hero-trip-actions">
                 <button className="secondary-button" onClick={() => setModal("trip")}>Compartir viaje</button>
                 <button className="secondary-button" onClick={showFuel}><Fuel size={16} /> Buscar gasolineras cerca</button>
+                <a
+                  className="secondary-button"
+                  href={fuelReferences.priceComparator}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Comparar precios gasolina <ArrowUpRight size={16} />
+                </a>
               </div>
               <div className="quick-destinations">
                 <span>

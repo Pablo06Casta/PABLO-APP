@@ -85,6 +85,11 @@ describe("CERCA: flujos del viajero", () => {
     expect(
       screen.getByRole("combobox", { name: "Tu pabellón de competición" }),
     ).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Comparar precios gasolina" }).getAttribute("href"),
+    ).toBe(
+      "https://www.ocu.org/coches/gasolina-y-carburantes/calculadora/gasolineras",
+    );
     expect(findTown).not.toHaveBeenCalled();
     expect(findMarkets).not.toHaveBeenCalled();
   });
