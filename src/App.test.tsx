@@ -334,7 +334,7 @@ describe("CERCA: flujos del viajero", () => {
       ...venue.location,
     });
   });
-  it("busca gasolineras solo tras la acción del usuario y bloquea sedes pendientes", async () => {
+  it("busca gasolineras solo tras la acción del usuario y limita las sedes pendientes", async () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(screen.getByRole("button", { name: "Gasolineras cerca" }));
@@ -345,7 +345,8 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Cerrar" }));
     await user.selectOptions(screen.getByRole("combobox", { name: "Tu pabellón de competición" }), "vitoria-aronova");
     await user.click(screen.getByRole("button", { name: "Gasolineras cerca" }));
-    expect(within(screen.getByRole("dialog")).getByText(/aún no tiene coordenadas confirmadas/)).toBeTruthy();
+    expect(within(screen.getByRole("dialog")).getByText(/ubicación exacta de este pabellón sigue pendiente/)).toBeTruthy();
+    expect(within(screen.getByRole("dialog")).queryByRole("button", { name: "Buscar gasolineras" })).toBeNull();
     expect(vi.mocked(findFuelStations)).toHaveBeenCalledTimes(1);
   });
   it("filtra presupuesto y mantiene el orden de menor a mayor sin anuncios importados", async () => {

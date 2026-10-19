@@ -168,12 +168,22 @@ export function LegalInformation({
             Wikimedia: privacidad
           </a>
         </li>
+        <li>
+          <a
+            href="https://www.ocu.org/organizacion/privacidad"
+            target="_blank"
+            rel="noreferrer"
+          >
+            OCU: privacidad
+          </a>
+        </li>
       </ul>
       <p>
-        Los enlaces a Booking, Airbnb y Google Maps solo abren sus servicios
-        cuando los pulsas. Los enlaces de búsqueda o reserva incluyen destino,
-        fechas y grupo; los de rutas, el destino seleccionado. Desde ese momento
-        se aplican sus políticas y condiciones.
+        Los enlaces a Booking, Airbnb, Google Maps y al comparador de OCU solo
+        abren sus servicios cuando los pulsas. Los enlaces de búsqueda o reserva
+        incluyen destino, fechas y grupo; los de gasolineras incluyen el nombre
+        y la dirección, y los de rutas, el origen y destino seleccionados. Desde
+        ese momento se aplican sus políticas y condiciones.
       </p>
       <h3>Tus derechos y cómo borrar datos</h3>
       <p>

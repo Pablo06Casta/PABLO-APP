@@ -1694,6 +1694,75 @@
 }
 .fuel-external-link { text-align: center; margin: 14px 0; font-size: 12px; }
 .fuel-external-link .text-button { display: inline-flex; align-items: center; gap: 5px; }
+.fuel-price-compare {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 18px;
+  border-radius: 15px;
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+}
+.fuel-price-compare strong {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.fuel-price-compare p {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 0;
+}
+.fuel-price-compare .primary-button {
+  flex: none;
+  white-space: nowrap;
+}
+.fuel-saved {
+  margin-top: 25px;
+}
+.fuel-saved-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  padding-bottom: 5px;
+}
+.fuel-saved-heading h3 {
+  font-size: 16px;
+  margin: 0 0 6px;
+}
+.fuel-saved-heading p {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 590px;
+}
+.fuel-saved-heading > span {
+  flex: none;
+  border-radius: 20px;
+  padding: 6px 10px;
+  background: var(--surface-soft);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+}
+.fuel-reference-card .market-logo {
+  background: var(--surface-soft);
+}
+.fuel-live-note {
+  border-top: 1px solid var(--line);
+  margin-top: 25px;
+  padding-top: 20px;
+}
+.fuel-live-search {
+  padding-top: 24px;
+  padding-bottom: 15px;
+}
+.fuel-location-pending {
+  margin-top: 24px;
+}
 .map-shell {
   height: 570px;
   position: relative;
@@ -3084,6 +3153,12 @@
   .fuel-card .market-info { flex: 1 1 calc(100% - 61px); }
   .fuel-route { margin-left: 61px; justify-content: center; }
   .fuel-route > span { display: inline; }
+  .fuel-price-compare { align-items: stretch; flex-direction: column; }
+  .fuel-price-compare .primary-button { width: 100%; }
+  .fuel-saved-heading { flex-direction: column; }
+  .fuel-reference-card { flex-wrap: wrap; }
+  .fuel-reference-card .market-info { flex: 1 1 calc(100% - 61px); }
+  .fuel-reference-card .fuel-route { width: calc(100% - 46px); }
   .markets-dialog-content {
     padding: 20px 15px;
   }

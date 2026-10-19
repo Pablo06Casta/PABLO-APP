@@ -1,0 +1,202 @@
+{
+  "providedAt": "2026-10-20",
+  "scope": "Direcciones aportadas por localidad; proximidad exacta y precios no verificados por CERCA.",
+  "priceComparator": "https://www.ocu.org/coches/gasolina-y-carburantes/calculadora/gasolineras",
+  "stations": [
+    {
+      "destination": "Granollers",
+      "name": "Shell",
+      "address": "Carrer de Joanot Martorell, s/n, Granollers"
+    },
+    {
+      "destination": "Granollers",
+      "name": "1PRIMER",
+      "address": "Passeig de la Conca de Besòs, 26, Granollers"
+    },
+    {
+      "destination": "Granollers",
+      "name": "Meroil",
+      "address": "Avinguda Enric Prat de la Riba, 100, Granollers"
+    },
+    {
+      "destination": "Solares",
+      "name": "Petróleos de Cudeyo",
+      "address": "Camino Rufriego, km 0, 39710 Solares"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Repsol Salburua",
+      "address": "Portal de Elorriaga, 17, Vitoria-Gasteiz"
+    },
+    {
+      "destination": "Vitoria-Gasteiz",
+      "name": "Repsol",
+      "address": "Portal de Castilla, 10, Vitoria-Gasteiz"
+    },
+    {
+      "destination": "A Estrada",
+      "name": "BP",
+      "address": "Avenida de Pontevedra, 24-28, A Estrada"
+    },
+    {
+      "destination": "A Estrada",
+      "name": "Repsol",
+      "address": "Calle San Pelayo, 71, A Estrada"
+    },
+    {
+      "destination": "A Estrada",
+      "name": "SBC",
+      "address": "Carretera PO-841, km 19,800, A Estrada"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Petroprix",
+      "address": "Urbanización La Leala, 22, Arroyo de la Miel"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Ballenoil",
+      "address": "Calle Santo Tomás, 43, Arroyo de la Miel"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Madese Benamaina",
+      "address": "Avenida del Tívoli, 19, Benalmádena"
+    },
+    {
+      "destination": "Benalmádena",
+      "name": "Galp",
+      "address": "Avenida Arroyo Hondo, s/n, Benalmádena"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Velaz (AVIA)",
+      "address": "Calle Carlos VII, 16, Estella"
+    },
+    {
+      "destination": "Estella-Lizarra",
+      "name": "Zaldu",
+      "address": "Calle Guipúzcoa, s/n, Estella"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Repsol",
+      "address": "Calle Cerco, 2, Huelva"
+    },
+    {
+      "destination": "Huelva",
+      "name": "Galp",
+      "address": "Avenida de Italia, 32, Huelva"
+    },
+    {
+      "destination": "Huelva",
+      "name": "TYCSA Aqualon",
+      "address": "Glorieta Norte, Huelva"
+    },
+    {
+      "destination": "Santander",
+      "name": "Repsol La Albericia",
+      "address": "Carretera La Albericia-Sardinero, km 0,1, Santander"
+    },
+    {
+      "destination": "Santander",
+      "name": "Repsol Sardinero",
+      "address": "Calle Joaquín Costa, El Sardinero, Santander"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Repsol",
+      "address": "Plaza de España, s/n, Cartagena"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Repsol",
+      "address": "Paseo Alfonso XIII, s/n, Cartagena"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Carrefour",
+      "address": "Paseo Alfonso XIII, s/n, Cartagena"
+    },
+    {
+      "destination": "Cartagena",
+      "name": "Repsol",
+      "address": "Avenida Juan Carlos I, 6C, Cartagena"
+    },
+    {
+      "destination": "Ibiza",
+      "name": "Shell",
+      "address": "Avinguda d'Ignasi Wallis, 58, Eivissa"
+    },
+    {
+      "destination": "Ibiza",
+      "name": "Autonetoil",
+      "address": "Calle Alcalde Bartomeu Rosselló Sala, 9B, Eivissa"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Plenergy",
+      "address": "Avenida de Boyeros, 14, La Rinconada"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "EasyGas",
+      "address": "Carretera Sevilla-Brenes, km 3, San José de la Rinconada"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Shell La Victoria",
+      "address": "A-8005, km 5, La Rinconada"
+    },
+    {
+      "destination": "La Rinconada",
+      "name": "Q8",
+      "address": "Carretera SE-111, km 10,8, San José de la Rinconada"
+    },
+    {
+      "destination": "Madrid",
+      "name": "Moeve",
+      "address": "Avenida de Logroño, 233, Madrid-Barajas"
+    },
+    {
+      "destination": "Madrid",
+      "name": "Galp",
+      "address": "Camino Cuartel, 9, Madrid-Barajas"
+    },
+    {
+      "destination": "Madrid",
+      "name": "Repsol",
+      "address": "Avenida General, 22, Madrid-Barajas"
+    },
+    {
+      "destination": "Paracuellos de Jarama",
+      "name": "Galp",
+      "address": "Camino Viejo de Cobeña, 34, Paracuellos de Jarama"
+    },
+    {
+      "destination": "Oviedo",
+      "venueHint": "Corredoria Arena",
+      "name": "Repsol",
+      "address": "Calle Molín la Casuca, s/n, La Corredoria"
+    },
+    {
+      "destination": "Oviedo",
+      "venueHint": "Corredoria Arena",
+      "name": "Shell",
+      "address": "Avenida de Oviedo, km 2"
+    },
+    {
+      "destination": "Oviedo",
+      "venueHint": "Corredoria Arena",
+      "name": "Moeve (antigua Cepsa)",
+      "address": "Plaza Luis Ruiz de la Peña, s/n"
+    },
+    {
+      "destination": "Oviedo",
+      "venueHint": "El Cristo",
+      "name": "Repsol",
+      "address": "Avenida de Buenavista, s/n"
+    }
+  ]
+}
+

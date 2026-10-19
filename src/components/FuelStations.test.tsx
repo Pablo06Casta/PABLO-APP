@@ -22,4 +22,43 @@ describe("Gasolineras cercanas", () => {
     expect(screen.getByText(/No encontramos gasolineras/)).toBeTruthy();
     expect(screen.getByRole("link", { name: "Buscar en Google Maps" }).getAttribute("href")).toContain("@40,-3,14z");
   });
+  it("muestra las gasolineras guardadas del destino y el comparador de precios", () => {
+    render(
+      <FuelStations
+        origin={origin}
+        destination="Granollers"
+        venueName="Pavelló Municipal del Congost"
+        status="idle"
+        error=""
+        onLoad={vi.fn()}
+        stations={[]}
+      />,
+    );
+    expect(screen.getByRole("heading", { name: "Gasolineras guardadas en Granollers" })).toBeTruthy();
+    expect(screen.getByText("1PRIMER")).toBeTruthy();
+    const locationLinks = screen.getAllByRole("link", { name: /^Ver ubicación de/ });
+    expect(locationLinks).toHaveLength(3);
+    expect(screen.getByRole("link", { name: /Comparar precios/ }).getAttribute("href")).toBe(
+      "https://www.ocu.org/coches/gasolina-y-carburantes/calculadora/gasolineras",
+    );
+    const map = new URL(locationLinks[0].getAttribute("href")!);
+    expect(map.searchParams.get("query")).toContain("Shell, Carrer de Joanot Martorell");
+  });
+  it("permite consultar la lista guardada cuando el pabellón sigue pendiente", () => {
+    render(
+      <FuelStations
+        origin={origin}
+        destination="Madrid"
+        venueName="Centro de Tecnificación de Madrid · Barajas"
+        liveSearchAvailable={false}
+        status="idle"
+        error=""
+        onLoad={vi.fn()}
+        stations={[]}
+      />,
+    );
+    expect(screen.getByText("Moeve")).toBeTruthy();
+    expect(screen.getByText(/ubicación exacta de este pabellón sigue pendiente/)).toBeTruthy();
+    expect(screen.queryByRole("button", { name: "Buscar gasolineras" })).toBeNull();
+  });
 });

@@ -1224,9 +1224,16 @@ function AppContent() {
       )}
       {modal === "fuel" && <Dialog title={`Gasolineras cerca de ${venueLabel(search)}`} onClose={() => setModal(null)} wide>
         <div className="markets-dialog-content">
-          {search.venue && !search.venue.location
-            ? <p className="budget-error" role="status">Este pabellón aún no tiene coordenadas confirmadas. No podemos buscar gasolineras cercanas hasta verificarlas.</p>
-            : <FuelStations stations={fuelOriginId === origin.id ? fuelStations : []} origin={origin} status={fuelOriginId === origin.id ? fuelStatus : "idle"} error={fuelError} onLoad={() => loadFuel(search)} />}
+          <FuelStations
+            stations={fuelOriginId === origin.id ? fuelStations : []}
+            origin={origin}
+            destination={search.town.name}
+            venueName={search.venue?.name}
+            liveSearchAvailable={!search.venue || Boolean(search.venue.location)}
+            status={fuelOriginId === origin.id ? fuelStatus : "idle"}
+            error={fuelError}
+            onLoad={() => loadFuel(search)}
+          />
         </div>
       </Dialog>}
       {modal === "help" && (
