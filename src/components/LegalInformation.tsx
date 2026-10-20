@@ -7,6 +7,7 @@ const dataFiles = [
   ["venue-markets.json", "Supermercados y tiendas OSM"],
   ["granada-markets.json", "Comercios de Granada OSM"],
   ["venues.json", "Sedes y ubicaciones"],
+  ["price-model.json", "Modelo propio de estimación"],
 ];
 const storageItems = [
   ["cerca-analytics-consent-v1", "Tu elección sobre la estadística de uso", "Técnico, necesario para respetar tu decisión", "Hasta que la cambies o borres los datos"],
@@ -325,6 +326,9 @@ export function LegalInformation({
         CERCA no publica tarifas observadas o copiadas de Booking o Airbnb. Todas
         las cifras de alojamiento proceden de un modelo propio de planificación
         basado en categoría, ciudad, temporada y habitaciones dobles previstas.
+        Una tarea automática revisa cada día el modelo y comprueba que no se han
+        incorporado campos de tarifas comerciales; actualizar la fecha de
+        revisión no convierte la estimación en un precio real.
         Ninguna cifra es una oferta, descuento, tarifa actual o disponibilidad
         confirmada; puede excluir impuestos y cargos. Eventos, puentes y fiestas
         pueden cambiar las condiciones. El orden por precio es orientativo y no

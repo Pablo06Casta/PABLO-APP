@@ -24,6 +24,8 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 
 Se filtra y ordena con la misma estimación central por persona y noche. Los hoteles no reciben variaciones aleatorias por nombre/ID. Para grupos impares se prevén habitaciones dobles completas.
 
+El modelo está declarado en `src/data/real/price-model.json`. No contiene tarifas observadas ni copiadas de plataformas. La tarea diaria actualiza su fecha de revisión, comprueba que no reaparezcan campos comerciales y vuelve a ejecutar las pruebas de cálculo; las estimaciones se recalculan con las fechas, el destino, la categoría y el tamaño del grupo elegidos.
+
 El usuario reserva en la plataforma: CERCA no cobra ni confirma reservas. Las fichas pueden estar antiguas o retiradas. «Ver en Booking» abre una ruta publicada o selecciona un identificador conocido; «Buscar en Booking» consulta el nombre y la ubicación de un alojamiento real de OSM, pero puede devolver otros resultados. No confirma su presencia en Booking. El catálogo tiene huecos; las búsquedas externas de ambas plataformas amplían la zona con fechas y huéspedes. No se hace scraping de Booking o Airbnb ni se simula una conexión con el plugin de Booking, que no está disponible en esta sesión.
 
 Fuentes, licencias, fechas, método y límites: [NOTICE-badminton.md](src/data/real/NOTICE-badminton.md). Wikidata: CC0. Sedes/tiendas y alojamientos OSM: © OpenStreetMap contributors, ODbL. Los datos importados de Inside Airbnb se retiraron por no tener acreditados todos los derechos necesarios.
@@ -68,6 +70,18 @@ El workflow `.github/workflows/ci.yml` comprueba, compila para `/PABLO-APP/` y p
 CERCA_BASE_PATH=/PABLO-APP/ npm run build -- --outDir /tmp/cerca-pages-dist
 CERCA_BASE_PATH=/PABLO-APP/ npm run preview -- --outDir /tmp/cerca-pages-dist --host 127.0.0.1 --port 5181 --strictPort
 ```
+
+### Revisión automática diaria
+
+`.github/workflows/daily-establishments.yml` se ejecuta todos los días a las **06:00 de Europe/Madrid**. Usa dos expresiones UTC y una comprobación de zona horaria para respetar tanto el horario de invierno como el de verano y ejecutar el trabajo una sola vez al día. La tarea:
+
+- actualiza la fecha de revisión del modelo propio de precios y rechaza cualquier reaparición de tarifas observadas o referencias comerciales retiradas;
+- amplía de forma acotada los establecimientos procedentes de OpenStreetMap;
+- comprueba la web pública, sus recursos, el manifiesto PWA, las sedes y el service worker;
+- ejecuta lint, pruebas, comprobación del calendario, compilación y smoke test;
+- guarda los datos revisados en `main` y lanza la publicación de GitHub Pages.
+
+Un fallo deja la ejecución marcada en rojo en GitHub Actions y detiene la publicación de esa revisión.
 
 ### Sincronización de presupuestos con Supabase
 

@@ -120,7 +120,7 @@ export function StayCard({
         </button>
       </div>
       <p className="estimate-source">
-        Estimación propia de CERCA · tarifa no observada
+        Estimación propia de CERCA · revisada {estimate.reviewedAt.split("-").reverse().join("/")} · tarifa no observada
       </p>
       <p className="card-total event-price-notice">
         Eventos, puentes y fiestas pueden cambiar el precio. Confírmalo para tus

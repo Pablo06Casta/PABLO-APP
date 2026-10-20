@@ -1,4 +1,5 @@
 import type { Search, Stay } from "../types";
+import priceModel from "../data/real/price-model.json";
 
 // Planning assumptions, NOT a quote or a claim about a property's tariff.
 // Unknown hotel room prices use the same category/city model, never a random
@@ -12,20 +13,14 @@ export function estimateStay(stay: Stay, search: Search) {
   );
   const month = Number(search.checkIn.slice(5, 7));
   const city = search.town.name.toLocaleLowerCase("es");
-  const cityFactor = /ibiza|eivissa/.test(city)
-    ? 1.65
-    : /madrid|barcelona/.test(city)
-      ? 1.3
-      : /santander|benalm|alicante|vitoria/.test(city)
-        ? 1.1
-        : 1;
-  const season = month >= 6 && month <= 8 ? 1.2 : 1;
+  const cityFactor = priceModel.cityFactors.find((rule) =>
+    new RegExp(rule.pattern, "i").test(city)
+  )?.factor ?? 1;
+  const season = priceModel.summer.months.includes(month)
+    ? priceModel.summer.factor
+    : 1;
   const rooms = stay.platform === "Airbnb" ? 1 : Math.ceil(search.guests / 2);
-  const base = stay.type === "Habitación"
-    ? 50
-    : stay.type === "Apartamento"
-      ? 100
-      : 75;
+  const base = priceModel.bases[stay.type];
   const nightlyGroup = Math.round(
     base * rooms * cityFactor * season,
   );
@@ -35,9 +30,10 @@ export function estimateStay(stay: Stay, search: Search) {
     perPersonNight,
     totalGroup: nightlyGroup * days,
     rooms,
-    low: Math.max(1, Math.round(perPersonNight * 0.7)),
-    high: Math.round(perPersonNight * 1.4),
+    low: Math.max(1, Math.round(perPersonNight * priceModel.range.low)),
+    high: Math.round(perPersonNight * priceModel.range.high),
     source: "model" as const,
+    reviewedAt: priceModel.reviewedAt,
     explanation: `Modelo propio de CERCA: ${base} € por unidad de planificación × factor de ciudad ${cityFactor} × temporada ${season} × ${rooms} ${stay.platform === "Airbnb" ? "alojamiento(s)" : "habitación(es)"}. No es una tarifa observada de este alojamiento. Extras e impuestos no confirmados.`,
   };
 }

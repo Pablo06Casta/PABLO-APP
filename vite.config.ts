@@ -9,6 +9,7 @@ const datasets: Record<string, string> = {
   "venue-markets.json": "src/data/real/venue-markets.json",
   "granada-markets.json": "src/data/real/granada-markets.json",
   "venues.json": "src/data/venues.json",
+  "price-model.json": "src/data/real/price-model.json",
   "market-exclusions.json": "src/data/real/market-exclusions.json",
   "osm-stays-exclusions.json": "src/data/real/osm-stays-exclusions.json",
   "municipalities-NOTICE.md": "src/data/NOTICE.md",

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-10-20",
+  "currency": "EUR",
+  "bases": {
+    "Habitación": 50,
+    "Hotel": 75,
+    "Apartamento": 100,
+    "Casa rural": 75,
+    "Casa": 75
+  },
+  "cityFactors": [
+    {
+      "pattern": "ibiza|eivissa",
+      "factor": 1.65
+    },
+    {
+      "pattern": "madrid|barcelona",
+      "factor": 1.3
+    },
+    {
+      "pattern": "santander|benalm|alicante|vitoria",
+      "factor": 1.1
+    }
+  ],
+  "summer": {
+    "months": [
+      6,
+      7,
+      8
+    ],
+    "factor": 1.2
+  },
+  "range": {
+    "low": 0.7,
+    "high": 1.4
+  },
+  "source": "Modelo propio de planificación de CERCA; no contiene tarifas observadas de alojamientos o plataformas."
+}

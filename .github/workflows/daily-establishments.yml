@@ -1,4 +1,4 @@
-name: Ampliar establecimientos cercanos
+name: Actualizar estimaciones y revisar CERCA a las 06:00
 
 on:
   workflow_dispatch:
@@ -12,12 +12,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: cerca-daily-establishments
+  group: cerca-daily-review
   cancel-in-progress: false
 
 jobs:
-  expand:
+  update-and-review:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:
@@ -47,25 +48,36 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Añadir establecimientos verificados
+      - name: Instalar dependencias verificadas
+        if: steps.local-time.outputs.allowed == 'true'
+        run: npm ci
+      - name: Actualizar y auditar el modelo propio de precios
+        if: steps.local-time.outputs.allowed == 'true'
+        run: python3 scripts/refresh-price-model.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Actualizar establecimientos de fuentes abiertas
         if: steps.local-time.outputs.allowed == 'true'
         run: python3 scripts/daily-expand-establishments.py
-      - name: Validar la aplicación
+      - name: Comprobar la web que está publicada
         if: steps.local-time.outputs.allowed == 'true'
-        run: npm ci && npm run check
-      - name: Guardar y publicar la ampliación
+        env:
+          CERCA_LIVE_URL: https://pablo06casta.github.io/PABLO-APP/
+        run: npm run smoke:live | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Revisar pruebas, tipos, compilación y PWA
+        if: steps.local-time.outputs.allowed == 'true'
+        run: npm run check
+      - name: Guardar y publicar la revisión diaria
         id: save
         if: steps.local-time.outputs.allowed == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/venues.json src/data/real/osm-stays.json src/data/real/fuel-references.json src/data/real/venue-markets.json src/data/real/daily-expansion-state.json
+          git add src/data/venues.json src/data/real/osm-stays.json src/data/real/fuel-references.json src/data/real/venue-markets.json src/data/real/daily-expansion-state.json src/data/real/price-model.json
           if git diff --cached --quiet; then
             echo "No hay cambios que guardar"
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "Amplía establecimientos cercanos automáticamente"
+          git commit -m "Actualiza estimaciones y revisión diaria de CERCA"
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
       - name: Iniciar comprobación y publicación de CERCA

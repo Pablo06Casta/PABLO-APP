@@ -13,6 +13,7 @@
     "typecheck": "tsc -b",
     "check": "npm run lint && npm run test && npm run test:calendar && npm run build && npm run smoke",
     "smoke": "node scripts/smoke.mjs",
+    "smoke:live": "node scripts/check-live-site.mjs",
     "test:calendar": "python3 -m unittest discover -s scripts -p 'test_*.py'"
   },
   "dependencies": {

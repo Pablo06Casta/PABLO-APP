@@ -21,6 +21,7 @@ Métodos y fuentes de las transformaciones: https://github.com/Pablo06Casta/PABL
 
 ## Otras fuentes
 
+- `price-model.json`: parámetros públicos del modelo propio de planificación de CERCA y fecha de su última revisión automática. No contiene tarifas observadas ni copiadas de plataformas.
 - Datos estructurados de Wikidata: CC0, https://www.wikidata.org/wiki/Wikidata:Licensing . Fuente y fecha de los catálogos: https://github.com/Pablo06Casta/PABLO-APP/tree/main/src/data/real . No implica licencia sobre las fotos o páginas externas enlazadas.
 - `curated-stays.json`: tres referencias públicas de alojamiento para Tudela de Duero, separadas de OSM y Wikidata. Sus coordenadas son aproximadas y sus enlaces abren búsquedas por nombre; deben confirmarse antes de viajar.
 - Catálogo municipal: licencia ISC, texto íntegro en `municipalities-NOTICE.md`.

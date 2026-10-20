@@ -63,6 +63,7 @@ try {
     "venue-markets.json",
     "granada-markets.json",
     "venues.json",
+    "price-model.json",
   ]) {
     const result = await fetch(new URL(`data/${file}`, root));
     assert.equal(result.status, 200, file);
