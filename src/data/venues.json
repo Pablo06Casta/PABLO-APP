@@ -308,5 +308,19 @@
     "sourceUrl": "https://www.openstreetmap.org/relation/17874845",
     "verifiedAt": "2026-10-18",
     "address": "Instalaciones deportivas de El Cristo, Calle Julián Clavería, Truébano, El Cristo, Oviedo / Uviéu, Oviedo, Asturias / Asturies, 33006"
+  },
+  {
+    "id": "soria-fuente-del-rey",
+    "city": "Soria",
+    "region": "Castilla y León",
+    "name": "Polideportivo Fuente del Rey",
+    "location": {
+      "lat": 41.7705525,
+      "lng": -2.4685633
+    },
+    "status": "confirmed",
+    "sourceUrl": "https://www.openstreetmap.org/way/271142947",
+    "verifiedAt": "2026-10-20",
+    "address": "Camino de la Fuente del Rey, 42000 Soria"
   }
 ]

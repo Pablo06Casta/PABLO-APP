@@ -690,13 +690,13 @@
     },
     {
       "destination": "Estella-Lizarra",
-      "name": "Albergue - Hostería de Curtidores",
+      "name": "Albergue Capuchinos Rocamador",
       "nightly": 102,
       "source": "Estimado"
     },
     {
       "destination": "Estella-Lizarra",
-      "name": "Albergue Capuchinos Rocamador",
+      "name": "Albergue - Hostería de Curtidores",
       "nightly": 102,
       "source": "Estimado"
     },
@@ -954,12 +954,6 @@
     },
     {
       "destination": "Oviedo",
-      "name": "Hotel & Spa Princesa Munia",
-      "nightly": 109,
-      "source": "Booking"
-    },
-    {
-      "destination": "Oviedo",
       "name": "Hotel Alda Centro Oviedo",
       "nightly": 82,
       "source": "Estimado"
@@ -1083,6 +1077,12 @@
       "name": "Hotel Soho Boutique Oviedo",
       "nightly": 82,
       "source": "Estimado"
+    },
+    {
+      "destination": "Oviedo",
+      "name": "Hotel & Spa Princesa Munia",
+      "nightly": 109,
+      "source": "Booking"
     },
     {
       "destination": "Oviedo",
@@ -1529,6 +1529,76 @@
       "source": "Booking"
     },
     {
+      "destination": "Soria",
+      "name": "Ábaco",
+      "nightly": 50,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Abaster",
+      "nightly": 68,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Arévacos",
+      "nightly": 48,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "El Rincón de Gala",
+      "nightly": 62,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hostal Eras de Santa Bárbara",
+      "nightly": 54,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hostal Ruiz",
+      "nightly": 50,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hostal Santa Bárbara",
+      "nightly": 52,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hostal Vitorina",
+      "nightly": 55,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hostel Soria",
+      "nightly": 56,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "name": "Hotel Alba",
+      "nightly": 58,
+      "source": "Estimado",
+      "providedAt": "2026-10-20"
+    },
+    {
       "destination": "Vitoria-Gasteiz",
       "name": "abba Jazz Hotel",
       "nightly": 85,
@@ -1674,4 +1744,3 @@
     }
   ]
 }
-

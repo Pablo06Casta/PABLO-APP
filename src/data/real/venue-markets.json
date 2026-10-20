@@ -12,6 +12,7 @@
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-1.0015412,37.6031864,-0.9715412,37.6231864",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-1.0224507,37.6027201,-0.9924507,37.6227201",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.0519539,42.6612007,-2.0219539,42.6812007",
+    "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.4886,41.7505,-2.4486,41.7905",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.6662927,42.8339512,-2.6362927,42.8539512",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.67246,42.85455,-2.65446,42.86655",
     "https://api.openstreetmap.org/api/0.6/map.json?bbox=-2.683,42.844,-2.663,42.859",
@@ -49,14 +50,74 @@
   ],
   "coverage": [
     {
+      "venueId": "alicante-pitiu",
+      "supermarkets": 34,
+      "shops": 54
+    },
+    {
+      "venueId": "alicante-tecnificacion",
+      "supermarkets": 34,
+      "shops": 54
+    },
+    {
+      "venueId": "benalmadena-arroyo",
+      "supermarkets": 28,
+      "shops": 45
+    },
+    {
+      "venueId": "cartagena-palacio",
+      "supermarkets": 30,
+      "shops": 39
+    },
+    {
+      "venueId": "cartagena-wssell",
+      "supermarkets": 30,
+      "shops": 38
+    },
+    {
+      "venueId": "estella-tierra",
+      "supermarkets": 8,
+      "shops": 11
+    },
+    {
+      "venueId": "estrada-coto",
+      "supermarkets": 3,
+      "shops": 3
+    },
+    {
       "venueId": "granollers-congost",
       "supermarkets": 10,
       "shops": 23
     },
     {
-      "venueId": "solares-mies",
-      "supermarkets": 4,
-      "shops": 4
+      "venueId": "huelva-andres",
+      "supermarkets": 25,
+      "shops": 38
+    },
+    {
+      "venueId": "huelva-palacio",
+      "supermarkets": 25,
+      "shops": 37
+    },
+    {
+      "venueId": "oviedo-corredoria",
+      "supermarkets": 37,
+      "shops": 46
+    },
+    {
+      "venueId": "oviedo-cristo",
+      "supermarkets": 48,
+      "shops": 65
+    },
+    {
+      "venueId": "paracuellos-municipal",
+      "supermarkets": 6,
+      "shops": 7
+    },
+    {
+      "venueId": "rinconada-fernando",
+      "supermarkets": 6,
+      "shops": 9
     },
     {
       "venueId": "santander-palacio",
@@ -69,6 +130,16 @@
       "shops": 13
     },
     {
+      "venueId": "solares-mies",
+      "supermarkets": 4,
+      "shops": 4
+    },
+    {
+      "venueId": "soria-fuente-del-rey",
+      "supermarkets": 5,
+      "shops": 5
+    },
+    {
       "venueId": "vitoria-aldabe",
       "supermarkets": 53,
       "shops": 74
@@ -77,71 +148,6 @@
       "venueId": "vitoria-salburua",
       "supermarkets": 50,
       "shops": 70
-    },
-    {
-      "venueId": "estrada-coto",
-      "supermarkets": 3,
-      "shops": 3
-    },
-    {
-      "venueId": "alicante-tecnificacion",
-      "supermarkets": 34,
-      "shops": 54
-    },
-    {
-      "venueId": "alicante-pitiu",
-      "supermarkets": 34,
-      "shops": 54
-    },
-    {
-      "venueId": "benalmadena-arroyo",
-      "supermarkets": 28,
-      "shops": 45
-    },
-    {
-      "venueId": "cartagena-wssell",
-      "supermarkets": 30,
-      "shops": 38
-    },
-    {
-      "venueId": "cartagena-palacio",
-      "supermarkets": 30,
-      "shops": 39
-    },
-    {
-      "venueId": "estella-tierra",
-      "supermarkets": 8,
-      "shops": 11
-    },
-    {
-      "venueId": "huelva-palacio",
-      "supermarkets": 25,
-      "shops": 37
-    },
-    {
-      "venueId": "huelva-andres",
-      "supermarkets": 25,
-      "shops": 38
-    },
-    {
-      "venueId": "rinconada-fernando",
-      "supermarkets": 6,
-      "shops": 9
-    },
-    {
-      "venueId": "paracuellos-municipal",
-      "supermarkets": 6,
-      "shops": 7
-    },
-    {
-      "venueId": "oviedo-corredoria",
-      "supermarkets": 37,
-      "shops": 46
-    },
-    {
-      "venueId": "oviedo-cristo",
-      "supermarkets": 48,
-      "shops": 65
     }
   ],
   "markets": [
@@ -677,6 +683,19 @@
       "sourceUrl": "https://www.openstreetmap.org/node/11150213386",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "node-11225228162",
+      "name": "Dia",
+      "kind": "supermarket",
+      "lat": 41.7674495,
+      "lng": -2.4674895,
+      "address": "Calle Clemente Sáenz 2",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/11225228162",
+      "retrievedAt": "2026-10-20",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:00"
     },
     {
       "id": "node-11286556569",
@@ -1397,6 +1416,18 @@
       "source": "osm",
       "sourceUrl": "https://www.openstreetmap.org/node/1336972826",
       "retrievedAt": "2026-10-19",
+      "coverage": "local"
+    },
+    {
+      "id": "node-13435283435",
+      "name": "Magazin Rumanesc Soria",
+      "kind": "supermarket",
+      "lat": 41.7651975,
+      "lng": -2.4702907,
+      "address": "Calle Sagunto 8",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/13435283435",
+      "retrievedAt": "2026-10-20",
       "coverage": "local"
     },
     {
@@ -4095,6 +4126,18 @@
       "coverage": "local"
     },
     {
+      "id": "node-7140274232",
+      "name": "Alcampo",
+      "kind": "supermarket",
+      "lat": 41.7654685,
+      "lng": -2.4655967,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/node/7140274232",
+      "retrievedAt": "2026-10-20",
+      "coverage": "local"
+    },
+    {
       "id": "node-7154667103",
       "name": "Zelai Alai",
       "kind": "convenience",
@@ -5163,6 +5206,19 @@
       "coverage": "local"
     },
     {
+      "id": "way-1289595741",
+      "name": "E. Leclerc",
+      "kind": "supermarket",
+      "lat": 41.770100760000005,
+      "lng": -2.46676262,
+      "address": "Calle Enrique García Carrilero 5",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/1289595741",
+      "retrievedAt": "2026-10-20",
+      "coverage": "local",
+      "hours": "09:00-14:30,17:00-20:30"
+    },
+    {
       "id": "way-1308432936",
       "name": "BM",
       "kind": "supermarket",
@@ -5197,6 +5253,19 @@
       "sourceUrl": "https://www.openstreetmap.org/way/1323610949",
       "retrievedAt": "2026-10-19",
       "coverage": "local"
+    },
+    {
+      "id": "way-1370042474",
+      "name": "Mercadona",
+      "kind": "supermarket",
+      "lat": 41.77202867777778,
+      "lng": -2.4734070666666668,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "source": "osm",
+      "sourceUrl": "https://www.openstreetmap.org/way/1370042474",
+      "retrievedAt": "2026-10-20",
+      "coverage": "local",
+      "hours": "Mo-Sa 09:00-21:30"
     },
     {
       "id": "way-141210278",

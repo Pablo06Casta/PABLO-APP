@@ -5,27 +5,783 @@
   "licenceUrl": "https://www.openstreetmap.org/copyright",
   "hotels": [
     {
-      "id": "osm-way-265435789",
-      "name": "Amelia Habitaciones",
-      "type": "Habitación",
-      "lat": 38.3453369375,
-      "lng": -0.4830279875,
-      "address": "Carrer de Miguel Soler 10, Alicante/Alacant",
-      "sourceUrl": "https://www.openstreetmap.org/way/265435789",
-      "bookingPath": "es/hab-miguel-soler.es",
-      "bookingSourceUrl": "https://ameliahabitaciones.top/",
+      "id": "osm-node-10033236459",
+      "name": "Hotel Sol Boutique",
+      "type": "Hotel",
+      "lat": 43.4653499,
+      "lng": -3.7998153,
+      "address": "Calle del Sol 31, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/10033236459",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-way-782477242",
-      "name": "Gran Hotel Sardinero",
+      "id": "osm-node-10043293766",
+      "name": "Almar Apartment",
+      "type": "Apartamento",
+      "lat": 36.5862581,
+      "lng": -4.5359367,
+      "address": "Camino de Doña María 8, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/10043293766",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1008742728",
+      "name": "Hostal Casa Enrique",
       "type": "Hotel",
-      "lat": 43.47250347368421,
-      "lng": -3.7831822210526314,
-      "address": "Plaza de Italia 2, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/782477242",
-      "bookingPath": "es/gran-hotel-sardinero",
-      "bookingSourceUrl": "https://www.sardinerohoteles.com",
+      "lat": 43.3871982,
+      "lng": -3.7310218,
+      "address": "Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/1008742728",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1008742776",
+      "name": "Hospedaje Rada",
+      "type": "Hotel",
+      "lat": 43.3843578,
+      "lng": -3.7388155,
+      "address": "Avenida de Santander 8, Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/1008742776",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1008742844",
+      "name": "Apartamentos Turísticos Villa Fresnedo",
+      "type": "Hotel",
+      "lat": 43.3845281,
+      "lng": -3.7403421,
+      "address": "Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/1008742844",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1008742854",
+      "name": "Castilla Termal Balnerio de Solares",
+      "type": "Hotel",
+      "lat": 43.3858471,
+      "lng": -3.7330807,
+      "address": "Avenida de Calvo Sotelo 13, Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/1008742854",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10095479343",
+      "name": "Hotel Favila",
+      "type": "Hotel",
+      "lat": 43.3656796,
+      "lng": -5.8540678,
+      "address": "Calle Uría 37, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/10095479343",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10095621373",
+      "name": "Exe Hotel El Magistral",
+      "type": "Hotel",
+      "lat": 43.3633044,
+      "lng": -5.8455721,
+      "address": "Calle Jovellanos 3, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/10095621373",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10095627852",
+      "name": "Hotel Clarín",
+      "type": "Hotel",
+      "lat": 43.3651382,
+      "lng": -5.8491261,
+      "address": "Calle Caveda 23, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/10095627852",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10096295625",
+      "name": "Hotel Soho Boutique Oviedo",
+      "type": "Hotel",
+      "lat": 43.3623922,
+      "lng": -5.8461966,
+      "address": "Calle Mendizábal 1, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/10096295625",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10119290912",
+      "name": "Hotel Duerming Longoria Plaza",
+      "type": "Hotel",
+      "lat": 43.3643015,
+      "lng": -5.8489243,
+      "address": "Calle Covadonga 13, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/10119290912",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10133132419",
+      "name": "Suite 1907 Oviedo",
+      "type": "Hotel",
+      "lat": 43.3627214,
+      "lng": -5.8491258,
+      "address": "Calle Uría 12, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/10133132419",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10165741541",
+      "name": "Hostería Santander",
+      "type": "Hotel",
+      "lat": 43.4712761,
+      "lng": -3.782574,
+      "address": "Calle de Joaquín Costa 43, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/10165741541",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10233516599",
+      "name": "Apartamentos rurales Sobremazas",
+      "type": "Habitación",
+      "lat": 43.3694192,
+      "lng": -3.7488118,
+      "address": "Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/10233516599",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10561974409",
+      "name": "Fly Rooms Madrid",
+      "type": "Hotel",
+      "lat": 40.4707532,
+      "lng": -3.5801137,
+      "address": "Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/10561974409",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10707871812",
+      "name": "Pensión Romero",
+      "type": "Habitación",
+      "lat": 43.363968,
+      "lng": -5.8508802,
+      "address": "Calle Uría / Cai Uría 38, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/10707871812",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-10992884674",
+      "name": "Habitaka",
+      "type": "Habitación",
+      "lat": 42.8458399,
+      "lng": -2.6714095,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/10992884674",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11143582038",
+      "name": "Pensión restaurante La Bombilla",
+      "type": "Hotel",
+      "lat": 42.6902646,
+      "lng": -8.4916216,
+      "address": "Praza de Galicia 5, A Estrada",
+      "sourceUrl": "https://www.openstreetmap.org/node/11143582038",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11302241070",
+      "name": "Los Rosales, 2",
+      "type": "Habitación",
+      "lat": 40.4726142,
+      "lng": -3.5804815,
+      "address": "Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/11302241070",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11396299748",
+      "name": "Hotel Rosal",
+      "type": "Hotel",
+      "lat": 43.3598101,
+      "lng": -5.8478277,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11396299748",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11512412174",
+      "name": "Pensión González",
+      "type": "Habitación",
+      "lat": 43.3663567,
+      "lng": -5.8537194,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11512412174",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11514816722",
+      "name": "Hostal Foncalada",
+      "type": "Habitación",
+      "lat": 43.365615,
+      "lng": -5.8460956,
+      "address": "Calle Foncalada 24, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/11514816722",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11527600861",
+      "name": "HiHome Hostel",
+      "type": "Habitación",
+      "lat": 43.3655037,
+      "lng": -5.8539308,
+      "address": "Calle Uría / Cai Uría 33, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11527600861",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11527617966",
+      "name": "Hotel Carbayón",
+      "type": "Hotel",
+      "lat": 43.3720907,
+      "lng": -5.8314368,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11527617966",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11677345385",
+      "name": "NUVÓ Hotel Boutique",
+      "type": "Hotel",
+      "lat": 43.3649946,
+      "lng": -5.8414842,
+      "address": "Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/11677345385",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11725368396",
+      "name": "Pensión Riesgo",
+      "type": "Habitación",
+      "lat": 43.3658637,
+      "lng": -5.8506645,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11725368396",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11765843237",
+      "name": "El Vasco Rooms",
+      "type": "Habitación",
+      "lat": 43.3647298,
+      "lng": -5.8451546,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/11765843237",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11937405086",
+      "name": "Logune Rooms",
+      "type": "Habitación",
+      "lat": 42.8488037,
+      "lng": -2.6695351,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/11937405086",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-11937416896",
+      "name": "Nirea",
+      "type": "Hotel",
+      "lat": 42.843596,
+      "lng": -2.6723623,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/11937416896",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12061980250",
+      "name": "Auditorio Rooms Boutique",
+      "type": "Hotel",
+      "lat": 43.3574,
+      "lng": -5.8504066,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12061980250",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12071247676",
+      "name": "Cartagena Spain",
+      "type": "Apartamento",
+      "lat": 37.600417,
+      "lng": -0.9868795,
+      "address": "Calle Comedias, Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12071247676",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12071247717",
+      "name": "San Sebastián Suites",
+      "type": "Apartamento",
+      "lat": 37.6013938,
+      "lng": -0.9867492,
+      "address": "Plaza de San Sebastián 8, Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12071247717",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12071409906",
+      "name": "La Casa De Las Flores",
+      "type": "Hotel",
+      "lat": 37.6018499,
+      "lng": -0.9850604,
+      "address": "Calle Honda 21, Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12071409906",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12078804079",
+      "name": "Hostal Fidalgo",
+      "type": "Habitación",
+      "lat": 43.3633398,
+      "lng": -5.8454555,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12078804079",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12087772187",
+      "name": "La Hospedería Oviedo",
+      "type": "Habitación",
+      "lat": 43.3629451,
+      "lng": -5.8441992,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12087772187",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12111595585",
+      "name": "Hostal Emilio",
+      "type": "Habitación",
+      "lat": 40.472404,
+      "lng": -3.5798331,
+      "address": "Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/12111595585",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12134483984",
+      "name": "The Market Hostel Alicante",
+      "type": "Habitación",
+      "lat": 38.3487678,
+      "lng": -0.4844076,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/12134483984",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12396689264",
+      "name": "Sahara Sunset Club",
+      "type": "Hotel",
+      "lat": 36.5897355,
+      "lng": -4.530029,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12396689264",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12409252105",
+      "name": "B&B Hotel Alicante Centro",
+      "type": "Hotel",
+      "lat": 38.3467056,
+      "lng": -0.4940549,
+      "address": "Avinguda de Salamanca 38, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/12409252105",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12499028091",
+      "name": "Bypillow Paseo",
+      "type": "Hotel",
+      "lat": 38.349095,
+      "lng": -0.4918476,
+      "address": "Carrer del Marqués de Molins 63, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/12499028091",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1253892896",
+      "name": "Aloha Playa",
+      "type": "Hotel",
+      "lat": 36.5856108,
+      "lng": -4.534078,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/1253892896",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1253915509",
+      "name": "Hotel MedPlaya Alba Beach",
+      "type": "Hotel",
+      "lat": 36.588809,
+      "lng": -4.5306891,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/1253915509",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12699227201",
+      "name": "Hostelfly",
+      "type": "Habitación",
+      "lat": 40.474952,
+      "lng": -3.5754755,
+      "address": "Calle de la Caldera 11, Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/12699227201",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12701918101",
+      "name": "Apartamentos Pedregal",
+      "type": "Apartamento",
+      "lat": 43.3664327,
+      "lng": -5.8522086,
+      "address": "Calle Manuel Pedregal 4Bis, oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12701918101",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12763037601",
+      "name": "Hotel Zen Airport",
+      "type": "Hotel",
+      "lat": 36.6396982,
+      "lng": -4.4994007,
+      "address": "Calle de los Fresnos 9, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12763037601",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12771732700",
+      "name": "Carthago Suites",
+      "type": "Apartamento",
+      "lat": 37.6049841,
+      "lng": -0.9764918,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/12771732700",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12903270063",
+      "name": "Pensión Cabezas",
+      "type": "Habitación",
+      "lat": 43.3638248,
+      "lng": -5.8530554,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12903270063",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-12986483984",
+      "name": "Pensión Berdasco",
+      "type": "Habitación",
+      "lat": 43.364974,
+      "lng": -5.8549563,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/12986483984",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13022718114",
+      "name": "Mayor",
+      "type": "Habitación",
+      "lat": 38.3448193,
+      "lng": -0.4828569,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/13022718114",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13028545136",
+      "name": "San Francisco",
+      "type": "Hotel",
+      "lat": 38.3441128,
+      "lng": -0.4844508,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/13028545136",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13032338175",
+      "name": "Hotel San Remo",
+      "type": "Hotel",
+      "lat": 38.3456223,
+      "lng": -0.4870364,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/13032338175",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13041753875",
+      "name": "Hotel Astures",
+      "type": "Hotel",
+      "lat": 43.3637205,
+      "lng": -5.8393809,
+      "address": "Calle Campo de los Patos, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/13041753875",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13137595701",
+      "name": "Loft Centre Santander",
+      "type": "Apartamento",
+      "lat": 43.4612361,
+      "lng": -3.8112777,
+      "address": "Calle Garmendia 10, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/13137595701",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1317197200",
+      "name": "Hostal La Lonja",
+      "type": "Hotel",
+      "lat": 38.3493087,
+      "lng": -0.486754,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/1317197200",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13197994340",
+      "name": "Umihouse",
+      "type": "Apartamento",
+      "lat": 38.3519113,
+      "lng": -0.4881668,
+      "address": "Carrer del Pintor Murillo 22, Alacant / Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/13197994340",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13207667401",
+      "name": "Estella",
+      "type": "Hotel",
+      "lat": 42.669083,
+      "lng": -2.0295689,
+      "address": "Calle San Nicolás 3, Estella-Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/13207667401",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13387229501",
+      "name": "Kora Green City",
+      "type": "Hotel",
+      "lat": 42.8412349,
+      "lng": -2.6665831,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/13387229501",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13512187674",
+      "name": "Loft Alicante Barrio 1",
+      "type": "Apartamento",
+      "lat": 38.3469558,
+      "lng": -0.4833344,
+      "address": "Carrer d'Álvarez 12, Alacant/Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/13512187674",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-135254209",
+      "name": "Hotel Adelma",
+      "type": "Hotel",
+      "lat": 43.3883362,
+      "lng": -3.6879646,
+      "address": "Solares",
+      "sourceUrl": "https://www.openstreetmap.org/node/135254209",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13580429901",
+      "name": "Hotel Marina",
+      "type": "Hotel",
+      "lat": 36.5981805,
+      "lng": -4.518257,
+      "address": "Avenida Antonio Machado, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/13580429901",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1387193868",
+      "name": "Hoster B&B&B",
+      "type": "Habitación",
+      "lat": 43.4597507,
+      "lng": -3.8086083,
+      "address": "Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/1387193868",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13896555499",
+      "name": "Central Suites Santander",
+      "type": "Habitación",
+      "lat": 43.4651367,
+      "lng": -3.8010395,
+      "address": "Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/13896555499",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-13949057901",
+      "name": "Isabel Rooms",
+      "type": "Habitación",
+      "lat": 43.4612735,
+      "lng": -3.8104,
+      "address": "Cuesta del Hospital 4, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/13949057901",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-14020389458",
+      "name": "Vas Hotel",
+      "type": "Hotel",
+      "lat": 42.8430677,
+      "lng": -2.6682119,
+      "address": "Errioxa kalea 11, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/14020389458",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-14123155697",
+      "name": "Hostel Dos Estaciones",
+      "type": "Habitación",
+      "lat": 38.3390118,
+      "lng": -0.4906303,
+      "address": "Avenida Eugenio Sempere 2, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/14123155697",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1438188790",
+      "name": "Hostal Cabo Mayor",
+      "type": "Habitación",
+      "lat": 43.4596001,
+      "lng": -3.8106885,
+      "address": "Calle de Cádiz 1, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/1438188790",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1749895889",
+      "name": "Hotel Alda Centro Oviedo",
+      "type": "Hotel",
+      "lat": 43.3681922,
+      "lng": -5.8450948,
+      "address": "Calle Joaquina Bobela 3, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/1749895889",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1817730620",
+      "name": "Boutique Las Brisas",
+      "type": "Hotel",
+      "lat": 43.4745751,
+      "lng": -3.7867812,
+      "address": "Calle de la Braña 14, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/1817730620",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1817761285",
+      "name": "Le Petit Boutique Hotel",
+      "type": "Hotel",
+      "lat": 43.4736935,
+      "lng": -3.7869135,
+      "address": "Avenida de los Castros 10, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/1817761285",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1861664832",
+      "name": "Fonda Europa",
+      "type": "Hotel",
+      "lat": 41.6082392,
+      "lng": 2.2890613,
+      "address": "Granollers",
+      "sourceUrl": "https://www.openstreetmap.org/node/1861664832",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1879330217",
+      "name": "Hotel Castro Real",
+      "type": "Hotel",
+      "lat": 43.3738646,
+      "lng": -5.8350975,
+      "address": "Calle Bermúdez de Castro 82, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/1879330217",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-1879330253",
+      "name": "Hotel El Retiro de Cardea",
+      "type": "Hotel",
+      "lat": 43.374784,
+      "lng": -5.8355855,
+      "address": "Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/1879330253",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2063996959",
+      "name": "Hotel La Bilbaína",
+      "type": "Hotel",
+      "lat": 42.8487965,
+      "lng": -2.6681998,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/2063996959",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2076992542",
+      "name": "Hostal Los Geranios",
+      "type": "Hotel",
+      "lat": 36.638868,
+      "lng": -4.4996875,
+      "address": "Calle Sierra de Guadarrama 20, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/2076992542",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2078657580",
+      "name": "Hostal Viky",
+      "type": "Hotel",
+      "lat": 40.4736986,
+      "lng": -3.5759037,
+      "address": "Calle de las Fraguas, Barajas",
+      "sourceUrl": "https://www.openstreetmap.org/node/2078657580",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2079779850",
+      "name": "Centro Vitoria",
+      "type": "Hotel",
+      "lat": 42.8454363,
+      "lng": -2.6714671,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/2079779850",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2082512365",
+      "name": "Hotel Senator",
+      "type": "Hotel",
+      "lat": 37.259634,
+      "lng": -6.9477354,
+      "address": "Huelva",
+      "sourceUrl": "https://www.openstreetmap.org/node/2082512365",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2167335910",
+      "name": "Gran Hotel Regente",
+      "type": "Hotel",
+      "lat": 43.3638394,
+      "lng": -5.8429615,
+      "address": "Calle Jovellanos 31, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/2167335910",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -41,15 +797,33 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-way-503459536",
-      "name": "Pension Oviedo",
+      "id": "osm-node-2316015677",
+      "name": "Rambla",
+      "type": "Hotel",
+      "lat": 38.3448484,
+      "lng": -0.4836928,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/2316015677",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2316880546",
+      "name": "Hostal Les Monges Palace",
       "type": "Habitación",
-      "lat": 43.36583478666667,
-      "lng": -5.854390446666667,
-      "address": "Calle Uría 43, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/way/503459536",
-      "bookingPath": "es/pension-oviedo.es",
-      "bookingSourceUrl": "https://pensionoviedo.top/",
+      "lat": 38.3458972,
+      "lng": -0.4815316,
+      "address": "Carrer de Sant Agustí 4, Alacant/Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/2316880546",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-2316880548",
+      "name": "Pensión Milán",
+      "type": "Habitación",
+      "lat": 38.3444281,
+      "lng": -0.4814608,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/2316880548",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -65,183 +839,33 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-500914933",
-      "name": "AC Hotel General Álava",
+      "id": "osm-node-2316880550",
+      "name": "Explanada Hotel",
       "type": "Hotel",
-      "lat": 42.8509023,
-      "lng": -2.6811753,
-      "address": "Gasteiz hiribidea 79, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/500914933",
+      "lat": 38.3441087,
+      "lng": -0.4823083,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/2316880550",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-2620148947",
-      "name": "Agata Apartments",
+      "id": "osm-node-2361454066",
+      "name": "Hotel Santa Clara",
       "type": "Hotel",
-      "lat": 36.5967947,
-      "lng": -4.5309398,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/2620148947",
+      "lat": 43.3641785,
+      "lng": -5.8472612,
+      "address": "Calle de Santa Clara 1, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/2361454066",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-662795979",
-      "name": "Aguila Apartments",
+      "id": "osm-node-2361454148",
+      "name": "Hotel Vetusta",
       "type": "Hotel",
-      "lat": 36.5966103,
-      "lng": -4.5281034,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662795979",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-166478738",
-      "name": "Alava Velascotarren etxea",
-      "type": "Apartamento",
-      "lat": 42.85145182,
-      "lng": -2.67363338,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/166478738",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-5349832970",
-      "name": "Albergue - Hostería de Curtidores",
-      "type": "Habitación",
-      "lat": 42.6686761,
-      "lng": -2.023459,
-      "address": "Calle Curtidores 43, Estella-Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/5349832970",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3519553429",
-      "name": "Albergue Capuchinos Rocamador",
-      "type": "Habitación",
-      "lat": 42.6656245,
-      "lng": -2.0317623,
-      "address": "Calle Rocamador 6, Estella/Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/3519553429",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-303681094",
-      "name": "Albergue Juvenil Municipal Oncineda",
-      "type": "Habitación",
-      "lat": 42.66464402857143,
-      "lng": -2.034332419047619,
-      "address": "Estella-Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/way/303681094",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9437748627",
-      "name": "Albergue La Peregrina",
-      "type": "Habitación",
-      "lat": 43.3648298,
-      "lng": -5.8453104,
-      "address": "Calle Gascona, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/9437748627",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-592739156",
-      "name": "Albergue de la Catedral",
-      "type": "Habitación",
-      "lat": 42.850489375,
-      "lng": -2.671893125,
-      "address": "Aiztogile kalea 87, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/592739156",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-789295543",
-      "name": "Albergue turístico Villa Miguela",
-      "type": "Habitación",
-      "lat": 43.46687292142857,
-      "lng": -3.793481489285714,
-      "address": "Paseo de Menéndez Pelayo 66, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/789295543",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9009865887",
-      "name": "Alda Estella Hostel",
-      "type": "Hotel",
-      "lat": 42.6726433,
-      "lng": -2.0333628,
-      "address": "Plaza Santiago 41, Estella/Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/9009865887",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10043293766",
-      "name": "Almar Apartment",
-      "type": "Apartamento",
-      "lat": 36.5862581,
-      "lng": -4.5359367,
-      "address": "Camino de Doña María 8, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/10043293766",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1253892896",
-      "name": "Aloha Playa",
-      "type": "Hotel",
-      "lat": 36.5856108,
-      "lng": -4.534078,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/1253892896",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-1192606640",
-      "name": "AluaSun Costa Park",
-      "type": "Hotel",
-      "lat": 36.63764123,
-      "lng": -4.49873075,
-      "address": "Calle El Pinar 2, Torremolinos",
-      "sourceUrl": "https://www.openstreetmap.org/way/1192606640",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9599190202",
-      "name": "ApartaHotel Eire",
-      "type": "Apartamento",
-      "lat": 42.844978,
-      "lng": -2.6816013,
-      "address": "Arantzabal kalea 4, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/9599190202",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-763044961",
-      "name": "Apartahotel Líbere Vitoria",
-      "type": "Hotel",
-      "lat": 42.8478764,
-      "lng": -2.681899,
-      "address": "Gasteiz hiribidea 45, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/763044961",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9208051593",
-      "name": "Apartamento VI-VI",
-      "type": "Apartamento",
-      "lat": 42.8462912,
-      "lng": -2.6703604,
-      "address": "Olagibel kalea 6, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/9208051593",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-442806338",
-      "name": "Apartamentos Barajas",
-      "type": "Apartamento",
-      "lat": 40.472699299999995,
-      "lng": -3.575666066666667,
-      "address": "Calle de Aries 19, Madrid",
-      "sourceUrl": "https://www.openstreetmap.org/way/442806338",
+      "lat": 43.3640264,
+      "lng": -5.8472558,
+      "address": "Calle Covadonga 2, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/2361454148",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -255,353 +879,43 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-way-495054814",
-      "name": "Apartamentos Irenaz",
-      "type": "Apartamento",
-      "lat": 42.86568217894737,
-      "lng": -2.6955208368421055,
-      "address": "Hondarribia kalea 3, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/495054814",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4124212964",
-      "name": "Apartamentos Las Brisas",
+      "id": "osm-node-2405558223",
+      "name": "Hotel IDH Ángel",
       "type": "Hotel",
-      "lat": 43.4757498,
-      "lng": -3.789276,
-      "address": "Avenida de Fernández Castañeda 17, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/4124212964",
+      "lat": 43.3833989,
+      "lng": -5.8259619,
+      "address": "La Corredoria 70, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/2405558223",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-4980112063",
-      "name": "Apartamentos Mariola",
-      "type": "Apartamento",
-      "lat": 37.6020651,
-      "lng": -0.9879484,
-      "address": "Calle de la Seña 3, Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/4980112063",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9208180982",
-      "name": "Apartamentos Ondoloin",
-      "type": "Apartamento",
-      "lat": 42.8429813,
-      "lng": -2.6681551,
-      "address": "Errioxa kalea 15, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/9208180982",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12701918101",
-      "name": "Apartamentos Pedregal",
-      "type": "Apartamento",
-      "lat": 43.3664327,
-      "lng": -5.8522086,
-      "address": "Calle Manuel Pedregal 4Bis, oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12701918101",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9017834372",
-      "name": "Apartamentos Terraza Ega",
-      "type": "Apartamento",
-      "lat": 42.6705236,
-      "lng": -2.0281398,
-      "address": "Calle Julio Ruiz de Alda 24, Estella/Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/9017834372",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1008742844",
-      "name": "Apartamentos Turísticos Villa Fresnedo",
+      "id": "osm-node-2469816522",
+      "name": "Hostal Paracuellos",
       "type": "Hotel",
-      "lat": 43.3845281,
-      "lng": -3.7403421,
-      "address": "Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/1008742844",
+      "lat": 40.5044386,
+      "lng": -3.5303395,
+      "address": "Calle Real 34, Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/2469816522",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-10233516599",
-      "name": "Apartamentos rurales Sobremazas",
-      "type": "Habitación",
-      "lat": 43.3694192,
-      "lng": -3.7488118,
-      "address": "Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/10233516599",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12061980250",
-      "name": "Auditorio Rooms Boutique",
+      "id": "osm-node-252162464",
+      "name": "Ibis Madrid Aeropuerto Barajas",
       "type": "Hotel",
-      "lat": 43.3574,
-      "lng": -5.8504066,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12061980250",
+      "lat": 40.4698335,
+      "lng": -3.5807416,
+      "address": "Avenida General 49, Madrid",
+      "sourceUrl": "https://www.openstreetmap.org/node/252162464",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-12409252105",
-      "name": "B&B Hotel Alicante Centro",
+      "id": "osm-node-254186223",
+      "name": "Hotel Clement Barajas",
       "type": "Hotel",
-      "lat": 38.3467056,
-      "lng": -0.4940549,
-      "address": "Avinguda de Salamanca 38, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/12409252105",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-269125362",
-      "name": "B&B La Milagrosa",
-      "type": "Hotel",
-      "lat": 38.34605225,
-      "lng": -0.47980550000000005,
-      "address": "Carrer de la Vila Vella 8, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/way/269125362",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-6507808885",
-      "name": "B48 Oviedo Ópera",
-      "type": "Hotel",
-      "lat": 43.3641005,
-      "lng": -5.84816,
-      "address": "Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/6507808885",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-498613239",
-      "name": "Benalmadena Palace",
-      "type": "Hotel",
-      "lat": 36.585461249999994,
-      "lng": -4.535983175,
-      "address": "Camino de Gilabert, Benalmádena Costa",
-      "sourceUrl": "https://www.openstreetmap.org/way/498613239",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2692436617",
-      "name": "Benalmadena Playa",
-      "type": "Hotel",
-      "lat": 36.5862756,
-      "lng": -4.5349713,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/2692436617",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2614129171",
-      "name": "Benalmadena Studio",
-      "type": "Apartamento",
-      "lat": 36.5863834,
-      "lng": -4.5360479,
-      "address": "Camino de Dona Maria 24-52, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/2614129171",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1817730620",
-      "name": "Boutique Las Brisas",
-      "type": "Hotel",
-      "lat": 43.4745751,
-      "lng": -3.7867812,
-      "address": "Calle de la Braña 14, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/1817730620",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12499028091",
-      "name": "Bypillow Paseo",
-      "type": "Hotel",
-      "lat": 38.349095,
-      "lng": -0.4918476,
-      "address": "Carrer del Marqués de Molins 63, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/12499028091",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12071247676",
-      "name": "Cartagena Spain",
-      "type": "Apartamento",
-      "lat": 37.600417,
-      "lng": -0.9868795,
-      "address": "Calle Comedias, Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12071247676",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12771732700",
-      "name": "Carthago Suites",
-      "type": "Apartamento",
-      "lat": 37.6049841,
-      "lng": -0.9764918,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12771732700",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-31303591",
-      "name": "Casona La Tudanca",
-      "type": "Habitación",
-      "lat": 43.37574068,
-      "lng": -3.745657,
-      "address": "Barrio Torrejón 18, Sobremazas",
-      "sourceUrl": "https://www.openstreetmap.org/way/31303591",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1008742854",
-      "name": "Castilla Termal Balnerio de Solares",
-      "type": "Hotel",
-      "lat": 43.3858471,
-      "lng": -3.7330807,
-      "address": "Avenida de Calvo Sotelo 13, Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/1008742854",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13896555499",
-      "name": "Central Suites Santander",
-      "type": "Habitación",
-      "lat": 43.4651367,
-      "lng": -3.8010395,
-      "address": "Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/13896555499",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2079779850",
-      "name": "Centro Vitoria",
-      "type": "Hotel",
-      "lat": 42.8454363,
-      "lng": -2.6714671,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/2079779850",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-6339932922",
-      "name": "Chameleon",
-      "type": "Hotel",
-      "lat": 38.3480141,
-      "lng": -0.497108,
-      "address": "Carrer del Pintor Gisbert 46, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/6339932922",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9393123917",
-      "name": "Club Playa Flores",
-      "type": "Apartamento",
-      "lat": 36.6393608,
-      "lng": -4.4929964,
-      "address": "Calle de la Colina 154, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/9393123917",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-965873295",
-      "name": "Costa de la Luz",
-      "type": "Hotel",
-      "lat": 37.2555384,
-      "lng": -6.9538498,
-      "address": "Calle Alcalde José María Amo 8, Huelva",
-      "sourceUrl": "https://www.openstreetmap.org/node/965873295",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-392302250",
-      "name": "Dato",
-      "type": "Hotel",
-      "lat": 42.8436398,
-      "lng": -2.6726844,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/392302250",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-1202385991",
-      "name": "Dato 2",
-      "type": "Hotel",
-      "lat": 42.84407,
-      "lng": -2.67416486,
-      "address": "San Antonio kalea 17, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/1202385991",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9811461717",
-      "name": "Doramar",
-      "type": "Apartamento",
-      "lat": 36.5970677,
-      "lng": -4.5208651,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/9811461717",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4510215823",
-      "name": "DormirDCine (DDC)",
-      "type": "Hotel",
-      "lat": 38.3451458,
-      "lng": -0.4802234,
-      "address": "Carrer de Gravina 5, Alicante/Alacant",
-      "sourceUrl": "https://www.openstreetmap.org/node/4510215823",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-789295557",
-      "name": "El Balcón de la Bahía",
-      "type": "Hotel",
-      "lat": 43.46647311875,
-      "lng": -3.795834475,
-      "address": "Paseo de Menéndez Pelayo 44, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/789295557",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-5040024183",
-      "name": "El Ovetense",
-      "type": "Hotel",
-      "lat": 43.3628928,
-      "lng": -5.8450062,
-      "address": "Calle de San Juan 6, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/5040024183",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-5139118051",
-      "name": "El Príncipe Horno de Leña",
-      "type": "Hotel",
-      "lat": 40.473909,
-      "lng": -3.5781085,
-      "address": "Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/5139118051",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11765843237",
-      "name": "El Vasco Rooms",
-      "type": "Habitación",
-      "lat": 43.3647298,
-      "lng": -5.8451546,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11765843237",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4885997999",
-      "name": "El Volante",
-      "type": "Hotel",
-      "lat": 42.6633422,
-      "lng": -2.0320158,
-      "address": "Estella-Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/4885997999",
+      "lat": 40.4709687,
+      "lng": -3.5799099,
+      "address": "Avenida General 43, Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/254186223",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -615,73 +929,43 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-13207667401",
-      "name": "Estella",
-      "type": "Hotel",
-      "lat": 42.669083,
-      "lng": -2.0295689,
-      "address": "Calle San Nicolás 3, Estella-Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/13207667401",
+      "id": "osm-node-2614129171",
+      "name": "Benalmadena Studio",
+      "type": "Apartamento",
+      "lat": 36.5863834,
+      "lng": -4.5360479,
+      "address": "Camino de Dona Maria 24-52, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/2614129171",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-10095621373",
-      "name": "Exe Hotel El Magistral",
+      "id": "osm-node-2620148947",
+      "name": "Agata Apartments",
       "type": "Hotel",
-      "lat": 43.3633044,
-      "lng": -5.8455721,
-      "address": "Calle Jovellanos 3, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/10095621373",
+      "lat": 36.5967947,
+      "lng": -4.5309398,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/2620148947",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-2316880550",
-      "name": "Explanada Hotel",
+      "id": "osm-node-2692436617",
+      "name": "Benalmadena Playa",
       "type": "Hotel",
-      "lat": 38.3441087,
-      "lng": -0.4823083,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/2316880550",
+      "lat": 36.5862756,
+      "lng": -4.5349713,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/2692436617",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-10561974409",
-      "name": "Fly Rooms Madrid",
+      "id": "osm-node-2769465195",
+      "name": "Manolo",
       "type": "Hotel",
-      "lat": 40.4707532,
-      "lng": -3.5801137,
-      "address": "Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/10561974409",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1861664832",
-      "name": "Fonda Europa",
-      "type": "Hotel",
-      "lat": 41.6082392,
-      "lng": 2.2890613,
-      "address": "Granollers",
-      "sourceUrl": "https://www.openstreetmap.org/node/1861664832",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-222396107",
-      "name": "Globales Los Patos Park",
-      "type": "Hotel",
-      "lat": 36.58687238,
-      "lng": -4.53559014,
-      "address": "Calle Torrealmádena 5, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/222396107",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2167335910",
-      "name": "Gran Hotel Regente",
-      "type": "Hotel",
-      "lat": 43.3638394,
-      "lng": -5.8429615,
-      "address": "Calle Jovellanos 31, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/2167335910",
+      "lat": 37.6218692,
+      "lng": -0.9994563,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/2769465195",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -695,83 +979,33 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-way-167142805",
-      "name": "HW Hydros",
+      "id": "osm-node-3180283477",
+      "name": "Hotel Goya",
       "type": "Hotel",
-      "lat": 36.574933120000004,
-      "lng": -4.584305179999999,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/167142805",
+      "lat": 38.3491167,
+      "lng": -0.4917126,
+      "address": "Carrer del Mestre Bretón 19, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/3180283477",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-10992884674",
-      "name": "Habitaka",
-      "type": "Habitación",
-      "lat": 42.8458399,
-      "lng": -2.6714095,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/10992884674",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-662795983",
-      "name": "Hercules Apartments",
+      "id": "osm-node-3188062921",
+      "name": "Hotel Leuka",
       "type": "Hotel",
-      "lat": 36.597072,
-      "lng": -4.5299092,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662795983",
+      "lat": 38.3478137,
+      "lng": -0.4907763,
+      "address": "Carrer de Segura 23, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/3188062921",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-11527600861",
-      "name": "HiHome Hostel",
-      "type": "Habitación",
-      "lat": 43.3655037,
-      "lng": -5.8539308,
-      "address": "Calle Uría / Cai Uría 33, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11527600861",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-167142792",
-      "name": "Holiday World Riwo Hotel",
+      "id": "osm-node-319276753",
+      "name": "La City Hotel",
       "type": "Hotel",
-      "lat": 36.576594557142855,
-      "lng": -4.585071376190476,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/167142792",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-167142806",
-      "name": "Holiday World Village Hotel",
-      "type": "Hotel",
-      "lat": 36.57605007058823,
-      "lng": -4.579344211764706,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/167142806",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4124214046",
-      "name": "Hospedaje Cervantes",
-      "type": "Habitación",
-      "lat": 43.4623388,
-      "lng": -3.8116542,
-      "address": "Calle Cervantes 5, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/4124214046",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1008742776",
-      "name": "Hospedaje Rada",
-      "type": "Hotel",
-      "lat": 43.3843578,
-      "lng": -3.7388155,
-      "address": "Avenida de Santander 8, Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/1008742776",
+      "lat": 38.3451254,
+      "lng": -0.4944744,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/319276753",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -795,73 +1029,113 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-1438188790",
-      "name": "Hostal Cabo Mayor",
+      "id": "osm-node-3378083778",
+      "name": "Pensión Balcones Azules",
       "type": "Habitación",
-      "lat": 43.4596001,
-      "lng": -3.8106885,
-      "address": "Calle de Cádiz 1, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/1438188790",
+      "lat": 37.6021133,
+      "lng": -0.9849055,
+      "address": "Calle Balcones Azules 12, Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/3378083778",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-7510442404",
-      "name": "Hostal Carlos III",
+      "id": "osm-node-3410450822",
+      "name": "Hostal Sol y Miel",
+      "type": "Habitación",
+      "lat": 36.5979953,
+      "lng": -4.5352106,
+      "address": "Avenida Blas Infante 14, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/3410450822",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-3430535100",
+      "name": "Hostal Serramar",
+      "type": "Habitación",
+      "lat": 36.5999105,
+      "lng": -4.5330481,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/3430535100",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-3444666793",
+      "name": "Hotel Cervantes",
       "type": "Hotel",
-      "lat": 43.4708572,
-      "lng": -3.7801171,
-      "address": "Avenida de la Reina Victoria 141, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/7510442404",
+      "lat": 38.3460556,
+      "lng": -0.4874477,
+      "address": "Carrer del Metge Pascual Pérez 19, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/3444666793",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-1008742728",
-      "name": "Hostal Casa Enrique",
+      "id": "osm-node-3519553429",
+      "name": "Albergue Capuchinos Rocamador",
+      "type": "Habitación",
+      "lat": 42.6656245,
+      "lng": -2.0317623,
+      "address": "Calle Rocamador 6, Estella/Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/3519553429",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-369314483",
+      "name": "Hostal Eras de Santa Bárbara",
       "type": "Hotel",
-      "lat": 43.3871982,
-      "lng": -3.7310218,
-      "address": "Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/1008742728",
-      "retrievedAt": "2026-10-19"
+      "lat": 41.7713304,
+      "lng": -2.4734909,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "sourceUrl": "https://www.openstreetmap.org/node/369314483",
+      "retrievedAt": "2026-10-20"
     },
     {
-      "id": "osm-node-12111595585",
-      "name": "Hostal Emilio",
-      "type": "Habitación",
-      "lat": 40.472404,
-      "lng": -3.5798331,
-      "address": "Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/12111595585",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12078804079",
-      "name": "Hostal Fidalgo",
-      "type": "Habitación",
-      "lat": 43.3633398,
-      "lng": -5.8454555,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12078804079",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11514816722",
-      "name": "Hostal Foncalada",
-      "type": "Habitación",
-      "lat": 43.365615,
-      "lng": -5.8460956,
-      "address": "Calle Foncalada 24, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/11514816722",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1317197200",
-      "name": "Hostal La Lonja",
+      "id": "osm-node-392302250",
+      "name": "Dato",
       "type": "Hotel",
-      "lat": 38.3493087,
-      "lng": -0.486754,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/1317197200",
+      "lat": 42.8436398,
+      "lng": -2.6726844,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/392302250",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-392302251",
+      "name": "abba Jazz Hotel",
+      "type": "Hotel",
+      "lat": 42.8435786,
+      "lng": -2.6750092,
+      "address": "Florida kalea 7, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/392302251",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4113864944",
+      "name": "Old Centre Inn",
+      "type": "Habitación",
+      "lat": 38.3449742,
+      "lng": -0.480744,
+      "address": "Plaça de l'Ajuntament 3, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/4113864944",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4124212964",
+      "name": "Apartamentos Las Brisas",
+      "type": "Hotel",
+      "lat": 43.4757498,
+      "lng": -3.789276,
+      "address": "Avenida de Fernández Castañeda 17, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/4124212964",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4124214046",
+      "name": "Hospedaje Cervantes",
+      "type": "Habitación",
+      "lat": 43.4623388,
+      "lng": -3.8116542,
+      "address": "Calle Cervantes 5, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/4124214046",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -885,46 +1159,6 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-2316880546",
-      "name": "Hostal Les Monges Palace",
-      "type": "Habitación",
-      "lat": 38.3458972,
-      "lng": -0.4815316,
-      "address": "Carrer de Sant Agustí 4, Alacant/Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/2316880546",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2076992542",
-      "name": "Hostal Los Geranios",
-      "type": "Hotel",
-      "lat": 36.638868,
-      "lng": -4.4996875,
-      "address": "Calle Sierra de Guadarrama 20, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/2076992542",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2469816522",
-      "name": "Hostal Paracuellos",
-      "type": "Hotel",
-      "lat": 40.5044386,
-      "lng": -3.5303395,
-      "address": "Calle Real 34, Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/2469816522",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-7001803491",
-      "name": "Hostal Residencia Campoy",
-      "type": "Habitación",
-      "lat": 38.3492501,
-      "lng": -0.486919,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/7001803491",
-      "retrievedAt": "2026-10-19"
-    },
-    {
       "id": "osm-node-4124214054",
       "name": "Hostal Rocamar",
       "type": "Habitación",
@@ -932,86 +1166,6 @@
       "lng": -3.7924487,
       "address": "Avenida de los Castros 41, Santander",
       "sourceUrl": "https://www.openstreetmap.org/node/4124214054",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-774051191",
-      "name": "Hostal Santa Ana",
-      "type": "Habitación",
-      "lat": 38.3414278,
-      "lng": -0.4876968,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/774051191",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3430535100",
-      "name": "Hostal Serramar",
-      "type": "Habitación",
-      "lat": 36.5999105,
-      "lng": -4.5330481,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/3430535100",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3410450822",
-      "name": "Hostal Sol y Miel",
-      "type": "Habitación",
-      "lat": 36.5979953,
-      "lng": -4.5352106,
-      "address": "Avenida Blas Infante 14, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/3410450822",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-167518394",
-      "name": "Hostal Venta El Cruce",
-      "type": "Hotel",
-      "lat": 37.48209812,
-      "lng": -5.95076356,
-      "address": "La Rinconada",
-      "sourceUrl": "https://www.openstreetmap.org/way/167518394",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2078657580",
-      "name": "Hostal Viky",
-      "type": "Hotel",
-      "lat": 40.4736986,
-      "lng": -3.5759037,
-      "address": "Calle de las Fraguas, Barajas",
-      "sourceUrl": "https://www.openstreetmap.org/node/2078657580",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9208219047",
-      "name": "Hostal del Arquitecto",
-      "type": "Habitación",
-      "lat": 42.8471502,
-      "lng": -2.6707327,
-      "address": "San Frantzisko kalea 2, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/9208219047",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-6074718098",
-      "name": "Hostal Álvarez",
-      "type": "Habitación",
-      "lat": 43.3649825,
-      "lng": -5.8545231,
-      "address": "Calle Independencia 14, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/6074718098",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-14123155697",
-      "name": "Hostel Dos Estaciones",
-      "type": "Habitación",
-      "lat": 38.3390118,
-      "lng": -0.4906303,
-      "address": "Avenida Eugenio Sempere 2, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/14123155697",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -1025,26 +1179,6 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-12699227201",
-      "name": "Hostelfly",
-      "type": "Habitación",
-      "lat": 40.474952,
-      "lng": -3.5754755,
-      "address": "Calle de la Caldera 11, Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/12699227201",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1387193868",
-      "name": "Hoster B&B&B",
-      "type": "Habitación",
-      "lat": 43.4597507,
-      "lng": -3.8086083,
-      "address": "Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/1387193868",
-      "retrievedAt": "2026-10-19"
-    },
-    {
       "id": "osm-node-4124214057",
       "name": "Hostería Las Palmeras",
       "type": "Habitación",
@@ -1052,916 +1186,6 @@
       "lng": -3.8630881,
       "address": "Calle El Somo 114, Santander",
       "sourceUrl": "https://www.openstreetmap.org/node/4124214057",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10165741541",
-      "name": "Hostería Santander",
-      "type": "Hotel",
-      "lat": 43.4712761,
-      "lng": -3.782574,
-      "address": "Calle de Joaquín Costa 43, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/10165741541",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-135254209",
-      "name": "Hotel Adelma",
-      "type": "Hotel",
-      "lat": 43.3883362,
-      "lng": -3.6879646,
-      "address": "Solares",
-      "sourceUrl": "https://www.openstreetmap.org/node/135254209",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1749895889",
-      "name": "Hotel Alda Centro Oviedo",
-      "type": "Hotel",
-      "lat": 43.3681922,
-      "lng": -5.8450948,
-      "address": "Calle Joaquina Bobela 3, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/1749895889",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-53271502",
-      "name": "Hotel Alicante Gran Sol",
-      "type": "Hotel",
-      "lat": 38.34387325,
-      "lng": -0.48321053,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/way/53271502",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-7510442517",
-      "name": "Hotel Apartamentos Don Carlos",
-      "type": "Hotel",
-      "lat": 43.4706442,
-      "lng": -3.7811454,
-      "address": "Calle del Duque de Santo Mauro 20, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/7510442517",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-784251877",
-      "name": "Hotel Art",
-      "type": "Hotel",
-      "lat": 43.46616631578947,
-      "lng": -3.800942752631579,
-      "address": "Calle de Santa Teresa de Jesús 20, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/784251877",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-671367455",
-      "name": "Hotel Arts-Gasteiz",
-      "type": "Hotel",
-      "lat": 42.8489599,
-      "lng": -2.66969022,
-      "address": "San Prudentzio ikastetxeko kalea 2, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/671367455",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13041753875",
-      "name": "Hotel Astures",
-      "type": "Hotel",
-      "lat": 43.3637205,
-      "lng": -5.8393809,
-      "address": "Calle Campo de los Patos, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/13041753875",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-6720612124",
-      "name": "Hotel Bahia",
-      "type": "Hotel",
-      "lat": 43.4603679,
-      "lng": -3.8062667,
-      "address": "Calle de Cádiz 22, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/6720612124",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-166137931",
-      "name": "Hotel Bali",
-      "type": "Hotel",
-      "lat": 36.59507062,
-      "lng": -4.52317635,
-      "address": "Avenida Telefónica 7, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/166137931",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-603606242",
-      "name": "Hotel Barajas Plaza",
-      "type": "Hotel",
-      "lat": 40.4728793,
-      "lng": -3.5769167,
-      "address": "Calle de Camarillas 5/7, Madrid",
-      "sourceUrl": "https://www.openstreetmap.org/node/603606242",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9867092118",
-      "name": "Hotel Betania",
-      "type": "Hotel",
-      "lat": 36.590408,
-      "lng": -4.5303131,
-      "address": "Carril de Contreras 12, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/9867092118",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11527617966",
-      "name": "Hotel Carbayón",
-      "type": "Hotel",
-      "lat": 43.3720907,
-      "lng": -5.8314368,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11527617966",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-5128949025",
-      "name": "Hotel Carreño",
-      "type": "Hotel",
-      "lat": 43.3681224,
-      "lng": -5.8540708,
-      "address": "Calle Monte Gamonal 4, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/5128949025",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224971164",
-      "name": "Hotel Cartagenera",
-      "type": "Hotel",
-      "lat": 37.601709285714286,
-      "lng": -0.9864214428571428,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224971164",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1879330217",
-      "name": "Hotel Castro Real",
-      "type": "Hotel",
-      "lat": 43.3738646,
-      "lng": -5.8350975,
-      "address": "Calle Bermúdez de Castro 82, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/1879330217",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3444666793",
-      "name": "Hotel Cervantes",
-      "type": "Hotel",
-      "lat": 38.3460556,
-      "lng": -0.4874477,
-      "address": "Carrer del Metge Pascual Pérez 19, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/3444666793",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-723086188",
-      "name": "Hotel Citrea",
-      "type": "Hotel",
-      "lat": 43.46271732,
-      "lng": -3.8134990666666666,
-      "address": "Calle Florida 10, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/723086188",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10095627852",
-      "name": "Hotel Clarín",
-      "type": "Hotel",
-      "lat": 43.3651382,
-      "lng": -5.8491261,
-      "address": "Calle Caveda 23, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/10095627852",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-254186223",
-      "name": "Hotel Clement Barajas",
-      "type": "Hotel",
-      "lat": 40.4709687,
-      "lng": -3.5799099,
-      "address": "Avenida General 43, Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/254186223",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-7510442410",
-      "name": "Hotel Dorma Sardinero",
-      "type": "Hotel",
-      "lat": 43.4713536,
-      "lng": -3.780727,
-      "address": "Avenida de la Reina Victoria 153, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/7510442410",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10119290912",
-      "name": "Hotel Duerming Longoria Plaza",
-      "type": "Hotel",
-      "lat": 43.3643015,
-      "lng": -5.8489243,
-      "address": "Calle Covadonga 13, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/10119290912",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-167518396",
-      "name": "Hotel El Cruce",
-      "type": "Hotel",
-      "lat": 37.481800764285715,
-      "lng": -5.950892921428571,
-      "address": "La Rinconada",
-      "sourceUrl": "https://www.openstreetmap.org/way/167518396",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1879330253",
-      "name": "Hotel El Retiro de Cardea",
-      "type": "Hotel",
-      "lat": 43.374784,
-      "lng": -5.8355855,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/1879330253",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-944437090",
-      "name": "Hotel Familia Conde",
-      "type": "Hotel",
-      "lat": 37.25439366,
-      "lng": -6.94514714,
-      "address": "Huelva",
-      "sourceUrl": "https://www.openstreetmap.org/way/944437090",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10095479343",
-      "name": "Hotel Favila",
-      "type": "Hotel",
-      "lat": 43.3656796,
-      "lng": -5.8540678,
-      "address": "Calle Uría 37, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/10095479343",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-6482195829",
-      "name": "Hotel Fruela",
-      "type": "Hotel",
-      "lat": 43.3607879,
-      "lng": -5.8466725,
-      "address": "Calle Fruela 3, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/6482195829",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3180283477",
-      "name": "Hotel Goya",
-      "type": "Hotel",
-      "lat": 38.3491167,
-      "lng": -0.4917126,
-      "address": "Carrer del Mestre Bretón 19, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/3180283477",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-502897309",
-      "name": "Hotel Hito",
-      "type": "Hotel",
-      "lat": 42.8434137,
-      "lng": -2.6738817,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/502897309",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2405558223",
-      "name": "Hotel IDH Ángel",
-      "type": "Hotel",
-      "lat": 43.3833989,
-      "lng": -5.8259619,
-      "address": "La Corredoria 70, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/2405558223",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2063996959",
-      "name": "Hotel La Bilbaína",
-      "type": "Hotel",
-      "lat": 42.8487965,
-      "lng": -2.6681998,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/2063996959",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-337265659",
-      "name": "Hotel Las Lomas",
-      "type": "Hotel",
-      "lat": 43.37253920909091,
-      "lng": -5.814429445454545,
-      "address": "Prolong. Calle Tenderina Baja 634, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/way/337265659",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3188062921",
-      "name": "Hotel Leuka",
-      "type": "Hotel",
-      "lat": 38.3478137,
-      "lng": -0.4907763,
-      "address": "Carrer de Segura 23, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/3188062921",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224969271",
-      "name": "Hotel Los Habaneros",
-      "type": "Hotel",
-      "lat": 37.6033966,
-      "lng": -0.9787558333333334,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224969271",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13580429901",
-      "name": "Hotel Marina",
-      "type": "Hotel",
-      "lat": 36.5981805,
-      "lng": -4.518257,
-      "address": "Avenida Antonio Machado, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/13580429901",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1253915509",
-      "name": "Hotel MedPlaya Alba Beach",
-      "type": "Hotel",
-      "lat": 36.588809,
-      "lng": -4.5306891,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/1253915509",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224234386",
-      "name": "Hotel NH Campo de Cartagena",
-      "type": "Hotel",
-      "lat": 37.61221565555556,
-      "lng": -0.9764204000000001,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224234386",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-852011528",
-      "name": "Hotel Palacio del Mar",
-      "type": "Hotel",
-      "lat": 43.478127574545454,
-      "lng": -3.7940812672727273,
-      "address": "Calle del Alcalde Vega Lamera 5, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/852011528",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4362993474",
-      "name": "Hotel Ramiro I",
-      "type": "Hotel",
-      "lat": 43.3575226,
-      "lng": -5.8529464,
-      "address": "Calle Leopoldo Calvo Sotelo, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/4362993474",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11396299748",
-      "name": "Hotel Rosal",
-      "type": "Hotel",
-      "lat": 43.3598101,
-      "lng": -5.8478277,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11396299748",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-166688396",
-      "name": "Hotel San Fermin",
-      "type": "Hotel",
-      "lat": 36.59571796666667,
-      "lng": -4.524142155555555,
-      "address": "Calle de San Fermin 11, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/166688396",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13032338175",
-      "name": "Hotel San Remo",
-      "type": "Hotel",
-      "lat": 38.3456223,
-      "lng": -0.4870364,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/13032338175",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2361454066",
-      "name": "Hotel Santa Clara",
-      "type": "Hotel",
-      "lat": 43.3641785,
-      "lng": -5.8472612,
-      "address": "Calle de Santa Clara 1, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/2361454066",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-330145278",
-      "name": "Hotel Santa Cruz",
-      "type": "Hotel",
-      "lat": 43.36038562,
-      "lng": -5.8491611,
-      "address": "Calle Marqués de Santa Cruz 6, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/way/330145278",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2082512365",
-      "name": "Hotel Senator",
-      "type": "Hotel",
-      "lat": 37.259634,
-      "lng": -6.9477354,
-      "address": "Huelva",
-      "sourceUrl": "https://www.openstreetmap.org/node/2082512365",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10096295625",
-      "name": "Hotel Soho Boutique Oviedo",
-      "type": "Hotel",
-      "lat": 43.3623922,
-      "lng": -5.8461966,
-      "address": "Calle Mendizábal 1, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/10096295625",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9873848678",
-      "name": "Hotel Soho Boutique Palacio de Pombo",
-      "type": "Hotel",
-      "lat": 43.4624293,
-      "lng": -3.8034464,
-      "address": "Calle de Marcelino Sanz de Sautuola 2, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/9873848678",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10033236459",
-      "name": "Hotel Sol Boutique",
-      "type": "Hotel",
-      "lat": 43.4653499,
-      "lng": -3.7998153,
-      "address": "Calle del Sol 31, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/10033236459",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-1313587605",
-      "name": "Hotel Ureder",
-      "type": "Hotel",
-      "lat": 42.67859216666667,
-      "lng": -2.0374867666666665,
-      "address": "Calle Zaldu 15, Estella/Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/way/1313587605",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2361454148",
-      "name": "Hotel Vetusta",
-      "type": "Hotel",
-      "lat": 43.3640264,
-      "lng": -5.8472558,
-      "address": "Calle Covadonga 2, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/2361454148",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-720849483",
-      "name": "Hotel Villa Maria",
-      "type": "Hotel",
-      "lat": 37.48307716666667,
-      "lng": -5.945277666666667,
-      "address": "La Rinconada",
-      "sourceUrl": "https://www.openstreetmap.org/way/720849483",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4252269410",
-      "name": "Hotel Villa de Barajas",
-      "type": "Hotel",
-      "lat": 40.4728446,
-      "lng": -3.5821523,
-      "address": "Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/4252269410",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-436176942",
-      "name": "Hotel Vistamar",
-      "type": "Hotel",
-      "lat": 36.584910328,
-      "lng": -4.535234056,
-      "address": "Camino Gilabert, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/436176942",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12763037601",
-      "name": "Hotel Zen Airport",
-      "type": "Hotel",
-      "lat": 36.6396982,
-      "lng": -4.4994007,
-      "address": "Calle de los Fresnos 9, Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12763037601",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-252162464",
-      "name": "Ibis Madrid Aeropuerto Barajas",
-      "type": "Hotel",
-      "lat": 40.4698335,
-      "lng": -3.5807416,
-      "address": "Avenida General 49, Madrid",
-      "sourceUrl": "https://www.openstreetmap.org/node/252162464",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-538313400",
-      "name": "Iradier",
-      "type": "Hotel",
-      "lat": 42.8426858,
-      "lng": -2.6687148,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/538313400",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-662795981",
-      "name": "Iris Apartments",
-      "type": "Hotel",
-      "lat": 36.597263,
-      "lng": -4.5289087,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662795981",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13949057901",
-      "name": "Isabel Rooms",
-      "type": "Habitación",
-      "lat": 43.4612735,
-      "lng": -3.8104,
-      "address": "Cuesta del Hospital 4, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/13949057901",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-662779039",
-      "name": "Jupiter Apartments",
-      "type": "Hotel",
-      "lat": 36.5954456,
-      "lng": -4.5264672,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662779039",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13387229501",
-      "name": "Kora Green City",
-      "type": "Hotel",
-      "lat": 42.8412349,
-      "lng": -2.6665831,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/13387229501",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12071409906",
-      "name": "La Casa De Las Flores",
-      "type": "Hotel",
-      "lat": 37.6018499,
-      "lng": -0.9850604,
-      "address": "Calle Honda 21, Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12071409906",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-490047532",
-      "name": "La Casa de Los Arquillos",
-      "type": "Hotel",
-      "lat": 42.8471491,
-      "lng": -2.6724931,
-      "address": "Arkupeko ibilbidea 1, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/490047532",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-319276753",
-      "name": "La City Hotel",
-      "type": "Hotel",
-      "lat": 38.3451254,
-      "lng": -0.4944744,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/319276753",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12087772187",
-      "name": "La Hospedería Oviedo",
-      "type": "Habitación",
-      "lat": 43.3629451,
-      "lng": -5.8441992,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12087772187",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-662799695",
-      "name": "Laderas del Mediterráneo",
-      "type": "Hotel",
-      "lat": 36.5896354,
-      "lng": -4.530968,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662799695",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-1817761285",
-      "name": "Le Petit Boutique Hotel",
-      "type": "Hotel",
-      "lat": 43.4736935,
-      "lng": -3.7869135,
-      "address": "Avenida de los Castros 10, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/1817761285",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-709879796",
-      "name": "Lemon Suites",
-      "type": "Hotel",
-      "lat": 43.46136846666666,
-      "lng": -3.8109787833333337,
-      "address": "Calle del Limón 9, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/709879796",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-220953175",
-      "name": "Limehome Oviedo Postigo Bajo",
-      "type": "Apartamento",
-      "lat": 43.362169,
-      "lng": -5.839609,
-      "address": "Calle Postigo Bajo 46, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/way/220953175",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13512187674",
-      "name": "Loft Alicante Barrio 1",
-      "type": "Apartamento",
-      "lat": 38.3469558,
-      "lng": -0.4833344,
-      "address": "Carrer d'Álvarez 12, Alacant/Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/13512187674",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13137595701",
-      "name": "Loft Centre Santander",
-      "type": "Apartamento",
-      "lat": 43.4612361,
-      "lng": -3.8112777,
-      "address": "Calle Garmendia 10, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/13137595701",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11937405086",
-      "name": "Logune Rooms",
-      "type": "Habitación",
-      "lat": 42.8488037,
-      "lng": -2.6695351,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/11937405086",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-273615594",
-      "name": "Loop INN",
-      "type": "Habitación",
-      "lat": 37.60290978,
-      "lng": -0.9790933799999999,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/273615594",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11302241070",
-      "name": "Los Rosales, 2",
-      "type": "Habitación",
-      "lat": 40.4726142,
-      "lng": -3.5804815,
-      "address": "Paracuellos de Jarama",
-      "sourceUrl": "https://www.openstreetmap.org/node/11302241070",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2769465195",
-      "name": "Manolo",
-      "type": "Hotel",
-      "lat": 37.6218692,
-      "lng": -0.9994563,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/2769465195",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4991109059",
-      "name": "Marina",
-      "type": "Hotel",
-      "lat": 37.2602722,
-      "lng": -6.930378,
-      "address": "Huelva",
-      "sourceUrl": "https://www.openstreetmap.org/node/4991109059",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13022718114",
-      "name": "Mayor",
-      "type": "Habitación",
-      "lat": 38.3448193,
-      "lng": -0.4828569,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/13022718114",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-662795977",
-      "name": "Minerva Apartments",
-      "type": "Hotel",
-      "lat": 36.5962468,
-      "lng": -4.5270438,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662795977",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-784271476",
-      "name": "NH Ciudad de Santander",
-      "type": "Hotel",
-      "lat": 43.465550680769226,
-      "lng": -3.7987063807692305,
-      "address": "Paseo de Menéndez Pelayo 13, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/784271476",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-674091856",
-      "name": "NH Cristal",
-      "type": "Hotel",
-      "lat": 38.3472406,
-      "lng": -0.4851087,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/674091856",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-300940665",
-      "name": "NH Hotel Oviedo Principado",
-      "type": "Hotel",
-      "lat": 43.36220295,
-      "lng": -5.846829040909091,
-      "address": "Calle San Francisco 6, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/way/300940665",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11677345385",
-      "name": "NUVÓ Hotel Boutique",
-      "type": "Hotel",
-      "lat": 43.3649946,
-      "lng": -5.8414842,
-      "address": "Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/11677345385",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-5655949735",
-      "name": "Nap Hotel Carta Puebla",
-      "type": "Hotel",
-      "lat": 43.3600758,
-      "lng": -5.8428919,
-      "address": "Calle Carta Puebla, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/5655949735",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11937416896",
-      "name": "Nirea",
-      "type": "Hotel",
-      "lat": 42.843596,
-      "lng": -2.6723623,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/11937416896",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4510215813",
-      "name": "Odyssey Rooms",
-      "type": "Hotel",
-      "lat": 38.3453286,
-      "lng": -0.4798482,
-      "address": "Carrer de Gravina 9, Alicante/Alacant",
-      "sourceUrl": "https://www.openstreetmap.org/node/4510215813",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4113864944",
-      "name": "Old Centre Inn",
-      "type": "Habitación",
-      "lat": 38.3449742,
-      "lng": -0.480744,
-      "address": "Plaça de l'Ajuntament 3, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/4113864944",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-239438218",
-      "name": "Palacio de Elorriaga",
-      "type": "Hotel",
-      "lat": 42.850935163636365,
-      "lng": -2.641168536363636,
-      "address": "Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/way/239438218",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-1485631822",
-      "name": "Palia La Roca",
-      "type": "Hotel",
-      "lat": 36.59241226923076,
-      "lng": -4.525295261538461,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/way/1485631822",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4209987889",
-      "name": "Pension Versalles",
-      "type": "Habitación",
-      "lat": 38.3461929,
-      "lng": -0.4798933,
-      "address": "Carrer de la Vila Vella 3 / 2-й этаж, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/4209987889",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-4477930891",
-      "name": "Pensión Amaia",
-      "type": "Hotel",
-      "lat": 42.845899,
-      "lng": -2.6681397,
-      "address": "Bake kalea 15, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/4477930891",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-3378083778",
-      "name": "Pensión Balcones Azules",
-      "type": "Habitación",
-      "lat": 37.6021133,
-      "lng": -0.9849055,
-      "address": "Calle Balcones Azules 12, Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/3378083778",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12986483984",
-      "name": "Pensión Berdasco",
-      "type": "Habitación",
-      "lat": 43.364974,
-      "lng": -5.8549563,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12986483984",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -1975,36 +1199,6 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-12903270063",
-      "name": "Pensión Cabezas",
-      "type": "Habitación",
-      "lat": 43.3638248,
-      "lng": -5.8530554,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/12903270063",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11512412174",
-      "name": "Pensión González",
-      "type": "Habitación",
-      "lat": 43.3663567,
-      "lng": -5.8537194,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11512412174",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224971166",
-      "name": "Pensión Isabelita",
-      "type": "Habitación",
-      "lat": 37.59933783333333,
-      "lng": -0.9867189666666666,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224971166",
-      "retrievedAt": "2026-10-19"
-    },
-    {
       "id": "osm-node-4124214430",
       "name": "Pensión La Bolera",
       "type": "Habitación",
@@ -2012,16 +1206,6 @@
       "lng": -3.8415251,
       "address": "Calle de Campogiro 10, Santander",
       "sourceUrl": "https://www.openstreetmap.org/node/4124214430",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2316880548",
-      "name": "Pensión Milán",
-      "type": "Habitación",
-      "lat": 38.3444281,
-      "lng": -0.4814608,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/2316880548",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -2045,46 +1229,6 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-11725368396",
-      "name": "Pensión Riesgo",
-      "type": "Habitación",
-      "lat": 43.3658637,
-      "lng": -5.8506645,
-      "address": "Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/11725368396",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10707871812",
-      "name": "Pensión Romero",
-      "type": "Habitación",
-      "lat": 43.363968,
-      "lng": -5.8508802,
-      "address": "Calle Uría / Cai Uría 38, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/node/10707871812",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224982627",
-      "name": "Pensión la Purísima",
-      "type": "Habitación",
-      "lat": 37.61867808,
-      "lng": -0.99756944,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224982627",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-11143582038",
-      "name": "Pensión restaurante La Bombilla",
-      "type": "Hotel",
-      "lat": 42.6902646,
-      "lng": -8.4916216,
-      "address": "Praza de Galicia 5, A Estrada",
-      "sourceUrl": "https://www.openstreetmap.org/node/11143582038",
-      "retrievedAt": "2026-10-19"
-    },
-    {
       "id": "osm-node-4124214434",
       "name": "Plaza Pombo B&B",
       "type": "Hotel",
@@ -2092,166 +1236,6 @@
       "lng": -3.8016222,
       "address": "Calle de Hernán Cortés 25, Santander",
       "sourceUrl": "https://www.openstreetmap.org/node/4124214434",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-28667561",
-      "name": "Posada El Hidalgo",
-      "type": "Hotel",
-      "lat": 43.38032836,
-      "lng": -3.7350578800000003,
-      "address": "Paseo de Santa María de Cudeyo, Valdecilla",
-      "sourceUrl": "https://www.openstreetmap.org/way/28667561",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-2316015677",
-      "name": "Rambla",
-      "type": "Hotel",
-      "lat": 38.3448484,
-      "lng": -0.4836928,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/2316015677",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-833129645",
-      "name": "Rhin Garden",
-      "type": "Hotel",
-      "lat": 43.473264914285714,
-      "lng": -3.7870977142857143,
-      "address": "Avenida de los Castros 17, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/833129645",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-784853800",
-      "name": "Royal Suite Santander",
-      "type": "Hotel",
-      "lat": 43.46692769090909,
-      "lng": -3.7959265545454546,
-      "address": "Paseo de Menéndez Pelayo 63, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/784853800",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12396689264",
-      "name": "Sahara Sunset Club",
-      "type": "Hotel",
-      "lat": 36.5897355,
-      "lng": -4.530029,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12396689264",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13028545136",
-      "name": "San Francisco",
-      "type": "Hotel",
-      "lat": 38.3441128,
-      "lng": -0.4844508,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/13028545136",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12071247717",
-      "name": "San Sebastián Suites",
-      "type": "Apartamento",
-      "lat": 37.6013938,
-      "lng": -0.9867492,
-      "address": "Plaza de San Sebastián 8, Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/node/12071247717",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-224968006",
-      "name": "Sercotel Carlos III",
-      "type": "Hotel",
-      "lat": 37.60614234444444,
-      "lng": -0.9825720888888889,
-      "address": "Cartagena",
-      "sourceUrl": "https://www.openstreetmap.org/way/224968006",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-268984824",
-      "name": "Smile & Co Hostal",
-      "type": "Hotel",
-      "lat": 38.34297598,
-      "lng": -0.48674896,
-      "address": "Carrer de Rafael Terol 22, Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/way/268984824",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-823858592",
-      "name": "Suit Home Pinares",
-      "type": "Habitación",
-      "lat": 43.47103163529412,
-      "lng": -3.787931847058824,
-      "address": "Avenida de los Infantes 23, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/way/823858592",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-10133132419",
-      "name": "Suite 1907 Oviedo",
-      "type": "Hotel",
-      "lat": 43.3627214,
-      "lng": -5.8491258,
-      "address": "Calle Uría 12, Oviedo",
-      "sourceUrl": "https://www.openstreetmap.org/node/10133132419",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-9514536395",
-      "name": "Suite Home Sardinero",
-      "type": "Hotel",
-      "lat": 43.4786434,
-      "lng": -3.7957061,
-      "address": "Avenida de Cantabria 22, Santander",
-      "sourceUrl": "https://www.openstreetmap.org/node/9514536395",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-266881083",
-      "name": "Tandem Pórtico Alicante Suites",
-      "type": "Apartamento",
-      "lat": 38.344505742857145,
-      "lng": -0.4837939428571429,
-      "address": "Carrer de Sant Nicolau 1, Alicante/Alacant",
-      "sourceUrl": "https://www.openstreetmap.org/way/266881083",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-12134483984",
-      "name": "The Market Hostel Alicante",
-      "type": "Habitación",
-      "lat": 38.3487678,
-      "lng": -0.4844076,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/12134483984",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-way-281574748",
-      "name": "Travelodge Alicante Puerto",
-      "type": "Hotel",
-      "lat": 38.33705767142857,
-      "lng": -0.5016347107142857,
-      "address": "Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/way/281574748",
-      "retrievedAt": "2026-10-19"
-    },
-    {
-      "id": "osm-node-13197994340",
-      "name": "Umihouse",
-      "type": "Apartamento",
-      "lat": 38.3519113,
-      "lng": -0.4881668,
-      "address": "Carrer del Pintor Murillo 22, Alacant / Alicante",
-      "sourceUrl": "https://www.openstreetmap.org/node/13197994340",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -2265,16 +1249,6 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-14020389458",
-      "name": "Vas Hotel",
-      "type": "Hotel",
-      "lat": 42.8430677,
-      "lng": -2.6682119,
-      "address": "Errioxa kalea 11, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/14020389458",
-      "retrievedAt": "2026-10-19"
-    },
-    {
       "id": "osm-node-4124214481",
       "name": "Vintage",
       "type": "Habitación",
@@ -2285,33 +1259,183 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-way-333095870",
-      "name": "Zalle Oviedo Suites",
+      "id": "osm-node-4209987889",
+      "name": "Pension Versalles",
+      "type": "Habitación",
+      "lat": 38.3461929,
+      "lng": -0.4798933,
+      "address": "Carrer de la Vila Vella 3 / 2-й этаж, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/4209987889",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4252269410",
+      "name": "Hotel Villa de Barajas",
+      "type": "Hotel",
+      "lat": 40.4728446,
+      "lng": -3.5821523,
+      "address": "Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/4252269410",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4362993474",
+      "name": "Hotel Ramiro I",
+      "type": "Hotel",
+      "lat": 43.3575226,
+      "lng": -5.8529464,
+      "address": "Calle Leopoldo Calvo Sotelo, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/4362993474",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4477930891",
+      "name": "Pensión Amaia",
+      "type": "Hotel",
+      "lat": 42.845899,
+      "lng": -2.6681397,
+      "address": "Bake kalea 15, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/4477930891",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4510215813",
+      "name": "Odyssey Rooms",
+      "type": "Hotel",
+      "lat": 38.3453286,
+      "lng": -0.4798482,
+      "address": "Carrer de Gravina 9, Alicante/Alacant",
+      "sourceUrl": "https://www.openstreetmap.org/node/4510215813",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4510215823",
+      "name": "DormirDCine (DDC)",
+      "type": "Hotel",
+      "lat": 38.3451458,
+      "lng": -0.4802234,
+      "address": "Carrer de Gravina 5, Alicante/Alacant",
+      "sourceUrl": "https://www.openstreetmap.org/node/4510215823",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4885997999",
+      "name": "El Volante",
+      "type": "Hotel",
+      "lat": 42.6633422,
+      "lng": -2.0320158,
+      "address": "Estella-Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/4885997999",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-490047532",
+      "name": "La Casa de Los Arquillos",
+      "type": "Hotel",
+      "lat": 42.8471491,
+      "lng": -2.6724931,
+      "address": "Arkupeko ibilbidea 1, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/490047532",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-4980112063",
+      "name": "Apartamentos Mariola",
       "type": "Apartamento",
-      "lat": 43.360552283333334,
-      "lng": -5.8460280000000004,
-      "address": "Calle Rosal 1, Oviedo / Uviéu",
-      "sourceUrl": "https://www.openstreetmap.org/way/333095870",
+      "lat": 37.6020651,
+      "lng": -0.9879484,
+      "address": "Calle de la Seña 3, Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/node/4980112063",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-662795975",
-      "name": "Zodiac Apartments",
-      "type": "Hotel",
-      "lat": 36.5980168,
-      "lng": -4.5299809,
-      "address": "Benalmádena",
-      "sourceUrl": "https://www.openstreetmap.org/node/662795975",
+      "id": "osm-node-4982221533",
+      "name": "Ágora Hostel",
+      "type": "Habitación",
+      "lat": 42.670842,
+      "lng": -2.0278125,
+      "address": "Callizo de Pelaires 3, Estella/Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/4982221533",
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-392302251",
-      "name": "abba Jazz Hotel",
+      "id": "osm-node-4991109059",
+      "name": "Marina",
       "type": "Hotel",
-      "lat": 42.8435786,
-      "lng": -2.6750092,
-      "address": "Florida kalea 7, Vitoria-Gasteiz",
-      "sourceUrl": "https://www.openstreetmap.org/node/392302251",
+      "lat": 37.2602722,
+      "lng": -6.930378,
+      "address": "Huelva",
+      "sourceUrl": "https://www.openstreetmap.org/node/4991109059",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-500914933",
+      "name": "AC Hotel General Álava",
+      "type": "Hotel",
+      "lat": 42.8509023,
+      "lng": -2.6811753,
+      "address": "Gasteiz hiribidea 79, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/500914933",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-502897309",
+      "name": "Hotel Hito",
+      "type": "Hotel",
+      "lat": 42.8434137,
+      "lng": -2.6738817,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/502897309",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-5040024183",
+      "name": "El Ovetense",
+      "type": "Hotel",
+      "lat": 43.3628928,
+      "lng": -5.8450062,
+      "address": "Calle de San Juan 6, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/5040024183",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-5128949025",
+      "name": "Hotel Carreño",
+      "type": "Hotel",
+      "lat": 43.3681224,
+      "lng": -5.8540708,
+      "address": "Calle Monte Gamonal 4, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/5128949025",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-5139118051",
+      "name": "El Príncipe Horno de Leña",
+      "type": "Hotel",
+      "lat": 40.473909,
+      "lng": -3.5781085,
+      "address": "Paracuellos de Jarama",
+      "sourceUrl": "https://www.openstreetmap.org/node/5139118051",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-5349832970",
+      "name": "Albergue - Hostería de Curtidores",
+      "type": "Habitación",
+      "lat": 42.6686761,
+      "lng": -2.023459,
+      "address": "Calle Curtidores 43, Estella-Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/5349832970",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-538313400",
+      "name": "Iradier",
+      "type": "Hotel",
+      "lat": 42.8426858,
+      "lng": -2.6687148,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/538313400",
       "retrievedAt": "2026-10-19"
     },
     {
@@ -2325,6 +1449,850 @@
       "retrievedAt": "2026-10-19"
     },
     {
+      "id": "osm-node-5655949735",
+      "name": "Nap Hotel Carta Puebla",
+      "type": "Hotel",
+      "lat": 43.3600758,
+      "lng": -5.8428919,
+      "address": "Calle Carta Puebla, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/5655949735",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-603606242",
+      "name": "Hotel Barajas Plaza",
+      "type": "Hotel",
+      "lat": 40.4728793,
+      "lng": -3.5769167,
+      "address": "Calle de Camarillas 5/7, Madrid",
+      "sourceUrl": "https://www.openstreetmap.org/node/603606242",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-6074718098",
+      "name": "Hostal Álvarez",
+      "type": "Habitación",
+      "lat": 43.3649825,
+      "lng": -5.8545231,
+      "address": "Calle Independencia 14, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/node/6074718098",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-6339932922",
+      "name": "Chameleon",
+      "type": "Hotel",
+      "lat": 38.3480141,
+      "lng": -0.497108,
+      "address": "Carrer del Pintor Gisbert 46, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/6339932922",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-6449351968",
+      "name": "Arévacos",
+      "type": "Habitación",
+      "lat": 41.7697071,
+      "lng": -2.4660203,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "sourceUrl": "https://www.openstreetmap.org/node/6449351968",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-6449351969",
+      "name": "Ábaco",
+      "type": "Habitación",
+      "lat": 41.7700539,
+      "lng": -2.4657103,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "sourceUrl": "https://www.openstreetmap.org/node/6449351969",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-6482195829",
+      "name": "Hotel Fruela",
+      "type": "Hotel",
+      "lat": 43.3607879,
+      "lng": -5.8466725,
+      "address": "Calle Fruela 3, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/6482195829",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-6507808885",
+      "name": "B48 Oviedo Ópera",
+      "type": "Hotel",
+      "lat": 43.3641005,
+      "lng": -5.84816,
+      "address": "Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/6507808885",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662779039",
+      "name": "Jupiter Apartments",
+      "type": "Hotel",
+      "lat": 36.5954456,
+      "lng": -4.5264672,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662779039",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662795975",
+      "name": "Zodiac Apartments",
+      "type": "Hotel",
+      "lat": 36.5980168,
+      "lng": -4.5299809,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662795975",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662795977",
+      "name": "Minerva Apartments",
+      "type": "Hotel",
+      "lat": 36.5962468,
+      "lng": -4.5270438,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662795977",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662795979",
+      "name": "Aguila Apartments",
+      "type": "Hotel",
+      "lat": 36.5966103,
+      "lng": -4.5281034,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662795979",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662795981",
+      "name": "Iris Apartments",
+      "type": "Hotel",
+      "lat": 36.597263,
+      "lng": -4.5289087,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662795981",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662795983",
+      "name": "Hercules Apartments",
+      "type": "Hotel",
+      "lat": 36.597072,
+      "lng": -4.5299092,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662795983",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-662799695",
+      "name": "Laderas del Mediterráneo",
+      "type": "Hotel",
+      "lat": 36.5896354,
+      "lng": -4.530968,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/662799695",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-671265835",
+      "name": "Hostal Ruiz",
+      "type": "Habitación",
+      "lat": 41.7660275,
+      "lng": -2.4682369,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "sourceUrl": "https://www.openstreetmap.org/node/671265835",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-6720612124",
+      "name": "Hotel Bahia",
+      "type": "Hotel",
+      "lat": 43.4603679,
+      "lng": -3.8062667,
+      "address": "Calle de Cádiz 22, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/6720612124",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-674091856",
+      "name": "NH Cristal",
+      "type": "Hotel",
+      "lat": 38.3472406,
+      "lng": -0.4851087,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/674091856",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-6991633314",
+      "name": "Abaster",
+      "type": "Hotel",
+      "lat": 41.76553,
+      "lng": -2.4660309,
+      "address": "Dirección no disponible en OpenStreetMap",
+      "sourceUrl": "https://www.openstreetmap.org/node/6991633314",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-7001803491",
+      "name": "Hostal Residencia Campoy",
+      "type": "Habitación",
+      "lat": 38.3492501,
+      "lng": -0.486919,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/7001803491",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-7086788091",
+      "name": "Hostel Soria",
+      "type": "Hotel",
+      "lat": 41.7662321,
+      "lng": -2.4739282,
+      "address": "Calle de las Navas de Tolosa 21, Soria",
+      "sourceUrl": "https://www.openstreetmap.org/node/7086788091",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-7510442404",
+      "name": "Hostal Carlos III",
+      "type": "Hotel",
+      "lat": 43.4708572,
+      "lng": -3.7801171,
+      "address": "Avenida de la Reina Victoria 141, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/7510442404",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-7510442410",
+      "name": "Hotel Dorma Sardinero",
+      "type": "Hotel",
+      "lat": 43.4713536,
+      "lng": -3.780727,
+      "address": "Avenida de la Reina Victoria 153, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/7510442410",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-7510442517",
+      "name": "Hotel Apartamentos Don Carlos",
+      "type": "Hotel",
+      "lat": 43.4706442,
+      "lng": -3.7811454,
+      "address": "Calle del Duque de Santo Mauro 20, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/7510442517",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-763044961",
+      "name": "Apartahotel Líbere Vitoria",
+      "type": "Hotel",
+      "lat": 42.8478764,
+      "lng": -2.681899,
+      "address": "Gasteiz hiribidea 45, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/763044961",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-774051191",
+      "name": "Hostal Santa Ana",
+      "type": "Habitación",
+      "lat": 38.3414278,
+      "lng": -0.4876968,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/node/774051191",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9009865887",
+      "name": "Alda Estella Hostel",
+      "type": "Hotel",
+      "lat": 42.6726433,
+      "lng": -2.0333628,
+      "address": "Plaza Santiago 41, Estella/Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/9009865887",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9017834372",
+      "name": "Apartamentos Terraza Ega",
+      "type": "Apartamento",
+      "lat": 42.6705236,
+      "lng": -2.0281398,
+      "address": "Calle Julio Ruiz de Alda 24, Estella/Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/node/9017834372",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9183740158",
+      "name": "El Rincón de Gala",
+      "type": "Hotel",
+      "lat": 41.7668877,
+      "lng": -2.472433,
+      "address": "Calle de Venerable Palafox 9, Soria",
+      "sourceUrl": "https://www.openstreetmap.org/node/9183740158",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-node-9208051593",
+      "name": "Apartamento VI-VI",
+      "type": "Apartamento",
+      "lat": 42.8462912,
+      "lng": -2.6703604,
+      "address": "Olagibel kalea 6, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/9208051593",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9208180982",
+      "name": "Apartamentos Ondoloin",
+      "type": "Apartamento",
+      "lat": 42.8429813,
+      "lng": -2.6681551,
+      "address": "Errioxa kalea 15, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/9208180982",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9208219047",
+      "name": "Hostal del Arquitecto",
+      "type": "Habitación",
+      "lat": 42.8471502,
+      "lng": -2.6707327,
+      "address": "San Frantzisko kalea 2, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/9208219047",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9393123917",
+      "name": "Club Playa Flores",
+      "type": "Apartamento",
+      "lat": 36.6393608,
+      "lng": -4.4929964,
+      "address": "Calle de la Colina 154, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/9393123917",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9437748627",
+      "name": "Albergue La Peregrina",
+      "type": "Habitación",
+      "lat": 43.3648298,
+      "lng": -5.8453104,
+      "address": "Calle Gascona, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/node/9437748627",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9514536395",
+      "name": "Suite Home Sardinero",
+      "type": "Hotel",
+      "lat": 43.4786434,
+      "lng": -3.7957061,
+      "address": "Avenida de Cantabria 22, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/9514536395",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9599190202",
+      "name": "ApartaHotel Eire",
+      "type": "Apartamento",
+      "lat": 42.844978,
+      "lng": -2.6816013,
+      "address": "Arantzabal kalea 4, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/node/9599190202",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-965873295",
+      "name": "Costa de la Luz",
+      "type": "Hotel",
+      "lat": 37.2555384,
+      "lng": -6.9538498,
+      "address": "Calle Alcalde José María Amo 8, Huelva",
+      "sourceUrl": "https://www.openstreetmap.org/node/965873295",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9811461717",
+      "name": "Doramar",
+      "type": "Apartamento",
+      "lat": 36.5970677,
+      "lng": -4.5208651,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/9811461717",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9867092118",
+      "name": "Hotel Betania",
+      "type": "Hotel",
+      "lat": 36.590408,
+      "lng": -4.5303131,
+      "address": "Carril de Contreras 12, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/node/9867092118",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-node-9873848678",
+      "name": "Hotel Soho Boutique Palacio de Pombo",
+      "type": "Hotel",
+      "lat": 43.4624293,
+      "lng": -3.8034464,
+      "address": "Calle de Marcelino Sanz de Sautuola 2, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/node/9873848678",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-1192606640",
+      "name": "AluaSun Costa Park",
+      "type": "Hotel",
+      "lat": 36.63764123,
+      "lng": -4.49873075,
+      "address": "Calle El Pinar 2, Torremolinos",
+      "sourceUrl": "https://www.openstreetmap.org/way/1192606640",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-1202385991",
+      "name": "Dato 2",
+      "type": "Hotel",
+      "lat": 42.84407,
+      "lng": -2.67416486,
+      "address": "San Antonio kalea 17, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/1202385991",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-1313587605",
+      "name": "Hotel Ureder",
+      "type": "Hotel",
+      "lat": 42.67859216666667,
+      "lng": -2.0374867666666665,
+      "address": "Calle Zaldu 15, Estella/Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/way/1313587605",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-1485631822",
+      "name": "Palia La Roca",
+      "type": "Hotel",
+      "lat": 36.59241226923076,
+      "lng": -4.525295261538461,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/1485631822",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-166137931",
+      "name": "Hotel Bali",
+      "type": "Hotel",
+      "lat": 36.59507062,
+      "lng": -4.52317635,
+      "address": "Avenida Telefónica 7, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/166137931",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-166478738",
+      "name": "Alava Velascotarren etxea",
+      "type": "Apartamento",
+      "lat": 42.85145182,
+      "lng": -2.67363338,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/166478738",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-166688396",
+      "name": "Hotel San Fermin",
+      "type": "Hotel",
+      "lat": 36.59571796666667,
+      "lng": -4.524142155555555,
+      "address": "Calle de San Fermin 11, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/166688396",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-167142792",
+      "name": "Holiday World Riwo Hotel",
+      "type": "Hotel",
+      "lat": 36.576594557142855,
+      "lng": -4.585071376190476,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/167142792",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-167142805",
+      "name": "HW Hydros",
+      "type": "Hotel",
+      "lat": 36.574933120000004,
+      "lng": -4.584305179999999,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/167142805",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-167142806",
+      "name": "Holiday World Village Hotel",
+      "type": "Hotel",
+      "lat": 36.57605007058823,
+      "lng": -4.579344211764706,
+      "address": "Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/167142806",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-167518394",
+      "name": "Hostal Venta El Cruce",
+      "type": "Hotel",
+      "lat": 37.48209812,
+      "lng": -5.95076356,
+      "address": "La Rinconada",
+      "sourceUrl": "https://www.openstreetmap.org/way/167518394",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-167518396",
+      "name": "Hotel El Cruce",
+      "type": "Hotel",
+      "lat": 37.481800764285715,
+      "lng": -5.950892921428571,
+      "address": "La Rinconada",
+      "sourceUrl": "https://www.openstreetmap.org/way/167518396",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-220953175",
+      "name": "Limehome Oviedo Postigo Bajo",
+      "type": "Apartamento",
+      "lat": 43.362169,
+      "lng": -5.839609,
+      "address": "Calle Postigo Bajo 46, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/way/220953175",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-222396107",
+      "name": "Globales Los Patos Park",
+      "type": "Hotel",
+      "lat": 36.58687238,
+      "lng": -4.53559014,
+      "address": "Calle Torrealmádena 5, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/222396107",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224234386",
+      "name": "Hotel NH Campo de Cartagena",
+      "type": "Hotel",
+      "lat": 37.61221565555556,
+      "lng": -0.9764204000000001,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224234386",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224968006",
+      "name": "Sercotel Carlos III",
+      "type": "Hotel",
+      "lat": 37.60614234444444,
+      "lng": -0.9825720888888889,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224968006",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224969271",
+      "name": "Hotel Los Habaneros",
+      "type": "Hotel",
+      "lat": 37.6033966,
+      "lng": -0.9787558333333334,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224969271",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224971164",
+      "name": "Hotel Cartagenera",
+      "type": "Hotel",
+      "lat": 37.601709285714286,
+      "lng": -0.9864214428571428,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224971164",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224971166",
+      "name": "Pensión Isabelita",
+      "type": "Habitación",
+      "lat": 37.59933783333333,
+      "lng": -0.9867189666666666,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224971166",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-224982627",
+      "name": "Pensión la Purísima",
+      "type": "Habitación",
+      "lat": 37.61867808,
+      "lng": -0.99756944,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/224982627",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-239438218",
+      "name": "Palacio de Elorriaga",
+      "type": "Hotel",
+      "lat": 42.850935163636365,
+      "lng": -2.641168536363636,
+      "address": "Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/239438218",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-265435789",
+      "name": "Amelia Habitaciones",
+      "type": "Habitación",
+      "lat": 38.3453369375,
+      "lng": -0.4830279875,
+      "address": "Carrer de Miguel Soler 10, Alicante/Alacant",
+      "sourceUrl": "https://www.openstreetmap.org/way/265435789",
+      "bookingPath": "es/hab-miguel-soler.es",
+      "bookingSourceUrl": "https://ameliahabitaciones.top/",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-266881083",
+      "name": "Tandem Pórtico Alicante Suites",
+      "type": "Apartamento",
+      "lat": 38.344505742857145,
+      "lng": -0.4837939428571429,
+      "address": "Carrer de Sant Nicolau 1, Alicante/Alacant",
+      "sourceUrl": "https://www.openstreetmap.org/way/266881083",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-268984824",
+      "name": "Smile & Co Hostal",
+      "type": "Hotel",
+      "lat": 38.34297598,
+      "lng": -0.48674896,
+      "address": "Carrer de Rafael Terol 22, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/way/268984824",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-269125362",
+      "name": "B&B La Milagrosa",
+      "type": "Hotel",
+      "lat": 38.34605225,
+      "lng": -0.47980550000000005,
+      "address": "Carrer de la Vila Vella 8, Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/way/269125362",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-273615594",
+      "name": "Loop INN",
+      "type": "Habitación",
+      "lat": 37.60290978,
+      "lng": -0.9790933799999999,
+      "address": "Cartagena",
+      "sourceUrl": "https://www.openstreetmap.org/way/273615594",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-281574748",
+      "name": "Travelodge Alicante Puerto",
+      "type": "Hotel",
+      "lat": 38.33705767142857,
+      "lng": -0.5016347107142857,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/way/281574748",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-28667561",
+      "name": "Posada El Hidalgo",
+      "type": "Hotel",
+      "lat": 43.38032836,
+      "lng": -3.7350578800000003,
+      "address": "Paseo de Santa María de Cudeyo, Valdecilla",
+      "sourceUrl": "https://www.openstreetmap.org/way/28667561",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-300940665",
+      "name": "NH Hotel Oviedo Principado",
+      "type": "Hotel",
+      "lat": 43.36220295,
+      "lng": -5.846829040909091,
+      "address": "Calle San Francisco 6, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/way/300940665",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-303681094",
+      "name": "Albergue Juvenil Municipal Oncineda",
+      "type": "Habitación",
+      "lat": 42.66464402857143,
+      "lng": -2.034332419047619,
+      "address": "Estella-Lizarra",
+      "sourceUrl": "https://www.openstreetmap.org/way/303681094",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-31303591",
+      "name": "Casona La Tudanca",
+      "type": "Habitación",
+      "lat": 43.37574068,
+      "lng": -3.745657,
+      "address": "Barrio Torrejón 18, Sobremazas",
+      "sourceUrl": "https://www.openstreetmap.org/way/31303591",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-330145278",
+      "name": "Hotel Santa Cruz",
+      "type": "Hotel",
+      "lat": 43.36038562,
+      "lng": -5.8491611,
+      "address": "Calle Marqués de Santa Cruz 6, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/way/330145278",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-333095870",
+      "name": "Zalle Oviedo Suites",
+      "type": "Apartamento",
+      "lat": 43.360552283333334,
+      "lng": -5.8460280000000004,
+      "address": "Calle Rosal 1, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/way/333095870",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-337265659",
+      "name": "Hotel Las Lomas",
+      "type": "Hotel",
+      "lat": 43.37253920909091,
+      "lng": -5.814429445454545,
+      "address": "Prolong. Calle Tenderina Baja 634, Oviedo",
+      "sourceUrl": "https://www.openstreetmap.org/way/337265659",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-436176942",
+      "name": "Hotel Vistamar",
+      "type": "Hotel",
+      "lat": 36.584910328,
+      "lng": -4.535234056,
+      "address": "Camino Gilabert, Benalmádena",
+      "sourceUrl": "https://www.openstreetmap.org/way/436176942",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-442806338",
+      "name": "Apartamentos Barajas",
+      "type": "Apartamento",
+      "lat": 40.472699299999995,
+      "lng": -3.575666066666667,
+      "address": "Calle de Aries 19, Madrid",
+      "sourceUrl": "https://www.openstreetmap.org/way/442806338",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-495054814",
+      "name": "Apartamentos Irenaz",
+      "type": "Apartamento",
+      "lat": 42.86568217894737,
+      "lng": -2.6955208368421055,
+      "address": "Hondarribia kalea 3, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/495054814",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-498613239",
+      "name": "Benalmadena Palace",
+      "type": "Hotel",
+      "lat": 36.585461249999994,
+      "lng": -4.535983175,
+      "address": "Camino de Gilabert, Benalmádena Costa",
+      "sourceUrl": "https://www.openstreetmap.org/way/498613239",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-503459536",
+      "name": "Pension Oviedo",
+      "type": "Habitación",
+      "lat": 43.36583478666667,
+      "lng": -5.854390446666667,
+      "address": "Calle Uría 43, Oviedo / Uviéu",
+      "sourceUrl": "https://www.openstreetmap.org/way/503459536",
+      "bookingPath": "es/pension-oviedo.es",
+      "bookingSourceUrl": "https://pensionoviedo.top/",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-53271502",
+      "name": "Hotel Alicante Gran Sol",
+      "type": "Hotel",
+      "lat": 38.34387325,
+      "lng": -0.48321053,
+      "address": "Alicante",
+      "sourceUrl": "https://www.openstreetmap.org/way/53271502",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-592739156",
+      "name": "Albergue de la Catedral",
+      "type": "Habitación",
+      "lat": 42.850489375,
+      "lng": -2.671893125,
+      "address": "Aiztogile kalea 87, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/592739156",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-671367455",
+      "name": "Hotel Arts-Gasteiz",
+      "type": "Hotel",
+      "lat": 42.8489599,
+      "lng": -2.66969022,
+      "address": "San Prudentzio ikastetxeko kalea 2, Vitoria-Gasteiz",
+      "sourceUrl": "https://www.openstreetmap.org/way/671367455",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-709879796",
+      "name": "Lemon Suites",
+      "type": "Hotel",
+      "lat": 43.46136846666666,
+      "lng": -3.8109787833333337,
+      "address": "Calle del Limón 9, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/709879796",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-720849483",
+      "name": "Hotel Villa Maria",
+      "type": "Hotel",
+      "lat": 37.48307716666667,
+      "lng": -5.945277666666667,
+      "address": "La Rinconada",
+      "sourceUrl": "https://www.openstreetmap.org/way/720849483",
+      "retrievedAt": "2026-10-19"
+    },
+    {
       "id": "osm-way-721298810",
       "name": "hostal santa ana",
       "type": "Hotel",
@@ -2335,13 +2303,145 @@
       "retrievedAt": "2026-10-19"
     },
     {
-      "id": "osm-node-4982221533",
-      "name": "Ágora Hostel",
+      "id": "osm-way-723086188",
+      "name": "Hotel Citrea",
+      "type": "Hotel",
+      "lat": 43.46271732,
+      "lng": -3.8134990666666666,
+      "address": "Calle Florida 10, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/723086188",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-743165734",
+      "name": "Hotel Alba",
+      "type": "Hotel",
+      "lat": 41.76967845,
+      "lng": -2.4720621333333335,
+      "address": "Paseo de Santa Bárbara 13, Soria",
+      "sourceUrl": "https://www.openstreetmap.org/way/743165734",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-way-743165735",
+      "name": "Hostal Santa Bárbara",
+      "type": "Hotel",
+      "lat": 41.769127983333334,
+      "lng": -2.4708293833333332,
+      "address": "Paseo de Santa Bárbara 5, Soria",
+      "sourceUrl": "https://www.openstreetmap.org/way/743165735",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-way-743165736",
+      "name": "Hostal Vitorina",
+      "type": "Hotel",
+      "lat": 41.76999472,
+      "lng": -2.465721325,
+      "address": "Paseo de la Florida 35, Soria",
+      "sourceUrl": "https://www.openstreetmap.org/way/743165736",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "id": "osm-way-782477242",
+      "name": "Gran Hotel Sardinero",
+      "type": "Hotel",
+      "lat": 43.47250347368421,
+      "lng": -3.7831822210526314,
+      "address": "Plaza de Italia 2, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/782477242",
+      "bookingPath": "es/gran-hotel-sardinero",
+      "bookingSourceUrl": "https://www.sardinerohoteles.com",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-784251877",
+      "name": "Hotel Art",
+      "type": "Hotel",
+      "lat": 43.46616631578947,
+      "lng": -3.800942752631579,
+      "address": "Calle de Santa Teresa de Jesús 20, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/784251877",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-784271476",
+      "name": "NH Ciudad de Santander",
+      "type": "Hotel",
+      "lat": 43.465550680769226,
+      "lng": -3.7987063807692305,
+      "address": "Paseo de Menéndez Pelayo 13, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/784271476",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-784853800",
+      "name": "Royal Suite Santander",
+      "type": "Hotel",
+      "lat": 43.46692769090909,
+      "lng": -3.7959265545454546,
+      "address": "Paseo de Menéndez Pelayo 63, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/784853800",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-789295543",
+      "name": "Albergue turístico Villa Miguela",
       "type": "Habitación",
-      "lat": 42.670842,
-      "lng": -2.0278125,
-      "address": "Callizo de Pelaires 3, Estella/Lizarra",
-      "sourceUrl": "https://www.openstreetmap.org/node/4982221533",
+      "lat": 43.46687292142857,
+      "lng": -3.793481489285714,
+      "address": "Paseo de Menéndez Pelayo 66, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/789295543",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-789295557",
+      "name": "El Balcón de la Bahía",
+      "type": "Hotel",
+      "lat": 43.46647311875,
+      "lng": -3.795834475,
+      "address": "Paseo de Menéndez Pelayo 44, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/789295557",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-823858592",
+      "name": "Suit Home Pinares",
+      "type": "Habitación",
+      "lat": 43.47103163529412,
+      "lng": -3.787931847058824,
+      "address": "Avenida de los Infantes 23, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/823858592",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-833129645",
+      "name": "Rhin Garden",
+      "type": "Hotel",
+      "lat": 43.473264914285714,
+      "lng": -3.7870977142857143,
+      "address": "Avenida de los Castros 17, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/833129645",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-852011528",
+      "name": "Hotel Palacio del Mar",
+      "type": "Hotel",
+      "lat": 43.478127574545454,
+      "lng": -3.7940812672727273,
+      "address": "Calle del Alcalde Vega Lamera 5, Santander",
+      "sourceUrl": "https://www.openstreetmap.org/way/852011528",
+      "retrievedAt": "2026-10-19"
+    },
+    {
+      "id": "osm-way-944437090",
+      "name": "Hotel Familia Conde",
+      "type": "Hotel",
+      "lat": 37.25439366,
+      "lng": -6.94514714,
+      "address": "Huelva",
+      "sourceUrl": "https://www.openstreetmap.org/way/944437090",
       "retrievedAt": "2026-10-19"
     }
   ]

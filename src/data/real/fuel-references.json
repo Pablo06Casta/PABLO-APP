@@ -1,6 +1,6 @@
 {
   "providedAt": "2026-10-20",
-  "scope": "Direcciones aportadas por localidad; proximidad exacta y precios no verificados por CERCA.",
+  "scope": "Referencias por localidad. Las entradas con coordenadas y sourceUrl proceden de OpenStreetMap; comprueba ruta, apertura y precios antes de desplazarte.",
   "priceComparator": "https://www.ocu.org/coches/gasolina-y-carburantes/calculadora/gasolineras",
   "stations": [
     {
@@ -196,7 +196,58 @@
       "venueHint": "El Cristo",
       "name": "Repsol",
       "address": "Avenida de Buenavista, s/n"
+    },
+    {
+      "destination": "Soria",
+      "venueHint": "Fuente del Rey",
+      "name": "Ballenoil San Andrés",
+      "address": "Coordenadas publicadas en OpenStreetMap · Soria",
+      "lat": 41.7612764,
+      "lng": -2.478245,
+      "sourceUrl": "https://www.openstreetmap.org/node/287007875",
+      "retrievedAt": "2026-10-20",
+      "hours": "Mo-Su 07:00-23:00"
+    },
+    {
+      "destination": "Soria",
+      "venueHint": "Fuente del Rey",
+      "name": "E. Leclerc",
+      "address": "Calle J 290, 42005 Soria",
+      "lat": 41.7720653,
+      "lng": -2.4857330333333336,
+      "sourceUrl": "https://www.openstreetmap.org/way/324987298",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "venueHint": "Fuente del Rey",
+      "name": "Petroprix",
+      "address": "Avenida de Valladolid 62, Soria",
+      "lat": 41.7687523,
+      "lng": -2.4858322,
+      "sourceUrl": "https://www.openstreetmap.org/node/9808044919",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "venueHint": "Fuente del Rey",
+      "name": "Gas Home",
+      "address": "Coordenadas publicadas en OpenStreetMap · Soria",
+      "lat": 41.77205563333334,
+      "lng": -2.4883827333333333,
+      "sourceUrl": "https://www.openstreetmap.org/way/1418315206",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "destination": "Soria",
+      "venueHint": "Fuente del Rey",
+      "name": "Estación de Servicio Moeve Las Casas",
+      "address": "Coordenadas publicadas en OpenStreetMap · Soria",
+      "lat": 41.7849984,
+      "lng": -2.4755772,
+      "sourceUrl": "https://www.openstreetmap.org/node/287007879",
+      "retrievedAt": "2026-10-20",
+      "hours": "Mo-Su 07:00-23:00"
     }
   ]
 }
-

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "soriaBootstrapCompleted": false,
+  "soriaBootstrapCompleted": true,
   "nextVenueIndex": 0,
-  "lastRunAt": null,
-  "lastVenueId": null
+  "lastRunAt": "2026-10-20T09:00:21+00:00",
+  "lastVenueId": "soria-fuente-del-rey"
 }
