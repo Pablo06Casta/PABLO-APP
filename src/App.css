@@ -2327,7 +2327,10 @@
 .budget-cloud-account > span { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 0.6875rem; font-weight: 650; }
 .budget-cloud-account > button:not(.secondary-button) { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 0.6875rem; }
 .budget-cloud-account > button.primary-button { color: white; }
+.budget-cloud-account > button.budget-delete-account { color: var(--danger); }
 .budget-cloud-help { flex-basis: 100%; margin: 0 0 3px; color: var(--muted); font-size: 0.6875rem; line-height: 1.55; }
+.budget-age-consent { flex-basis: 100%; display: flex; align-items: flex-start; gap: 9px; color: var(--muted); font-size: 0.75rem; line-height: 1.45; }
+.budget-age-consent input { margin-top: 2px; }
 .budget-password-setup { flex-basis: 100%; display: flex; align-items: end; gap: 10px; padding-top: 5px; }
 .budget-save-message { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--text); font-size: 0.6875rem; }
 .budget-saved-list { display: grid; gap: 9px; margin-top: 16px; }

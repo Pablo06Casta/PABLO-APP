@@ -20,20 +20,14 @@ export function estimateStay(stay: Stay, search: Search) {
         ? 1.1
         : 1;
   const season = month >= 6 && month <= 8 ? 1.2 : 1;
-  const supplied = Boolean(stay.referenceNightly && stay.referenceNightly > 0);
-  const observed = Boolean(stay.observedNightly && stay.observedNightly > 0);
   const rooms = stay.platform === "Airbnb" ? 1 : Math.ceil(search.guests / 2);
-  const base = supplied
-    ? stay.referenceNightly!
-    : observed
-    ? stay.observedNightly!
-    : stay.type === "Habitación"
-      ? 50
-      : stay.type === "Apartamento"
-        ? 100
-        : 75;
+  const base = stay.type === "Habitación"
+    ? 50
+    : stay.type === "Apartamento"
+      ? 100
+      : 75;
   const nightlyGroup = Math.round(
-    base * rooms * (supplied ? 1 : observed ? season : cityFactor * season),
+    base * rooms * cityFactor * season,
   );
   const perPersonNight = Math.round(nightlyGroup / search.guests);
   return {
@@ -43,15 +37,7 @@ export function estimateStay(stay: Stay, search: Search) {
     rooms,
     low: Math.max(1, Math.round(perPersonNight * 0.7)),
     high: Math.round(perPersonNight * 1.4),
-    source: supplied
-      ? ("supplied" as const)
-      : observed
-        ? ("historical" as const)
-        : ("model" as const),
-    explanation: supplied
-      ? `Precio medio aportado: ${base} € por noche (fuente indicada: ${stay.priceReferenceSource}, ${stay.priceReferenceAt}). Para ${search.guests} huésped(es) se presupone(n) ${rooms} unidad(es). Es una referencia orientativa, no una tarifa en tiempo real; confirma precio, impuestos y disponibilidad para tus fechas.`
-      : observed
-      ? `Referencia de Inside Airbnb del ${stay.observedAt}. Ajuste de verano ×${season}. No incluye cargos adicionales ni confirma disponibilidad.`
-      : `Modelo propio de CERCA: ${base} € por habitación doble × factor de ciudad ${cityFactor} × temporada ${season} × ${rooms} habitación(es). No es una tarifa observada de este hotel. Extras e impuestos no confirmados.`,
+    source: "model" as const,
+    explanation: `Modelo propio de CERCA: ${base} € por unidad de planificación × factor de ciudad ${cityFactor} × temporada ${season} × ${rooms} ${stay.platform === "Airbnb" ? "alojamiento(s)" : "habitación(es)"}. No es una tarifa observada de este alojamiento. Extras e impuestos no confirmados.`,
   };
 }

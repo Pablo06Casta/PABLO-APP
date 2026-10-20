@@ -18,9 +18,6 @@ const query: Search = {
 };
 const hotel: Stay = {
   ...realStays(query).find((s) => s.platform === "Booking")!,
-  referenceNightly: undefined,
-  priceReferenceSource: undefined,
-  priceReferenceAt: undefined,
 };
 const apartment: Stay = {
   ...hotel,
@@ -28,8 +25,6 @@ const apartment: Stay = {
   platform: "Airbnb",
   airbnbId: "1234567890123456789",
   type: "Apartamento",
-  observedNightly: 100,
-  observedAt: "2026-09-25",
   minimumNights: 2,
   capacity: 4,
 };
@@ -53,33 +48,28 @@ describe("Presupuestos orientativos para el torneo", () => {
       ).searchParams.get("no_rooms"),
     ).toBe("2");
   });
-  it("usa el precio medio aportado sin aplicar de nuevo ciudad o temporada", () => {
-    const result = estimateStay(
-      {
-        ...hotel,
-        referenceNightly: 139,
-        priceReferenceSource: "Booking",
-        priceReferenceAt: "2026-10-19",
-      },
-      { ...query, guests: 2, checkIn: "2027-07-10", checkOut: "2027-07-12" },
-    );
-    expect(result.nightlyGroup).toBe(139);
-    expect(result.perPersonNight).toBe(70);
-    expect(result.source).toBe("supplied");
-    expect(result.explanation).toContain("fuente indicada: Booking");
-    expect(result.explanation).toContain("no una tarifa en tiempo real");
+  it("usa únicamente el modelo propio de ciudad, temporada y categoría", () => {
+    const regular = estimateStay(hotel, query);
+    const summer = estimateStay(hotel, {
+      ...query,
+      checkIn: "2027-07-10",
+      checkOut: "2027-07-12",
+    });
+    expect(regular.source).toBe("model");
+    expect(summer.source).toBe("model");
+    expect(summer.nightlyGroup).toBeGreaterThan(regular.nightlyGroup);
+    expect(summer.explanation).toContain("Modelo propio de CERCA");
+    expect(summer.explanation).toContain("No es una tarifa observada");
   });
-  it("reparte entre el grupo la tarifa histórica de una vivienda, sin multiplicarla por habitaciones", () => {
+  it("calcula una vivienda con el modelo propio sin multiplicarla por habitaciones", () => {
     const result = estimateStay(apartment, { ...query, guests: 4 });
-    expect(result.nightlyGroup).toBe(100);
-    expect(result.perPersonNight).toBe(25);
-    expect(result.source).toBe("historical");
-    expect(result.explanation).toContain("2026-09-25");
-    expect(result.totalGroup).toBe(300);
+    expect(result.rooms).toBe(1);
+    expect(result.source).toBe("model");
+    expect(result.totalGroup).toBe(result.nightlyGroup * 3);
   });
   it("filtra por el mismo presupuesto central usado al ordenar, de menor a mayor", () => {
-    const cheap = { ...apartment, id: "cheap", observedNightly: 40 },
-      expensive = { ...apartment, id: "expensive", observedNightly: 160 };
+    const cheap = { ...hotel, id: "cheap", type: "Habitación" as const },
+      expensive = { ...hotel, id: "expensive", type: "Apartamento" as const };
     expect(
       filterStays(
         [expensive, cheap],
@@ -93,7 +83,7 @@ describe("Presupuestos orientativos para el torneo", () => {
       filterStays(
         [expensive, cheap],
         query,
-        { ...initialFilters, maxPrice: 30, platform: "Airbnb" },
+        { ...initialFilters, maxPrice: 40, platform: "Booking" },
         [],
         "price",
       ).map((s) => s.id),

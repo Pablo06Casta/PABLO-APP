@@ -108,10 +108,7 @@ export function CompareDialog({
                 {selections.map(({ stay }) => (
                   <td key={stay.id}>
                     <a href={stay.sourceUrl} target="_blank" rel="noreferrer">
-                      {stay.platform === "Airbnb"
-                        ? "Inside Airbnb"
-                        : (stay.sourceName ?? "Wikidata")}{" "}
-                      · {stay.observedAt ?? stay.retrievedAt}
+                      {stay.sourceName ?? "Wikidata"} · {stay.retrievedAt}
                     </a>
                   </td>
                 ))}

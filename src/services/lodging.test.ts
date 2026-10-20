@@ -104,22 +104,13 @@ describe("Más alojamientos reales cerca del pabellón", () => {
     }
   });
 
-  it("incorpora los precios medios aportados y resuelve nombres comerciales completos", () => {
+  it("no incorpora precios comerciales en los alojamientos", () => {
     const stays = realStays(queryFor("alicante-pitiu"));
-    expect(
-      stays.find((item) => item.name === "AC Hotel Alicante by Marriott"),
-    ).toMatchObject({
-      referenceNightly: 139,
-      priceReferenceSource: "Booking",
-      priceReferenceAt: "2026-10-19",
-    });
-    expect(
-      stays.find((item) =>
-        item.name.startsWith("Hotel Boutique Alicante Palacete S.XVII"),
-      ),
-    ).toMatchObject({
-      referenceNightly: 166,
-      priceReferenceSource: "Booking",
-    });
+    expect(stays.length).toBeGreaterThan(0);
+    for (const stay of stays) {
+      expect(stay).not.toHaveProperty("referenceNightly");
+      expect(stay).not.toHaveProperty("priceReferenceSource");
+      expect(stay).not.toHaveProperty("priceReferenceAt");
+    }
   });
 });

@@ -54,6 +54,7 @@ export function SavedBudgetLibrary({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [ageEligible, setAgeEligible] = useState(false);
   const [showPasswordSetup, setShowPasswordSetup] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
@@ -226,7 +227,7 @@ export function SavedBudgetLibrary({
     const redirect = new URL(import.meta.env.BASE_URL, window.location.origin).href;
     const { error } = await supabase.auth.signInWithOtp({
       email: address,
-      options: { emailRedirectTo: redirect },
+      options: { emailRedirectTo: redirect, shouldCreateUser: false },
     });
     if (!error) {
       setMessage("Enlace enviado. Ábrelo en este mismo navegador; al volver verás «Nube activa».");
@@ -281,12 +282,22 @@ export function SavedBudgetLibrary({
       setMessage("La contraseña debe tener al menos 8 caracteres.");
       return;
     }
+    if (!ageEligible) {
+      setMessage("Para crear una cuenta debes confirmar que tienes al menos 14 años o autorización de tu madre, padre o representante legal.");
+      return;
+    }
     setBusy(true);
     const redirect = new URL(import.meta.env.BASE_URL, window.location.origin).href;
     const { data, error } = await supabase.auth.signUp({
       email: address,
       password,
-      options: { emailRedirectTo: redirect },
+      options: {
+        emailRedirectTo: redirect,
+        data: {
+          age_condition_accepted: true,
+          legal_notice_version: "2026-10-20",
+        },
+      },
     });
     if (error) {
       setMessage(`No se pudo crear la cuenta: ${error.message}`);
@@ -295,6 +306,32 @@ export function SavedBudgetLibrary({
     } else if (!data.session) {
       setMessage("Cuenta creada. Abre el correo de confirmación una sola vez; después podrás entrar siempre con tu contraseña.");
     }
+    setBusy(false);
+  }
+
+  async function deleteAccount() {
+    if (!supabase || !session || busy) return;
+    const confirmed = window.confirm(
+      "Se eliminarán definitivamente tu cuenta y todos sus presupuestos guardados en la nube. Esta acción no se puede deshacer. ¿Quieres continuar?",
+    );
+    if (!confirmed) return;
+    setBusy(true);
+    setMessage("");
+    const { error } = await supabase.rpc("delete_current_user");
+    if (error) {
+      setMessage("No se pudo eliminar la cuenta. Comprueba que la migración de borrado de cuenta está instalada en Supabase e inténtalo de nuevo.");
+      setBusy(false);
+      return;
+    }
+    await supabase.auth.signOut({ scope: "local" });
+    setSession(null);
+    setBudgets(writeLocalBudgets([]));
+    setEmail("");
+    setPassword("");
+    setNewPassword("");
+    setShowPasswordSetup(false);
+    onNew();
+    setMessage("Cuenta, sesión y presupuestos eliminados definitivamente.");
     setBusy(false);
   }
 
@@ -375,6 +412,9 @@ export function SavedBudgetLibrary({
                 <KeyRound size={15} /> {showPasswordSetup ? "Cancelar" : "Crear o cambiar contraseña"}
               </button>
               <button type="button" onClick={() => void signOut()} disabled={busy}><LogOut size={15} /> Cerrar sesión</button>
+              <button type="button" className="budget-delete-account" onClick={() => void deleteAccount()} disabled={busy}>
+                <Trash2 size={15} /> Eliminar cuenta y datos
+              </button>
               {showPasswordSetup && (
                 <div className="budget-password-setup">
                   <label className="trip-field">Nueva contraseña
@@ -398,6 +438,10 @@ export function SavedBudgetLibrary({
               <button type="button" className="primary-button" onClick={() => void signInWithPassword()} disabled={busy}>
                 <LogIn size={16} /> Entrar
               </button>
+              <label className="budget-age-consent">
+                <input type="checkbox" checked={ageEligible} onChange={(event) => setAgeEligible(event.target.checked)} />
+                <span><strong>Para crear una cuenta:</strong> confirmo que tengo al menos 14 años o autorización de mi madre, padre o representante legal.</span>
+              </label>
               <button type="button" className="secondary-button" onClick={() => void createAccount()} disabled={busy}>
                 <UserPlus size={16} /> Crear cuenta
               </button>

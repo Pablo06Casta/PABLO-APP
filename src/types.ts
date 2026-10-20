@@ -53,11 +53,6 @@ export type Stay = {
   bookingSourceUrl?: string;
   platform?: "Booking" | "Airbnb";
   airbnbId?: string;
-  observedNightly?: number;
-  observedAt?: string;
-  referenceNightly?: number;
-  priceReferenceSource?: "Booking" | "Estimado";
-  priceReferenceAt?: string;
   minimumNights?: number;
   approximateLocation?: boolean;
   sourceUrl: string;

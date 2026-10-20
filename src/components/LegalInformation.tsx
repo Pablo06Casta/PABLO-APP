@@ -44,23 +44,20 @@ export function LegalInformation({
       <p>Información actualizada el 20 de octubre de 2026.</p>
       <h3>Quién mantiene CERCA</h3>
       <p>
-        Proyecto personal sin ingresos de Pablo, titular de la cuenta de GitHub
-        Pablo06Casta. CERCA es independiente y no está afiliada a Booking.com ni
-        a Airbnb. No tramitamos reservas ni pagos. La cuenta opcional de Supabase
-        sirve únicamente para sincronizar presupuestos.
+        Responsable: Pablo Martín Castañeda, titular de la cuenta de GitHub
+        Pablo06Casta. CERCA es un proyecto personal sin ingresos, independiente
+        y no afiliado a Booking.com ni a Airbnb. No tramitamos reservas ni pagos.
+        La cuenta opcional de Supabase sirve únicamente para sincronizar
+        presupuestos.
       </p>
       <p>
         Contacto:{" "}
-        <a
-          href="https://github.com/Pablo06Casta/PABLO-APP/issues/new?title=Contacto%20CERCA"
-          target="_blank"
-          rel="noreferrer"
-        >
-          contactar con Pablo mediante GitHub
+        <a href="mailto:pablitocastaneda06@gmail.com">
+          pablitocastaneda06@gmail.com
         </a>
-        . Las consultas son públicas: no publiques documentos de identidad,
-        ubicaciones privadas ni otros datos sensibles. Puedes pedir un canal
-        privado antes de aportar información personal.
+        . Utiliza este canal privado para consultas de privacidad o para ejercer
+        tus derechos. No envíes documentos de identidad salvo que sean
+        imprescindibles para atender una solicitud concreta.
       </p>
       <h3>Elige qué guardar y cargar</h3>
       <label className="privacy-option">
@@ -186,6 +183,17 @@ export function LegalInformation({
         los nombres o alias que escribas. Cada cuenta solo puede acceder a sus
         propios presupuestos. CERCA no incorpora publicidad ni seguimiento entre
         sitios y no elabora perfiles o decisiones automatizadas sobre personas.
+        La cuenta y los presupuestos sincronizados se conservan hasta que los
+        eliminas.
+      </p>
+      <h3>Edad y datos de otras personas</h3>
+      <p>
+        Las cuentas están reservadas a personas de 14 años o más. Si eres menor
+        de 14 años, la cuenta debe crearla y gestionarla tu madre, padre o
+        representante legal. Al crear una cuenta confirmas que cumples esta
+        condición. Usa alias o iniciales en los presupuestos y no escribas el
+        nombre completo de compañeros, especialmente menores, sin su permiso o
+        el de su representante legal.
       </p>
       <p>
         El almacenamiento funcional responde a las acciones que solicitas.
@@ -287,8 +295,8 @@ export function LegalInformation({
       <p>
         Cuando proceda, puedes solicitar acceso, rectificación, supresión,
         limitación, oposición y portabilidad, y retirar el consentimiento sin
-        afectar al tratamiento anterior. Contacta con Pablo por el canal
-        indicado; no publiques información personal en una incidencia. Puedes
+        afectar al tratamiento anterior. Contacta con Pablo mediante el correo
+        privado indicado. Puedes
         reclamar ante la{" "}
         <a href="https://www.aepd.es/" target="_blank" rel="noreferrer">
           Agencia Española de Protección de Datos
@@ -301,26 +309,28 @@ export function LegalInformation({
         y tu elección sobre la estadística de uso, y desactiva fotos y mapas
         externos. Los eventos anónimos ya enviados no se pueden vincular a ti,
         por lo que no es posible localizarlos para borrarlos. Para borrar presupuestos
-        sincronizados, inicia sesión y elimínalos desde «Mis presupuestos» antes
-        de borrar los datos locales. Para eliminar también la copia técnica sin
-        conexión, borra los datos del sitio desde los ajustes del navegador; no
-        contiene un historial personal de reservas.
+        sincronizados por separado, inicia sesión y elimínalos desde «Mis
+        presupuestos». El botón «Eliminar cuenta y datos» de esa sección borra
+        definitivamente la cuenta de Supabase y todos sus presupuestos
+        sincronizados, además de cerrar la sesión y retirar sus copias locales.
+        Para eliminar también la copia técnica sin conexión, borra los datos del
+        sitio desde los ajustes del navegador; no contiene un historial personal
+        de reservas.
       </p>
       <button className="danger-button" onClick={clearData}>
         Borrar mis datos locales de CERCA
       </button>
       <h3>Precios y enlaces de reserva</h3>
       <p>
-        Algunas tarjetas muestran precios medios aportados al proyecto, con la
-        fuente indicada como Booking o como estimación. CERCA no consulta ni
-        actualiza esas cifras directamente en Booking o Airbnb. Cuando no existe
-        una referencia para el alojamiento, utiliza su propio modelo de
-        planificación. Ninguna cifra es una oferta, descuento, tarifa actual o
-        disponibilidad confirmada; puede excluir impuestos y cargos. Eventos,
-        puentes y fiestas pueden cambiar las condiciones. El orden por precio es
-        orientativo y no identifica el hotel con menor tarifa real. Un
-        identificador o enlace publicado no acredita que la ficha siga activa.
-        Confirma todo en la plataforma antes de reservar.
+        CERCA no publica tarifas observadas o copiadas de Booking o Airbnb. Todas
+        las cifras de alojamiento proceden de un modelo propio de planificación
+        basado en categoría, ciudad, temporada y habitaciones dobles previstas.
+        Ninguna cifra es una oferta, descuento, tarifa actual o disponibilidad
+        confirmada; puede excluir impuestos y cargos. Eventos, puentes y fiestas
+        pueden cambiar las condiciones. El orden por precio es orientativo y no
+        identifica el hotel con menor tarifa real. Un identificador o enlace
+        publicado no acredita que la ficha siga activa. Confirma todo en la
+        plataforma antes de reservar.
       </p>
       <h3>Calendario de competiciones</h3>
       <p>

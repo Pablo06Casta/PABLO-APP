@@ -35,16 +35,16 @@ SORIA_VENUE = {
 }
 
 SORIA_LODGINGS = [
-    ("osm-node-6449351968", "Arévacos", "Habitación", 41.7697071, -2.4660203, "Dirección no disponible en OpenStreetMap", 48),
-    ("osm-node-6449351969", "Ábaco", "Habitación", 41.7700539, -2.4657103, "Dirección no disponible en OpenStreetMap", 50),
-    ("osm-way-743165736", "Hostal Vitorina", "Hotel", 41.76999472, -2.465721325, "Paseo de la Florida 35, Soria", 55),
-    ("osm-way-743165735", "Hostal Santa Bárbara", "Hotel", 41.769127983333334, -2.4708293833333332, "Paseo de Santa Bárbara 5, Soria", 52),
-    ("osm-way-743165734", "Hotel Alba", "Hotel", 41.76967845, -2.4720621333333335, "Paseo de Santa Bárbara 13, Soria", 58),
-    ("osm-node-369314483", "Hostal Eras de Santa Bárbara", "Hotel", 41.7713304, -2.4734909, "Dirección no disponible en OpenStreetMap", 54),
-    ("osm-node-671265835", "Hostal Ruiz", "Habitación", 41.7660275, -2.4682369, "Dirección no disponible en OpenStreetMap", 50),
-    ("osm-node-9183740158", "El Rincón de Gala", "Hotel", 41.7668877, -2.472433, "Calle de Venerable Palafox 9, Soria", 62),
-    ("osm-node-6991633314", "Abaster", "Hotel", 41.76553, -2.4660309, "Dirección no disponible en OpenStreetMap", 68),
-    ("osm-node-7086788091", "Hostel Soria", "Hotel", 41.7662321, -2.4739282, "Calle de las Navas de Tolosa 21, Soria", 56),
+    ("osm-node-6449351968", "Arévacos", "Habitación", 41.7697071, -2.4660203, "Dirección no disponible en OpenStreetMap"),
+    ("osm-node-6449351969", "Ábaco", "Habitación", 41.7700539, -2.4657103, "Dirección no disponible en OpenStreetMap"),
+    ("osm-way-743165736", "Hostal Vitorina", "Hotel", 41.76999472, -2.465721325, "Paseo de la Florida 35, Soria"),
+    ("osm-way-743165735", "Hostal Santa Bárbara", "Hotel", 41.769127983333334, -2.4708293833333332, "Paseo de Santa Bárbara 5, Soria"),
+    ("osm-way-743165734", "Hotel Alba", "Hotel", 41.76967845, -2.4720621333333335, "Paseo de Santa Bárbara 13, Soria"),
+    ("osm-node-369314483", "Hostal Eras de Santa Bárbara", "Hotel", 41.7713304, -2.4734909, "Dirección no disponible en OpenStreetMap"),
+    ("osm-node-671265835", "Hostal Ruiz", "Habitación", 41.7660275, -2.4682369, "Dirección no disponible en OpenStreetMap"),
+    ("osm-node-9183740158", "El Rincón de Gala", "Hotel", 41.7668877, -2.472433, "Calle de Venerable Palafox 9, Soria"),
+    ("osm-node-6991633314", "Abaster", "Hotel", 41.76553, -2.4660309, "Dirección no disponible en OpenStreetMap"),
+    ("osm-node-7086788091", "Hostel Soria", "Hotel", 41.7662321, -2.4739282, "Calle de las Navas de Tolosa 21, Soria"),
 ]
 
 SORIA_FUEL = [
@@ -102,12 +102,10 @@ def distance(first, second) -> float:
 def bootstrap_soria(root: Path, today: str) -> dict[str, int]:
     venues_path = root / "src/data/venues.json"
     stays_path = root / "src/data/real/osm-stays.json"
-    prices_path = root / "src/data/real/hotel-price-references.json"
     fuel_path = root / "src/data/real/fuel-references.json"
     markets_path = root / "src/data/real/venue-markets.json"
     venues = read_json(venues_path)
     stays = read_json(stays_path)
-    prices = read_json(prices_path)
     fuel = read_json(fuel_path)
     markets = read_json(markets_path)
 
@@ -117,13 +115,8 @@ def bootstrap_soria(root: Path, today: str) -> dict[str, int]:
         venue_added = 1
 
     stay_ids = {stay["id"] for stay in stays["hotels"]}
-    price_keys = {
-        (normalize(price["destination"]), normalize(price["name"]))
-        for price in prices["prices"]
-    }
     stays_added = 0
-    prices_added = 0
-    for lodging_id, name, lodging_type, lat, lng, address, estimate in SORIA_LODGINGS:
+    for lodging_id, name, lodging_type, lat, lng, address in SORIA_LODGINGS:
         if lodging_id not in stay_ids:
             osm_type, osm_id = lodging_id.removeprefix("osm-").split("-", 1)
             stays["hotels"].append(
@@ -139,19 +132,6 @@ def bootstrap_soria(root: Path, today: str) -> dict[str, int]:
                 }
             )
             stays_added += 1
-        key = (normalize("Soria"), normalize(name))
-        if key not in price_keys:
-            prices["prices"].append(
-                {
-                    "destination": "Soria",
-                    "name": name,
-                    "nightly": estimate,
-                    "source": "Estimado",
-                    "providedAt": today,
-                }
-            )
-            price_keys.add(key)
-            prices_added += 1
 
     fuel_keys = {
         (normalize(station["destination"]), normalize(station["name"]), normalize(station["address"]))
@@ -209,14 +189,12 @@ def bootstrap_soria(root: Path, today: str) -> dict[str, int]:
         markets["sources"].append(soria_osm_source)
 
     stays["hotels"].sort(key=lambda item: item["id"])
-    prices["prices"].sort(key=lambda item: (normalize(item["destination"]), normalize(item["name"])))
     fuel["scope"] = (
         "Referencias por localidad. Las entradas con coordenadas y sourceUrl proceden de "
         "OpenStreetMap; comprueba ruta, apertura y precios antes de desplazarte."
     )
     write_json(venues_path, venues)
     write_json(stays_path, stays)
-    write_json(prices_path, prices)
     write_json(fuel_path, fuel)
     markets["markets"].sort(key=lambda item: item["id"])
     markets["coverage"].sort(key=lambda item: item["venueId"])
@@ -225,7 +203,6 @@ def bootstrap_soria(root: Path, today: str) -> dict[str, int]:
     return {
         "venues": venue_added,
         "lodgings": stays_added,
-        "prices": prices_added,
         "fuel": fuel_added,
         "markets": markets_added,
     }
@@ -266,30 +243,16 @@ def fetch_local_osm(location):
     return data, url
 
 
-def estimated_nightly(lodging_type: str, city: str) -> int:
-    base = 50 if lodging_type == "Habitación" else 100 if lodging_type == "Apartamento" else 75
-    factor = 1.3 if normalize(city) in {"madrid", "barcelona"} else 1.1 if any(
-        name in normalize(city) for name in ["ibiza", "eivissa", "santander", "benalm", "alicante", "vitoria"]
-    ) else 1
-    return round(base * factor)
-
-
 def expand_venue(root: Path, venue: dict, today: str) -> dict[str, int]:
     data, source = fetch_local_osm(venue["location"])
     nodes = {item["id"]: item for item in data["elements"] if item["type"] == "node"}
     stays_path = root / "src/data/real/osm-stays.json"
-    prices_path = root / "src/data/real/hotel-price-references.json"
     fuel_path = root / "src/data/real/fuel-references.json"
     markets_path = root / "src/data/real/venue-markets.json"
     stays = read_json(stays_path)
-    prices = read_json(prices_path)
     fuel = read_json(fuel_path)
     markets = read_json(markets_path)
     existing_stay_ids = {stay["id"] for stay in stays["hotels"]}
-    existing_price_keys = {
-        (normalize(price["destination"]), normalize(price["name"]))
-        for price in prices["prices"]
-    }
     existing_fuel_sources = {
         station.get("sourceUrl") for station in fuel["stations"] if station.get("sourceUrl")
     }
@@ -363,7 +326,6 @@ def expand_venue(root: Path, venue: dict, today: str) -> dict[str, int]:
             market_candidates.append((distance_km, market))
 
     added_stays = 0
-    added_prices = 0
     for _, candidate in sorted(lodging_candidates, key=lambda item: item[0]):
         if added_stays >= 3:
             break
@@ -378,19 +340,6 @@ def expand_venue(root: Path, venue: dict, today: str) -> dict[str, int]:
         stays["hotels"].append(candidate)
         existing_stay_ids.add(candidate["id"])
         added_stays += 1
-        price_key = (normalize(venue["city"]), normalize(candidate["name"]))
-        if price_key not in existing_price_keys:
-            prices["prices"].append(
-                {
-                    "destination": venue["city"],
-                    "name": candidate["name"],
-                    "nightly": estimated_nightly(candidate["type"], venue["city"]),
-                    "source": "Estimado",
-                    "providedAt": today,
-                }
-            )
-            existing_price_keys.add(price_key)
-            added_prices += 1
 
     added_fuel = 0
     for _, station in sorted(fuel_candidates, key=lambda item: item[0]):
@@ -428,9 +377,7 @@ def expand_venue(root: Path, venue: dict, today: str) -> dict[str, int]:
 
     if added_stays:
         stays["hotels"].sort(key=lambda item: item["id"])
-        prices["prices"].sort(key=lambda item: (normalize(item["destination"]), normalize(item["name"])))
         write_json(stays_path, stays)
-        write_json(prices_path, prices)
     if added_fuel:
         fuel["stations"].sort(
             key=lambda item: (normalize(item["destination"]), normalize(item["name"]), normalize(item["address"]))
@@ -458,7 +405,6 @@ def expand_venue(root: Path, venue: dict, today: str) -> dict[str, int]:
         write_json(markets_path, markets)
     return {
         "lodgings": added_stays,
-        "prices": added_prices,
         "fuel": added_fuel,
         "markets": added_markets,
         "osmSources": 1,

@@ -100,20 +100,9 @@ export function StayCard({
       <div className="card-bottom">
         <div>
           <p className="card-price">
-            <strong>
-              ≈ {money(stay.referenceNightly ?? estimate.perPersonNight)}
-            </strong>
-            <span>
-              {stay.referenceNightly
-                ? " / precio medio por noche"
-                : " / persona y noche"}
-            </span>
+            <strong>≈ {money(estimate.perPersonNight)}</strong>
+            <span> / persona y noche</span>
           </p>
-          {stay.referenceNightly && (
-            <p className="card-total">
-              ≈ {money(estimate.perPersonNight)} / persona según el grupo
-            </p>
-          )}
           <p className="card-total">
             Rango orientativo {money(estimate.low)}–{money(estimate.high)}
           </p>
@@ -131,11 +120,7 @@ export function StayCard({
         </button>
       </div>
       <p className="estimate-source">
-        {estimate.source === "supplied"
-          ? `Referencia aportada · fuente indicada: ${stay.priceReferenceSource} · ${stay.priceReferenceAt}`
-          : estimate.source === "historical"
-          ? `Referencia histórica · ${stay.observedAt}`
-          : "Estimación de CERCA · tarifa no observada"}
+        Estimación propia de CERCA · tarifa no observada
       </p>
       <p className="card-total event-price-notice">
         Eventos, puentes y fiestas pueden cambiar el precio. Confírmalo para tus

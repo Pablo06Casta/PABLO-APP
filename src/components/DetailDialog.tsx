@@ -89,9 +89,7 @@ export function DetailDialog({
             <section className="detail-section">
               <h3>Para tu viaje de bádminton</h3>
               <p>
-                {stay.platform === "Airbnb"
-                  ? `Anuncio de Airbnb recopilado por Inside Airbnb. Tarifa de referencia observada el ${stay.observedAt}. La localización publicada es aproximada; la dirección exacta se confirma en la plataforma.`
-                  : stay.bookingSearch
+                {stay.bookingSearch
                     ? `${stay.sourceName === "OpenStreetMap" ? "Alojamiento localizado en OpenStreetMap." : "Alojamiento incorporado por nombre y dirección pública; su punto en el mapa es aproximado."} El enlace busca su nombre y ubicación en Booking; confirma que el resultado corresponde al hotel antes de reservar. No se ha verificado una ficha ni disponibilidad en Booking. El presupuesto usa el modelo de planificación indicado.`
                     : `Alojamiento con identificador o enlace publicado de Booking. Fuente: ${stay.sourceName ?? "Wikidata"}. El enlace no confirma que la ficha siga activa ni disponibilidad. No hay tarifa observada de este hotel: el presupuesto usa el modelo propio de CERCA.`}
               </p>
@@ -117,19 +115,6 @@ export function DetailDialog({
               >
                 Ver fuente del alojamiento <ArrowUpRight size={15} />
               </a>
-              {stay.platform === "Airbnb" && (
-                <small>
-                  Datos: Inside Airbnb ·{" "}
-                  <a
-                    href="https://creativecommons.org/licenses/by/4.0/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    CC BY 4.0
-                  </a>
-                  . Selección y estimaciones elaboradas por CERCA.
-                </small>
-              )}
               {stay.sourceName === "OpenStreetMap" && (
                 <small>
                   © OpenStreetMap contributors ·{" "}

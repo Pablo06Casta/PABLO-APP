@@ -18,15 +18,14 @@ class DailyExpansionTest(unittest.TestCase):
             data.mkdir(parents=True)
             (root / "src/data/venues.json").write_text("[]")
             (data / "osm-stays.json").write_text(json.dumps({"retrievedAt": "2026-10-19", "hotels": []}))
-            (data / "hotel-price-references.json").write_text(json.dumps({"providedAt": "2026-10-19", "prices": []}))
             (data / "fuel-references.json").write_text(json.dumps({"providedAt": "2026-10-19", "scope": "", "priceComparator": "https://example.com", "stations": []}))
             (data / "venue-markets.json").write_text(json.dumps({"retrievedAt": "2026-10-19", "sources": [], "coverage": [], "markets": []}))
 
             first = MODULE.bootstrap_soria(root, "2026-10-20")
             second = MODULE.bootstrap_soria(root, "2026-10-20")
 
-            self.assertEqual(first, {"venues": 1, "lodgings": 10, "prices": 10, "fuel": 5, "markets": 5})
-            self.assertEqual(second, {"venues": 0, "lodgings": 0, "prices": 0, "fuel": 0, "markets": 0})
+            self.assertEqual(first, {"venues": 1, "lodgings": 10, "fuel": 5, "markets": 5})
+            self.assertEqual(second, {"venues": 0, "lodgings": 0, "fuel": 0, "markets": 0})
             self.assertEqual(len(json.loads((root / "src/data/venues.json").read_text())), 1)
             self.assertEqual(len(json.loads((data / "osm-stays.json").read_text())["hotels"]), 10)
             self.assertEqual(len(json.loads((data / "fuel-references.json").read_text())["stations"]), 5)
