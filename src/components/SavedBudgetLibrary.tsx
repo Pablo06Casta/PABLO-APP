@@ -7,6 +7,7 @@ import {
   LogIn,
   LogOut,
   Plus,
+  RefreshCw,
   Save,
   Trash2,
 } from "lucide-react";
@@ -46,6 +47,7 @@ export function SavedBudgetLibrary({
 }) {
   const [budgets, setBudgets] = useState<SavedBudget[]>(readLocalBudgets);
   const [session, setSession] = useState<Session | null>(null);
+  const [authReady, setAuthReady] = useState(!supabaseConfigured);
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
@@ -60,26 +62,51 @@ export function SavedBudgetLibrary({
   }, []);
 
   useEffect(() => {
-    if (!supabase) return;
-    void supabase.auth.getSession().then(({ data }) => setSession(data.session));
-    const { data } = supabase.auth.onAuthStateChange((_event, next) => {
+    const client = supabase;
+    if (!client) return;
+    const refreshSession = () => {
+      void client.auth.getSession().then(({ data }) => {
+        setSession(data.session);
+        setAuthReady(true);
+      });
+    };
+    refreshSession();
+    const refreshWhenVisible = () => {
+      if (document.visibilityState === "visible") refreshSession();
+    };
+    window.addEventListener("pageshow", refreshSession);
+    document.addEventListener("visibilitychange", refreshWhenVisible);
+    const { data } = client.auth.onAuthStateChange((event, next) => {
       setSession(next);
+      setAuthReady(true);
+      if (event === "SIGNED_IN") {
+        setMessage("Acceso confirmado. Estamos sincronizando tus presupuestos.");
+      }
     });
-    return () => data.subscription.unsubscribe();
+    return () => {
+      data.subscription.unsubscribe();
+      window.removeEventListener("pageshow", refreshSession);
+      document.removeEventListener("visibilitychange", refreshWhenVisible);
+    };
   }, []);
 
   useEffect(() => {
     if (!session) return;
     let active = true;
+    const local = readLocalBudgets();
     void readCloudBudgets()
-      .then((cloud) => {
+      .then(async (cloud) => {
         if (!active) return;
-        const merged = mergeBudgets(readLocalBudgets(), cloud);
+        const merged = mergeBudgets(local, cloud);
+        await Promise.all(merged.map((budget) => saveCloudBudget(budget, session.user.id)));
+        if (!active) return;
         setBudgets(merged);
-        setMessage(cloud.length ? "Presupuestos de la nube recuperados." : "La nube está lista para guardar este presupuesto.");
+        setMessage(merged.length
+          ? `${merged.length} ${merged.length === 1 ? "presupuesto sincronizado" : "presupuestos sincronizados"} con la nube.`
+          : "La nube está lista para guardar tu primer presupuesto.");
       })
       .catch(() => {
-        if (active) setMessage("No se pudieron recuperar los presupuestos de la nube.");
+        if (active) setMessage("La sesión está activa, pero no se pudo acceder a la tabla de presupuestos. Comprueba que ejecutaste el SQL de configuración en Supabase.");
       })
     return () => { active = false; };
   }, [session]);
@@ -169,7 +196,23 @@ export function SavedBudgetLibrary({
       email: address,
       options: { emailRedirectTo: redirect },
     });
-    setMessage(error ? "No se pudo enviar el enlace de acceso." : "Revisa tu correo para abrir el enlace de acceso.");
+    setMessage(error
+      ? "No se pudo enviar el enlace de acceso. Inténtalo de nuevo dentro de unos minutos."
+      : "Enlace enviado. Ábrelo en este mismo navegador; al volver verás «Nube activa».");
+    setBusy(false);
+  }
+
+  async function checkAccess() {
+    if (!supabase || busy) return;
+    setBusy(true);
+    const { data, error } = await supabase.auth.getSession();
+    setSession(data.session);
+    setAuthReady(true);
+    setMessage(error
+      ? "No se pudo comprobar la sesión."
+      : data.session
+        ? "Acceso confirmado. Estamos sincronizando tus presupuestos."
+        : "Todavía no hay una sesión activa. Abre el enlace del correo en este mismo navegador y vuelve a comprobarla.");
     setBusy(false);
   }
 
@@ -202,7 +245,9 @@ export function SavedBudgetLibrary({
 
       {supabaseConfigured && (
         <div className="budget-cloud-account">
-          {session ? (
+          {!authReady ? (
+            <span><RefreshCw className="spin" size={16} /> Comprobando la sesión…</span>
+          ) : session ? (
             <>
               <span><Cloud size={16} /> Nube activa · {session.user.email}</span>
               <button type="button" onClick={() => void signOut()} disabled={busy}><LogOut size={15} /> Cerrar sesión</button>
@@ -214,6 +259,9 @@ export function SavedBudgetLibrary({
               </label>
               <button type="button" className="secondary-button" onClick={() => void sendMagicLink()} disabled={busy}>
                 <LogIn size={16} /> Enviar enlace de acceso
+              </button>
+              <button type="button" onClick={() => void checkAccess()} disabled={busy}>
+                <RefreshCw size={15} /> Ya he abierto el enlace
               </button>
             </>
           )}
