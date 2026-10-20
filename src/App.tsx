@@ -1,4 +1,12 @@
-import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   ArrowDownUp,
   ArrowRight,
@@ -65,25 +73,59 @@ import {
 } from "./lib/search";
 import { readStorage, useStored } from "./lib/storage";
 import { realStays, lodgingProvider } from "./services/lodging";
-import { findFuelStations, findMarkets, findTown } from "./services/places";
 import { SearchBar } from "./components/SearchBar";
 import { StayCard } from "./components/StayCard";
-import { FiltersDialog } from "./components/FiltersDialog";
-import { DetailDialog } from "./components/DetailDialog";
 import { Dialog } from "./components/Dialog";
-import { CompareDialog } from "./components/CompareDialog";
-import { TripDialog } from "./components/TripDialog";
-import { GroupBudgetSection } from "./components/GroupBudgetSection";
 import { readTrip } from "./lib/trip";
 import { LazyMap as MapView } from "./components/LazyMap";
-import { Markets } from "./components/Markets";
-import { FuelStations } from "./components/FuelStations";
 import { ExternalServices } from "./components/ExternalServices";
-import { LegalInformation } from "./components/LegalInformation";
-import { TournamentCalendar } from "./components/TournamentCalendar";
-import { suggestedTripDates, type Tournament } from "./data/tournaments";
-import fuelReferences from "./data/real/fuel-references.json";
+import { ConsentBanner } from "./components/ConsentBanner";
+import { track, useAnalyticsConsent } from "./lib/analytics";
+import type { Tournament } from "./data/tournaments";
 import "./App.css";
+
+// Cada sección y diálogo se descarga al usarse por primera vez para que la
+// primera carga en móviles solo incluya el listado de alojamientos.
+const FiltersDialog = lazy(() =>
+  import("./components/FiltersDialog").then((m) => ({ default: m.FiltersDialog })),
+);
+const DetailDialog = lazy(() =>
+  import("./components/DetailDialog").then((m) => ({ default: m.DetailDialog })),
+);
+const CompareDialog = lazy(() =>
+  import("./components/CompareDialog").then((m) => ({ default: m.CompareDialog })),
+);
+const TripDialog = lazy(() =>
+  import("./components/TripDialog").then((m) => ({ default: m.TripDialog })),
+);
+const GroupBudgetSection = lazy(() =>
+  import("./components/GroupBudgetSection").then((m) => ({
+    default: m.GroupBudgetSection,
+  })),
+);
+const Markets = lazy(() =>
+  import("./components/Markets").then((m) => ({ default: m.Markets })),
+);
+const FuelStations = lazy(() =>
+  import("./components/FuelStations").then((m) => ({ default: m.FuelStations })),
+);
+const LegalInformation = lazy(() =>
+  import("./components/LegalInformation").then((m) => ({
+    default: m.LegalInformation,
+  })),
+);
+const TournamentCalendar = lazy(() =>
+  import("./components/TournamentCalendar").then((m) => ({
+    default: m.TournamentCalendar,
+  })),
+);
+// Supermercados, gasolineras y geocodificación solo se descargan al pedirlos.
+const places = () => import("./services/places");
+const sectionFallback = (
+  <div className="section-loading" role="status">
+    Cargando…
+  </div>
+);
 
 type Selection = { stay: Stay; search: Search };
 type Favorite = { stay: Stay; town: Town; venue?: Venue };
@@ -92,6 +134,8 @@ type InstallPrompt = Event & {
   userChoice: Promise<{ outcome: string }>;
 };
 const currentYear = new Date().getFullYear();
+const fuelPriceComparator =
+  "https://www.ocu.org/coches/gasolina-y-carburantes/calculadora/gasolineras";
 const categories: Array<{ name: StayType; label: string; icon: typeof Home }> =
   [
     { name: "Todos", label: "Todos los alojamientos", icon: LayoutGrid },
@@ -144,6 +188,11 @@ function AppContent() {
     "filters" | "markets" | "fuel" | "help" | "privacy" | "compare" | "trip" | null
   >(null);
   const [detail, setDetail] = useState<Selection | null>(null);
+  const [budgetOpened, setBudgetOpened] = useState(false);
+  const [analyticsConsent, setAnalyticsConsent] = useAnalyticsConsent();
+  // El presupuesto se descarga al abrirlo y después se mantiene montado para
+  // conservar lo escrito al cambiar de sección.
+  if (tab === "budget" && !budgetOpened) setBudgetOpened(true);
   const [busy, setBusy] = useState(false);
   const [searchError, setSearchError] = useState("");
   const [markets, setMarkets] = useState<Market[]>([]);
@@ -235,6 +284,12 @@ function AppContent() {
     return () => window.removeEventListener("beforeinstallprompt", capture);
   }, []);
   useEffect(() => {
+    track("section", tab);
+  }, [tab, analyticsConsent]);
+  useEffect(() => {
+    if (modal) track("feature", modal);
+  }, [modal]);
+  useEffect(() => {
     if (!toast) return;
     const timeout = setTimeout(() => setToast(""), 3500);
     return () => clearTimeout(timeout);
@@ -301,7 +356,7 @@ function AppContent() {
     setCompare([]);
     if (!next.venue && next.town.approximate) {
       try {
-        const matches = await findTown(
+        const matches = await (await places()).findTown(
           next.town.name + ", " + next.town.region,
           AbortSignal.timeout(5000),
         );
@@ -313,6 +368,7 @@ function AppContent() {
     }
     if (generation !== searchGeneration.current) return;
     setSearch(next);
+    track("destination", next.venue?.id ?? next.town.id);
     setRecent((items) =>
       [
         { town: next.town, date: new Date().toISOString() },
@@ -340,6 +396,7 @@ function AppContent() {
         ? favorites.filter((entry) => entry.stay.id !== stay.id)
         : [...favorites, { stay, town: query.town, venue: query.venue }],
     );
+    if (!saved) track("feature", "favorite_add");
     setToast(
       saved
         ? "Alojamiento eliminado de favoritos"
@@ -358,6 +415,7 @@ function AppContent() {
       return;
     }
     setCompare([...compare, { stay, search: query }]);
+    track("feature", "compare_add");
   }
   async function loadMarkets(query = search) {
     const town = searchOrigin(query);
@@ -381,7 +439,7 @@ function AppContent() {
     setMarketTownId(town.id);
     const timeout = setTimeout(() => controller.abort(), 25000);
     try {
-      const result = await findMarkets(
+      const result = await (await places()).findMarkets(
         town,
         controller.signal,
         marketStatus === "success" && marketTownId === town.id,
@@ -421,6 +479,7 @@ function AppContent() {
   function openDetail(stay: Stay, query = search) {
     setModal(null);
     setDetail({ stay, search: query });
+    track("feature", "detail");
     if (marketTownId !== searchOrigin(query).id) {
       void loadMarkets(query);
     }
@@ -443,13 +502,14 @@ function AppContent() {
     }
     const controller = new AbortController();
     fuelController.current = controller;
+    track("feature", "fuel_search");
     setFuelStatus("loading");
     setFuelError("");
     if (fuelOriginId !== place.id) setFuelStations([]);
     setFuelOriginId(place.id);
     const timeout = setTimeout(() => controller.abort(), 25000);
     try {
-      const found = await findFuelStations(place, controller.signal, fuelStatus === "success" && fuelOriginId === place.id);
+      const found = await (await places()).findFuelStations(place, controller.signal, fuelStatus === "success" && fuelOriginId === place.id);
       if (fuelController.current === controller) {
         setFuelStations(found);
         setFuelStatus("success");
@@ -571,9 +631,16 @@ function AppContent() {
       </header>
 
       <main id="main" className="main-container">
-        <div hidden={tab !== "budget"}>
-          <GroupBudgetSection search={search} stays={shareableCompare.map((entry) => entry.stay)} />
-        </div>
+        {budgetOpened && (
+          <div hidden={tab !== "budget"}>
+            <Suspense fallback={sectionFallback}>
+              <GroupBudgetSection
+                search={search}
+                stays={shareableCompare.map((entry) => entry.stay)}
+              />
+            </Suspense>
+          </div>
+        )}
         {(tab === "explore" || tab === "map") && (
           <>
             <section className="hero" aria-labelledby="main-title">
@@ -608,7 +675,7 @@ function AppContent() {
                 <button className="secondary-button" onClick={showFuel}><Fuel size={16} /> Buscar gasolineras cerca</button>
                 <a
                   className="secondary-button"
-                  href={fuelReferences.priceComparator}
+                  href={fuelPriceComparator}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -916,10 +983,15 @@ function AppContent() {
         )}
 
         {tab === "tournaments" && (
+          <Suspense fallback={sectionFallback}>
           <TournamentCalendar
             search={search}
-            onPlan={(event: Tournament, venue: Venue) => {
-              const { checkIn, checkOut } = suggestedTripDates(event);
+            onPlan={(
+              _event: Tournament,
+              venue: Venue,
+              { checkIn, checkOut },
+            ) => {
+              track("tournament_plan", venue.id);
               void runSearch({
                 town: townForVenue(venue),
                 venue,
@@ -930,6 +1002,7 @@ function AppContent() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           />
+          </Suspense>
         )}
         {tab === "favorites" && (
           <section className="saved-page">
@@ -1061,8 +1134,9 @@ function AppContent() {
                   </h2>
                   <p>
                     Los favoritos y la apariencia se guardan cuando los eliges.
-                    Recordar búsquedas es opcional. Sin cuentas, anuncios ni
-                    analítica.
+                    Recordar búsquedas es opcional. Sin cookies, anuncios ni
+                    perfiles; la estadística de uso anónima solo se activa si la
+                    aceptas.
                   </p>
                   <p>
                     La ubicación solo se consulta cuando la solicitas y
@@ -1199,6 +1273,7 @@ function AppContent() {
         </div>
       )}
 
+      <Suspense fallback={null}>
       {modal === "filters" && (
         <FiltersDialog
           filters={filters}
@@ -1227,6 +1302,7 @@ function AppContent() {
               {venueLabel(search)}. Las distancias son aproximadas en línea
               recta.
             </p>
+            <Suspense fallback={sectionFallback}>
             <Markets
               markets={marketTownId === origin.id ? markets : []}
               origin={origin}
@@ -1234,11 +1310,13 @@ function AppContent() {
               error={marketError}
               onLoad={() => loadMarkets(search)}
             />
+            </Suspense>
           </div>
         </Dialog>
       )}
       {modal === "fuel" && <Dialog title={`Gasolineras cerca de ${venueLabel(search)}`} onClose={() => setModal(null)} wide>
         <div className="markets-dialog-content">
+          <Suspense fallback={sectionFallback}>
           <FuelStations
             stations={fuelOriginId === origin.id ? fuelStations : []}
             origin={origin}
@@ -1249,6 +1327,7 @@ function AppContent() {
             error={fuelError}
             onLoad={() => loadFuel(search)}
           />
+          </Suspense>
         </div>
       </Dialog>}
       {modal === "help" && (
@@ -1312,7 +1391,12 @@ function AppContent() {
           title="Tus datos, bajo tu control"
           onClose={() => setModal(null)}
         >
+          <Suspense fallback={sectionFallback}>
           <LegalInformation
+            analytics={analyticsConsent === "granted"}
+            setAnalytics={(value) =>
+              setAnalyticsConsent(value ? "granted" : "denied")
+            }
             photos={photos}
             setPhotos={setPhotos}
             maps={maps}
@@ -1326,6 +1410,7 @@ function AppContent() {
               setRememberSearch(false);
               setPhotos(false);
               setMaps(false);
+              setAnalyticsConsent("unset");
               try {
                 for (const key of [
                   "cerca-search-v3",
@@ -1335,6 +1420,7 @@ function AppContent() {
                   "cerca-favorites-v2",
                   "cerca-theme-v1",
                   "cerca-saved-budgets-v1",
+                  "cerca-analytics-consent-v1",
                 ])
                   localStorage.removeItem(key);
                 window.dispatchEvent(new Event("cerca-budgets-cleared"));
@@ -1347,6 +1433,7 @@ function AppContent() {
               );
             }}
           />
+          </Suspense>
         </Dialog>
       )}
       {modal === "compare" && (
@@ -1382,6 +1469,12 @@ function AppContent() {
           loadMarkets={() => loadMarkets(detail.search)}
         />
       )}
+      </Suspense>
+      <ConsentBanner
+        consent={analyticsConsent}
+        onChange={setAnalyticsConsent}
+        onMore={() => setModal("privacy")}
+      />
     </div>
   );
 }

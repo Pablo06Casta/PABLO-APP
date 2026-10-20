@@ -1,4 +1,5 @@
 import { ShieldCheck } from "lucide-react";
+import { analyticsAvailable, consentKey } from "../lib/analytics";
 
 const dataFiles = [
   ["osm-stays.json", "Alojamientos OSM"],
@@ -7,7 +8,18 @@ const dataFiles = [
   ["granada-markets.json", "Comercios de Granada OSM"],
   ["venues.json", "Sedes y ubicaciones"],
 ];
+const storageItems = [
+  ["cerca-analytics-consent-v1", "Tu elección sobre la estadística de uso", "Técnico, necesario para respetar tu decisión", "Hasta que la cambies o borres los datos"],
+  ["cerca-favorites-v2", "Favoritos que guardas", "Funcional, solicitado por ti", "Hasta que los elimines"],
+  ["cerca-theme-v1", "Apariencia clara u oscura", "Funcional, solicitado por ti", "Hasta que la cambies"],
+  ["cerca-saved-budgets-v1", "Presupuestos guardados en el dispositivo", "Funcional, solicitado por ti", "Hasta que los elimines"],
+  ["cerca-remember-search-v1, cerca-search-v3, cerca-recent-v1", "Búsquedas recordadas", "Preferencia opcional", "Hasta que desactives «Recordar»"],
+  ["sb-…-auth-token", "Sesión de Supabase si inicias sesión", "Técnico, necesario para la cuenta", "Hasta cerrar sesión"],
+  ["Caché sin conexión (service worker)", "Interfaz y catálogo para usar CERCA sin red", "Técnico, necesario", "Hasta la siguiente versión o hasta borrar los datos del sitio"],
+] as const;
 export function LegalInformation({
+  analytics,
+  setAnalytics,
   photos,
   setPhotos,
   maps,
@@ -16,6 +28,8 @@ export function LegalInformation({
   setRememberSearch,
   clearData,
 }: {
+  analytics: boolean;
+  setAnalytics: (value: boolean) => void;
   photos: boolean;
   setPhotos: (value: boolean) => void;
   maps: boolean;
@@ -93,6 +107,75 @@ export function LegalInformation({
           </small>
         </span>
       </label>
+      {analyticsAvailable() && (
+        <label className="privacy-option">
+          <input
+            type="checkbox"
+            checked={analytics}
+            onChange={(e) => setAnalytics(e.target.checked)}
+          />
+          <span>
+            <strong>Permitir estadística de uso anónima</strong>
+            <small>
+              Opcional y desactivada hasta que la aceptes. Cuenta qué secciones,
+              sedes y funciones se usan en cada visita, sin cookies ni
+              identificadores. Puedes retirarla en cualquier momento.
+            </small>
+          </span>
+        </label>
+      )}
+      <h3>Cookies y almacenamiento en tu navegador</h3>
+      <p>
+        CERCA no utiliza cookies propias ni de terceros, ni con fines
+        publicitarios ni analíticos. Sí guarda en el almacenamiento local del
+        navegador los datos necesarios para las funciones que pides. Conforme al
+        artículo 22.2 de la LSSI, este almacenamiento técnico o solicitado por
+        ti no requiere consentimiento; las opciones voluntarias se activan solo
+        si las eliges.
+      </p>
+      <div className="table-scroll">
+        <table className="storage-table">
+          <caption className="sr-only">
+            Datos que CERCA guarda en tu navegador
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Clave</th>
+              <th scope="col">Finalidad</th>
+              <th scope="col">Tipo</th>
+              <th scope="col">Duración</th>
+            </tr>
+          </thead>
+          <tbody>
+            {storageItems.map(([key, purpose, kind, duration]) => (
+              <tr key={key}>
+                <th scope="row">
+                  <code>{key}</code>
+                </th>
+                <td>{purpose}</td>
+                <td>{kind}</td>
+                <td>{duration}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <h3>Estadística de uso anónima</h3>
+      <p>
+        Solo si la aceptas, CERCA envía a su base de datos de Supabase un aviso
+        por cada sección, sede o función usada durante la visita (por ejemplo,
+        «section: budget» o «destination: vitoria-aldabe»), con la fecha y hora
+        del servidor. No se envían identificadores de persona, dispositivo o
+        sesión, la dirección de la página ni el navegador. Como en toda
+        conexión, el proveedor recibe tu IP para entregar la solicitud, pero no
+        se guarda en la tabla de estadística. Si tu navegador envía la señal
+        Global Privacy Control o «No rastrear», no se envía nada aunque hayas
+        aceptado. Finalidad: conocer el uso agregado para mejorar CERCA. Base
+        jurídica: tu consentimiento (art. 6.1.a RGPD), que puedes retirar arriba
+        sin consecuencias. Conservación: 13 meses, tras los que los eventos se
+        eliminan automáticamente. No se ceden ni se combinan con otros datos.
+        La elección se guarda en <code>{consentKey}</code>.
+      </p>
       <h3>Datos, finalidad y conservación</h3>
       <p>
         Los favoritos, los presupuestos y la apariencia se guardan localmente
@@ -101,12 +184,12 @@ export function LegalInformation({
         «Recordar». Si inicias sesión para sincronizar, Supabase recibe el correo,
         los datos técnicos de acceso y el contenido de los presupuestos, incluidos
         los nombres o alias que escribas. Cada cuenta solo puede acceder a sus
-        propios presupuestos. CERCA no incorpora publicidad ni analítica y no
-        elabora perfiles o decisiones automatizadas sobre personas.
+        propios presupuestos. CERCA no incorpora publicidad ni seguimiento entre
+        sitios y no elabora perfiles o decisiones automatizadas sobre personas.
       </p>
       <p>
         El almacenamiento funcional responde a las acciones que solicitas.
-        Recordar búsquedas y activar fotos o mapas externos son opciones
+        Recordar búsquedas, la estadística de uso y activar fotos o mapas externos son opciones
         voluntarias que puedes retirar aquí. Para los tratamientos sujetos al
         RGPD, las funciones opcionales se basan en tu consentimiento (art.
         6.1.a); la prestación de funciones solicitadas, en atender tu solicitud
@@ -129,7 +212,8 @@ export function LegalInformation({
         geocodificación usan servicios de OpenStreetMap; las fotos externas,
         Wikimedia; la actualización de comercios envía la zona de la sede a
         Overpass o a la API de OpenStreetMap. Si eliges sincronizar presupuestos,
-        Supabase presta el acceso por correo y el almacenamiento en PostgreSQL.
+        Supabase presta el acceso por correo y el almacenamiento en PostgreSQL;
+        si aceptas la estadística de uso, también recibe esos eventos anónimos.
         El catálogo guardado no necesita esas consultas. Cada conexión comunica
         al proveedor IP y datos técnicos, además de la consulta correspondiente.
       </p>
@@ -213,8 +297,10 @@ export function LegalInformation({
         ajustes del navegador.
       </p>
       <p>
-        El botón elimina favoritos, búsquedas, presupuestos locales y apariencia
-        de CERCA, y desactiva fotos y mapas externos. Para borrar presupuestos
+        El botón elimina favoritos, búsquedas, presupuestos locales, apariencia
+        y tu elección sobre la estadística de uso, y desactiva fotos y mapas
+        externos. Los eventos anónimos ya enviados no se pueden vincular a ti,
+        por lo que no es posible localizarlos para borrarlos. Para borrar presupuestos
         sincronizados, inicia sesión y elimínalos desde «Mis presupuestos» antes
         de borrar los datos locales. Para eliminar también la copia técnica sin
         conexión, borra los datos del sitio desde los ajustes del navegador; no
