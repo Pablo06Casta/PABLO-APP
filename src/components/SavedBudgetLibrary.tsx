@@ -1,0 +1,247 @@
+import { useEffect, useState } from "react";
+import {
+  Cloud,
+  Copy,
+  FolderOpen,
+  HardDrive,
+  LogIn,
+  LogOut,
+  Plus,
+  Save,
+  Trash2,
+} from "lucide-react";
+import type { Session } from "@supabase/supabase-js";
+import {
+  createBudgetId,
+  deleteCloudBudget,
+  mergeBudgets,
+  readCloudBudgets,
+  readLocalBudgets,
+  removeBudget,
+  saveCloudBudget,
+  type SavedBudget,
+  upsertBudget,
+} from "../lib/savedBudgets";
+import { supabase, supabaseConfigured } from "../lib/supabase";
+
+type BudgetDraft = Omit<
+  SavedBudget,
+  "schemaVersion" | "id" | "createdAt" | "updatedAt"
+>;
+
+export function SavedBudgetLibrary({
+  draft,
+  currentId,
+  currentCreatedAt,
+  onCurrentChange,
+  onLoad,
+  onNew,
+}: {
+  draft: BudgetDraft;
+  currentId: string | null;
+  currentCreatedAt: string | null;
+  onCurrentChange: (id: string, createdAt: string) => void;
+  onLoad: (budget: SavedBudget) => void;
+  onNew: () => void;
+}) {
+  const [budgets, setBudgets] = useState<SavedBudget[]>(readLocalBudgets);
+  const [session, setSession] = useState<Session | null>(null);
+  const [email, setEmail] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    const clear = () => {
+      setBudgets([]);
+      setMessage("Presupuestos locales eliminados.");
+    };
+    window.addEventListener("cerca-budgets-cleared", clear);
+    return () => window.removeEventListener("cerca-budgets-cleared", clear);
+  }, []);
+
+  useEffect(() => {
+    if (!supabase) return;
+    void supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    const { data } = supabase.auth.onAuthStateChange((_event, next) => {
+      setSession(next);
+    });
+    return () => data.subscription.unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (!session) return;
+    let active = true;
+    void readCloudBudgets()
+      .then((cloud) => {
+        if (!active) return;
+        const merged = mergeBudgets(readLocalBudgets(), cloud);
+        setBudgets(merged);
+        setMessage(cloud.length ? "Presupuestos de la nube recuperados." : "La nube está lista para guardar este presupuesto.");
+      })
+      .catch(() => {
+        if (active) setMessage("No se pudieron recuperar los presupuestos de la nube.");
+      })
+    return () => { active = false; };
+  }, [session]);
+
+  function buildBudget(id: string, createdAt: string, changes: Partial<BudgetDraft> = {}): SavedBudget {
+    return {
+      schemaVersion: 1,
+      id,
+      ...draft,
+      ...changes,
+      createdAt,
+      updatedAt: new Date().toISOString(),
+    };
+  }
+
+  async function save() {
+    if (busy) return;
+    setBusy(true);
+    setMessage("");
+    const id = currentId ?? createBudgetId();
+    const createdAt = currentCreatedAt ?? new Date().toISOString();
+    const budget = buildBudget(id, createdAt);
+    setBudgets((current) => upsertBudget(current, budget));
+    onCurrentChange(id, createdAt);
+    try {
+      if (session) {
+        await saveCloudBudget(budget, session.user.id);
+        setMessage("Presupuesto guardado en este dispositivo y en la nube.");
+      } else {
+        setMessage("Presupuesto guardado en este dispositivo.");
+      }
+    } catch {
+      setMessage("Guardado en este dispositivo, pero la nube no respondió.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function duplicate(budget: SavedBudget) {
+    if (busy) return;
+    setBusy(true);
+    const now = new Date().toISOString();
+    const copy: SavedBudget = {
+      ...budget,
+      id: createBudgetId(),
+      groupName: `${budget.groupName.trim() || "Presupuesto"} (copia)`,
+      createdAt: now,
+      updatedAt: now,
+    };
+    setBudgets((current) => upsertBudget(current, copy));
+    onLoad(copy);
+    try {
+      if (session) await saveCloudBudget(copy, session.user.id);
+      setMessage(session ? "Copia creada y guardada en la nube." : "Copia creada en este dispositivo.");
+    } catch {
+      setMessage("Copia creada en este dispositivo, pero la nube no respondió.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function remove(budget: SavedBudget) {
+    if (busy) return;
+    setBusy(true);
+    setBudgets((current) => removeBudget(current, budget.id));
+    if (currentId === budget.id) onNew();
+    try {
+      if (session) await deleteCloudBudget(budget.id);
+      setMessage("Presupuesto eliminado.");
+    } catch {
+      setMessage("Se eliminó de este dispositivo, pero no de la nube.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function sendMagicLink() {
+    if (!supabase || busy) return;
+    const address = email.trim();
+    if (!/^\S+@\S+\.\S+$/.test(address)) {
+      setMessage("Escribe un correo válido.");
+      return;
+    }
+    setBusy(true);
+    const redirect = new URL(import.meta.env.BASE_URL, window.location.origin).href;
+    const { error } = await supabase.auth.signInWithOtp({
+      email: address,
+      options: { emailRedirectTo: redirect },
+    });
+    setMessage(error ? "No se pudo enviar el enlace de acceso." : "Revisa tu correo para abrir el enlace de acceso.");
+    setBusy(false);
+  }
+
+  async function signOut() {
+    if (!supabase || busy) return;
+    setBusy(true);
+    await supabase.auth.signOut();
+    setSession(null);
+    setMessage("Sesión cerrada. Los presupuestos locales siguen en este dispositivo.");
+    setBusy(false);
+  }
+
+  return (
+    <section className="budget-library" aria-labelledby="budget-library-title">
+      <div className="budget-library-heading">
+        <div>
+          <p className="small-caps"><HardDrive size={15} /> MIS PRESUPUESTOS</p>
+          <h2 id="budget-library-title">Guarda y continúa después</h2>
+          <p>Los presupuestos se conservan en este dispositivo. Con una cuenta también se sincronizan en la nube.</p>
+        </div>
+        <div className="budget-library-actions">
+          <button type="button" className="secondary-button" onClick={onNew} disabled={busy}>
+            <Plus size={16} /> Nuevo
+          </button>
+          <button type="button" className="primary-button" onClick={() => void save()} disabled={busy}>
+            <Save size={16} /> {currentId ? "Guardar cambios" : "Guardar presupuesto"}
+          </button>
+        </div>
+      </div>
+
+      {supabaseConfigured && (
+        <div className="budget-cloud-account">
+          {session ? (
+            <>
+              <span><Cloud size={16} /> Nube activa · {session.user.email}</span>
+              <button type="button" onClick={() => void signOut()} disabled={busy}><LogOut size={15} /> Cerrar sesión</button>
+            </>
+          ) : (
+            <>
+              <label className="trip-field">Correo para sincronizar
+                <input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="equipo@ejemplo.es" />
+              </label>
+              <button type="button" className="secondary-button" onClick={() => void sendMagicLink()} disabled={busy}>
+                <LogIn size={16} /> Enviar enlace de acceso
+              </button>
+            </>
+          )}
+        </div>
+      )}
+
+      {message && <p className="budget-save-message" role="status">{message}</p>}
+
+      {budgets.length > 0 ? (
+        <div className="budget-saved-list">
+          {budgets.map((budget) => (
+            <article className={budget.id === currentId ? "current" : ""} key={budget.id}>
+              <div>
+                <strong>{budget.groupName.trim() || "Presupuesto sin nombre"}</strong>
+                <span>{budget.tournamentName.trim() || budget.destination}{budget.season.trim() ? ` · ${budget.season}` : ""}</span>
+                <small>Actualizado {new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" }).format(new Date(budget.updatedAt))}</small>
+              </div>
+              <div className="budget-saved-actions">
+                <button type="button" onClick={() => onLoad(budget)} disabled={busy}><FolderOpen size={15} /> Abrir</button>
+                <button type="button" onClick={() => void duplicate(budget)} disabled={busy}><Copy size={15} /> Duplicar</button>
+                <button type="button" aria-label={`Eliminar ${budget.groupName.trim() || "presupuesto"}`} onClick={() => void remove(budget)} disabled={busy}><Trash2 size={15} /></button>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p className="budget-empty">Todavía no hay presupuestos guardados.</p>
+      )}
+    </section>
+  );
+}

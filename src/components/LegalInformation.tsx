@@ -32,7 +32,8 @@ export function LegalInformation({
       <p>
         Proyecto personal sin ingresos de Pablo, titular de la cuenta de GitHub
         Pablo06Casta. CERCA es independiente y no está afiliada a Booking.com ni
-        a Airbnb. No tramitamos reservas, pagos ni cuentas de viajeros.
+        a Airbnb. No tramitamos reservas ni pagos. La cuenta opcional de Supabase
+        sirve únicamente para sincronizar presupuestos.
       </p>
       <p>
         Contacto:{" "}
@@ -94,12 +95,14 @@ export function LegalInformation({
       </label>
       <h3>Datos, finalidad y conservación</h3>
       <p>
-        Los favoritos y la apariencia se guardan localmente cuando los eliges,
-        para prestarte esas funciones, hasta que los elimines o limpies el
-        navegador. Las búsquedas se conservan solo si activas «Recordar». CERCA
-        no envía esos favoritos o búsquedas a un servidor propio, no incorpora
-        publicidad ni analítica y no elabora perfiles o decisiones automatizadas
-        sobre personas. La ordenación compara un presupuesto de viaje.
+        Los favoritos, los presupuestos y la apariencia se guardan localmente
+        cuando los eliges, para prestarte esas funciones, hasta que los elimines
+        o limpies el navegador. Las búsquedas se conservan solo si activas
+        «Recordar». Si inicias sesión para sincronizar, Supabase recibe el correo,
+        los datos técnicos de acceso y el contenido de los presupuestos, incluidos
+        los nombres o alias que escribas. Cada cuenta solo puede acceder a sus
+        propios presupuestos. CERCA no incorpora publicidad ni analítica y no
+        elabora perfiles o decisiones automatizadas sobre personas.
       </p>
       <p>
         El almacenamiento funcional responde a las acciones que solicitas.
@@ -125,9 +128,10 @@ export function LegalInformation({
         técnicos de las visitas conforme a su política. Los mapas y la
         geocodificación usan servicios de OpenStreetMap; las fotos externas,
         Wikimedia; la actualización de comercios envía la zona de la sede a
-        Overpass o a la API de OpenStreetMap. El catálogo guardado no necesita
-        esas consultas. Cada conexión comunica al proveedor IP y datos técnicos,
-        además de la consulta correspondiente.
+        Overpass o a la API de OpenStreetMap. Si eliges sincronizar presupuestos,
+        Supabase presta el acceso por correo y el almacenamiento en PostgreSQL.
+        El catálogo guardado no necesita esas consultas. Cada conexión comunica
+        al proveedor IP y datos técnicos, además de la consulta correspondiente.
       </p>
       <p>
         Estos proveedores pueden tratar datos fuera del Espacio Económico
@@ -171,6 +175,15 @@ export function LegalInformation({
         </li>
         <li>
           <a
+            href="https://supabase.com/privacy"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Supabase: privacidad
+          </a>
+        </li>
+        <li>
+          <a
             href="https://www.ocu.org/organizacion/privacidad"
             target="_blank"
             rel="noreferrer"
@@ -200,14 +213,15 @@ export function LegalInformation({
         ajustes del navegador.
       </p>
       <p>
-        El botón elimina favoritos, búsquedas y apariencia de CERCA y desactiva
-        fotos y mapas externos. No borra datos en otras plataformas. Para
-        eliminar también la copia técnica sin conexión, borra los datos del
-        sitio desde los ajustes del navegador; no contiene un historial personal
-        de reservas.
+        El botón elimina favoritos, búsquedas, presupuestos locales y apariencia
+        de CERCA, y desactiva fotos y mapas externos. Para borrar presupuestos
+        sincronizados, inicia sesión y elimínalos desde «Mis presupuestos» antes
+        de borrar los datos locales. Para eliminar también la copia técnica sin
+        conexión, borra los datos del sitio desde los ajustes del navegador; no
+        contiene un historial personal de reservas.
       </p>
       <button className="danger-button" onClick={clearData}>
-        Borrar mis datos de CERCA
+        Borrar mis datos locales de CERCA
       </button>
       <h3>Precios y enlaces de reserva</h3>
       <p>

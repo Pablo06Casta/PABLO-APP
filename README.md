@@ -15,7 +15,7 @@ Encuentra alojamientos reales y supermercados alrededor del **pabellón de compe
 - Supermercados ordenados desde el pabellón, incluidos en el mapa junto a alojamientos y sede. Catálogo fechado de 307 supermercados y 143 tiendas de alimentación para las 19 sedes confirmadas: carga inmediata, selección de tipo y actualización explícita sin perder los resultados guardados. Los detalles cargan la compra al abrirse, desde su propia sede. Distancias en línea recta y minutos a pie aproximados, no rutas calculadas. «Cómo llegar» abre Google Maps.
 - Favoritos, comparación de tres opciones, navegación móvil, modo oscuro y PWA. El autocompletado de municipios se conserva para destinos adicionales; donde no hay sede elegida se identifica el modo centro de ciudad.
 - Viajes compartidos mediante enlace con sede, fechas, viajeros y hasta tres identificadores del catálogo. Al abrirlo se comprueban todos los campos; si una ficha desaparece, se conserva el resto. Los gastos de la calculadora no se comparten. Quien tenga el enlace puede ver la selección.
-- Sección de presupuesto del grupo al principio de la aplicación: destino, número de viajeros y nombres opcionales (por defecto, Viajero 1, Viajero 2…). Permite añadir hasta 50 gastos con categoría, concepto y precio total, por persona o por persona y día; incluye restaurante, comida, alojamiento, gasolina, transporte y otros. Una sola opción de la comparación puede aportar una estimación de alojamiento para las noches elegidas. El total se reparte a partes iguales, asignando los céntimos sobrantes por orden para cuadrar la suma. Descarga un PDF con gastos, subtotales y aportación individual. El presupuesto permanece en memoria y no se incorpora al enlace compartido.
+- Sección propia de presupuesto del grupo: nombre del equipo, torneo, temporada, destino, número de viajeros y nombres opcionales (por defecto, Viajero 1, Viajero 2…). Permite añadir hasta 50 gastos con categoría, concepto y precio total, por persona o por persona y día; incluye restaurante, comida, alojamiento, gasolina, transporte y otros. Una sola opción de la comparación puede aportar una estimación de alojamiento para las noches elegidas. El total se reparte a partes iguales, asignando los céntimos sobrantes por orden para cuadrar la suma. Descarga un PDF con gastos, subtotales y aportación individual. Los presupuestos se pueden guardar, editar, duplicar y borrar en el dispositivo; con Supabase configurado se sincronizan en la cuenta del usuario. No se incorporan al enlace compartido.
 - En el detalle de cada alojamiento, enlaces de Google Maps para trayectos andando, en coche y en transporte público hasta un pabellón confirmado. CERCA solo muestra la distancia en línea recta y no calcula tiempos de ruta. Abrir Google Maps envía las dos coordenadas; el mapa de OpenStreetMap del detalle se carga a petición.
 
 ## Datos y precios
@@ -42,7 +42,7 @@ npm ci --cache /tmp/pablo-app-npm-cache
 npm run dev -- --host 0.0.0.0 --port 5173 --strictPort
 ```
 
-Utiliza el checkout existente: cada tarea en la nube ya está aislada y no requiere worktrees. Si 5173 ya sirve CERCA, reutilízalo. Los procesos deben arrancarse de nuevo en cada máquina. No se necesitan claves privadas para este catálogo abierto.
+Utiliza el checkout existente: cada tarea en la nube ya está aislada y no requiere worktrees. Si 5173 ya sirve CERCA, reutilízalo. Los procesos deben arrancarse de nuevo en cada máquina. El catálogo abierto no necesita claves privadas. La sincronización opcional de presupuestos utiliza las variables públicas `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY`; la clave administrativa de Supabase nunca se incluye en el cliente.
 
 ```sh
 npm run check       # Lint, pruebas, tipos, build y smoke HTTP/PWA.
@@ -69,13 +69,23 @@ CERCA_BASE_PATH=/PABLO-APP/ npm run build -- --outDir /tmp/cerca-pages-dist
 CERCA_BASE_PATH=/PABLO-APP/ npm run preview -- --outDir /tmp/cerca-pages-dist --host 127.0.0.1 --port 5181 --strictPort
 ```
 
+### Sincronización de presupuestos con Supabase
+
+1. Crea un proyecto gratuito en Supabase.
+2. Ejecuta `supabase/migrations/20261020_create_budgets.sql` desde el editor SQL del proyecto. La migración activa Row Level Security y limita cada operación al propietario autenticado.
+3. En Authentication → URL Configuration, añade `https://pablo06casta.github.io/PABLO-APP/` como URL de redirección.
+4. Copia `.env.example` a `.env.local` para desarrollo y completa la URL del proyecto y la clave pública `anon`.
+5. En GitHub → Settings → Secrets and variables → Actions → Variables, crea `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` con esos mismos valores.
+
+Sin estas variables, el guardado local, la edición, la duplicación y el borrado siguen funcionando. Cuando están configuradas, la interfaz permite iniciar sesión mediante un enlace enviado por correo y sincroniza los presupuestos con PostgreSQL.
+
 Se conserva `scripts/refresh-catalogue.py` para el catálogo base de Wikidata y sus fotografías libres. `scripts/import-osm-hotels.py` importa exportaciones oficiales `map.json` sin datos personales de colaboradores, aplica el radio de 10 km, elimina duplicados y respeta exclusiones revisadas. No consulta Booking ni inventa rutas. La actualización de sedes y alojamientos abiertos debe conservar fuentes, fechas, licencia y criterios de `NOTICE-badminton.md` y ejecutar las comprobaciones.
 
 ## Transparencia y privacidad
 
 Proyecto personal de Pablo, sin ingresos ni afiliación con Booking.com o Airbnb. La información pública no acredita disponibilidad, vigencia de enlaces ni la legalidad turística de cada alojamiento. Los avisos no sustituyen permisos de reutilización. No reactivar importaciones de las plataformas sin autorización y derechos acreditados.
 
-«Privacidad y licencias» ofrece controles para recordar búsquedas (desactivado por defecto), mostrar fotos remotas y cargar mapas (opciones en memoria, apagadas al iniciar cada visita), borrar los datos locales y descargar bases OSM bajo ODbL. Favoritos y apariencia se guardan cuando el usuario los elige; búsquedas y recientes no persisten sin activación expresa. Se retiran favoritos Airbnb de versiones anteriores. El borrado no afecta a registros de proveedores ni al almacenamiento técnico de la PWA; se explica cómo quitarlo desde el navegador.
+«Privacidad y licencias» ofrece controles para recordar búsquedas (desactivado por defecto), mostrar fotos remotas y cargar mapas (opciones en memoria, apagadas al iniciar cada visita), borrar los datos locales y descargar bases OSM bajo ODbL. Favoritos, apariencia y presupuestos guardados permanecen en el navegador cuando el usuario los elige; búsquedas y recientes no persisten sin activación expresa. Si se activa Supabase, los presupuestos se asocian a la cuenta de correo y solo son accesibles por su propietario mediante las políticas RLS incluidas. El borrado local no elimina por sí solo las copias sincronizadas: deben eliminarse desde «Mis presupuestos» con la sesión iniciada. Se retiran favoritos Airbnb de versiones anteriores. El borrado no afecta al almacenamiento técnico de la PWA; se explica cómo quitarlo desde el navegador.
 
 El contacto público es la incidencia de GitHub del repositorio, asociada a la cuenta del responsable. No publicar datos personales en incidencias públicas. No se ha aportado correo privado ni identidad legal completa del operador: la política no debe presentarse como certificación jurídica exhaustiva. Las conexiones de proveedores y sus transferencias requieren revisión según su configuración y contratos reales.
 

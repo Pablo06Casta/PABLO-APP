@@ -214,6 +214,28 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
     expect((screen.getByRole("textbox", { name: "Viajero 1" }) as HTMLInputElement).value).toBe("María");
   });
+  it("guarda, duplica, abre y elimina presupuestos en el dispositivo", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    const nav = screen.getByRole("navigation", { name: "Navegación principal" });
+    await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
+    await user.type(screen.getByRole("textbox", { name: "Nombre del equipo o grupo" }), "Club Tudela");
+    await user.type(screen.getByRole("textbox", { name: "Torneo" }), "TOP TTR");
+    await user.type(screen.getByRole("textbox", { name: "Temporada" }), "2026/27");
+    const library = screen.getByRole("region", { name: "Guarda y continúa después" });
+    await user.click(within(library).getByRole("button", { name: "Guardar presupuesto" }));
+    expect(JSON.parse(localStorage.getItem("cerca-saved-budgets-v1")!)).toHaveLength(1);
+    expect(within(library).getByText("Club Tudela")).toBeTruthy();
+    await user.click(within(library).getByRole("button", { name: "Duplicar" }));
+    expect(JSON.parse(localStorage.getItem("cerca-saved-budgets-v1")!)).toHaveLength(2);
+    expect((screen.getByRole("textbox", { name: "Nombre del equipo o grupo" }) as HTMLInputElement).value).toBe("Club Tudela (copia)");
+    await user.click(within(library).getByRole("button", { name: "Nuevo" }));
+    expect((screen.getByRole("textbox", { name: "Nombre del equipo o grupo" }) as HTMLInputElement).value).toBe("");
+    await user.click(within(library).getAllByRole("button", { name: "Abrir" })[0]);
+    expect((screen.getByRole("textbox", { name: "Torneo" }) as HTMLInputElement).value).toBe("TOP TTR");
+    await user.click(within(library).getByRole("button", { name: "Eliminar Club Tudela (copia)" }));
+    expect(JSON.parse(localStorage.getItem("cerca-saved-budgets-v1")!)).toHaveLength(1);
+  });
   it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {
     const user = userEvent.setup();
     render(<App />);
@@ -277,7 +299,7 @@ describe("CERCA: flujos del viajero", () => {
       screen.getByRole("button", { name: "Gestionar datos guardados" }),
     );
     await user.click(
-      screen.getByRole("button", { name: "Borrar mis datos de CERCA" }),
+      screen.getByRole("button", { name: "Borrar mis datos locales de CERCA" }),
     );
     expect(localStorage.getItem("cerca-favorites-v2")).toBeNull();
     expect(document.documentElement.dataset.theme).toBe("light");

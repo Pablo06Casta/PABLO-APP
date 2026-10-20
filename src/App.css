@@ -2316,6 +2316,27 @@
 .group-budget-heading h2 { margin: 8px 0; font-size: clamp(24px, 2.4vw, 34px); letter-spacing: -1px; }
 .group-budget-heading > div:first-child > p:last-child { max-width: 680px; color: var(--muted); font-size: 13px; line-height: 1.6; margin: 8px 0 0; }
 .group-budget-heading-icon { width: 56px; height: 56px; flex: none; display: grid; place-items: center; color: var(--accent); background: var(--accent-soft); border-radius: 17px; }
+.budget-library { margin-top: 22px; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-soft); }
+.budget-library-heading { display: flex; align-items: start; justify-content: space-between; gap: 18px; }
+.budget-library-heading .small-caps { display: flex; align-items: center; gap: 6px; color: var(--accent); margin: 0 0 6px; }
+.budget-library-heading h2 { margin: 0; font-size: 17px; }
+.budget-library-heading p:last-child { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.budget-library-actions, .budget-saved-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.budget-cloud-account { display: flex; align-items: end; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.budget-cloud-account .trip-field { flex: 1; max-width: 380px; margin: 0; }
+.budget-cloud-account > span { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 11px; font-weight: 650; }
+.budget-cloud-account > button:not(.secondary-button) { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 11px; }
+.budget-save-message { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--text); font-size: 11px; }
+.budget-saved-list { display: grid; gap: 9px; margin-top: 16px; }
+.budget-saved-list article { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.budget-saved-list article.current { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft); }
+.budget-saved-list article > div:first-child { display: grid; gap: 3px; min-width: 0; }
+.budget-saved-list article strong, .budget-saved-list article span, .budget-saved-list article small { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.budget-saved-list article strong { font-size: 12px; }
+.budget-saved-list article span { color: var(--muted); font-size: 10px; }
+.budget-saved-list article small { color: var(--muted); font-size: 9px; }
+.budget-saved-actions button { display: inline-flex; align-items: center; gap: 5px; padding: 7px 9px; border-radius: 8px; color: var(--muted); font-size: 10px; }
+.budget-saved-actions button:hover { color: var(--accent); background: var(--accent-soft); }
 .group-budget-layout { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(290px, 0.9fr); gap: 28px; padding-top: 23px; }
 .group-budget-form { min-width: 0; }
 .budget-block + .budget-block { border-top: 1px solid var(--line); margin-top: 24px; padding-top: 22px; }
@@ -2347,7 +2368,7 @@
 .budget-download { width: 100%; justify-content: center; margin: 16px 0; }
 .budget-error { padding: 12px; background: var(--accent-soft); border-radius: 9px; color: var(--text); font-size: 12px; }
 @media (max-width: 950px) { .group-budget-layout { grid-template-columns: 1fr; } }
-@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
+@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-library { padding: 15px; } .budget-library-heading, .budget-saved-list article { align-items: stretch; flex-direction: column; } .budget-library-actions > *, .budget-saved-actions > * { flex: 1; justify-content: center; } .budget-cloud-account { align-items: stretch; flex-direction: column; } .budget-cloud-account .trip-field { max-width: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
 @media (max-width: 480px) {
   .hero-trip-actions {
     grid-template-columns: minmax(0, 300px);

@@ -8,6 +8,8 @@ import {
   type BudgetEntry,
   type BudgetScope,
 } from "../lib/detailedBudget";
+import type { SavedBudget } from "../lib/savedBudgets";
+import { SavedBudgetLibrary } from "./SavedBudgetLibrary";
 
 const euros = (cents: number) =>
   new Intl.NumberFormat("es-ES", {
@@ -19,19 +21,72 @@ const euros = (cents: number) =>
 
 export function GroupBudgetSection({ search, stays }: { search: Search; stays: Stay[] }) {
   const [groupName, setGroupName] = useState("");
+  const [tournamentName, setTournamentName] = useState("");
+  const [season, setSeason] = useState("");
   const [destinationState, setDestinationState] = useState({ town: search.town.name, value: search.town.name });
   const [peopleRaw, setPeopleRaw] = useState(String(search.guests));
   const [names, setNames] = useState<string[]>([]);
   const [selectedId, setSelectedId] = useState("");
   const [entries, setEntries] = useState<BudgetEntry[]>([]);
+  const [savedStay, setSavedStay] = useState<Stay | null>(null);
+  const [savedSearch, setSavedSearch] = useState<Search | null>(null);
+  const [currentBudgetId, setCurrentBudgetId] = useState<string | null>(null);
+  const [currentCreatedAt, setCurrentCreatedAt] = useState<string | null>(null);
   const [pdfBusy, setPdfBusy] = useState(false);
   const [pdfMessage, setPdfMessage] = useState("");
   const nextId = useRef(0);
-  const destination = destinationState.town !== search.town.name && destinationState.value === destinationState.town ? search.town.name : destinationState.value;
-  const activeSelectedId = stays.some((item) => item.id === selectedId) ? selectedId : "";
-  const stay = stays.find((item) => item.id === activeSelectedId);
-  const { error, result } = calculateDetailedBudget({ search, groupName, destination, peopleRaw, names, entries, stay });
+  const budgetSearch = savedSearch ?? search;
+  const destination = destinationState.town !== budgetSearch.town.name && destinationState.value === destinationState.town ? budgetSearch.town.name : destinationState.value;
+  const availableStays = savedStay && !stays.some((item) => item.id === savedStay.id) ? [savedStay, ...stays] : stays;
+  const activeSelectedId = availableStays.some((item) => item.id === selectedId) ? selectedId : "";
+  const stay = availableStays.find((item) => item.id === activeSelectedId);
+  const { error, result } = calculateDetailedBudget({ search: budgetSearch, groupName, destination, peopleRaw, names, entries, stay });
   const people = /^\d+$/.test(peopleRaw) ? Math.min(100, Math.max(0, Number(peopleRaw))) : 0;
+  const budgetDraft = {
+    groupName,
+    tournamentName,
+    season,
+    destination,
+    peopleRaw,
+    names,
+    entries,
+    selectedStay: stay ?? null,
+    search: budgetSearch,
+  };
+
+  function newBudget() {
+    setGroupName("");
+    setTournamentName("");
+    setSeason("");
+    setDestinationState({ town: search.town.name, value: search.town.name });
+    setPeopleRaw(String(search.guests));
+    setNames([]);
+    setSelectedId("");
+    setEntries([]);
+    setSavedStay(null);
+    setSavedSearch(null);
+    setCurrentBudgetId(null);
+    setCurrentCreatedAt(null);
+    setPdfMessage("");
+    nextId.current = 0;
+  }
+
+  function loadBudget(budget: SavedBudget) {
+    setGroupName(budget.groupName);
+    setTournamentName(budget.tournamentName);
+    setSeason(budget.season);
+    setDestinationState({ town: budget.search.town.name, value: budget.destination });
+    setPeopleRaw(budget.peopleRaw);
+    setNames(budget.names);
+    setSelectedId(budget.selectedStay?.id ?? "");
+    setEntries(budget.entries);
+    setSavedStay(budget.selectedStay);
+    setSavedSearch(budget.search);
+    setCurrentBudgetId(budget.id);
+    setCurrentCreatedAt(budget.createdAt);
+    setPdfMessage("");
+    nextId.current = budget.entries.reduce((maximum, entry) => Math.max(maximum, Number(entry.id) || 0), 0);
+  }
 
   function addExpense() {
     if (entries.length >= 50) return;
@@ -54,7 +109,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
     setPdfMessage("");
     try {
       const { downloadBudgetPdf } = await import("../lib/budgetPdf");
-      await downloadBudgetPdf(result, search, stay);
+      await downloadBudgetPdf(result, budgetSearch, stay);
       setPdfMessage("PDF generado y descargado.");
     } catch {
       setPdfMessage("No se pudo generar el PDF. Vuelve a intentarlo.");
@@ -69,10 +124,22 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
         <div>
           <p className="small-caps"><Wallet size={16} /> ORGANIZA LOS GASTOS DE TU EQUIPO</p>
           <h2 id="budget-title">Presupuesto del grupo<span className="heading-dot">.</span></h2>
-          <p>Prepara el viaje completo y descubre cuánto aporta cada persona. Este presupuesto permanece en esta sesión; los nombres y gastos no se incluyen en el enlace compartido.</p>
+          <p>Prepara el viaje completo y descubre cuánto aporta cada persona. Puedes guardarlo, duplicarlo y continuar más tarde; los nombres y gastos no se incluyen en el enlace compartido.</p>
         </div>
         <div className="group-budget-heading-icon" aria-hidden="true"><Users size={30} /></div>
       </div>
+
+      <SavedBudgetLibrary
+        draft={budgetDraft}
+        currentId={currentBudgetId}
+        currentCreatedAt={currentCreatedAt}
+        onCurrentChange={(id, createdAt) => {
+          setCurrentBudgetId(id);
+          setCurrentCreatedAt(createdAt);
+        }}
+        onLoad={loadBudget}
+        onNew={newBudget}
+      />
 
       <div className="group-budget-layout">
         <div className="group-budget-form">
@@ -81,6 +148,12 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
             <div className="budget-fields">
               <label className="trip-field budget-team-field">Nombre del equipo o grupo
                 <input value={groupName} maxLength={100} onChange={(event) => setGroupName(event.target.value)} placeholder="Ej. Club Bádminton Tudela" />
+              </label>
+              <label className="trip-field">Torneo
+                <input value={tournamentName} maxLength={120} onChange={(event) => setTournamentName(event.target.value)} placeholder="Ej. TOP TTR Tudela" />
+              </label>
+              <label className="trip-field">Temporada
+                <input value={season} maxLength={30} onChange={(event) => setSeason(event.target.value)} placeholder="Ej. 2026/27" />
               </label>
               <label className="trip-field">Dónde viajamos
                 <input value={destination} maxLength={120} onChange={(event) => setDestinationState({ town: search.town.name, value: event.target.value })} placeholder="Destino del viaje" />
@@ -99,11 +172,14 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
 
           <div className="budget-block">
             <h2>Alojamiento de la comparación</h2>
-            <p className="budget-helper">Puedes usar una sola estimación de CERCA para {nights(search)} noches, o añadir alojamientos con tu propio precio como gastos. Las opciones de la comparación son alternativas.</p>
+            <p className="budget-helper">Puedes usar una sola estimación de CERCA para {nights(budgetSearch)} noches, o añadir alojamientos con tu propio precio como gastos. Las opciones de la comparación son alternativas.</p>
             <label className="trip-field">Alojamiento estimado
-              <select value={activeSelectedId} onChange={(event) => setSelectedId(event.target.value)}>
+              <select value={activeSelectedId} onChange={(event) => {
+                setSelectedId(event.target.value);
+                setSavedStay(availableStays.find((item) => item.id === event.target.value) ?? null);
+              }}>
                 <option value="">Sin estimación de CERCA</option>
-                {stays.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
+                {availableStays.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
               </select>
             </label>
             {stay && <p className="budget-helper">Estimación CERCA: {euros(result?.lodgingCents ?? 0)} para toda la estancia. Confirma precio, capacidad, impuestos y disponibilidad.</p>}

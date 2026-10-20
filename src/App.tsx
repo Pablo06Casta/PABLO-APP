@@ -1334,8 +1334,10 @@ function AppContent() {
                   "cerca-favorites-v1",
                   "cerca-favorites-v2",
                   "cerca-theme-v1",
+                  "cerca-saved-budgets-v1",
                 ])
                   localStorage.removeItem(key);
+                window.dispatchEvent(new Event("cerca-budgets-cleared"));
               } catch {
                 /* Almacenamiento opcional */
               }
