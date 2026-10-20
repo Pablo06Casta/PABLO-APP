@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Cloud,
   Copy,
@@ -22,6 +22,7 @@ import {
   saveCloudBudget,
   type SavedBudget,
   upsertBudget,
+  writeLocalBudgets,
 } from "../lib/savedBudgets";
 import { supabase, supabaseConfigured } from "../lib/supabase";
 
@@ -51,6 +52,11 @@ export function SavedBudgetLibrary({
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  const onNewRef = useRef(onNew);
+
+  useEffect(() => {
+    onNewRef.current = onNew;
+  }, [onNew]);
 
   useEffect(() => {
     const clear = () => {
@@ -81,6 +87,9 @@ export function SavedBudgetLibrary({
       setAuthReady(true);
       if (event === "SIGNED_IN") {
         setMessage("Acceso confirmado. Estamos sincronizando tus presupuestos.");
+      } else if (event === "SIGNED_OUT") {
+        setBudgets(writeLocalBudgets([]));
+        onNewRef.current();
       }
     });
     return () => {
@@ -196,9 +205,19 @@ export function SavedBudgetLibrary({
       email: address,
       options: { emailRedirectTo: redirect },
     });
-    setMessage(error
-      ? "No se pudo enviar el enlace de acceso. Inténtalo de nuevo dentro de unos minutos."
-      : "Enlace enviado. Ábrelo en este mismo navegador; al volver verás «Nube activa».");
+    if (!error) {
+      setMessage("Enlace enviado. Ábrelo en este mismo navegador; al volver verás «Nube activa».");
+    } else {
+      const reason = `${error.code ?? ""} ${error.message}`.toLowerCase();
+      const seconds = reason.match(/after\s+(\d+)\s+seconds?/i)?.[1];
+      setMessage(
+        seconds
+          ? `Supabase limita la frecuencia de los correos. Espera ${seconds} segundos antes de solicitar otro enlace.`
+          : reason.includes("rate") || reason.includes("limit")
+            ? "Supabase ha alcanzado temporalmente el límite de correos del plan gratuito. Espera aproximadamente una hora antes de solicitar otro enlace."
+            : `No se pudo enviar el enlace de acceso: ${error.message}`,
+      );
+    }
     setBusy(false);
   }
 
@@ -219,9 +238,16 @@ export function SavedBudgetLibrary({
   async function signOut() {
     if (!supabase || busy) return;
     setBusy(true);
-    await supabase.auth.signOut();
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      setMessage("No se pudo cerrar la sesión. Inténtalo de nuevo.");
+      setBusy(false);
+      return;
+    }
     setSession(null);
-    setMessage("Sesión cerrada. Los presupuestos locales siguen en este dispositivo.");
+    setBudgets(writeLocalBudgets([]));
+    onNew();
+    setMessage("Sesión cerrada. Los presupuestos de la cuenta ya no se muestran en este dispositivo.");
     setBusy(false);
   }
 
@@ -231,7 +257,7 @@ export function SavedBudgetLibrary({
         <div>
           <p className="small-caps"><HardDrive size={15} /> MIS PRESUPUESTOS</p>
           <h2 id="budget-library-title">Guarda y continúa después</h2>
-          <p>Los presupuestos se conservan en este dispositivo. Con una cuenta también se sincronizan en la nube.</p>
+          <p>Sin iniciar sesión se conservan en este dispositivo. Con una cuenta se sincronizan en la nube y dejan de mostrarse al cerrar sesión.</p>
         </div>
         <div className="budget-library-actions">
           <button type="button" className="secondary-button" onClick={onNew} disabled={busy}>
