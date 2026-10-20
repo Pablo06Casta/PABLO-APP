@@ -116,7 +116,7 @@ describe("CERCA: flujos del viajero", () => {
     const user = userEvent.setup();
     render(<App />);
     await user.click(screen.getByRole("button", { name: "Filtros" }));
-    const dialog = screen.getByRole("dialog");
+    const dialog = await screen.findByRole("dialog");
     await user.selectOptions(
       within(dialog).getByRole("combobox", {
         name: "Distancia máxima al pabellón",
@@ -174,7 +174,7 @@ describe("CERCA: flujos del viajero", () => {
       screen.getAllByRole("button", { name: "Comparar" }).at(-1)!,
     );
     expect(
-      screen.getByRole("dialog", { name: "¿Con cuál te quedas?" }),
+      await screen.findByRole("dialog", { name: "¿Con cuál te quedas?" }),
     ).toBeTruthy();
     expect(screen.getAllByRole("button", { name: "Quitar" })).toHaveLength(3);
   });
@@ -187,7 +187,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(screen.getByText("1 de 3")).toBeTruthy();
     const nav = screen.getByRole("navigation", { name: "Navegación principal" });
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
-    const budget = screen.getByRole("region", { name: /Presupuesto del grupo/ });
+    const budget = await screen.findByRole("region", { name: /Presupuesto del grupo/ });
     await user.selectOptions(within(budget).getByRole("combobox", { name: "Alojamiento estimado" }), chosen.id);
     await user.type(within(budget).getByRole("textbox", { name: "Viajero 1" }), "Ana");
     await user.click(within(budget).getByRole("button", { name: "Añadir gasto" }));
@@ -197,7 +197,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(within(budget).getByRole("button", { name: "Descargar presupuesto en PDF" }).hasAttribute("disabled")).toBe(false);
     await user.click(within(nav).getByRole("button", { name: "Alojamientos" }));
     await user.click(screen.getByRole("button", { name: "Compartir viaje" }));
-    const dialog = screen.getByRole("dialog", { name: "Compartir viaje" });
+    const dialog = await screen.findByRole("dialog", { name: "Compartir viaje" });
     const link = (within(dialog).getByLabelText("Enlace del viaje") as HTMLInputElement).value;
     expect(link).toContain("trip=");
     expect(link).not.toContain("Ana");
@@ -208,7 +208,7 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     const nav = screen.getByRole("navigation", { name: "Navegación principal" });
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
-    await user.type(screen.getByRole("textbox", { name: "Viajero 1" }), "María");
+    await user.type(await screen.findByRole("textbox", { name: "Viajero 1" }), "María");
     await user.click(within(nav).getByRole("button", { name: /Favoritos/ }));
     expect(screen.queryByRole("region", { name: /Presupuesto del grupo/ })).toBeNull();
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
@@ -219,7 +219,7 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     const nav = screen.getByRole("navigation", { name: "Navegación principal" });
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
-    await user.type(screen.getByRole("textbox", { name: "Nombre del equipo o grupo" }), "Club Tudela");
+    await user.type(await screen.findByRole("textbox", { name: "Nombre del equipo o grupo" }), "Club Tudela");
     await user.type(screen.getByRole("textbox", { name: "Torneo" }), "TOP TTR");
     await user.type(screen.getByRole("textbox", { name: "Temporada" }), "2026/27");
     const library = screen.getByRole("region", { name: "Guarda y continúa después" });
@@ -246,7 +246,7 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(
       within(directCard).getByRole("button", { name: /^Detalles de/ }),
     );
-    const dialog = screen.getByRole("dialog");
+    const dialog = await screen.findByRole("dialog");
     expect(
       within(dialog).getByText("Alojamiento real, presupuesto estimado."),
     ).toBeTruthy();
@@ -299,7 +299,9 @@ describe("CERCA: flujos del viajero", () => {
       screen.getByRole("button", { name: "Gestionar datos guardados" }),
     );
     await user.click(
-      screen.getByRole("button", { name: "Borrar mis datos locales de CERCA" }),
+      await screen.findByRole("button", {
+        name: "Borrar mis datos locales de CERCA",
+      }),
     );
     expect(localStorage.getItem("cerca-favorites-v2")).toBeNull();
     expect(document.documentElement.dataset.theme).toBe("light");
@@ -370,7 +372,7 @@ describe("CERCA: flujos del viajero", () => {
     render(<App />);
     await user.click(screen.getByRole("button", { name: "Gasolineras cerca" }));
     expect(findFuelStations).not.toHaveBeenCalled();
-    await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Buscar gasolineras" }));
+    await user.click(await within(screen.getByRole("dialog")).findByRole("button", { name: "Buscar gasolineras" }));
     await screen.findByText("Gasolinera registrada");
     expect(vi.mocked(findFuelStations).mock.calls[0][0]).toMatchObject({ id: defaultVenue.id, ...defaultVenue.location });
     await user.click(within(screen.getByRole("dialog")).getByRole("button", { name: "Cerrar" }));
@@ -406,7 +408,7 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(
       screen.getByRole("button", { name: "Privacidad y licencias" }),
     );
-    const checkbox = screen.getByRole("checkbox", {
+    const checkbox = await screen.findByRole("checkbox", {
       name: /Recordar mis búsquedas/,
     });
     expect((checkbox as HTMLInputElement).checked).toBe(false);

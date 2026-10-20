@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import type { Search, Town } from "../types";
 import { localTowns, normalize, towns } from "../data/towns";
-import { findTown, reverseTown } from "../services/places";
+// Los servicios de OpenStreetMap y su catálogo se descargan solo al usarlos.
+const places = () => import("../services/places");
 import { isoDate } from "../lib/search";
 
 export function SearchBar({
@@ -57,7 +58,7 @@ export function SearchBar({
     setFinding(true);
     setError("");
     try {
-      const result = await findTown(query.trim());
+      const result = await (await places()).findTown(query.trim());
       setOptions(result);
       setOpen(true);
       if (!result.length)
@@ -107,7 +108,7 @@ export function SearchBar({
       async (position) => {
         try {
           choose(
-            await reverseTown(
+            await (await places()).reverseTown(
               position.coords.latitude,
               position.coords.longitude,
             ),

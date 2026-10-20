@@ -10,6 +10,7 @@ import {
 } from "../lib/detailedBudget";
 import type { SavedBudget } from "../lib/savedBudgets";
 import { SavedBudgetLibrary } from "./SavedBudgetLibrary";
+import { track } from "../lib/analytics";
 
 const euros = (cents: number) =>
   new Intl.NumberFormat("es-ES", {
@@ -109,6 +110,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
     setPdfMessage("");
     try {
       const { downloadBudgetPdf } = await import("../lib/budgetPdf");
+      track("feature", "budget_pdf");
       await downloadBudgetPdf(result, budgetSearch, stay);
       setPdfMessage("PDF generado y descargado.");
     } catch {
@@ -123,7 +125,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
       <div className="group-budget-heading">
         <div>
           <p className="small-caps"><Wallet size={16} /> ORGANIZA LOS GASTOS DE TU EQUIPO</p>
-          <h2 id="budget-title">Presupuesto del grupo<span className="heading-dot">.</span></h2>
+          <h1 id="budget-title">Presupuesto del grupo<span className="heading-dot">.</span></h1>
           <p>Prepara el viaje completo y descubre cuánto aporta cada persona. Puedes guardarlo, duplicarlo y continuar más tarde; los nombres y gastos no se incluyen en el enlace compartido.</p>
         </div>
         <div className="group-budget-heading-icon" aria-hidden="true"><Users size={30} /></div>

@@ -3,10 +3,10 @@
   --surface: #fff;
   --surface-soft: #f6f7f9;
   --text: #24262b;
-  --muted: #777b85;
+  --muted: #646873;
   --line: #e9ebef;
-  --accent: #3970e8;
-  --accent-hover: #285bca;
+  --accent: #2c62d6;
+  --accent-hover: #2352b8;
   --accent-soft: #f0f5ff;
   --shadow: 0 8px 30px #1e365310;
   --shadow-popover: 0 12px 48px #152a4d20;
@@ -125,6 +125,8 @@ svg {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  margin: -1px;
+  border: 0;
 }
 .skip-link {
   position: fixed;
@@ -144,11 +146,11 @@ svg {
 }
 .muted {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 .small-caps {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 0.6875rem;
   font-weight: 650;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -176,7 +178,7 @@ svg {
   gap: 9px;
   border-radius: 11px;
   padding: 12px 20px;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
   line-height: 1.4;
@@ -210,7 +212,7 @@ svg {
   align-items: center;
   gap: 7px;
   color: var(--text);
-  font-size: 13px;
+  font-size: 0.8125rem;
   padding: 7px 0;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -221,7 +223,7 @@ svg {
   margin-top: 16px;
   border: 1px solid var(--line);
   border-radius: 9px;
-  font-size: 12px;
+  font-size: 0.75rem;
   background: var(--surface-soft);
 }
 .danger-button:hover {

@@ -96,3 +96,24 @@ Durante la compilación se generan `dist/data/*.json` con copias de los datos OS
 Fuente: [calendario oficial FESBA](https://www.badminton.es/calendar/192/Calendario-FESBA). `src/data/real/fesba-calendar.json` es una selección fechada de competiciones en España con ciudad publicada; cada fila enlaza a la ficha original. No importa fotos, documentos, inscripciones o datos de deportistas. `scripts/refresh-fesba-calendar.py` consulta las páginas públicas del año en curso y el siguiente, comprueba país, grupo, fecha y ciudad, y revisa las fechas finales solo para destinos de CERCA. Si la fuente no responde conserva la última copia. El workflow actualiza esta copia al publicar los lunes; la web indica la fecha de consulta y avisa si la copia tiene más de dos semanas.
 
 Una ciudad coincidente no confirma que el evento se dispute en una instalación concreta. CERCA pide elegir explícitamente un pabellón con coordenadas verificadas y propone llegar la víspera y salir al día siguiente; el usuario puede editar las fechas. Los eventos sin pabellón confirmado solo enlazan a la fuente. El calendario oficial puede cambiar, por lo que siempre debe consultarse antes de reservar.
+
+### Estadística de uso anónima (opcional y con consentimiento)
+
+CERCA puede contar qué secciones, sedes y funciones se usan sin cookies ni identificadores:
+
+- Se pide permiso con un aviso que ofrece **Aceptar** y **Rechazar** con el mismo peso. Hasta aceptar no se envía nada; la elección se puede cambiar en «Privacidad y licencias» y se borra con «Borrar mis datos locales».
+- Cada evento contiene solo un nombre (`section`, `destination`, `feature`, `tournament_plan`) y un identificador público (por ejemplo, `budget` o `vitoria-aldabe`). Se cuenta una vez por visita. No se envían identificadores de persona, sesión o dispositivo, URL, referer ni navegador. Si el navegador envía Global Privacy Control o «No rastrear», no se envía nada.
+- En el dispositivo solo se guarda `cerca-analytics-consent-v1` (almacenamiento técnico exento según el art. 22.2 LSSI). La política de privacidad incluye la tabla de almacenamiento local, la base jurídica (consentimiento, art. 6.1.a RGPD) y la conservación de 13 meses.
+
+**Está desactivada por defecto**: sin `VITE_ANALYTICS=on` no aparece el aviso ni se envía nada, aunque Supabase esté configurado. Para activarla, ejecuta `supabase/migrations/20261021_create_usage_events.sql` en el editor SQL del mismo proyecto de Supabase. La tabla solo admite inserciones desde la web (sin lectura pública) y programa con `pg_cron` el borrado de eventos de más de 13 meses. Consulta el resumen con:
+
+```sql
+select * from public.usage_summary order by day desc, total desc;
+```
+
+Después añade la variable de Actions `VITE_ANALYTICS` con el valor `on` y pásala al paso de compilación del workflow.
+
+## Rendimiento y accesibilidad
+
+- Las secciones (torneos, presupuesto con Supabase y PDF, privacidad), los diálogos (detalle, filtros, comparación, compartir) y los servicios de supermercados, gasolineras y geocodificación se descargan al usarlos. El bloque inicial pasa de 836 kB (214 kB gzip) a 365 kB (105 kB gzip) en la compilación publicada.
+- Revisión con axe-core (WCAG 2.2 AA) en móvil, temas claro y oscuro: contraste de texto ≥ 4,5:1, tamaños de letra en `rem` con un mínimo de 11 px para respetar el tamaño de letra del sistema, objetivos táctiles de al menos 24 px (44 px en botones de icono con pantalla táctil), un `h1` por sección, navegación con teclado con foco visible y diseño sin desplazamiento horizontal con el texto al 200 %.

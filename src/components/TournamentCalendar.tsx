@@ -55,7 +55,11 @@ export function TournamentCalendar({
   search: Search;
   today?: string;
   events?: Tournament[];
-  onPlan: (event: Tournament, venue: Venue) => void;
+  onPlan: (
+    event: Tournament,
+    venue: Venue,
+    dates: { checkIn: string; checkOut: string },
+  ) => void;
 }) {
   const [city, setCity] = useState("all");
   const [month, setMonth] = useState("all");
@@ -165,7 +169,7 @@ export function TournamentCalendar({
               <button
                 className="tournament-plan"
                 disabled={!selected}
-                onClick={() => selected && onPlan(event, selected)}
+                onClick={() => selected && onPlan(event, selected, dates)}
               >
                 Buscar alojamiento · {readableDay(dates.checkIn)} –{" "}
                 {readableDay(dates.checkOut)}
