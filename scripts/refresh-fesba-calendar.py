@@ -51,6 +51,7 @@ def destination(city: str, destinations: set[str]) -> str | None:
         "estella": "Estella-Lizarra",
         "san jose de la rinconada": "La Rinconada",
         "eivissa": "Ibiza",
+        "tudela de duero valladolid": "Tudela de Duero",
     }
     key = norm(city)
     choice = aliases.get(key, city)

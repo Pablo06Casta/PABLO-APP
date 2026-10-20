@@ -61,4 +61,22 @@ describe("Gasolineras cercanas", () => {
     expect(screen.getByText(/ubicación exacta de este pabellón sigue pendiente/)).toBeTruthy();
     expect(screen.queryByRole("button", { name: "Buscar gasolineras" })).toBeNull();
   });
+  it("muestra las opciones económicas de Tudela con precios fechados y ruta", () => {
+    render(
+      <FuelStations
+        origin={{ lat: 41.5868, lng: -4.5862 }}
+        destination="Tudela de Duero"
+        venueName="Polideportivo San Roque"
+        status="idle"
+        error=""
+        onLoad={vi.fn()}
+        stations={[]}
+      />,
+    );
+    expect(screen.getByText("AN Energéticos · Jaramiel")).toBeTruthy();
+    expect(screen.getAllByText(/gasolina 95 1,695 €/).length).toBe(2);
+    expect(screen.getAllByText(/Precio publicado 20\/10\/2026/).length).toBe(3);
+    expect(screen.getAllByRole("link", { name: /^Ver ruta en coche a/ })).toHaveLength(3);
+    expect(screen.getAllByRole("link", { name: "Ver fuente oficial" })).toHaveLength(3);
+  });
 });

@@ -210,7 +210,7 @@ describe("Proveedores públicos de lugares", () => {
   it("muestra supermercados reales y fechados para todas las sedes confirmadas sin depender de la red", async () => {
     const request = vi.fn();
     vi.stubGlobal("fetch", request);
-    for (const venue of venues.filter((item) => item.location)) {
+    for (const venue of venues.filter((item) => item.status === "confirmed")) {
       const origin = {
         ...townForVenue(venue),
         ...venue.location!,

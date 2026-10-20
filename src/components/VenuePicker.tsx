@@ -40,7 +40,11 @@ export function VenuePicker({
               .map((v) => (
                 <option key={v.id} value={v.id}>
                   {v.name}
-                  {v.location ? "" : " · ubicación por confirmar"}
+                  {v.status === "approximate"
+                    ? " · punto aproximado"
+                    : v.location
+                      ? ""
+                      : " · ubicación por confirmar"}
                 </option>
               ))}
           </optgroup>
@@ -55,8 +59,10 @@ export function VenuePicker({
               {search.venue.city} · {search.venue.name}
             </strong>
             <p>
-              {search.venue.location
-                ? "Alojamientos, supermercados y gasolineras buscados desde este pabellón."
+              {search.venue.status === "approximate"
+                ? "Alojamientos y gasolineras calculados desde un punto aproximado de la instalación. Confirma la entrada antes de viajar."
+                : search.venue.location
+                  ? "Alojamientos, supermercados y gasolineras buscados desde este pabellón."
                 : "La ubicación de esta instalación necesita confirmación. No mostramos distancias ni recomendaciones de proximidad hasta verificarla."}
             </p>
           </div>

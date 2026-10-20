@@ -4,7 +4,7 @@ Consulta y selección: 18 de octubre de 2026. CERCA no está afiliada a Booking 
 
 ## Instalaciones
 
-`../venues.json` recoge las 23 instalaciones comunicadas por el usuario, en 15 destinos municipales. Las 19 ubicaciones confirmadas se contrastaron con instalaciones de OpenStreetMap; cada registro guarda su enlace al objeto OSM, dirección y fecha. Los cuatro registros sin ubicación inequívoca se mantienen como pendientes y no generan recomendaciones ni consultas de cercanía. No se reutilizan paradas de autobús, cafés o aparcabicicletas como si fueran el pabellón.
+`../venues.json` recoge las 24 instalaciones comunicadas por el usuario, en 16 destinos municipales. Las 19 ubicaciones confirmadas se contrastaron con instalaciones de OpenStreetMap; cada registro guarda su enlace al objeto OSM, dirección y fecha. El Polideportivo San Roque de Tudela de Duero conserva un punto aproximado aportado para poder planificar el viaje y lo indica expresamente en la interfaz. Los cuatro registros sin ubicación inequívoca se mantienen como pendientes y no generan recomendaciones ni consultas de cercanía. No se reutilizan paradas de autobús, cafés o aparcabicicletas como si fueran el pabellón.
 
 © OpenStreetMap contributors, licencia ODbL 1.0: https://www.openstreetmap.org/copyright . Las coordenadas de edificios se calcularon como centro de sus nodos cuando fue necesario; no representan necesariamente la entrada de deportistas. Estella se corresponde con la instalación rotulada «Polideportivo Lizarreria» en OSM.
 
@@ -28,6 +28,8 @@ Fuente: API oficial de lectura `https://api.openstreetmap.org/api/0.6/map.json?b
 
 Los otros **184** alojamientos adicionales no tienen ficha verificada en Booking. La tarjeta dice **«Alojamiento real · buscar en Booking»**, su botón **«Buscar en Booking»** y el detalle explica que es una búsqueda por nombre y coordenadas que puede devolver otros hoteles. La selección de plataforma «Booking» incluye los hoteles que se pueden consultar en esa plataforma mediante búsqueda; no afirma que sean inventario importado de Booking. Se mantienen desconocidos tarifas, reseñas, capacidad, cancelación y servicios. No se incorporó el CSV comercial de Bright Data ni datos antiguos de GeoNames investigados durante la búsqueda. El plugin de Booking no estaba disponible y no se presenta como conectado.
 
+`curated-stays.json` añade tres referencias por nombre y dirección para Tudela de Duero: Hotel Puerta del Arco, Hotel Jaramiel y Hotel Ruta del Duero. No se mezclan con la base OSM ni se les atribuye una ficha de Booking. Sus puntos se marcan como aproximados, abren una búsqueda externa por nombre y deben confirmarse antes de reservar o viajar.
+
 ### Ampliación adicional: establecimientos y aviso de fechas
 
 Se consultaron 16 nuevas ventanas acotadas de la API oficial OSM alrededor de hoteles conocidos próximos a las sedes, el 19 de octubre de 2026. Tras revisar duplicados y accesos específicos se añadieron **44 alojamientos** (233 OSM en total, con cinco rutas publicadas de Booking y 228 búsquedas identificadas) y **59 comercios de alimentación** (450 en total). Los límites continúan siendo 10 km para alojamientos y 3 km para comercios, siempre desde una sede confirmada. Los nuevos registros conservan su enlace al objeto OSM y fecha; no se importan tarifas, reseñas ni fotos sin licencia.
@@ -48,7 +50,7 @@ Los enlaces «Cómo llegar» abren las coordenadas reales del comercio en Google
 
 ## Gasolineras
 
-`fuel-references.json` contiene 38 nombres y direcciones aportados al proyecto el 20 de octubre de 2026, agrupados en 14 destinos. No incluye coordenadas, precios ni una verificación de cercanía; CERCA no los ordena como los más próximos. Cada dirección abre una búsqueda en Google Maps solo cuando el usuario pulsa «Ver ubicación». La ventana enlaza también al comparador público de gasolineras de OCU; CERCA no incorpora sus datos, no está afiliada y no conoce los precios mostrados allí.
+`fuel-references.json` contiene 41 referencias agrupadas en 15 destinos. Las tres incorporadas para Tudela de Duero conservan coordenadas y precios de gasolina 95 y gasóleo A de la copia oficial del Ministerio fechada el 20 de octubre de 2026 a las 00:41; se eligieron por su precio publicado y por estar a menos de 10 km del punto de San Roque. Son referencias históricas, no garantizan el precio actual. Las otras 38 entradas conservan nombres y direcciones aportados sin precio verificado. La ventana enlaza también al comparador público de gasolineras de OCU; CERCA no está afiliada.
 
 La búsqueda adicional de gasolineras se inicia expresamente desde su ventana. Consulta `amenity=fuel` en OpenStreetMap alrededor del pabellón o localidad seleccionados (hasta 5 km mediante Overpass; si falla, una ventana local de la API oficial OSM). No guarda precios de combustible. Muestra la distancia en línea recta, la fecha de consulta y el enlace a la fuente. El enlace de ruta en coche abre Google Maps con las coordenadas del origen y de la gasolinera; la aplicación no calcula duración ni carga el mapa antes de abrirlo. Para pabellones sin coordenadas confirmadas no se realiza la búsqueda en OpenStreetMap, aunque se pueden consultar las direcciones aportadas y el comparador externo.
 

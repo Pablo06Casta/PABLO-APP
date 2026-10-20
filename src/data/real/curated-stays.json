@@ -1,0 +1,36 @@
+{
+  "retrievedAt": "2026-10-20",
+  "source": "Referencias públicas por nombre y dirección aportadas para Tudela de Duero",
+  "hotels": [
+    {
+      "id": "reference-tudela-puerta-del-arco",
+      "name": "Hotel Puerta del Arco",
+      "type": "Hotel",
+      "lat": 41.5887,
+      "lng": -4.5868,
+      "address": "Tudela de Duero, Valladolid",
+      "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Hotel%20Puerta%20del%20Arco%2C%20Tudela%20de%20Duero",
+      "approximateLocation": true
+    },
+    {
+      "id": "reference-tudela-hotel-jaramiel",
+      "name": "Hotel Jaramiel",
+      "type": "Hotel",
+      "lat": 41.601,
+      "lng": -4.560694,
+      "address": "Carretera de Villabáñez, Tudela de Duero, Valladolid",
+      "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Hotel%20Jaramiel%2C%20Tudela%20de%20Duero",
+      "approximateLocation": true
+    },
+    {
+      "id": "reference-tudela-ruta-del-duero",
+      "name": "Hotel Ruta del Duero",
+      "type": "Hotel",
+      "lat": 41.598583,
+      "lng": -4.656111,
+      "address": "Avenida de los Álamos, La Cistérniga, Valladolid",
+      "sourceUrl": "https://www.google.com/maps/search/?api=1&query=Hotel%20Ruta%20del%20Duero%2C%20La%20Cist%C3%A9rniga",
+      "approximateLocation": true
+    }
+  ]
+}

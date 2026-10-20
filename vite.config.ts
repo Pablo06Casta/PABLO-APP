@@ -5,6 +5,7 @@ import { VitePWA } from "vite-plugin-pwa";
 
 const datasets: Record<string, string> = {
   "osm-stays.json": "src/data/real/osm-stays.json",
+  "curated-stays.json": "src/data/real/curated-stays.json",
   "venue-markets.json": "src/data/real/venue-markets.json",
   "granada-markets.json": "src/data/real/granada-markets.json",
   "venues.json": "src/data/venues.json",

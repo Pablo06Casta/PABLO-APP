@@ -9,6 +9,9 @@ import {
 } from "../lib/search";
 import type { Search } from "../types";
 
+const normalizeName = (value: string) =>
+  value.normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("es");
+
 function queryFor(id: string): Search {
   const venue = venues.find((item) => item.id === id)!;
   return {
@@ -81,6 +84,24 @@ describe("Más alojamientos reales cerca del pabellón", () => {
     const url = new URL(stayPlatformUrl(stay, query)!);
     expect(url.pathname).toBe("/hotel/es/don-luis.html");
     expect(url.searchParams.get("checkin")).toBe(query.checkIn);
+  });
+
+  it("añade tres alojamientos nuevos para San Roque sin duplicar identidades", () => {
+    const query = queryFor("tudela-san-roque");
+    const stays = realStays(query);
+    const added = stays.filter((stay) => stay.id.startsWith("reference-tudela-"));
+    expect(added.map((stay) => stay.name)).toEqual([
+      "Hotel Puerta del Arco",
+      "Hotel Jaramiel",
+      "Hotel Ruta del Duero",
+    ]);
+    expect(new Set(stays.map((stay) => stay.id)).size).toBe(stays.length);
+    expect(new Set(stays.map((stay) => normalizeName(stay.name))).size).toBe(stays.length);
+    for (const stay of added) {
+      expect(stay.approximateLocation).toBe(true);
+      expect(stay.sourceName).toBe("Referencia pública por nombre y dirección");
+      expect(distance(stay, query.venue!.location!)).toBeLessThanOrEqual(10);
+    }
   });
 
   it("incorpora los precios medios aportados y resuelve nombres comerciales completos", () => {

@@ -322,5 +322,19 @@
     "sourceUrl": "https://www.openstreetmap.org/way/271142947",
     "verifiedAt": "2026-10-20",
     "address": "Camino de la Fuente del Rey, 42000 Soria"
+  },
+  {
+    "id": "tudela-san-roque",
+    "city": "Tudela de Duero",
+    "region": "Valladolid, Castilla y León",
+    "name": "Polideportivo San Roque",
+    "location": {
+      "lat": 41.5868,
+      "lng": -4.5862
+    },
+    "status": "approximate",
+    "sourceUrl": "https://www.badminton.es/calendarevent/90887/Castilla-y-Leon-TOP-TTR-Absoluto-y-Senior",
+    "verifiedAt": "2026-10-20",
+    "address": "Calle San Roque, 47320 Tudela de Duero, Valladolid · punto aproximado"
   }
 ]

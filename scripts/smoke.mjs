@@ -59,6 +59,7 @@ try {
   // La oferta ODbL debe servir las bases utilizadas, no el HTML de la SPA.
   for (const file of [
     "osm-stays.json",
+    "curated-stays.json",
     "venue-markets.json",
     "granada-markets.json",
     "venues.json",

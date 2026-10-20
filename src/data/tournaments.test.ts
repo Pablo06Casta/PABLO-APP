@@ -35,7 +35,7 @@ describe("Torneos FESBA y planificación", () => {
     ).toBe(true);
     expect(events.some((event) => event.destination === null)).toBe(true);
   });
-  it("solo ofrece pabellones confirmados de la misma ciudad, sin atribuirlos al torneo", () => {
+  it("solo ofrece pabellones utilizables de la misma ciudad, sin atribuirlos al torneo", () => {
     expect(tournamentVenues(base).map((venue) => venue.id)).toEqual([
       "granollers-congost",
     ]);
@@ -46,6 +46,11 @@ describe("Torneos FESBA y planificación", () => {
     ).toEqual(["vitoria-aldabe", "vitoria-salburua"]);
     expect(tournamentVenues({ ...base, destination: "Ibiza" })).toEqual([]);
     expect(tournamentVenues({ ...base, destination: "Madrid" })).toEqual([]);
+    expect(
+      tournamentVenues({ ...base, destination: "Tudela de Duero" }).map(
+        (venue) => venue.id,
+      ),
+    ).toEqual(["tudela-san-roque"]);
     expect(tournamentVenues({ ...base, destination: null })).toEqual([]);
   });
   it("sugiere llegada la víspera y salida tras terminar, también al cambiar de mes", () => {

@@ -20,8 +20,12 @@ type StoredFuelReference = {
   lat?: number;
   lng?: number;
   sourceUrl?: string;
+  sourceName?: string;
   retrievedAt?: string;
   hours?: string;
+  gasoline95?: number;
+  dieselA?: number;
+  priceAt?: string;
 };
 
 const storedReferences = references as {
@@ -142,9 +146,17 @@ export function FuelStations({
                     <span><MapPin size={12} /> Referencia: {station.venueHint}</span>
                   ) : null}
                   {station.hours && <small><Clock3 size={12} /> {station.hours}</small>}
+                  {(station.gasoline95 || station.dieselA) && (
+                    <small>
+                      Precio publicado {station.priceAt ?? storedReferences.providedAt}:
+                      {station.gasoline95 ? ` gasolina 95 ${station.gasoline95.toFixed(3).replace(".", ",")} €/l` : ""}
+                      {station.gasoline95 && station.dieselA ? " ·" : ""}
+                      {station.dieselA ? ` gasóleo A ${station.dieselA.toFixed(3).replace(".", ",")} €/l` : ""}
+                    </small>
+                  )}
                   {station.sourceUrl && (
                     <a className="market-source" href={station.sourceUrl} target="_blank" rel="noreferrer">
-                      Ver en OpenStreetMap <ExternalLink size={11} />
+                      {station.sourceName ? "Ver fuente oficial" : "Ver en OpenStreetMap"} <ExternalLink size={11} />
                     </a>
                   )}
                 </div>
@@ -173,8 +185,8 @@ export function FuelStations({
           })}
           <p className="market-attribution">
             Lista actualizada el {storedReferences.providedAt}. Las entradas con
-            coordenadas se ordenan por distancia; CERCA no
-            ha comprobado sus precios actuales.
+            coordenadas se ordenan por distancia. Los precios fechados son una
+            referencia publicada y pueden haber cambiado; compruébalos antes de repostar.
           </p>
         </section>
       )}

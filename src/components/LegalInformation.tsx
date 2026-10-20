@@ -2,6 +2,7 @@ import { ShieldCheck } from "lucide-react";
 
 const dataFiles = [
   ["osm-stays.json", "Alojamientos OSM"],
+  ["curated-stays.json", "Alojamientos de Tudela de Duero"],
   ["venue-markets.json", "Supermercados y tiendas OSM"],
   ["granada-markets.json", "Comercios de Granada OSM"],
   ["venues.json", "Sedes y ubicaciones"],
@@ -26,7 +27,7 @@ export function LegalInformation({
   return (
     <div className="privacy-content">
       <ShieldCheck size={35} className="blue" />
-      <p>Información actualizada el 19 de octubre de 2026.</p>
+      <p>Información actualizada el 20 de octubre de 2026.</p>
       <h3>Quién mantiene CERCA</h3>
       <p>
         Proyecto personal sin ingresos de Pablo, titular de la cuenta de GitHub
@@ -258,7 +259,9 @@ export function LegalInformation({
         </a>
         . Se han seleccionado por cercanía a las sedes, normalizado y eliminado
         duplicados; algunas coordenadas son centros de edificios. Ofrecemos las
-        bases derivadas en formato JSON, con sus fuentes y fechas:
+        bases derivadas en formato JSON, con sus fuentes y fechas. Las tres
+        referencias de Tudela se publican en un fichero separado y se identifican
+        como puntos aproximados, sin atribuirlas a OpenStreetMap:
       </p>
       <ul>
         {dataFiles.map(([file, label]) => (

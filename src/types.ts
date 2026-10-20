@@ -27,7 +27,7 @@ export type Venue = {
   region: string;
   address: string;
   location: { lat: number; lng: number } | null;
-  status: "confirmed" | "pending";
+  status: "confirmed" | "approximate" | "pending";
   sourceUrl: string;
   verifiedAt: string;
 };

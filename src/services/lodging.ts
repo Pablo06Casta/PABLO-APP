@@ -2,6 +2,7 @@ import type { Search, Stay } from "../types";
 import catalogue from "../data/real/stays.json";
 import additional from "../data/real/venue-stays.json";
 import osm from "../data/real/osm-stays.json";
+import curated from "../data/real/curated-stays.json";
 import priceReferences from "../data/real/hotel-price-references.json";
 import { searchOrigin } from "../data/venues";
 import localPhotos from "../data/real/local-photos.json";
@@ -142,7 +143,31 @@ export function realStays(query: Search): Stay[] {
         : undefined,
       });
     });
-  return [...hotels, ...nearbyHotels];
+  const curatedHotels: Stay[] = curated.hotels
+    .filter((hotel) => distance(hotel, origin) <= 10)
+    .map((hotel) => ({
+      id: hotel.id,
+      name: hotel.name,
+      type: hotel.type as Stay["type"],
+      platform: "Booking",
+      bookingSearch: true,
+      sourceName: "Referencia pública por nombre y dirección",
+      nightly: null,
+      cleaningFee: null,
+      rating: null,
+      reviews: null,
+      capacity: null,
+      lat: hotel.lat,
+      lng: hotel.lng,
+      address: hotel.address,
+      images: [],
+      amenities: [],
+      freeCancellation: null,
+      sourceUrl: hotel.sourceUrl,
+      retrievedAt: curated.retrievedAt,
+      approximateLocation: hotel.approximateLocation,
+    }));
+  return [...hotels, ...nearbyHotels, ...curatedHotels];
 }
 
 export const lodgingProvider: LodgingProvider = {

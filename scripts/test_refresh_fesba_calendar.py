@@ -25,6 +25,15 @@ class CalendarImportTest(unittest.TestCase):
         markup = row().replace("06/11/2026", "06/11/2025") + row(link="https://evil.example/calendarevent/99/False")
         self.assertEqual(parse(markup, 2026, dt.date(2026, 10, 19), {"granollers"}), [])
 
+    def test_maps_tudela_calendar_label_to_the_new_destination(self):
+        events = parse(
+            row(city="Tudela de Duero (Valladolid)"),
+            2026,
+            dt.date(2026, 10, 19),
+            {"tudela de duero"},
+        )
+        self.assertEqual(events[0]["destination"], "Tudela de Duero")
+
 
 if __name__ == "__main__":
     unittest.main()

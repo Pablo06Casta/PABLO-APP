@@ -40,7 +40,7 @@ export function tournamentVenues(event: Tournament): Venue[] {
   return event.destination
     ? venues.filter(
         (venue) =>
-          venue.city === event.destination && venue.status === "confirmed",
+          venue.city === event.destination && venue.status !== "pending",
       )
     : [];
 }

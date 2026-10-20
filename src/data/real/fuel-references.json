@@ -248,6 +248,51 @@
       "sourceUrl": "https://www.openstreetmap.org/node/287007879",
       "retrievedAt": "2026-10-20",
       "hours": "Mo-Su 07:00-23:00"
+    },
+    {
+      "destination": "Tudela de Duero",
+      "venueHint": "San Roque",
+      "name": "AN Energéticos · Jaramiel",
+      "address": "Carretera de Villabáñez, km 2,5, Tudela de Duero",
+      "lat": 41.601,
+      "lng": -4.560694,
+      "hours": "L-D: 24 h",
+      "gasoline95": 1.719,
+      "dieselA": 1.819,
+      "priceAt": "20/10/2026 00:41",
+      "sourceName": "Geoportal de gasolineras del Ministerio",
+      "sourceUrl": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "destination": "Tudela de Duero",
+      "venueHint": "San Roque",
+      "name": "Plenergy",
+      "address": "Avenida de Soria, 28-B, Valladolid",
+      "lat": 41.617417,
+      "lng": -4.692806,
+      "hours": "L-D: 24 h",
+      "gasoline95": 1.695,
+      "dieselA": 1.789,
+      "priceAt": "20/10/2026 00:41",
+      "sourceName": "Geoportal de gasolineras del Ministerio",
+      "sourceUrl": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres",
+      "retrievedAt": "2026-10-20"
+    },
+    {
+      "destination": "Tudela de Duero",
+      "venueHint": "San Roque",
+      "name": "La Estrella de Qatar",
+      "address": "Calle Turquesa, 71, Valladolid",
+      "lat": 41.62075,
+      "lng": -4.696694,
+      "hours": "L-D: 24 h",
+      "gasoline95": 1.695,
+      "dieselA": 1.825,
+      "priceAt": "20/10/2026 00:41",
+      "sourceName": "Geoportal de gasolineras del Ministerio",
+      "sourceUrl": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres",
+      "retrievedAt": "2026-10-20"
     }
   ]
 }
