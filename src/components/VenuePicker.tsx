@@ -9,6 +9,7 @@ export function VenuePicker({
   onSelect: (venue: Venue) => void;
 }) {
   const cities = [...new Set(venues.map((v) => v.city))];
+  const tudelaVenue = venues.find((venue) => venue.id === "tudela-san-roque");
   return (
     <section className="venue-picker" aria-label="Pabellones de bádminton">
       <div className="venue-picker-heading">
@@ -19,6 +20,19 @@ export function VenuePicker({
           {venues.length} instalaciones · {cities.length} destinos
         </span>
       </div>
+      {tudelaVenue && search.venue?.id !== tudelaVenue.id && (
+        <button
+          type="button"
+          className="venue-featured"
+          onClick={() => onSelect(tudelaVenue)}
+        >
+          <span>
+            <strong>Nuevo destino · Tudela de Duero</strong>
+            <small>Polideportivo San Roque · alojamientos y gasolineras</small>
+          </span>
+          <ArrowUpRight size={17} />
+        </button>
+      )}
       <label htmlFor="venue-select">
         <MapPin size={18} /> Tu pabellón de competición
       </label>

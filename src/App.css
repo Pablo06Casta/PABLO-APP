@@ -3714,6 +3714,39 @@
   font-weight: 700;
   letter-spacing: 1.4px;
 }
+.venue-featured {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 36%, var(--line));
+  border-radius: 12px;
+  background: var(--accent-soft);
+  color: var(--text);
+  text-align: left;
+}
+.venue-featured:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.venue-featured span {
+  display: grid;
+  gap: 3px;
+}
+.venue-featured strong {
+  font-size: 12px;
+}
+.venue-featured small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.venue-featured > svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
 .venue-picker > label {
   display: flex;
   align-items: center;
