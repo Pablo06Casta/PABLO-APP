@@ -185,6 +185,8 @@ describe("CERCA: flujos del viajero", () => {
     const user = userEvent.setup();
     render(<App />);
     expect(screen.getByText("1 de 3")).toBeTruthy();
+    const nav = screen.getByRole("navigation", { name: "Navegación principal" });
+    await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
     const budget = screen.getByRole("region", { name: /Presupuesto del grupo/ });
     await user.selectOptions(within(budget).getByRole("combobox", { name: "Alojamiento estimado" }), chosen.id);
     await user.type(within(budget).getByRole("textbox", { name: "Viajero 1" }), "Ana");
@@ -193,6 +195,7 @@ describe("CERCA: flujos del viajero", () => {
     await user.type(within(budget).getByRole("textbox", { name: "Precio (€)" }), "45,50");
     expect(within(budget).getByText("Ana")).toBeTruthy();
     expect(within(budget).getByRole("button", { name: "Descargar presupuesto en PDF" }).hasAttribute("disabled")).toBe(false);
+    await user.click(within(nav).getByRole("button", { name: "Alojamientos" }));
     await user.click(screen.getByRole("button", { name: "Compartir viaje" }));
     const dialog = screen.getByRole("dialog", { name: "Compartir viaje" });
     const link = (within(dialog).getByLabelText("Enlace del viaje") as HTMLInputElement).value;
@@ -203,11 +206,12 @@ describe("CERCA: flujos del viajero", () => {
   it("conserva el presupuesto al visitar otras secciones", async () => {
     const user = userEvent.setup();
     render(<App />);
-    await user.type(screen.getByRole("textbox", { name: "Viajero 1" }), "María");
     const nav = screen.getByRole("navigation", { name: "Navegación principal" });
+    await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
+    await user.type(screen.getByRole("textbox", { name: "Viajero 1" }), "María");
     await user.click(within(nav).getByRole("button", { name: /Favoritos/ }));
     expect(screen.queryByRole("region", { name: /Presupuesto del grupo/ })).toBeNull();
-    await user.click(within(nav).getByRole("button", { name: "Alojamientos" }));
+    await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
     expect((screen.getByRole("textbox", { name: "Viajero 1" }) as HTMLInputElement).value).toBe("María");
   });
   it("muestra la fuente y el enlace del hotel real con fechas y huéspedes", async () => {

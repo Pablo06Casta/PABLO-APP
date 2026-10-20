@@ -138,7 +138,7 @@ function AppContent() {
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
   const [sort, setSort] = useState("price");
   const [tab, setTab] = useState<
-    "explore" | "map" | "tournaments" | "favorites" | "settings"
+    "explore" | "map" | "tournaments" | "budget" | "favorites" | "settings"
   >("explore");
   const [modal, setModal] = useState<
     "filters" | "markets" | "fuel" | "help" | "privacy" | "compare" | "trip" | null
@@ -488,8 +488,8 @@ function AppContent() {
     { id: "explore" as const, label: "Explorar", icon: Compass },
     { id: "map" as const, label: "Mapa", icon: MapIcon },
     { id: "tournaments" as const, label: "Torneos", icon: Trophy },
+    { id: "budget" as const, label: "Presupuesto", icon: Wallet },
     { id: "favorites" as const, label: "Favoritos", icon: Heart },
-    { id: "settings" as const, label: "Ajustes", icon: Settings },
   ];
   return (
     <div className={`cerca-app ${compare.length ? "has-comparison" : ""}`}>
@@ -526,6 +526,12 @@ function AppContent() {
               onClick={() => setTab("tournaments")}
             >
               Torneos
+            </button>
+            <button
+              className={tab === "budget" ? "active" : ""}
+              onClick={() => setTab("budget")}
+            >
+              Presupuesto del grupo
             </button>
             <button onClick={showMarkets}>
               Supermercados cerca <span className="new-dot" />
@@ -565,7 +571,7 @@ function AppContent() {
       </header>
 
       <main id="main" className="main-container">
-        <div hidden={tab !== "explore" && tab !== "map"}>
+        <div hidden={tab !== "budget"}>
           <GroupBudgetSection search={search} stays={shareableCompare.map((entry) => entry.stay)} />
         </div>
         {(tab === "explore" || tab === "map") && (
