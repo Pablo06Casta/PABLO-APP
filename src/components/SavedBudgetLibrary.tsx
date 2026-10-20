@@ -319,7 +319,7 @@ export function SavedBudgetLibrary({
     setMessage("");
     const { error } = await supabase.rpc("delete_current_user");
     if (error) {
-      setMessage("No se pudo eliminar la cuenta. Comprueba que la migración de borrado de cuenta está instalada en Supabase e inténtalo de nuevo.");
+      setMessage("No se pudo eliminar la cuenta automáticamente. Puedes solicitar el borrado mediante el correo privado indicado junto al botón.");
       setBusy(false);
       return;
     }
@@ -415,6 +415,9 @@ export function SavedBudgetLibrary({
               <button type="button" className="budget-delete-account" onClick={() => void deleteAccount()} disabled={busy}>
                 <Trash2 size={15} /> Eliminar cuenta y datos
               </button>
+              <a className="budget-delete-request" href="mailto:pablitocastaneda06@gmail.com?subject=Solicitud%20de%20borrado%20de%20cuenta%20CERCA">
+                Solicitar borrado por correo
+              </a>
               {showPasswordSetup && (
                 <div className="budget-password-setup">
                   <label className="trip-field">Nueva contraseña
