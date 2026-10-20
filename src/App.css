@@ -2322,10 +2322,13 @@
 .budget-library-heading h2 { margin: 0; font-size: 17px; }
 .budget-library-heading p:last-child { margin: 7px 0 0; color: var(--muted); font-size: 11px; line-height: 1.55; }
 .budget-library-actions, .budget-saved-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-.budget-cloud-account { display: flex; align-items: end; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
-.budget-cloud-account .trip-field { flex: 1; max-width: 380px; margin: 0; }
+.budget-cloud-account { display: flex; align-items: end; flex-wrap: wrap; gap: 10px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); }
+.budget-cloud-account .trip-field { flex: 1 1 220px; max-width: 320px; margin: 0; }
 .budget-cloud-account > span { display: inline-flex; align-items: center; gap: 7px; color: var(--accent); font-size: 11px; font-weight: 650; }
 .budget-cloud-account > button:not(.secondary-button) { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 11px; }
+.budget-cloud-account > button.primary-button { color: white; }
+.budget-cloud-help { flex-basis: 100%; margin: 0 0 3px; color: var(--muted); font-size: 11px; line-height: 1.55; }
+.budget-password-setup { flex-basis: 100%; display: flex; align-items: end; gap: 10px; padding-top: 5px; }
 .budget-save-message { margin: 14px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--accent-soft); color: var(--text); font-size: 11px; }
 .budget-saved-list { display: grid; gap: 9px; margin-top: 16px; }
 .budget-saved-list article { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
@@ -2368,7 +2371,7 @@
 .budget-download { width: 100%; justify-content: center; margin: 16px 0; }
 .budget-error { padding: 12px; background: var(--accent-soft); border-radius: 9px; color: var(--text); font-size: 12px; }
 @media (max-width: 950px) { .group-budget-layout { grid-template-columns: 1fr; } }
-@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-library { padding: 15px; } .budget-library-heading, .budget-saved-list article { align-items: stretch; flex-direction: column; } .budget-library-actions > *, .budget-saved-actions > * { flex: 1; justify-content: center; } .budget-cloud-account { align-items: stretch; flex-direction: column; } .budget-cloud-account .trip-field { max-width: none; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
+@media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-library { padding: 15px; } .budget-library-heading, .budget-saved-list article { align-items: stretch; flex-direction: column; } .budget-library-actions > *, .budget-saved-actions > * { flex: 1; justify-content: center; } .budget-cloud-account { align-items: stretch; flex-direction: column; } .budget-cloud-account .trip-field { max-width: none; } .budget-password-setup { align-items: stretch; flex-direction: column; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
 @media (max-width: 480px) {
   .hero-trip-actions {
     grid-template-columns: minmax(0, 300px);

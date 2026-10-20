@@ -4,12 +4,14 @@ import {
   Copy,
   FolderOpen,
   HardDrive,
+  KeyRound,
   LogIn,
   LogOut,
   Plus,
   RefreshCw,
   Save,
   Trash2,
+  UserPlus,
 } from "lucide-react";
 import type { Session } from "@supabase/supabase-js";
 import {
@@ -50,6 +52,9 @@ export function SavedBudgetLibrary({
   const [session, setSession] = useState<Session | null>(null);
   const [authReady, setAuthReady] = useState(!supabaseConfigured);
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [showPasswordSetup, setShowPasswordSetup] = useState(false);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
   const onNewRef = useRef(onNew);
@@ -86,9 +91,16 @@ export function SavedBudgetLibrary({
       setSession(next);
       setAuthReady(true);
       if (event === "SIGNED_IN") {
+        setPassword("");
         setMessage("Acceso confirmado. Estamos sincronizando tus presupuestos.");
+      } else if (event === "PASSWORD_RECOVERY") {
+        setShowPasswordSetup(true);
+        setMessage("Escribe una contraseña nueva para poder entrar sin esperar otro correo.");
       } else if (event === "SIGNED_OUT") {
         setBudgets(writeLocalBudgets([]));
+        setPassword("");
+        setNewPassword("");
+        setShowPasswordSetup(false);
         onNewRef.current();
       }
     });
@@ -221,6 +233,78 @@ export function SavedBudgetLibrary({
     setBusy(false);
   }
 
+  async function signInWithPassword() {
+    if (!supabase || busy) return;
+    const address = email.trim();
+    if (!/^\S+@\S+\.\S+$/.test(address)) {
+      setMessage("Escribe un correo válido.");
+      return;
+    }
+    if (!password) {
+      setMessage("Escribe tu contraseña.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.signInWithPassword({ email: address, password });
+    if (error) {
+      const reason = `${error.code ?? ""} ${error.message}`.toLowerCase();
+      setMessage(
+        reason.includes("invalid") || reason.includes("credentials")
+          ? "Correo o contraseña incorrectos. Si tu cuenta solo usaba enlaces, entra una última vez con un enlace y crea una contraseña."
+          : reason.includes("confirm")
+            ? "Confirma primero tu correo desde el mensaje que te envió Supabase."
+            : `No se pudo iniciar sesión: ${error.message}`,
+      );
+    }
+    setBusy(false);
+  }
+
+  async function createAccount() {
+    if (!supabase || busy) return;
+    const address = email.trim();
+    if (!/^\S+@\S+\.\S+$/.test(address)) {
+      setMessage("Escribe un correo válido.");
+      return;
+    }
+    if (password.length < 8) {
+      setMessage("La contraseña debe tener al menos 8 caracteres.");
+      return;
+    }
+    setBusy(true);
+    const redirect = new URL(import.meta.env.BASE_URL, window.location.origin).href;
+    const { data, error } = await supabase.auth.signUp({
+      email: address,
+      password,
+      options: { emailRedirectTo: redirect },
+    });
+    if (error) {
+      setMessage(`No se pudo crear la cuenta: ${error.message}`);
+    } else if (!data.session && data.user?.identities?.length === 0) {
+      setMessage("Ese correo ya tiene una cuenta. Entra con su contraseña o utiliza el enlace de acceso para crear una.");
+    } else if (!data.session) {
+      setMessage("Cuenta creada. Abre el correo de confirmación una sola vez; después podrás entrar siempre con tu contraseña.");
+    }
+    setBusy(false);
+  }
+
+  async function savePassword() {
+    if (!supabase || !session || busy) return;
+    if (newPassword.length < 8) {
+      setMessage("La contraseña debe tener al menos 8 caracteres.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.updateUser({ password: newPassword });
+    if (error) {
+      setMessage(`No se pudo guardar la contraseña: ${error.message}`);
+    } else {
+      setNewPassword("");
+      setShowPasswordSetup(false);
+      setMessage("Contraseña guardada. A partir de ahora puedes entrar directamente con tu correo y contraseña.");
+    }
+    setBusy(false);
+  }
+
   async function checkAccess() {
     if (!supabase || busy) return;
     setBusy(true);
@@ -276,15 +360,38 @@ export function SavedBudgetLibrary({
           ) : session ? (
             <>
               <span><Cloud size={16} /> Nube activa · {session.user.email}</span>
+              <button type="button" onClick={() => setShowPasswordSetup((current) => !current)} disabled={busy}>
+                <KeyRound size={15} /> {showPasswordSetup ? "Cancelar" : "Crear o cambiar contraseña"}
+              </button>
               <button type="button" onClick={() => void signOut()} disabled={busy}><LogOut size={15} /> Cerrar sesión</button>
+              {showPasswordSetup && (
+                <div className="budget-password-setup">
+                  <label className="trip-field">Nueva contraseña
+                    <input type="password" minLength={8} autoComplete="new-password" value={newPassword} onChange={(event) => setNewPassword(event.target.value)} placeholder="Mínimo 8 caracteres" />
+                  </label>
+                  <button type="button" className="primary-button" onClick={() => void savePassword()} disabled={busy}>
+                    <KeyRound size={16} /> Guardar contraseña
+                  </button>
+                </div>
+              )}
             </>
           ) : (
             <>
-              <label className="trip-field">Correo para sincronizar
+              <p className="budget-cloud-help">Entra con contraseña siempre que quieras. Si tu cuenta anterior solo usaba enlaces, abre uno por última vez y crea una contraseña.</p>
+              <label className="trip-field">Correo
                 <input type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="equipo@ejemplo.es" />
               </label>
+              <label className="trip-field">Contraseña
+                <input type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} placeholder="Tu contraseña" />
+              </label>
+              <button type="button" className="primary-button" onClick={() => void signInWithPassword()} disabled={busy}>
+                <LogIn size={16} /> Entrar
+              </button>
+              <button type="button" className="secondary-button" onClick={() => void createAccount()} disabled={busy}>
+                <UserPlus size={16} /> Crear cuenta
+              </button>
               <button type="button" className="secondary-button" onClick={() => void sendMagicLink()} disabled={busy}>
-                <LogIn size={16} /> Enviar enlace de acceso
+                <KeyRound size={16} /> Entrar con enlace una vez
               </button>
               <button type="button" onClick={() => void checkAccess()} disabled={busy}>
                 <RefreshCw size={15} /> Ya he abierto el enlace
