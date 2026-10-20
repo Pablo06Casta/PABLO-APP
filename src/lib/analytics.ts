@@ -27,7 +27,10 @@ function readConsent(): AnalyticsConsent {
   }
 }
 
+// Desactivada por defecto: requiere VITE_ANALYTICS=on y la tabla
+// usage_events creada en Supabase. Sin ello no hay aviso ni envíos.
 function endpoint() {
+  if (import.meta.env.VITE_ANALYTICS?.trim() !== "on") return null;
   const url = import.meta.env.VITE_SUPABASE_URL?.trim();
   const key = import.meta.env.VITE_SUPABASE_ANON_KEY?.trim();
   return url && key ? { url: `${url}/rest/v1/usage_events`, key } : null;

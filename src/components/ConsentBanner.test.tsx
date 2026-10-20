@@ -6,6 +6,7 @@ import { ConsentBanner } from "./ConsentBanner";
 beforeEach(() => {
   vi.stubEnv("VITE_SUPABASE_URL", "https://proyecto.supabase.co");
   vi.stubEnv("VITE_SUPABASE_ANON_KEY", "clave-publica");
+  vi.stubEnv("VITE_ANALYTICS", "on");
 });
 afterEach(() => {
   cleanup();
@@ -37,7 +38,8 @@ describe("Aviso de estadística de uso", () => {
     );
     expect(screen.queryByRole("region")).toBeNull();
     vi.unstubAllEnvs();
-    vi.stubEnv("VITE_SUPABASE_URL", "");
+    vi.stubEnv("VITE_SUPABASE_URL", "https://proyecto.supabase.co");
+    vi.stubEnv("VITE_ANALYTICS", "");
     rerender(
       <ConsentBanner consent="unset" onChange={() => {}} onMore={() => {}} />,
     );

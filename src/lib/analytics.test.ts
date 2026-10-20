@@ -12,6 +12,7 @@ const fetchMock = vi.fn(async () => new Response(null, { status: 201 }));
 beforeEach(() => {
   vi.stubEnv("VITE_SUPABASE_URL", "https://proyecto.supabase.co");
   vi.stubEnv("VITE_SUPABASE_ANON_KEY", "clave-publica");
+  vi.stubEnv("VITE_ANALYTICS", "on");
   vi.stubGlobal("fetch", fetchMock);
   fetchMock.mockClear();
   localStorage.clear();

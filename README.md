@@ -105,13 +105,13 @@ CERCA puede contar qué secciones, sedes y funciones se usan sin cookies ni iden
 - Cada evento contiene solo un nombre (`section`, `destination`, `feature`, `tournament_plan`) y un identificador público (por ejemplo, `budget` o `vitoria-aldabe`). Se cuenta una vez por visita. No se envían identificadores de persona, sesión o dispositivo, URL, referer ni navegador. Si el navegador envía Global Privacy Control o «No rastrear», no se envía nada.
 - En el dispositivo solo se guarda `cerca-analytics-consent-v1` (almacenamiento técnico exento según el art. 22.2 LSSI). La política de privacidad incluye la tabla de almacenamiento local, la base jurídica (consentimiento, art. 6.1.a RGPD) y la conservación de 13 meses.
 
-Para activarla, ejecuta `supabase/migrations/20261021_create_usage_events.sql` en el editor SQL del mismo proyecto de Supabase. La tabla solo admite inserciones desde la web (sin lectura pública) y programa con `pg_cron` el borrado de eventos de más de 13 meses. Consulta el resumen con:
+**Está desactivada por defecto**: sin `VITE_ANALYTICS=on` no aparece el aviso ni se envía nada, aunque Supabase esté configurado. Para activarla, ejecuta `supabase/migrations/20261021_create_usage_events.sql` en el editor SQL del mismo proyecto de Supabase. La tabla solo admite inserciones desde la web (sin lectura pública) y programa con `pg_cron` el borrado de eventos de más de 13 meses. Consulta el resumen con:
 
 ```sql
 select * from public.usage_summary order by day desc, total desc;
 ```
 
-Sin las variables de Supabase, el aviso no aparece y no se envía ningún evento.
+Después añade la variable de Actions `VITE_ANALYTICS` con el valor `on` y pásala al paso de compilación del workflow.
 
 ## Rendimiento y accesibilidad
 
