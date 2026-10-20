@@ -18,6 +18,7 @@ const euros = (cents: number) =>
   }).format(cents / 100);
 
 export function GroupBudgetSection({ search, stays }: { search: Search; stays: Stay[] }) {
+  const [groupName, setGroupName] = useState("");
   const [destinationState, setDestinationState] = useState({ town: search.town.name, value: search.town.name });
   const [peopleRaw, setPeopleRaw] = useState(String(search.guests));
   const [names, setNames] = useState<string[]>([]);
@@ -29,7 +30,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
   const destination = destinationState.town !== search.town.name && destinationState.value === destinationState.town ? search.town.name : destinationState.value;
   const activeSelectedId = stays.some((item) => item.id === selectedId) ? selectedId : "";
   const stay = stays.find((item) => item.id === activeSelectedId);
-  const { error, result } = calculateDetailedBudget({ search, destination, peopleRaw, names, entries, stay });
+  const { error, result } = calculateDetailedBudget({ search, groupName, destination, peopleRaw, names, entries, stay });
   const people = /^\d+$/.test(peopleRaw) ? Math.min(100, Math.max(0, Number(peopleRaw))) : 0;
 
   function addExpense() {
@@ -78,6 +79,9 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
           <div className="budget-block">
             <h2>El viaje y sus viajeros</h2>
             <div className="budget-fields">
+              <label className="trip-field budget-team-field">Nombre del equipo o grupo
+                <input value={groupName} maxLength={100} onChange={(event) => setGroupName(event.target.value)} placeholder="Ej. Club Bádminton Tudela" />
+              </label>
               <label className="trip-field">Dónde viajamos
                 <input value={destination} maxLength={120} onChange={(event) => setDestinationState({ town: search.town.name, value: event.target.value })} placeholder="Destino del viaje" />
               </label>
@@ -154,7 +158,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
 
         <aside className="budget-summary" aria-labelledby="budget-summary-title">
           <h2 id="budget-summary-title">Resumen del viaje</h2>
-          <p>{destination.trim() || "Destino pendiente"} · {peopleRaw || "0"} viajeros</p>
+          <p>{groupName.trim() && <><strong>{groupName.trim()}</strong> · </>}{destination.trim() || "Destino pendiente"} · {peopleRaw || "0"} viajeros</p>
           {error && <p className="budget-error" role="alert">{error}</p>}
           {result && <>
             <div className="budget-summary-lines">

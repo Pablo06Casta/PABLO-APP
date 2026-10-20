@@ -10,12 +10,13 @@ const entries: BudgetEntry[] = [
   { id: "2", category: "Comida", concept: "Menú", amount: "7,50", scope: "personDay", days: "2" },
   { id: "3", category: "Gasolina", concept: "Depósito", amount: "30", scope: "group", days: "1" },
 ];
-const input = { search, destination: "Vitoria-Gasteiz", peopleRaw: "3", names: ["Ana", "", "Luis"], entries };
+const input = { search, groupName: "Equipo CERCA", destination: "Vitoria-Gasteiz", peopleRaw: "3", names: ["Ana", "", "Luis"], entries };
 
 describe("presupuesto completo del grupo", () => {
   it("calcula gastos por grupo, persona y día y reparte todos los céntimos", () => {
     const { result } = calculateDetailedBudget(input);
     expect(result).not.toBeNull();
+    expect(result!.groupName).toBe("Equipo CERCA");
     expect(result!.entries.map((entry) => entry.cents)).toEqual([1001, 4500, 3000]);
     expect(result!.names).toEqual(["Ana", "Viajero 2", "Luis"]);
     expect(result!.totalCents).toBe(8501);
@@ -46,5 +47,6 @@ describe("presupuesto completo del grupo", () => {
     expect(calculateDetailedBudget({ ...input, entries: [{ ...entries[0], amount: "-1" }] }).result).toBeNull();
     expect(calculateDetailedBudget({ ...input, entries: [{ ...entries[1], days: "0" }] }).result).toBeNull();
     expect(calculateDetailedBudget({ ...input, entries: [{ ...entries[0], concept: "" }] }).result).toBeNull();
+    expect(calculateDetailedBudget({ ...input, groupName: "A".repeat(101) }).result).toBeNull();
   });
 });

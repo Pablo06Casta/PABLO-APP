@@ -31,6 +31,7 @@ function parseCents(value: string): number | null {
 
 export function calculateDetailedBudget({
   search,
+  groupName,
   destination,
   peopleRaw,
   names,
@@ -38,6 +39,7 @@ export function calculateDetailedBudget({
   stay,
 }: {
   search: Search;
+  groupName: string;
   destination: string;
   peopleRaw: string;
   names: string[];
@@ -46,6 +48,7 @@ export function calculateDetailedBudget({
 }): { error: string; result: null } | {
   error: "";
   result: {
+    groupName: string;
     destination: string;
     people: number;
     names: string[];
@@ -62,6 +65,8 @@ export function calculateDetailedBudget({
     return { error: "Indica entre 1 y 100 viajeros.", result: null };
   const place = destination.trim();
   if (!place || place.length > 120) return { error: "Indica un destino de hasta 120 caracteres.", result: null };
+  const team = groupName.trim();
+  if (team.length > 100) return { error: "El nombre del equipo puede tener hasta 100 caracteres.", result: null };
   if (stay?.capacity != null && people > stay.capacity)
     return { error: "El grupo supera la capacidad publicada de ese alojamiento.", result: null };
   if (entries.length > 50) return { error: "Puedes añadir hasta 50 gastos.", result: null };
@@ -105,6 +110,7 @@ export function calculateDetailedBudget({
   return {
     error: "",
     result: {
+      groupName: team,
       destination: place,
       people,
       names: displayNames,

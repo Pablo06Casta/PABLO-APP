@@ -1,7 +1,8 @@
 import type { Search, Stay } from "../types";
 import { budgetCategories, type CalculatedEntry } from "./detailedBudget";
 
-type BudgetPdfData = {
+export type BudgetPdfData = {
+  groupName: string;
   destination: string;
   people: number;
   names: string[];
@@ -54,15 +55,21 @@ export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, sta
     y += height;
   }
 
+  const headerHeight = data.groupName ? 50 : 43;
   pdf.setFillColor(55, 105, 223);
-  pdf.rect(0, 0, 210, 43, "F");
+  pdf.rect(0, 0, 210, headerHeight, "F");
   pdf.setTextColor(255, 255, 255);
   pdf.setFont("helvetica", "bold");
   pdf.setFontSize(20);
   pdf.text("CERCA · Presupuesto del grupo", 16, 23);
   pdf.setFontSize(10);
-  pdf.text(`Destino: ${data.destination}`, 16, 34, { maxWidth: 178 });
-  y = 53;
+  if (data.groupName) {
+    pdf.text(`Equipo o grupo: ${data.groupName}`, 16, 34, { maxWidth: 178 });
+    pdf.text(`Destino: ${data.destination}`, 16, 43, { maxWidth: 178 });
+  } else {
+    pdf.text(`Destino: ${data.destination}`, 16, 34, { maxWidth: 178 });
+  }
+  y = headerHeight + 10;
   pdf.setFont("helvetica", "normal");
   pdf.setTextColor(70, 80, 100);
   pdf.setFontSize(10);
@@ -107,6 +114,6 @@ export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, sta
     pdf.setTextColor(130, 140, 155);
     pdf.text(`Página ${page} de ${pages}`, 194, 290, { align: "right" });
   }
-  const filename = data.destination.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "viaje";
+  const filename = (data.groupName || data.destination).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "viaje";
   pdf.save(`presupuesto-cerca-${filename}.pdf`);
 }
