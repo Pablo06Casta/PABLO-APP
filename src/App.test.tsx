@@ -233,6 +233,7 @@ describe("CERCA: flujos del viajero", () => {
     expect((screen.getByRole("textbox", { name: "Nombre del equipo o grupo" }) as HTMLInputElement).value).toBe("");
     await user.click(within(library).getAllByRole("button", { name: "Abrir" })[0]);
     expect((screen.getByRole("textbox", { name: "Torneo" }) as HTMLInputElement).value).toBe("TOP TTR");
+    expect(within(library).getByText(/Presupuesto «Club Tudela \(copia\)» abierto/)).toBeTruthy();
     await user.click(within(library).getByRole("button", { name: "Eliminar Club Tudela (copia)" }));
     expect(JSON.parse(localStorage.getItem("cerca-saved-budgets-v1")!)).toHaveLength(1);
   });

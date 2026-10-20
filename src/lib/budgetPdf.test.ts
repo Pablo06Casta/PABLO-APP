@@ -1,15 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { defaultVenue, townForVenue } from "../data/venues";
 import type { Search } from "../types";
-import { downloadBudgetPdf, type BudgetPdfData } from "./budgetPdf";
+import { createBudgetPdfFile, downloadBudgetPdf, type BudgetPdfData } from "./budgetPdf";
 
-const pdfCalls = vi.hoisted(() => ({ text: vi.fn(), save: vi.fn() }));
+const pdfCalls = vi.hoisted(() => ({ text: vi.fn(), save: vi.fn(), output: vi.fn() }));
 
 vi.mock("jspdf", () => ({
   jsPDF: class {
     addPage() {}
     getNumberOfPages() { return 1; }
     line() {}
+    output() { pdfCalls.output(); return new Blob(["pdf"], { type: "application/pdf" }); }
     rect() {}
     save(name: string) { pdfCalls.save(name); }
     setDrawColor() {}
@@ -59,5 +60,10 @@ describe("PDF del presupuesto", () => {
     expect(pdfCalls.save).toHaveBeenCalledWith(
       "presupuesto-cerca-club-badminton-tudela.pdf",
     );
+
+    const file = await createBudgetPdfFile(data, search);
+    expect(file.name).toBe("presupuesto-cerca-club-badminton-tudela.pdf");
+    expect(file.type).toBe("application/pdf");
+    expect(pdfCalls.output).toHaveBeenCalled();
   });
 });

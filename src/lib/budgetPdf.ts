@@ -14,7 +14,7 @@ export type BudgetPdfData = {
   contributions: number[];
 };
 
-export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, stay?: Stay) {
+async function buildBudgetPdf(data: BudgetPdfData, search: Search, stay?: Stay) {
   const { jsPDF } = await import("jspdf");
   const pdf = new jsPDF({ unit: "mm", format: "a4" });
   const euro = (cents: number) => `${(cents / 100).toFixed(2).replace(".", ",")} EUR`;
@@ -115,5 +115,15 @@ export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, sta
     pdf.text(`Página ${page} de ${pages}`, 194, 290, { align: "right" });
   }
   const filename = (data.groupName || data.destination).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "viaje";
-  pdf.save(`presupuesto-cerca-${filename}.pdf`);
+  return { pdf, filename: `presupuesto-cerca-${filename}.pdf` };
+}
+
+export async function downloadBudgetPdf(data: BudgetPdfData, search: Search, stay?: Stay) {
+  const { pdf, filename } = await buildBudgetPdf(data, search, stay);
+  pdf.save(filename);
+}
+
+export async function createBudgetPdfFile(data: BudgetPdfData, search: Search, stay?: Stay) {
+  const { pdf, filename } = await buildBudgetPdf(data, search, stay);
+  return new File([pdf.output("blob")], filename, { type: "application/pdf" });
 }

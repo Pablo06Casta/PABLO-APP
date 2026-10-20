@@ -204,6 +204,17 @@ export function SavedBudgetLibrary({
     }
   }
 
+  function openBudget(budget: SavedBudget) {
+    onLoad(budget);
+    setMessage(`Presupuesto «${budget.groupName.trim() || budget.destination}» abierto. Ya puedes consultarlo o editarlo.`);
+    window.requestAnimationFrame(() => {
+      const editor = document.getElementById("budget-editor");
+      if (editor && typeof editor.scrollIntoView === "function") {
+        editor.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
   async function sendMagicLink() {
     if (!supabase || busy) return;
     const address = email.trim();
@@ -413,7 +424,7 @@ export function SavedBudgetLibrary({
                 <small>Actualizado {new Intl.DateTimeFormat("es-ES", { dateStyle: "medium", timeStyle: "short" }).format(new Date(budget.updatedAt))}</small>
               </div>
               <div className="budget-saved-actions">
-                <button type="button" onClick={() => onLoad(budget)} disabled={busy}><FolderOpen size={15} /> Abrir</button>
+                <button type="button" onClick={() => openBudget(budget)} disabled={busy}><FolderOpen size={15} /> Abrir</button>
                 <button type="button" onClick={() => void duplicate(budget)} disabled={busy}><Copy size={15} /> Duplicar</button>
                 <button type="button" aria-label={`Eliminar ${budget.groupName.trim() || "presupuesto"}`} onClick={() => void remove(budget)} disabled={busy}><Trash2 size={15} /></button>
               </div>

@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { ArrowDownToLine, Plus, Trash2, Users, Wallet } from "lucide-react";
+import { ArrowDownToLine, Plus, Share2, Trash2, Users, Wallet } from "lucide-react";
 import type { Search, Stay } from "../types";
 import { nights } from "../lib/search";
 import {
@@ -119,6 +119,38 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
       setPdfBusy(false);
     }
   }
+  async function sharePdf() {
+    if (!result || pdfBusy) return;
+    setPdfBusy(true);
+    setPdfMessage("");
+    try {
+      const { createBudgetPdfFile, downloadBudgetPdf } = await import("../lib/budgetPdf");
+      const file = await createBudgetPdfFile(result, budgetSearch, stay);
+      const shareData: ShareData = {
+        title: `Presupuesto CERCA · ${groupName.trim() || destination}`,
+        text: `Presupuesto del grupo para ${groupName.trim() || destination}`,
+        files: [file],
+      };
+      if (navigator.share && (!navigator.canShare || navigator.canShare(shareData))) {
+        try {
+          await navigator.share(shareData);
+          setPdfMessage("PDF compartido.");
+          return;
+        } catch (shareError) {
+          if (shareError instanceof Error && shareError.name === "AbortError") {
+            setPdfMessage("Compartir cancelado.");
+            return;
+          }
+        }
+      }
+      await downloadBudgetPdf(result, budgetSearch, stay);
+      setPdfMessage("Este navegador no permite compartir el archivo directamente; el PDF se ha descargado para que puedas enviarlo.");
+    } catch {
+      setPdfMessage("No se pudo compartir el PDF. Prueba a descargarlo.");
+    } finally {
+      setPdfBusy(false);
+    }
+  }
 
   return (
     <section id="presupuesto" className="group-budget" aria-labelledby="budget-title">
@@ -143,7 +175,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
         onNew={newBudget}
       />
 
-      <div className="group-budget-layout">
+      <div id="budget-editor" className="group-budget-layout">
         <div className="group-budget-form">
           <div className="budget-block">
             <h2>El viaje y sus viajeros</h2>
@@ -248,7 +280,10 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
             <h3>Aportación por persona</h3>
             <p className="budget-helper">Los gastos comunes se reparten a partes iguales; los importes individuales se añaden solo a su viajero. Si sobran céntimos del reparto común, se asignan por orden de la lista.</p>
             <div className="budget-contributions">{result.names.map((name, index) => <p key={index}><span>{name}{result.individualTotals[index] > 0 && <small> · individual {euros(result.individualTotals[index])}</small>}</span><strong>{euros(result.contributions[index])}</strong></p>)}</div>
-            <button className="primary-button budget-download" disabled={pdfBusy || (!stay && !entries.length)} onClick={downloadPdf}><ArrowDownToLine size={17} /> {pdfBusy ? "Generando PDF…" : "Descargar presupuesto en PDF"}</button>
+            <div className="budget-pdf-actions">
+              <button className="primary-button budget-download" disabled={pdfBusy || (!stay && !entries.length)} onClick={downloadPdf}><ArrowDownToLine size={17} /> {pdfBusy ? "Generando PDF…" : "Descargar presupuesto en PDF"}</button>
+              <button className="secondary-button budget-download" disabled={pdfBusy || (!stay && !entries.length)} onClick={sharePdf}><Share2 size={17} /> {pdfBusy ? "Preparando PDF…" : "Compartir PDF"}</button>
+            </div>
             {pdfMessage && <p role="status">{pdfMessage}</p>}
           </>}
           <p className="budget-helper">Los importes introducidos son tuyos. La estimación de CERCA no confirma una reserva; precios y disponibilidad pueden cambiar por eventos o festivos.</p>

@@ -2368,7 +2368,8 @@
 .budget-contributions small { color: var(--muted); font-size: 0.6875rem; }
 .budget-individual { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
 .budget-individual .budget-names { max-height: 280px; }
-.budget-download { width: 100%; justify-content: center; margin: 16px 0; }
+.budget-pdf-actions { display: grid; gap: 8px; margin: 16px 0; }
+.budget-download { width: 100%; justify-content: center; margin: 0; }
 .budget-error { padding: 12px; background: var(--accent-soft); border-radius: 9px; color: var(--text); font-size: 0.75rem; }
 @media (max-width: 950px) { .group-budget-layout { grid-template-columns: 1fr; } }
 @media (max-width: 760px) { .trip-content { padding: 17px; } .trip-actions > * { flex: 1 1 auto; text-align: center; } .hero-trip-actions { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 100%; } .group-budget { margin-top: 17px; padding: 18px; border-radius: 17px; } .group-budget-heading-icon { display: none; } .budget-library { padding: 15px; } .budget-library-heading, .budget-saved-list article { align-items: stretch; flex-direction: column; } .budget-library-actions > *, .budget-saved-actions > * { flex: 1; justify-content: center; } .budget-cloud-account { align-items: stretch; flex-direction: column; } .budget-cloud-account .trip-field { max-width: none; } .budget-password-setup { align-items: stretch; flex-direction: column; } .budget-fields, .budget-names { grid-template-columns: 1fr; } .budget-block-title { flex-wrap: wrap; } .budget-block-title > button { width: 100%; justify-content: center; } .budget-summary { padding: 16px; } }
