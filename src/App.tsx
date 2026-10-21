@@ -44,6 +44,7 @@ import {
   X,
 } from "lucide-react";
 import type {
+  AirbnbQuote,
   Filters,
   FuelStation,
   Market,
@@ -233,6 +234,7 @@ function AppContent() {
   const { photos, setPhotos, maps, setMaps } = useContext(ExternalServices);
   const [theme, setTheme] = useStored<Theme>("cerca-theme-v1", "system");
   const [compare, setCompare] = useState<Selection[]>(() => restoredTrip?.search ? restoredTrip.stays.map((stay) => ({ stay, search: restoredTrip.search! })) : []);
+  const [airbnbQuote, setAirbnbQuote] = useState<AirbnbQuote | null>(null);
   const currentStayIds = useMemo(() => new Set(realStays(search).map((stay) => stay.id)), [search]);
   const shareableCompare = compare.filter((entry) => currentStayIds.has(entry.stay.id));
   const [tripWarning, setTripWarning] = useState(restoredTrip?.warning ?? "");
@@ -364,6 +366,7 @@ function AppContent() {
     setSearchError("");
     setTab("explore");
     setCompare([]);
+    setAirbnbQuote(null);
     if (!next.venue && next.town.approximate) {
       try {
         const matches = await (await places()).findTown(
@@ -563,7 +566,9 @@ function AppContent() {
     { id: "favorites" as const, label: "Favoritos", icon: Heart },
   ];
   return (
-    <div className={`cerca-app ${compare.length ? "has-comparison" : ""}`}>
+    <div
+      className={`cerca-app ${compare.length || airbnbQuote ? "has-comparison" : ""}`}
+    >
       <a href="#main" className="skip-link">
         Saltar al contenido
       </a>
@@ -901,7 +906,10 @@ function AppContent() {
               )}
               {lodgingSource === "airbnb" ? (
                 <div className="airbnb-results">
-                  <AirbnbSearchCard search={search} />
+                  <AirbnbSearchCard
+                    search={search}
+                    onCompare={() => setModal("compare")}
+                  />
                 </div>
               ) : busy ? (
                 <div
@@ -1312,7 +1320,7 @@ function AppContent() {
           </button>
         ))}
       </nav>
-      {compare.length > 0 && (
+      {(compare.length > 0 || airbnbQuote) && (
         <div className="compare-bar">
           <div className="compare-thumbnails">
             {compare.map(({ stay }) => (
@@ -1322,9 +1330,19 @@ function AppContent() {
                 alt="Alojamiento elegido"
               />
             ))}
+            {airbnbQuote && (
+              <span className="compare-airbnb-thumb" aria-hidden="true">
+                A
+              </span>
+            )}
           </div>
           <span>
-            <strong>{compare.length} de 3</strong> para comparar
+            <strong>{compare.length} de 3</strong> Booking
+            {airbnbQuote && (
+              <>
+                {" · "}<i>Airbnb añadido</i>
+              </>
+            )}
           </span>
           <button
             className="primary-button"
@@ -1335,7 +1353,10 @@ function AppContent() {
           <button
             className="icon-button"
             aria-label="Vaciar comparación"
-            onClick={() => setCompare([])}
+            onClick={() => {
+              setCompare([]);
+              setAirbnbQuote(null);
+            }}
           >
             <X size={18} />
           </button>
@@ -1519,6 +1540,9 @@ function AppContent() {
       {modal === "compare" && (
         <CompareDialog
           selections={compare}
+          search={search}
+          airbnbQuote={airbnbQuote}
+          onAirbnbQuoteChange={setAirbnbQuote}
           onTrip={() => setModal("trip")}
           onClose={() => setModal(null)}
           onOpen={(selection) => {

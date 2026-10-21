@@ -8,7 +8,13 @@ const readableDate = (iso: string) => {
   return year && month && day ? `${day}/${month}/${year}` : iso;
 };
 
-export function AirbnbSearchCard({ search }: { search: Search }) {
+export function AirbnbSearchCard({
+  search,
+  onCompare,
+}: {
+  search: Search;
+  onCompare?: () => void;
+}) {
   return (
     <aside className="airbnb-search-card" aria-label={`Alojamientos en Airbnb para ${search.town.name}`}>
       <div className="airbnb-search-card-top">
@@ -27,6 +33,11 @@ export function AirbnbSearchCard({ search }: { search: Search }) {
       <a className="airbnb-search-action" href={bookingUrl(search, "Airbnb")} target="_blank" rel="noreferrer">
         Ver alojamientos en Airbnb <ArrowUpRight size={16} />
       </a>
+      {onCompare && (
+        <button className="airbnb-compare-action" onClick={onCompare}>
+          Comparar un Airbnb con Booking
+        </button>
+      )}
       <small>Airbnb abre en una pestaña nueva. CERCA no copia ni verifica sus anuncios y no está afiliada.</small>
     </aside>
   );

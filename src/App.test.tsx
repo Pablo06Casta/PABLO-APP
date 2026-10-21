@@ -120,6 +120,66 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(within(source).getByRole("button", { name: "Booking" }));
     expect(screen.getAllByRole("article")).toHaveLength(count);
   });
+  it("compara un precio final de Airbnb con alojamientos de Booking", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const source = screen.getByRole("group", {
+      name: "Fuente de alojamientos",
+    });
+    await user.click(within(source).getByRole("button", { name: "Airbnb" }));
+    await user.click(
+      screen.getByRole("button", {
+        name: "Comparar un Airbnb con Booking",
+      }),
+    );
+
+    const dialog = await screen.findByRole("dialog", {
+      name: "¿Con cuál te quedas?",
+    });
+    await user.type(
+      within(dialog).getByRole("textbox", { name: "Nombre del alojamiento" }),
+      "Mi Airbnb",
+    );
+    await user.type(
+      within(dialog).getByRole("spinbutton", {
+        name: "Precio final del grupo (€)",
+      }),
+      "600",
+    );
+    await user.type(
+      within(dialog).getByRole("spinbutton", {
+        name: "Distancia al pabellón (km, opcional)",
+      }),
+      "1.4",
+    );
+    await user.type(
+      within(dialog).getByRole("textbox", {
+        name: "Enlace de Airbnb (opcional)",
+      }),
+      "https://www.airbnb.es/rooms/123456",
+    );
+    await user.click(
+      within(dialog).getByRole("button", {
+        name: "Añadir a la comparación",
+      }),
+    );
+
+    expect(within(dialog).getByRole("link", { name: "Mi Airbnb" })).toBeTruthy();
+    expect(within(dialog).getByText(/100\s*€/)).toBeTruthy();
+    expect(within(dialog).getByText(/600\s*€/)).toBeTruthy();
+
+    await user.click(within(dialog).getByRole("button", { name: "Cerrar" }));
+    expect(screen.getByText("Airbnb añadido")).toBeTruthy();
+    await user.click(within(source).getByRole("button", { name: "Booking" }));
+    await user.click(
+      within(screen.getAllByRole("article")[0]).getByRole("button", {
+        name: "Comparar",
+      }),
+    );
+    expect(screen.getByText("1 de 3")).toBeTruthy();
+    expect(screen.getByText("Airbnb añadido")).toBeTruthy();
+  });
   it("autocompleta localidades y busca el destino elegido", async () => {
     const user = userEvent.setup();
     render(<App />);

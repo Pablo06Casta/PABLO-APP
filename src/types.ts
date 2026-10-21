@@ -20,6 +20,13 @@ export type Search = {
   checkOut: string;
   guests: number;
 };
+export type AirbnbQuote = {
+  name: string;
+  url: string;
+  totalPrice: number;
+  distanceKm: number | null;
+  notes: string;
+};
 export type Venue = {
   id: string;
   name: string;
