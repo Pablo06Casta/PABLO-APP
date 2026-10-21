@@ -784,7 +784,10 @@ function AppContent() {
                   </h2>
                   <p>
                     {lodgingSource === "booking" ? (
-                      <>{visible.length} alojamientos del catálogo</>
+                      <>
+                        {visible.length} alojamientos de Booking y acceso a
+                        Airbnb
+                      </>
                     ) : (
                       <>Buscar alojamientos en Airbnb</>
                     )}{" "}
@@ -1003,6 +1006,10 @@ function AppContent() {
                 </div>
               ) : (
                 <div className="stays-grid">
+                  <AirbnbSearchCard
+                    search={search}
+                    onCompare={() => setModal("compare")}
+                  />
                   {visible.map((stay) => card(stay))}
                 </div>
               )}

@@ -69,6 +69,16 @@ describe("CERCA: flujos del viajero", () => {
     );
     expect(screen.getAllByRole("article")).toHaveLength(count);
     expect(
+      screen.getByRole("complementary", {
+        name: `Alojamientos en Airbnb para ${query.town.name}`,
+      }),
+    ).toBeTruthy();
+    expect(
+      screen.getByRole("button", {
+        name: "Comparar un Airbnb con Booking",
+      }),
+    ).toBeTruthy();
+    expect(
       screen.getByText("Precios orientativos, alojamientos reales."),
     ).toBeTruthy();
     expect(
