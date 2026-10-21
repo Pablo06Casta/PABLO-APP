@@ -14,6 +14,7 @@ const storageItems = [
   ["cerca-favorites-v2", "Favoritos que guardas", "Funcional, solicitado por ti", "Hasta que los elimines"],
   ["cerca-theme-v1", "Apariencia clara u oscura", "Funcional, solicitado por ti", "Hasta que la cambies"],
   ["cerca-saved-budgets-v1", "Presupuestos guardados en el dispositivo", "Funcional, solicitado por ti", "Hasta que los elimines"],
+  ["cerca-team-utilities-v1", "Cálculo del viaje, coches, pagos y lista de material", "Funcional, solicitado por ti", "Hasta que los elimines"],
   ["cerca-remember-search-v1, cerca-search-v3, cerca-recent-v1", "Búsquedas recordadas", "Preferencia opcional", "Hasta que desactives «Recordar»"],
   ["sb-…-auth-token", "Sesión de Supabase si inicias sesión", "Técnico, necesario para la cuenta", "Hasta cerrar sesión"],
   ["Caché sin conexión (service worker)", "Interfaz y catálogo para usar CERCA sin red", "Técnico, necesario", "Hasta la siguiente versión o hasta borrar los datos del sitio"],
@@ -42,7 +43,7 @@ export function LegalInformation({
   return (
     <div className="privacy-content">
       <ShieldCheck size={35} className="blue" />
-      <p>Información actualizada el 20 de octubre de 2026.</p>
+      <p>Información actualizada el 21 de octubre de 2026.</p>
       <h3>Quién mantiene CERCA</h3>
       <p>
         Responsable: Pablo Martín Castañeda, titular de la cuenta de GitHub
@@ -176,7 +177,7 @@ export function LegalInformation({
       </p>
       <h3>Datos, finalidad y conservación</h3>
       <p>
-        Los favoritos, los presupuestos y la apariencia se guardan localmente
+        Los favoritos, los presupuestos, las utilidades del equipo y la apariencia se guardan localmente
         cuando los eliges, para prestarte esas funciones, hasta que los elimines
         o limpies el navegador. Las búsquedas se conservan solo si activas
         «Recordar». Si inicias sesión para sincronizar, Supabase recibe el correo,
@@ -306,7 +307,7 @@ export function LegalInformation({
         ajustes del navegador.
       </p>
       <p>
-        El botón elimina favoritos, búsquedas, presupuestos locales, apariencia
+        El botón elimina favoritos, búsquedas, presupuestos locales, utilidades del equipo, apariencia
         y tu elección sobre la estadística de uso, y desactiva fotos y mapas
         externos. Los eventos anónimos ya enviados no se pueden vincular a ti,
         por lo que no es posible localizarlos para borrarlos. Para borrar presupuestos

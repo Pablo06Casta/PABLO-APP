@@ -15,6 +15,7 @@ import {
   Building2,
   Check,
   ChevronRight,
+  ClipboardCheck,
   Compass,
   Download,
   Earth,
@@ -103,6 +104,11 @@ const GroupBudgetSection = lazy(() =>
     default: m.GroupBudgetSection,
   })),
 );
+const TeamUtilitiesSection = lazy(() =>
+  import("./components/TeamUtilitiesSection").then((m) => ({
+    default: m.TeamUtilitiesSection,
+  })),
+);
 const Markets = lazy(() =>
   import("./components/Markets").then((m) => ({ default: m.Markets })),
 );
@@ -182,7 +188,7 @@ function AppContent() {
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
   const [sort, setSort] = useState("price");
   const [tab, setTab] = useState<
-    "explore" | "map" | "tournaments" | "budget" | "favorites" | "settings"
+    "explore" | "map" | "tournaments" | "budget" | "utilities" | "favorites" | "settings"
   >("explore");
   const [modal, setModal] = useState<
     "filters" | "markets" | "fuel" | "help" | "privacy" | "compare" | "trip" | null
@@ -549,6 +555,7 @@ function AppContent() {
     { id: "map" as const, label: "Mapa", icon: MapIcon },
     { id: "tournaments" as const, label: "Torneos", icon: Trophy },
     { id: "budget" as const, label: "Presupuesto", icon: Wallet },
+    { id: "utilities" as const, label: "Utilidades", icon: ClipboardCheck },
     { id: "favorites" as const, label: "Favoritos", icon: Heart },
   ];
   return (
@@ -592,6 +599,12 @@ function AppContent() {
               onClick={() => setTab("budget")}
             >
               Presupuesto del grupo
+            </button>
+            <button
+              className={tab === "utilities" ? "active" : ""}
+              onClick={() => setTab("utilities")}
+            >
+              Utilidades
             </button>
             <button onClick={showMarkets}>
               Supermercados cerca <span className="new-dot" />
@@ -1002,6 +1015,11 @@ function AppContent() {
               window.scrollTo({ top: 0, behavior: "smooth" });
             }}
           />
+          </Suspense>
+        )}
+        {tab === "utilities" && (
+          <Suspense fallback={sectionFallback}>
+            <TeamUtilitiesSection search={search} />
           </Suspense>
         )}
         {tab === "favorites" && (
@@ -1420,16 +1438,18 @@ function AppContent() {
                   "cerca-favorites-v2",
                   "cerca-theme-v1",
                   "cerca-saved-budgets-v1",
+                  "cerca-team-utilities-v1",
                   "cerca-analytics-consent-v1",
                 ])
                   localStorage.removeItem(key);
                 window.dispatchEvent(new Event("cerca-budgets-cleared"));
+                window.dispatchEvent(new Event("cerca-team-utilities-cleared"));
               } catch {
                 /* Almacenamiento opcional */
               }
               setModal(null);
               setToast(
-                "Se han eliminado tus favoritos, búsquedas guardadas y ajustes.",
+                "Se han eliminado tus favoritos, búsquedas, presupuestos, utilidades y ajustes.",
               );
             }}
           />

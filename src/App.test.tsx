@@ -214,6 +214,17 @@ describe("CERCA: flujos del viajero", () => {
     await user.click(within(nav).getByRole("button", { name: "Presupuesto del grupo" }));
     expect((screen.getByRole("textbox", { name: "Viajero 1" }) as HTMLInputElement).value).toBe("María");
   });
+  it("abre las utilidades del equipo desde la navegación principal", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+    const nav = screen.getByRole("navigation", { name: "Navegación principal" });
+    await user.click(within(nav).getByRole("button", { name: "Utilidades" }));
+    const utilities = await screen.findByRole("region", { name: "Utilidades del viaje" });
+    expect(within(utilities).getByRole("heading", { name: "Calculadora del viaje" })).toBeTruthy();
+    expect(within(utilities).getByRole("button", { name: "Añadir coche" })).toBeTruthy();
+    expect(within(utilities).getByRole("button", { name: "Añadir persona" })).toBeTruthy();
+    expect(within(utilities).getByLabelText("Raquetas")).toBeTruthy();
+  });
   it("guarda, duplica, abre y elimina presupuestos en el dispositivo", async () => {
     const user = userEvent.setup();
     render(<App />);

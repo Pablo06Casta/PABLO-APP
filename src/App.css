@@ -2385,6 +2385,75 @@
     margin-top: 16px;
   }
 }
+.team-utilities { margin: 30px 0 0; padding: 28px; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); }
+.utilities-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; padding-top: 23px; }
+.utility-card { min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface-soft); }
+.utility-card-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 17px; }
+.utility-card-heading > span { width: 42px; height: 42px; flex: none; display: grid; place-items: center; border-radius: 12px; color: var(--accent); background: var(--accent-soft); }
+.utility-card-heading h2 { margin: 0 0 4px; font-size: 1rem; }
+.utility-card-heading p { margin: 0; color: var(--muted); font-size: 0.6875rem; line-height: 1.45; }
+.utility-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 12px; }
+.utility-wide { grid-column: 1 / -1; }
+.utility-result { margin-top: 8px; padding: 14px; border-radius: 13px; background: var(--surface); border: 1px solid var(--line); }
+.utility-result p { display: flex; justify-content: space-between; gap: 12px; margin: 7px 0; font-size: 0.75rem; }
+.utility-result strong { white-space: nowrap; }
+.utility-result-main { margin-top: 12px !important; padding-top: 12px; border-top: 1px solid var(--line); font-weight: 700; }
+.utility-result-main strong { color: var(--accent); font-size: 1rem; }
+.utility-summary { padding: 10px 12px; margin-bottom: 12px; border-radius: 10px; background: var(--surface); color: var(--muted); font-size: 0.75rem; }
+.utility-summary strong { color: var(--text); }
+.utility-warning { padding: 9px 11px; border-radius: 9px; background: color-mix(in srgb, var(--danger) 10%, var(--surface)); color: var(--danger); font-size: 0.75rem; }
+.utility-rows { display: grid; gap: 10px; }
+.utility-row { padding: 13px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.utility-row-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; font-size: 0.75rem; }
+.utility-row-heading .icon-button, .payment-row > .icon-button, .checklist-items .icon-button { width: 30px; height: 30px; color: var(--muted); }
+.utility-row > small { color: var(--muted); font-size: 0.6875rem; }
+.utility-row > small.utility-over { color: var(--danger); }
+.utility-add { width: 100%; justify-content: center; margin-top: 12px; }
+.payment-totals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-bottom: 14px; }
+.payment-totals > span { display: grid; gap: 4px; padding: 10px; border-radius: 10px; background: var(--surface); color: var(--muted); font-size: 0.6875rem; }
+.payment-totals strong { color: var(--text); font-size: 0.8125rem; }
+.payment-row { display: grid; grid-template-columns: auto minmax(0, 1fr) minmax(90px, 0.45fr) auto; align-items: center; gap: 8px; }
+.payment-row > input, .payment-amount, .checklist-add > input { min-width: 0; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--text); font-size: 0.75rem; }
+.payment-row > input, .checklist-add > input { width: 100%; padding: 10px; }
+.payment-amount { display: flex; align-items: center; padding-right: 9px; }
+.payment-amount input { width: 100%; min-width: 0; padding: 10px; border: 0; background: transparent; color: var(--text); }
+.payment-amount span { color: var(--muted); font-size: 0.75rem; }
+.payment-check { cursor: pointer; }
+.payment-check input, .checklist-items input { position: absolute; opacity: 0; pointer-events: none; }
+.payment-check > span { display: grid; color: var(--accent); }
+.payment-check input:focus-visible + span, .checklist-items input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.utility-empty { padding: 14px; border: 1px dashed var(--line); border-radius: 10px; color: var(--muted); text-align: center; font-size: 0.75rem; }
+.checklist-progress { height: 7px; overflow: hidden; margin: -4px 0 14px; border-radius: 5px; background: var(--line); }
+.checklist-progress span { display: block; height: 100%; border-radius: inherit; background: var(--accent); transition: width 180ms ease; }
+.checklist-items { display: grid; gap: 5px; }
+.checklist-items > div { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 38px; padding: 3px 4px 3px 8px; border-radius: 9px; }
+.checklist-items > div:hover { background: var(--surface); }
+.checklist-items label { display: flex; align-items: center; gap: 9px; min-width: 0; cursor: pointer; font-size: 0.75rem; }
+.checklist-items label > span:first-of-type { display: grid; flex: none; color: var(--accent); }
+.checklist-items .checked label > span:last-child { color: var(--muted); text-decoration: line-through; }
+.checklist-add { display: flex; gap: 8px; margin-top: 13px; }
+.checklist-add .secondary-button { flex: none; }
+.checklist-reset { display: inline-flex; align-items: center; gap: 5px; margin-top: 13px; color: var(--muted); font-size: 0.6875rem; }
+@media (max-width: 950px) { .utilities-grid { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+  .team-utilities { margin-top: 17px; padding: 18px; border-radius: 17px; }
+  .utilities-grid { padding-top: 18px; }
+  .utility-card { padding: 16px; }
+  .utility-fields { grid-template-columns: 1fr; }
+  .utility-wide { grid-column: auto; }
+  .bottom-nav > button { min-width: 0; flex: 1; }
+  .bottom-nav > button > span { padding-inline: 11px; }
+}
+@media (max-width: 430px) {
+  .payment-row { grid-template-columns: auto minmax(0, 1fr) auto; }
+  .payment-amount { grid-column: 2 / 3; }
+  .payment-totals { grid-template-columns: 1fr; }
+  .checklist-add { flex-direction: column; }
+  .checklist-add .secondary-button { justify-content: center; }
+  .bottom-nav { padding-inline: 4px; }
+  .bottom-nav > button { font-size: 0.625rem; }
+  .bottom-nav > button > span { padding-inline: 8px; }
+}
 .compare-thumbnails {
   display: flex;
   padding-left: 5px;
