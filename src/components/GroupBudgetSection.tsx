@@ -54,6 +54,11 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
     selectedStay: stay ?? null,
     search: budgetSearch,
   };
+  const pdfData = result ? {
+    ...result,
+    tournamentName: tournamentName.trim(),
+    season: season.trim(),
+  } : null;
 
   function newBudget() {
     setGroupName("");
@@ -111,7 +116,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
     try {
       const { downloadBudgetPdf } = await import("../lib/budgetPdf");
       track("feature", "budget_pdf");
-      await downloadBudgetPdf(result, budgetSearch, stay);
+      await downloadBudgetPdf(pdfData ?? result, budgetSearch, stay);
       setPdfMessage("PDF generado y descargado.");
     } catch {
       setPdfMessage("No se pudo generar el PDF. Vuelve a intentarlo.");
@@ -125,7 +130,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
     setPdfMessage("");
     try {
       const { createBudgetPdfFile, downloadBudgetPdf } = await import("../lib/budgetPdf");
-      const file = await createBudgetPdfFile(result, budgetSearch, stay);
+      const file = await createBudgetPdfFile(pdfData ?? result, budgetSearch, stay);
       const shareData: ShareData = {
         title: `Presupuesto CERCA · ${groupName.trim() || destination}`,
         text: `Presupuesto del grupo para ${groupName.trim() || destination}`,
@@ -143,7 +148,7 @@ export function GroupBudgetSection({ search, stays }: { search: Search; stays: S
           }
         }
       }
-      await downloadBudgetPdf(result, budgetSearch, stay);
+      await downloadBudgetPdf(pdfData ?? result, budgetSearch, stay);
       setPdfMessage("Este navegador no permite compartir el archivo directamente; el PDF se ha descargado para que puedas enviarlo.");
     } catch {
       setPdfMessage("No se pudo compartir el PDF. Prueba a descargarlo.");
