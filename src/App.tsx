@@ -188,6 +188,9 @@ function AppContent() {
   const [stays, setStays] = useState<Stay[]>(() => realStays(search));
   const [filters, setFilters] = useState<Filters>({ ...initialFilters });
   const [sort, setSort] = useState("price");
+  const [lodgingSource, setLodgingSource] = useState<"booking" | "airbnb">(
+    "booking",
+  );
   const [tab, setTab] = useState<
     "explore" | "map" | "tournaments" | "budget" | "utilities" | "favorites" | "settings"
   >("explore");
@@ -775,11 +778,17 @@ function AppContent() {
                     <span className="heading-dot">.</span>
                   </h2>
                   <p>
-                    {visible.length} alojamientos del catálogo <span>·</span>{" "}
-                    {nights(search)} noches <span>·</span> {search.guests}{" "}
+                    {lodgingSource === "booking" ? (
+                      <>{visible.length} alojamientos del catálogo</>
+                    ) : (
+                      <>Buscar alojamientos en Airbnb</>
+                    )}{" "}
+                    <span>·</span> {nights(search)} noches <span>·</span>{" "}
+                    {search.guests}{" "}
                     {search.guests === 1 ? "huésped" : "huéspedes"}
                   </p>
-                  {visible.some((stay) => stay.bookingSearch) && (
+                  {lodgingSource === "booking" &&
+                    visible.some((stay) => stay.bookingSearch) && (
                     <p className="catalogue-coverage">
                       {visible.filter((stay) => !stay.bookingSearch).length}{" "}
                       enlaces directos
@@ -788,46 +797,82 @@ function AppContent() {
                       alojamientos para buscar en Booking
                     </p>
                   )}
+                  {lodgingSource === "airbnb" && (
+                    <p className="catalogue-coverage">
+                      Los anuncios, la disponibilidad y el precio final se
+                      consultan directamente en Airbnb.
+                    </p>
+                  )}
                 </div>
-                <div className="results-controls">
-                  <label className="sort-select">
-                    <ArrowDownUp size={15} />
-                    <span className="sr-only">Ordenar alojamientos</span>
-                    <select
-                      aria-label="Ordenar alojamientos"
-                      value={sort}
-                      onChange={(event) => setSort(event.target.value)}
-                    >
-                      <option value="price">
-                        Menor precio estimado por persona
-                      </option>
-                      <option value="recommended">
-                        Con fotografía primero
-                      </option>
-                      <option value="name">Nombre del alojamiento</option>
-                      <option value="distance">
-                        Más cerca del {search.venue ? "pabellón" : "centro"}
-                      </option>
-                    </select>
-                  </label>
-                  <div className="view-toggle">
+                <div className="results-actions">
+                  <span className="lodging-source-label">
+                    Ver alojamientos de
+                  </span>
+                  <div
+                    className="lodging-source-toggle"
+                    role="group"
+                    aria-label="Fuente de alojamientos"
+                  >
                     <button
-                      className={tab === "explore" ? "active" : ""}
-                      onClick={() => setTab("explore")}
-                      aria-pressed={tab === "explore"}
+                      className={lodgingSource === "booking" ? "active" : ""}
+                      onClick={() => setLodgingSource("booking")}
+                      aria-pressed={lodgingSource === "booking"}
                     >
-                      <List size={15} />
-                      <span>Lista</span>
+                      Booking
                     </button>
                     <button
-                      className={tab === "map" ? "active" : ""}
-                      onClick={() => setTab("map")}
-                      aria-pressed={tab === "map"}
+                      className={lodgingSource === "airbnb" ? "active" : ""}
+                      onClick={() => {
+                        setLodgingSource("airbnb");
+                        setTab("explore");
+                      }}
+                      aria-pressed={lodgingSource === "airbnb"}
                     >
-                      <MapIcon size={15} />
-                      <span>Mapa</span>
+                      Airbnb
                     </button>
                   </div>
+                  {lodgingSource === "booking" && (
+                    <div className="results-controls">
+                      <label className="sort-select">
+                        <ArrowDownUp size={15} />
+                        <span className="sr-only">Ordenar alojamientos</span>
+                        <select
+                          aria-label="Ordenar alojamientos"
+                          value={sort}
+                          onChange={(event) => setSort(event.target.value)}
+                        >
+                          <option value="price">
+                            Menor precio estimado por persona
+                          </option>
+                          <option value="recommended">
+                            Con fotografía primero
+                          </option>
+                          <option value="name">Nombre del alojamiento</option>
+                          <option value="distance">
+                            Más cerca del {search.venue ? "pabellón" : "centro"}
+                          </option>
+                        </select>
+                      </label>
+                      <div className="view-toggle">
+                        <button
+                          className={tab === "explore" ? "active" : ""}
+                          onClick={() => setTab("explore")}
+                          aria-pressed={tab === "explore"}
+                        >
+                          <List size={15} />
+                          <span>Lista</span>
+                        </button>
+                        <button
+                          className={tab === "map" ? "active" : ""}
+                          onClick={() => setTab("map")}
+                          aria-pressed={tab === "map"}
+                        >
+                          <MapIcon size={15} />
+                          <span>Mapa</span>
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="demo-notice">
@@ -845,14 +890,20 @@ function AppContent() {
                   Saber más <ArrowUpRight size={13} />
                 </button>
               </div>
-              <PlatformSearches search={search} />
+              {lodgingSource === "booking" && (
+                <PlatformSearches search={search} />
+              )}
               {search.town.approximate && !search.venue && (
                 <p className="coordinate-notice">
                   El centro de {search.town.name} es aproximado (centroide
                   municipal). Las distancias se calculan respecto a ese punto.
                 </p>
               )}
-              {busy ? (
+              {lodgingSource === "airbnb" ? (
+                <div className="airbnb-results">
+                  <AirbnbSearchCard search={search} />
+                </div>
+              ) : busy ? (
                 <div
                   className="stays-grid"
                   aria-label="Cargando alojamientos"
@@ -944,7 +995,6 @@ function AppContent() {
                 </div>
               ) : (
                 <div className="stays-grid">
-                  <AirbnbSearchCard search={search} />
                   {visible.map((stay) => card(stay))}
                 </div>
               )}

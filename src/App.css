@@ -557,6 +557,41 @@
   gap: 19px;
   padding-bottom: 3px;
 }
+.results-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 11px;
+}
+.lodging-source-label {
+  margin-bottom: -6px;
+  color: var(--muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+.lodging-source-toggle {
+  display: flex;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-soft);
+}
+.lodging-source-toggle button {
+  min-width: 96px;
+  padding: 8px 15px;
+  border-radius: 7px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+.lodging-source-toggle button.active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 4px #0000000c;
+}
+.lodging-source-toggle button:last-child {
+  color: #a84451;
+}
 .sort-select {
   display: flex;
   align-items: center;
@@ -3970,6 +4005,13 @@
 .airbnb-search-action { display: flex; align-items: center; justify-content: center; gap: 7px; width: 100%; margin-top: auto; padding: 12px 14px; border-radius: 10px; background: #a84451; color: #fff; font-size: 0.75rem; font-weight: 700; text-align: center; }
 .airbnb-search-card > small { color: var(--muted); font-size: 0.6875rem; line-height: 1.5; }
 [data-theme="dark"] .airbnb-search-action { background: #bd5965; }
+.airbnb-results {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.airbnb-results .airbnb-search-card {
+  min-height: 360px;
+}
 @media (max-width: 600px) {
   .venue-picker {
     margin-top: 20px;
@@ -4004,6 +4046,20 @@
     justify-content: center;
   }
   .airbnb-search-card { min-height: auto; padding: 19px; }
+  .airbnb-results .airbnb-search-card { min-height: auto; }
+}
+@media (max-width: 760px) {
+  .results-actions {
+    width: 100%;
+    align-items: stretch;
+  }
+  .lodging-source-toggle {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .lodging-source-toggle button {
+    flex: 1;
+  }
 }
 /* Decorative checks must not intercept clicks on their native input. */
 .custom-checkbox {

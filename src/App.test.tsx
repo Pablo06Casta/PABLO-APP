@@ -93,6 +93,33 @@ describe("CERCA: flujos del viajero", () => {
     expect(findTown).not.toHaveBeenCalled();
     expect(findMarkets).not.toHaveBeenCalled();
   });
+  it("permite alternar claramente entre el catálogo de Booking y Airbnb", async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    const source = screen.getByRole("group", {
+      name: "Fuente de alojamientos",
+    });
+    await user.click(within(source).getByRole("button", { name: "Airbnb" }));
+
+    expect(screen.queryAllByRole("article")).toHaveLength(0);
+    expect(
+      screen.getByRole("complementary", {
+        name: `Alojamientos en Airbnb para ${query.town.name}`,
+      }),
+    ).toBeTruthy();
+    expect(
+      screen
+        .getByRole("link", { name: "Ver alojamientos en Airbnb" })
+        .getAttribute("href"),
+    ).toMatch(/^https:\/\/www\.airbnb\.es\/s\//);
+    expect(
+      screen.queryByRole("combobox", { name: "Ordenar alojamientos" }),
+    ).toBeNull();
+
+    await user.click(within(source).getByRole("button", { name: "Booking" }));
+    expect(screen.getAllByRole("article")).toHaveLength(count);
+  });
   it("autocompleta localidades y busca el destino elegido", async () => {
     const user = userEvent.setup();
     render(<App />);
