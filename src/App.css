@@ -66,13 +66,6 @@
   bottom: 0;
   left: calc(50% - 11px);
 }
-.new-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  margin-left: 0;
-}
 .nav-count {
   color: var(--accent);
   background: var(--accent-soft);

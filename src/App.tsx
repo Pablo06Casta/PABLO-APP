@@ -607,7 +607,7 @@ function AppContent() {
               Utilidades
             </button>
             <button onClick={showMarkets}>
-              Supermercados cerca <span className="new-dot" />
+              Supermercados cerca
             </button>
             <button onClick={showFuel}>Gasolineras cerca</button>
             <button
