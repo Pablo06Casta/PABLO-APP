@@ -6,16 +6,16 @@ afterEach(cleanup);
 const origin = { lat: 40, lng: -3 };
 
 describe("Gasolineras cercanas", () => {
-  it("muestra la distancia recta y una ruta en coche con origen y destino correctos", () => {
+  it("muestra kilómetros y minutos al pabellón y una ruta con origen y destino correctos", () => {
     render(<FuelStations origin={origin} status="success" error="" onLoad={vi.fn()} stations={[{
       id: "node-1", name: "Gasolinera Uno", address: "Calle Uno", lat: 40.001, lng: -3.002,
       sourceUrl: "https://www.openstreetmap.org/node/1", retrievedAt: "2026-10-19", coverage: "radius",
     }]} />);
-    expect(screen.getAllByText(/en línea recta/).length).toBeGreaterThan(0);
+    expect(screen.getByText("0,2 km al pabellón · ~1 min en coche")).toBeTruthy();
     const url = new URL(screen.getByRole("link", { name: "Ver ruta en coche a Gasolinera Uno" }).getAttribute("href")!);
     expect(url.searchParams.get("origin")).toBe("40,-3");
     expect(url.searchParams.get("destination")).toBe("40.001,-3.002");
-    expect(screen.getByText(/envían el origen y destino cuando los abres/)).toBeTruthy();
+    expect(screen.getByText(/minutos son una estimación orientativa/)).toBeTruthy();
   });
   it("ofrece una búsqueda externa cuando no hay datos", () => {
     render(<FuelStations origin={origin} status="success" error="" onLoad={vi.fn()} stations={[]} />);
@@ -78,5 +78,6 @@ describe("Gasolineras cercanas", () => {
     expect(screen.getAllByText(/Precio publicado 20\/10\/2026/).length).toBe(3);
     expect(screen.getAllByRole("link", { name: /^Ver ruta en coche a/ })).toHaveLength(3);
     expect(screen.getAllByRole("link", { name: "Ver fuente oficial" })).toHaveLength(3);
+    expect(screen.getAllByText(/km al pabellón · ~\d+ min en coche/)).toHaveLength(3);
   });
 });

@@ -8,7 +8,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import type { FuelStation, Town } from "../types";
-import { distance, formatDistance } from "../lib/search";
+import { distance } from "../lib/search";
 import { fuelDirectionsUrl } from "../services/places";
 import references from "../data/real/fuel-references.json";
 
@@ -48,6 +48,26 @@ function fuelReferenceMapsUrl(name: string, address: string) {
     query: `${name}, ${address}`,
   }).toString();
   return url.toString();
+}
+
+function formatKilometres(km: number) {
+  return `${Math.max(0.1, km).toFixed(1).replace(".", ",")} km`;
+}
+
+function estimatedDriveMinutes(straightDistanceKm: number) {
+  // Estimación urbana: la ruta suele ser más larga que la línea recta y la
+  // velocidad media incluye cruces, semáforos y acceso al aparcamiento.
+  const estimatedRoadKm = straightDistanceKm * 1.25;
+  return Math.max(1, Math.ceil((estimatedRoadKm / 30) * 60));
+}
+
+function FuelProximity({ kilometres }: { kilometres: number }) {
+  return (
+    <span>
+      <Navigation size={12} /> {formatKilometres(kilometres)} al pabellón · ~
+      {estimatedDriveMinutes(kilometres)} min en coche
+    </span>
+  );
 }
 
 export function FuelStations({
@@ -119,8 +139,8 @@ export function FuelStations({
             <div>
               <h3 id="saved-fuel-title">Gasolineras guardadas en {destination}</h3>
               <p>
-                Direcciones aportadas al proyecto. Comprueba en el mapa la ruta,
-                la distancia y que la estación siga abierta.
+                Direcciones aportadas al proyecto. Mostramos la distancia al
+                pabellón y una estimación del tiempo en coche.
               </p>
             </div>
             <span>{saved.length} opciones</span>
@@ -141,7 +161,7 @@ export function FuelStations({
                   <h4>{station.name}</h4>
                   <p>{station.address}</p>
                   {storedDistance !== null ? (
-                    <span><Navigation size={12} /> {formatDistance(storedDistance)} en línea recta</span>
+                    <FuelProximity kilometres={storedDistance} />
                   ) : station.venueHint ? (
                     <span><MapPin size={12} /> Referencia: {station.venueHint}</span>
                   ) : null}
@@ -196,7 +216,8 @@ export function FuelStations({
           <p className="market-attribution fuel-live-note">
             La consulta de OpenStreetMap envía las coordenadas del pabellón solo
             al buscar. Los enlaces de Google Maps envían el origen y destino
-            cuando los abres. No cargamos mapas automáticamente.
+            cuando los abres. Los minutos son una estimación orientativa; Google
+            Maps muestra la ruta y el tráfico reales.
           </p>
           {showResults && sorted.length > 0 && (
             <div className="markets-toolbar">
@@ -252,7 +273,7 @@ export function FuelStations({
               <div className="market-info">
                 <h4>{station.name}</h4>
                 <p>{station.address}</p>
-                <span><Navigation size={12} /> {formatDistance(station.straightDistance)} en línea recta</span>
+                <FuelProximity kilometres={station.straightDistance} />
                 {station.hours && <small><Clock3 size={12} /> {station.hours}</small>}
                 <a className="market-source" href={station.sourceUrl} target="_blank" rel="noreferrer">
                   Ver en OpenStreetMap <ExternalLink size={11} />
@@ -273,8 +294,9 @@ export function FuelStations({
             <p className="market-attribution">
               Datos © OpenStreetMap contributors (ODbL), consultados el {sorted[0].retrievedAt}.{" "}
               {sorted[0].coverage === "local" ? "Cobertura local limitada." : "Radio de hasta 5 km."}{" "}
-              Distancias en línea recta; Google Maps calcula la ruta al abrir el enlace.
-              Consulta allí horarios, precios y disponibilidad.
+              Distancias en línea recta y minutos en coche estimados. Google Maps
+              calcula la ruta real al abrir el enlace. Consulta allí el tráfico,
+              los horarios, los precios y la disponibilidad.
             </p>
           )}
         </>
