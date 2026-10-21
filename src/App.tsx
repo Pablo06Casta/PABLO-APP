@@ -65,6 +65,7 @@ import {
 } from "./data/venues";
 import { VenuePicker } from "./components/VenuePicker";
 import { PlatformSearches } from "./components/PlatformSearches";
+import { AirbnbSearchCard } from "./components/AirbnbSearchCard";
 import {
   initialFilters,
   bookingUrl,
@@ -902,6 +903,14 @@ function AppContent() {
                     Buscar más alojamientos en Booking{" "}
                     <ArrowUpRight size={15} />
                   </a>
+                  <a
+                    className="secondary-button"
+                    href={bookingUrl(search, "Airbnb")}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ver alojamientos en Airbnb <ArrowUpRight size={15} />
+                  </a>
                 </div>
               ) : tab === "map" ? (
                 <div className="map-results">
@@ -935,6 +944,7 @@ function AppContent() {
                 </div>
               ) : (
                 <div className="stays-grid">
+                  <AirbnbSearchCard search={search} />
                   {visible.map((stay) => card(stay))}
                 </div>
               )}

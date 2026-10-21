@@ -74,7 +74,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(
       screen.getAllByRole("link", {
         name: /^(Ver|Buscar) .+ en (Booking|Airbnb)$/,
-      }),
+      }).filter((link) => link.classList.contains("card-booking-link")),
     ).toHaveLength(count);
     expect(
       screen.getAllByRole("link", { name: /^Buscar .+ en Booking$/ }).length,
@@ -476,7 +476,7 @@ describe("CERCA: flujos del viajero", () => {
     expect(localStorage.getItem("cerca-search-v3")).toBeNull();
     expect(
       screen
-        .getByRole("link", { name: "Buscar en Airbnb" })
+        .getAllByRole("link", { name: "Ver alojamientos en Airbnb" })[0]
         .getAttribute("href"),
     ).toMatch(/^https:\/\/www.airbnb.es\/s\//);
     expect(

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { towns } from "../data/towns";
+import { townForVenue, venues } from "../data/venues";
 import { realStays } from "../services/lodging";
 import {
   bookingUrl,
@@ -145,5 +146,17 @@ describe("Catálogo real, enlaces y filtros", () => {
       expect(
         new URL(bookingUrl(query, platform)).searchParams.get("checkin"),
       ).toBe(query.checkIn);
+  });
+  it("ofrece la búsqueda de Airbnb en todas las sedes con alojamientos", () => {
+    const available = venues.filter((venue) => venue.location);
+    expect(available.length).toBeGreaterThan(0);
+    for (const venue of available) {
+      const search: Search = { ...query, town: townForVenue(venue), venue };
+      const url = new URL(bookingUrl(search, "Airbnb"));
+      expect(url.hostname).toBe("www.airbnb.es");
+      expect(url.searchParams.get("lat")).toBe(String(venue.location!.lat));
+      expect(url.searchParams.get("lng")).toBe(String(venue.location!.lng));
+      expect(url.searchParams.get("adults")).toBe(String(query.guests));
+    }
   });
 });
