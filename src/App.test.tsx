@@ -67,6 +67,18 @@ describe("CERCA: flujos del viajero", () => {
     expect(screen.getByRole("heading", { level: 1 }).textContent).toContain(
       "Tu torneo, todo cerca.",
     );
+    expect(
+      screen
+        .getByText("Pablo Martín Castañeda")
+        .closest(".creator-credit")?.textContent,
+    ).toContain(
+      "Creado por Pablo Martín Castañeda, jugador de Club Bádminton Valladolid",
+    );
+    expect(
+      screen
+        .getByRole("link", { name: /Web de Bádminton UVa/ })
+        .getAttribute("href"),
+    ).toBe("https://pablo06casta.github.io/UVa-b-dminton/");
     expect(screen.getAllByRole("article")).toHaveLength(count);
     expect(
       screen.getByRole("complementary", {

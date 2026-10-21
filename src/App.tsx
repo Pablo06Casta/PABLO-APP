@@ -666,6 +666,19 @@ function AppContent() {
         {(tab === "explore" || tab === "map") && (
           <>
             <section className="hero" aria-labelledby="main-title">
+              <div className="creator-credit">
+                <span>
+                  Creado por <strong>Pablo Martín Castañeda</strong>, jugador de
+                  Club Bádminton Valladolid
+                </span>
+                <a
+                  href="https://pablo06casta.github.io/UVa-b-dminton/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Web de Bádminton UVa <ArrowUpRight size={13} />
+                </a>
+              </div>
               <div className="hero-eyebrow">
                 <span className="eyebrow-line" />
                 <Sparkles size={13} /> MENOS DESPLAZAMIENTOS. MÁS BÁDMINTON.
